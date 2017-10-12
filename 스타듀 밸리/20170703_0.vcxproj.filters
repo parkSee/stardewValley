@@ -142,6 +142,9 @@
     <Filter Include="playGround\UI\inventory">
       <UniqueIdentifier>{25412d26-e4f8-437c-a9ec-3f35b188326e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\player">
+      <UniqueIdentifier>{879f19ee-1ba4-420c-bcdf-5117831ee5a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -269,6 +272,9 @@
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>playGround\UI\conversation + normal UI</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>playGround\player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -418,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="sceneInit + youngjae.cpp">
       <Filter>publicForder\youngJae</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>playGround\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

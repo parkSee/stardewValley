@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "townWorld.h"
 #include <algorithm>
-
 #include "gameObject.h"
 
 using namespace objectType;
