@@ -401,5 +401,23 @@
     <ClCompile Include="UI.cpp">
       <Filter>playGround\UI\conversation + normal UI</Filter>
     </ClCompile>
+    <ClCompile Include="sceneInit + geunhwa.cpp">
+      <Filter>publicForder\geunHwa</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneInit + dongjin.cpp">
+      <Filter>publicForder\dongjin</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneInit + jericho.cpp">
+      <Filter>publicForder\jericho</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneInit + seeYoung.cpp">
+      <Filter>publicForder\seeyoung</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneInit + soonwoo.cpp">
+      <Filter>publicForder\soonwoo</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneInit + youngjae.cpp">
+      <Filter>publicForder\youngJae</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

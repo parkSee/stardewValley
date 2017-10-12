@@ -13,7 +13,13 @@ public:
 	void release();
 	void update();
 	void render();
-
+	
+	void seeyoungInit();
+	void soonwooInit();
+	void jerichoInit();
+	void guenhwaInit();
+	void youngjaeInit();
+	void dongjinInit();
 
 	townScene() 
 	: a(false){}

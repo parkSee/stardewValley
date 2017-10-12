@@ -147,7 +147,13 @@
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="publicUI.cpp" />
+    <ClCompile Include="sceneInit + geunhwa.cpp" />
+    <ClCompile Include="sceneInit + jericho.cpp" />
+    <ClCompile Include="sceneInit + seeYoung.cpp" />
+    <ClCompile Include="sceneInit + soonwoo.cpp" />
+    <ClCompile Include="sceneInit + youngjae.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="sceneInit + dongjin.cpp" />
     <ClCompile Include="seeyound + imageLoad.cpp" />
     <ClCompile Include="soowoo + imageLoad.cpp" />
     <ClCompile Include="soundManager.cpp" />

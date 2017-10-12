@@ -28,5 +28,4 @@ void loadingScene::soonwoo()
 	//퍼블릭 UI 이미지
 	_loading->loadImage("publicUI", "resource/UI/publicUI.bmp", 611, 112, true, RGB(255, 0, 255));
 
-	
 }
