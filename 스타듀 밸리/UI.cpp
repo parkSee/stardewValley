@@ -46,6 +46,8 @@ HRESULT UI::init(string objName)
 		_timeUI.window->getHeight());
 	_timeUI.pointer = IMAGEMANAGER->findImage("timePointer");
 	_timeUI.frameX = 0;
+
+
 	//콜백함수들 초기화 함수 
 	this->setAddCallback();
 
@@ -63,7 +65,8 @@ void UI::update()
 {
 	gameObject::update();
 
-
+	this->timePointer();
+	
 	//대화창 업데이트
 	if (_direction == CONVERSATION)
 	{

@@ -31,7 +31,7 @@ void worldTime::update()
 	//시간을 지배한다~!
 	if (_isTimeFlow == true)							//시간 불값이 활성화가 되있다면 시간계산을 해라 
 	{
-		_time.second += TIMEMANAGER->getElapsedTime();	//초는 ElapsedTime으로 현실시간반영 
+		_time.second += TIMEMANAGER->getElapsedTime() *50;	//초는 ElapsedTime으로 현실시간반영 
 		if (_time.second >= 10.0f)
 		{
 			_time.second = 0.0f;
@@ -41,14 +41,6 @@ void worldTime::update()
 			{
 				_time.hour += 1;
 				_time.minute = 0;
-				
-				if (abs(_saveHour - _time.hour) == 0)
-				{
-					_saveHour = _time.hour;
-
-					gameObject* ui = TOWNWORLD->findObject(objectType::INTERFACE, "UI");
-					ui->sendMessage(tagMessage("changePointer"));
-				}
 
 				if (_time.ap == "pm" && _time.hour >= 13)
 				{
