@@ -20,9 +20,8 @@ void townScene::release()
 
 void townScene::update()
 {
-	
-
 	TOWNWORLD->update();
+	WORLDTIME->update();
 }
 
 void townScene::render()

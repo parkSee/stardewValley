@@ -21,17 +21,13 @@ void UI::setAddCallback()
 		this->exit();
 	});
 
-	this->addCallback("changePointer", [this](tagMessage msg)
-	{
-		this->timePointer();
-	});
 }
 
 
 void UI::timePointer()
 {
-	_timeUI.frameX += 1;
-	if (_timeUI.frameX >= _timeUI.pointer->getMaxFrameX())_timeUI.frameX = _timeUI.pointer->getMaxFrameX();
+	
+	
 }
 
 //다용도 콜백 함수 등록 
