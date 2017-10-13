@@ -145,6 +145,9 @@
     <Filter Include="playGround\player">
       <UniqueIdentifier>{879f19ee-1ba4-420c-bcdf-5117831ee5a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\worldTime">
+      <UniqueIdentifier>{18eb6abb-7147-4b4e-b864-fbec54ee498f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -275,6 +278,9 @@
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>playGround\player</Filter>
+    </ClInclude>
+    <ClInclude Include="worldTime.h">
+      <Filter>playGround\worldTime</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -427,6 +433,9 @@
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="worldTime.cpp">
+      <Filter>playGround\worldTime</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

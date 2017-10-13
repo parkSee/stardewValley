@@ -49,7 +49,7 @@ void playGround::render(void)
 
 	SCENEMANAGER->render();
 	
-	//TIMEMANAGER->render(getMemDC());
+	TIMEMANAGER->render(getMemDC());
 
 	//=================== 손 대 지 마 ===================
 	this->getBackBuffer()->render(getHDC(), 0, 0);

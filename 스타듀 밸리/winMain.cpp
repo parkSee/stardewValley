@@ -11,7 +11,6 @@ playGround _pg;
 
 BOOL _leftButtonDown = false;
 
-bool _isStop = false;
 
 //함수의 프로토 타입
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);

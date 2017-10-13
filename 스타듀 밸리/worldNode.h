@@ -18,7 +18,6 @@ struct tagFloat
 	tagFloat(float X, float Y) { x = X; y = Y; }
 };
 
-
 //=================== UI ======================
 
 //ฤÝน้~

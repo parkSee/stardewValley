@@ -470,9 +470,9 @@ void image::frameRender(HDC hdc, int destX, int destY, int currentFrameX, int cu
 	_imageInfo->currentFrameY = currentFrameY;
 
 	//만약 렌더링 영역이 화면 밖이라면 그리지 않는다.
-	RECT renderRC = RectMake(destX, destY, _imageInfo->frameWidth, _imageInfo->frameHeight);
-	if (renderRC.right < 0 || renderRC.left > WINSIZEX || renderRC.top > WINSIZEY || renderRC.bottom < 0)
-		return;
+	//RECT renderRC = RectMake(destX, destY, _imageInfo->frameWidth, _imageInfo->frameHeight);
+	//if (renderRC.right < 0 || renderRC.left > WINSIZEX || renderRC.top > WINSIZEY || renderRC.bottom < 0)
+	//	return;
 
 	if (_trans)
 	{

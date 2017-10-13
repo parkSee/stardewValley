@@ -32,14 +32,20 @@ HRESULT UI::init(string objName)
 	_exit.animation->start();
 
 	_exit.y = 545;
-	_exit.rc = RectMakeCenter(645, _exit.y, 30, 30);
+	_exit.rc = RectMake(690, 658, 40, 40);
 
 	_letter.img = IMAGEMANAGER->findImage("letter");
 	_letter.exit = IMAGEMANAGER->findImage("exit2");
 	_letter.txt = "";
 	_letter.rc = RectMake(1062, 50, _letter.exit->getWidth(), _letter.exit->getHeight());
 	_letter.scale = 0.7f;
-	
+
+	//타임 UI
+	_timeUI.window = IMAGEMANAGER->findImage("timeWindow");
+	_timeUI.windowRc = RectMake(WINSIZEX - 25 - _timeUI.window->getWidth(), 25, _timeUI.window->getWidth(),
+		_timeUI.window->getHeight());
+	_timeUI.pointer = IMAGEMANAGER->findImage("timePointer");
+	_timeUI.frameX = 0;
 	//콜백함수들 초기화 함수 
 	this->setAddCallback();
 
@@ -51,7 +57,6 @@ void UI::release()
 	gameObject::release();
 
 
-	
 }
 
 void UI::update()
@@ -96,28 +101,34 @@ void UI::update()
 
 		this->sendMessage(tagMessage("letter", 0.0f, 0, 0, vector<gameObject*>(), str));
 	}
-
+	if (KEYMANAGER->isOnceKeyDown('F'))
+	{
+		_timeUI.frameX++;
+	}
 	
 }
 
 void UI::render()
 {
-	if (_direction == NORMAL)
+	if (_direction != LETTER)
 	{
-		
+		_timeUI.window->render(getMemDC(), _timeUI.windowRc.left, _timeUI.windowRc.top);
+		_timeUI.pointer->frameRender(getMemDC(), _timeUI.windowRc.left+5, _timeUI.windowRc.top, _timeUI.frameX, 0);
 	}
 
 	if (_direction == CONVERSATION)
 	{
 		this->conversationRender();
+	
 	}
 	if (_direction == LETTER)
 	{
 		this->letterRender();
 	}
-
+	
 
 }
+
 
 //대화창 업데이트 
 void UI::conversationUpdate()
@@ -130,7 +141,6 @@ void UI::conversationUpdate()
 	else _exit.y += 0.5;
 	if (_exit.y <= 540)_exit.isJump = false;
 	if (_exit.y >= 545)_exit.isJump = true;
-	_exit.rc = RectMakeCenter(650, _exit.y, 40, 40);
 	//나가기 버튼 프레임 계속ㄱ 돌게 해주자 
 	_exit.animation->frameUpdate(0.01);
 
@@ -153,19 +163,19 @@ void UI::conversationUpdate()
 void UI::conversationRender()
 {
 	//대화창 윈도우 렉트
-	RECT windowRc = RectMake(WINSIZEX / 2 - _conversation.window->getWidth() / 2, WINSIZEY / 2 - _conversation.window->getHeight() / 2
+	RECT windowRc = RectMake(WINSIZEX / 2 - _conversation.window->getWidth() / 2, WINSIZEY / 2 
 		, _conversation.window->getWidth(), _conversation.window->getHeight());
 	//대화창 윈도우 이미지
 	_conversation.window->render(getMemDC(), windowRc.left, windowRc.top);
-	//대화창 대상 이름표 이미지
-	_conversation.scroll->render(getMemDC(), windowRc.right - 370, windowRc.bottom - 112);
-	//대화창 대상 프로필 이미지
-	_conversation.who->scaleRender(getMemDC(), windowRc.right - 320, windowRc.top + 70,
+	////대화창 대상 이름표 이미지
+	_conversation.scroll->scaleRender(getMemDC(), windowRc.right - 360, windowRc.bottom - 90 ,300,50);
+	////대화창 대상 프로필 이미지
+	_conversation.who->scaleRender(getMemDC(), windowRc.right - 320, windowRc.top + 37,
 		_conversation.who->getWidth() * 3, _conversation.who->getHeight() * 3);
-	//대화창 옆 호삼도 표시 볼 이미지 
-	_conversation.ball->scaleRender(getMemDC(),windowRc.right-82, windowRc.bottom-157, _conversation.ball->getWidth() * _conversation.size,
+	////대화창 옆 호삼도 표시 볼 이미지 
+	_conversation.ball->scaleRender(getMemDC(),windowRc.right-82, windowRc.bottom-127, _conversation.ball->getWidth() * _conversation.size,
 		_conversation.ball->getHeight() * _conversation.size);
-	//나가기 버튼 
+	////나가기 버튼 
 	_exit.img->aniRender(getMemDC(), windowRc.right - 465, windowRc.bottom - 94, _exit.animation);
 
 	//==================== 대사 처리 ===================
@@ -215,7 +225,7 @@ void UI::letterUpdate()
 	if (_letter.scale >= 1.0)_letter.isScaleUp = false;
 	if (_letter.scale <= 0.7)_letter.isScaleUp = true;
 
-	_letter.rc = RectMake(1062, 50, _letter.exit->getWidth() * _letter.scale, _letter.exit->getHeight() * _letter.scale);
+	_letter.rc = RectMake(1115, 50, _letter.exit->getWidth() * _letter.scale, _letter.exit->getHeight() * _letter.scale);
 }
 
 void UI::letterRender()
