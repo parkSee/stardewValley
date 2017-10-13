@@ -2,11 +2,11 @@
 #include "worldTime.h"
 #include "gameObject.h"
 
+using namespace month;
+
 HRESULT worldTime::init()
 {
-	return S_OK;
-
-	_month = month::APR;
+	_month = month::JUN;
 
 	ZeroMemory(&_time, sizeof(tagTime));
 	
@@ -17,6 +17,8 @@ HRESULT worldTime::init()
 	_time.day = 1;
 	_isTimeFlow = true;
 	_saveHour = 6;
+
+	return S_OK;
 }
 
 void worldTime::release()
@@ -27,7 +29,7 @@ void worldTime::release()
 void worldTime::update()
 {
 	//시간을 지배한다~!
-	if (_isTimeFlow = true)								//시간 불값이 활성화가 되있다면 시간계산을 해라 
+	if (_isTimeFlow == true)							//시간 불값이 활성화가 되있다면 시간계산을 해라 
 	{
 		_time.second += TIMEMANAGER->getElapsedTime();	//초는 ElapsedTime으로 현실시간반영 
 		if (_time.second >= 10.0f)
@@ -76,45 +78,20 @@ void worldTime::update()
 
 string worldTime::getMonth()
 {
-	switch (_month)
+	if (_month == JAN)
 	{
-	case month::JAN:
 		return "Jan";
-		break;
-	case month::FEB:
-		return "Feb";
-		break;
-	case month::MAR:
-		return "War";
-		break;
-	case month::APR:
-		return "Apr";
-		break;
-	case month::MAY:
-		return "May";
-		break;
-	case month::JUN:
-		return "Jun";
-		break;
-	case month::JULL:
-		return "Jull";
-		break;
-	case month::AGS:
-		return "Ags";
-		break;
-	case month::SEP:
-		return "Sep";
-		break;
-	case month::OCT:
-		return "Oct";
-		break;
-	case month::NOV:
-		return "Nov";
-		break;
-	case month::DEC:
-		return "Dec";
-		break;
-	default:
-		break;
 	}
+	if (_month == FEB)return "Feb";
+	if (_month == MAR)return "Mar";
+	if (_month == APR)return "Apr";
+	if (_month == MAY)return "May";
+	if (_month == JUN)return "Jun";
+	if (_month == JUL)return "JULL";
+	if (_month == AGS)return "Ags";
+	if (_month == SEP)return "Sep";
+	if (_month == NOV)return "Nov";
+	if (_month == OCT)return "Oct";
+	if (_month == DEC)return "Dec";
+
 }

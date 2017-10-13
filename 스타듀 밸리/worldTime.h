@@ -5,7 +5,7 @@ namespace month
 {
 	enum Enum
 	{
-		JAN,FEB,MAR,APR,MAY,JUN,JULL,AGS,SEP,OCT,NOV,DEC,END
+		JAN,FEB,MAR,APR,MAY,JUN,JUL,AGS,SEP,OCT,NOV,DEC,END
 	};
 }
 
@@ -35,7 +35,8 @@ public:
 	string getMonth();
 
 
-	worldTime() {}
+	worldTime() 
+	{}
 	~worldTime() {}
 };
 

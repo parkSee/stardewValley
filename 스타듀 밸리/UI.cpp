@@ -112,14 +112,11 @@ void UI::render()
 {
 	if (_direction != LETTER)
 	{
-		_timeUI.window->render(getMemDC(), _timeUI.windowRc.left, _timeUI.windowRc.top);
-		_timeUI.pointer->frameRender(getMemDC(), _timeUI.windowRc.left+5, _timeUI.windowRc.top, _timeUI.frameX, 0);
+		this->timeUIRender();
 	}
-
 	if (_direction == CONVERSATION)
 	{
 		this->conversationRender();
-	
 	}
 	if (_direction == LETTER)
 	{
@@ -127,6 +124,59 @@ void UI::render()
 	}
 	
 
+}
+
+void UI::timeUIRender()
+{
+	_timeUI.window->render(getMemDC(), _timeUI.windowRc.left, _timeUI.windowRc.top);
+
+	_timeUI.pointer->frameRender(getMemDC(), _timeUI.windowRc.left + 5, _timeUI.windowRc.top, _timeUI.frameX, 0);
+
+	RECT drawRc1 = RectMake(_timeUI.windowRc.left + 115, _timeUI.windowRc.top + 20, 200, 100);		//그려줄 범위 및 렉트 잡아줄 렉트 생성 
+	RECT drawRc2 = RectMake(_timeUI.windowRc.left + 175, _timeUI.windowRc.top + 20, 200, 100);
+	RECT drawRc3 = RectMake(_timeUI.windowRc.left + 116, _timeUI.windowRc.top + 115, 200, 100);
+
+	char strMonth[100];
+	sprintf(strMonth, "%s.", WORLDTIME->getMonth().c_str());
+	char strDay[100];
+	sprintf(strDay, "%d", WORLDTIME->_time.day);
+
+	char strTime[100];
+	if (WORLDTIME->_time.hour < 10 && WORLDTIME->_time.minute < 10)
+	{
+		sprintf(strTime, "0%d : 0%d %s", WORLDTIME->_time.hour, WORLDTIME->_time.minute, WORLDTIME->_time.ap.c_str());
+	}
+	else if (WORLDTIME->_time.hour < 10 && WORLDTIME->_time.minute >= 10)
+	{
+		sprintf(strTime, "0%d : %d %s", WORLDTIME->_time.hour, WORLDTIME->_time.minute, WORLDTIME->_time.ap.c_str());
+	}
+	else if (WORLDTIME->_time.hour >= 10 && WORLDTIME->_time.minute < 10)
+	{
+		sprintf(strTime, "%d : 0%d %s", WORLDTIME->_time.hour, WORLDTIME->_time.minute, WORLDTIME->_time.ap.c_str());
+	}
+	else if (WORLDTIME->_time.hour >= 10 && WORLDTIME->_time.minute >= 10)
+	{
+		sprintf(strTime, "%d : %d %s", WORLDTIME->_time.hour, WORLDTIME->_time.minute, WORLDTIME->_time.ap.c_str());
+	}
+	
+
+	HFONT font = CreateFont(25, 0, 0, 0, 800, false, false, false,
+		DEFAULT_CHARSET, OUT_STROKE_PRECIS, CLIP_DEFAULT_PRECIS,
+		PROOF_QUALITY, DEFAULT_PITCH | FF_SWISS, TEXT("HY엽서L"));
+	HFONT oldFont = (HFONT)SelectObject(getMemDC(), font);
+	//텍스트 색을 설정해준다.
+	SetTextColor(getMemDC(), RGB(86, 22, 12));
+	//텍스트 그려주고
+	DrawText(getMemDC(), strMonth, strlen(strMonth), &drawRc1, DT_LEFT | DT_VCENTER | DT_WORDBREAK | DT_EXTERNALLEADING);
+	DrawText(getMemDC(), strDay, strlen(strDay), &drawRc2, DT_LEFT | DT_VCENTER | DT_WORDBREAK | DT_EXTERNALLEADING);
+	DrawText(getMemDC(), strTime, strlen(strTime), &drawRc3, DT_LEFT | DT_VCENTER | DT_WORDBREAK | DT_EXTERNALLEADING);
+	
+	SelectObject(getMemDC(), oldFont);
+	DeleteObject(font);
+	
+	char a[100];
+	sprintf(a, "%d, %d", _ptMouse.x - _timeUI.windowRc.left, _ptMouse.y - _timeUI.windowRc.top);
+	TextOut(getMemDC(),10,500, a, strlen(a));
 }
 
 

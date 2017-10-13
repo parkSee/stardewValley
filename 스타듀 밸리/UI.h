@@ -87,6 +87,7 @@ public :
 	void letterRender();
 	//시간UI
 	void timePointer();
+	void timeUIRender();
 	//대화창 콜백함수
 	void setConverSationWindow(int who, string txt);
 	//편지 콜백함수
