@@ -99,6 +99,7 @@
     <ClInclude Include="loadingScene.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="obj.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="playGround.h" />
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="publicUI.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="obj.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="publicUI.cpp" />
