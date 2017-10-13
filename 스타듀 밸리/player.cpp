@@ -101,7 +101,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	_state = STAND;
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
-	_isStop = false;
+
 	//콜백
 	this->addCallback("changeState", [this](tagMessage msg)
 	{
@@ -117,11 +117,12 @@ HRESULT player::init(string objName, tagFloat pos)
 	//아이템 선택
 	this->addCallback("LbuttonClick", [this](tagMessage msg)
 	{
-
+		this->lbuttonClick();
 	});
+
 	this->addCallback("changeTargetItem", [this](tagMessage msg)
 	{
-
+		this->changeTargetItem();
 	});
 
 	
@@ -135,7 +136,12 @@ void player::release()
 void player::update() 
 {
 	gameObject::update();
-	this->stateUpdate(_state);
+	
+	if (WORLDTIME->_isTimeFlow)				//UI가 켜지면 움직이지 않는다.
+	{
+		this->stateUpdate(_state);
+	}
+
 
 	KEYANIMANAGER->update();
 	
@@ -151,9 +157,7 @@ void player::render()
 
 void player::stateUpdate(playerState::Enum state)
 {
-	if (!_isStop)
-	{
-		switch (_state)
+	switch (_state)
 		{
 		case playerState::STAND:									//플레이어가 아래로(앞을보고) 서있을때
 			if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
@@ -309,7 +313,10 @@ void player::stateUpdate(playerState::Enum state)
 			}
 			break;
 		case playerState::AXE_RIGHT:
-
+			if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON))
+			{
+				this->changeState(STAND_RIGHT);
+			}
 			break;
 		case playerState::AXE_LEFT:
 			break;
@@ -351,7 +358,6 @@ void player::stateUpdate(playerState::Enum state)
 			break;
 		}
 		_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
-	}
 }
 
 
@@ -474,6 +480,14 @@ void player::changeState(playerState::Enum state)
 void player::eating()
 {
 
+}
+
+void player::lbuttonClick()
+{
+}
+
+void player::changeTargetItem()
+{
 }
 
 

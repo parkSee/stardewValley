@@ -59,6 +59,7 @@ private:
 	playerState::Enum _state;
 	tagPlayer _player;
 	bool _isStop;
+	
 
 public:
 	HRESULT init(string objName, tagFloat pos);
@@ -69,6 +70,8 @@ public:
 	void stateUpdate(playerState::Enum state);
 	void changeState(playerState::Enum state);
 	void eating();
+	void lbuttonClick();
+	void changeTargetItem();
 
 
 	player() {};
