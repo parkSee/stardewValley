@@ -28,15 +28,26 @@ namespace playerState
 		WATER_RIGHT,			//물뿌리개 오른쪽
 		WATER_LEFT,				//물뿌리개 왼쪽
 		WATER_UP,				//물뿌리개 위로
-		WATER_DOWN				//물뿌리개 아래로
+		WATER_DOWN,				//물뿌리개 아래로
+		TAKE_RIGHT,				//들고 있기 오른쪽
+		TAKE_LEFT,				//들고 있기 왼쪽
+		TAKE_UP,				//들고 있기 위
+		TAKE_DOWN				//들고 있기 아래
 
 	};
 }
 
+struct tagItem
+{
+	//아이템 포인터 
+	//이미지 포인터
+
+};
+
 struct tagPlayer
 {
-	//animation ani;
-	//image img;
+	animation* Motion;
+	
 	RECT rc;
 };
 
@@ -48,7 +59,6 @@ private:
 	playerState::Enum _state;
 	tagPlayer _player;
 
-
 public:
 	HRESULT init(string objName, tagFloat pos);
 	void release();
@@ -57,6 +67,8 @@ public:
 
 	void stateUpdate(playerState::Enum state);
 	void changeState(playerState::Enum state);
+	void eating();
+
 
 	player() {};
 	~player() {};
