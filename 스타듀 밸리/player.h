@@ -41,6 +41,9 @@ struct tagItem
 {
 	//아이템 포인터 
 	//이미지 포인터
+	image* img;
+	RECT rc;
+	float x, y;
 
 };
 
@@ -51,6 +54,7 @@ struct tagPlayer
 	RECT rc;
 };
 
+
 using namespace playerState;
 
 class player : public gameObject
@@ -59,7 +63,8 @@ private:
 	playerState::Enum _state;
 	tagPlayer _player;
 	bool _isStop;
-	
+	tagItem _item;
+
 
 public:
 	HRESULT init(string objName, tagFloat pos);

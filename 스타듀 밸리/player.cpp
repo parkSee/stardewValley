@@ -102,6 +102,9 @@ HRESULT player::init(string objName, tagFloat pos)
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
+	_item.img = IMAGEMANAGER->findImage("Axe");
+	
+
 	//ฤÝน้
 	this->addCallback("changeState", [this](tagMessage msg)
 	{
@@ -146,12 +149,12 @@ void player::update()
 	KEYANIMANAGER->update();
 	
 }
-void player::render() 
+void player::render()
 {
 	//gameObject::render();
 	Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 
-	_image->aniRender(getMemDC(), _player.rc.left, _player.rc.top,_player.Motion);
+	_image->aniRender(getMemDC(), _player.rc.left, _player.rc.top, _player.Motion);
 	
 }
 
