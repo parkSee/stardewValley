@@ -101,7 +101,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	_state = STAND;
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
-	
+	_isStop = false;
 	//콜백
 	this->addCallback("changeState", [this](tagMessage msg)
 	{
@@ -151,205 +151,207 @@ void player::render()
 
 void player::stateUpdate(playerState::Enum state)
 {
-	switch (_state)
+	if (!_isStop)
 	{
-	case playerState::STAND:									//플레이어가 아래로(앞을보고) 서있을때
-		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))					
+		switch (_state)
 		{
-			this->changeState(LEFT_RUN);						//왼쪽으로 이동상태로	바껴라
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))				
-		{
-			this->changeState(RIGHT_RUN);						//오른쪽으로 이동상태로 바껴라
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_UP))
-		{
-			this->changeState(UP_RUN);							//위로가는 이동상태로 바껴라
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
-		{
-			this->changeState(DOWN_RUN);						//아래로가는 이동상태로 바껴라
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
-		{
-			this->changeState(AXE_RIGHT);
-		}
-		break;
-	
-	case playerState::STAND_RIGHT:								//RIGHT_STAND
-		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
-		{
-			this->changeState(RIGHT_RUN);						//오른쪽으로 계속가라~
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
-		{
-			this->changeState(LEFT_RUN);						//왼쪽으로 가는 상태로 바껴라
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_UP))
-		{
-			this->changeState(UP_RUN);							//위로가는 상태로 바껴라
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
-		{
-			this->changeState(DOWN_RUN);						//아래로 가는 상태로 바껴라
-		}
-		break;
-	case playerState::STAND_LEFT:
-		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))					//LEFT_STAND
-		{
-			this->changeState(LEFT_RUN);						//왼쪽으로 계속가라~
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
-		{
-			this->changeState(RIGHT_RUN);						//오른쪽으로 가는 상태로 바껴라
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_UP))
-		{
-			this->changeState(UP_RUN);							//위로 가는 상태로 바껴라
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
-		{
-			this->changeState(DOWN_RUN);						//아래로 가는 상태로 바껴라
-		}
-		break;
-	case playerState::STAND_BACK:
-		if (KEYMANAGER->isOnceKeyDown(VK_UP))
-		{
-			this->changeState(UP_RUN);							//계속 위로 가렴
-		}
+		case playerState::STAND:									//플레이어가 아래로(앞을보고) 서있을때
+			if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+			{
+				this->changeState(LEFT_RUN);						//왼쪽으로 이동상태로	바껴라
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+			{
+				this->changeState(RIGHT_RUN);						//오른쪽으로 이동상태로 바껴라
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_UP))
+			{
+				this->changeState(UP_RUN);							//위로가는 이동상태로 바껴라
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+			{
+				this->changeState(DOWN_RUN);						//아래로가는 이동상태로 바껴라
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+			{
+				this->changeState(AXE_RIGHT);
+			}
+			break;
 
-		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
-		{
-			this->changeState(DOWN_RUN);						//아래로 가는 상태로 바껴라				
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
-		{
-			this->changeState(LEFT_RUN);						//왼쪽으로 가는 상태로 바껴라
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
-		{
-			this->changeState(RIGHT_RUN);						//오른쪽으로 가는 상태로 바껴라
-		}
+		case playerState::STAND_RIGHT:								//RIGHT_STAND
+			if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+			{
+				this->changeState(RIGHT_RUN);						//오른쪽으로 계속가라~
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+			{
+				this->changeState(LEFT_RUN);						//왼쪽으로 가는 상태로 바껴라
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_UP))
+			{
+				this->changeState(UP_RUN);							//위로가는 상태로 바껴라
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+			{
+				this->changeState(DOWN_RUN);						//아래로 가는 상태로 바껴라
+			}
+			break;
+		case playerState::STAND_LEFT:
+			if (KEYMANAGER->isOnceKeyDown(VK_LEFT))					//LEFT_STAND
+			{
+				this->changeState(LEFT_RUN);						//왼쪽으로 계속가라~
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+			{
+				this->changeState(RIGHT_RUN);						//오른쪽으로 가는 상태로 바껴라
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_UP))
+			{
+				this->changeState(UP_RUN);							//위로 가는 상태로 바껴라
+			}
+			if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+			{
+				this->changeState(DOWN_RUN);						//아래로 가는 상태로 바껴라
+			}
+			break;
+		case playerState::STAND_BACK:
+			if (KEYMANAGER->isOnceKeyDown(VK_UP))
+			{
+				this->changeState(UP_RUN);							//계속 위로 가렴
+			}
 
-		break;
-	case playerState::RIGHT_RUN:								//오른쪽으로 이동중
-		if (KEYMANAGER->isStayKeyDown(VK_RIGHT))			
-		{
-			_pos.x += 5;
-			if (KEYMANAGER->isStayKeyDown(VK_DOWN))				//오른쪽 대각선 아래로 이동
+			if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 			{
-				_pos.y += 5;
+				this->changeState(DOWN_RUN);						//아래로 가는 상태로 바껴라				
 			}
-			else if (KEYMANAGER->isStayKeyDown(VK_UP))
+			if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 			{
-				_pos.y -= 5;									//오른쪽 대각선 위로 이동
+				this->changeState(LEFT_RUN);						//왼쪽으로 가는 상태로 바껴라
 			}
-		}
-		else if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
-		{
-			this->changeState(STAND_RIGHT);
-		}
-		break;
-	case playerState::LEFT_RUN:									//왼쪽으로 이동중
-		if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-		{
-			_pos.x -= 5;
-			if (KEYMANAGER->isStayKeyDown(VK_DOWN))				//왼쪽 대각선 아래로 이동
+			if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 			{
-				_pos.y += 5;
+				this->changeState(RIGHT_RUN);						//오른쪽으로 가는 상태로 바껴라
 			}
-			else if (KEYMANAGER->isStayKeyDown(VK_UP))			//왼쪽 대각선 위로 이동
-			{
-				_pos.y -= 5;
-			}
-			
-		}
-		else if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
-		{
-			this->changeState(STAND_LEFT);
-		}
-		break;
-	case playerState::UP_RUN:									//위로 이동중
-		if (KEYMANAGER->isStayKeyDown(VK_UP))
-		{
-			_pos.y -= 5;
-			if (KEYMANAGER->isStayKeyDown(VK_LEFT))				//위 대각선 왼쪽으로 이동
-			{
-				_pos.x -= 5;
-			}
-			else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))		//위 대각선 오른쪽으로 이동
+
+			break;
+		case playerState::RIGHT_RUN:								//오른쪽으로 이동중
+			if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
 			{
 				_pos.x += 5;
+				if (KEYMANAGER->isStayKeyDown(VK_DOWN))				//오른쪽 대각선 아래로 이동
+				{
+					_pos.y += 5;
+				}
+				else if (KEYMANAGER->isStayKeyDown(VK_UP))
+				{
+					_pos.y -= 5;									//오른쪽 대각선 위로 이동
+				}
 			}
-		}
-		else if (KEYMANAGER->isOnceKeyUp(VK_UP))
-		{
-			this->changeState(STAND_BACK);
-		}
-		break;
-	case playerState::DOWN_RUN:
-		if (KEYMANAGER->isStayKeyDown(VK_DOWN))
-		{
-			_pos.y += 5;
-
+			else if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
+			{
+				this->changeState(STAND_RIGHT);
+			}
+			break;
+		case playerState::LEFT_RUN:									//왼쪽으로 이동중
 			if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 			{
 				_pos.x -= 5;
-			}
-			else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
-			{
-				_pos.x += 5;
-			}
-		}
-		else if (KEYMANAGER->isOnceKeyUp(VK_DOWN))
-		{
-			this->changeState(STAND);
-		}
-		break;
-	case playerState::AXE_RIGHT:
-		
-		break;
-	case playerState::AXE_LEFT:
-		break;
-	case playerState::AXE_UP:
-		break;
-	case playerState::AXE_DOWN:
-		break;
-	case playerState::HOE_RIGHT:
-		break;
-	case playerState::HOE_LEFT:
-		break;
-	case playerState::HOE_UP:
-		break;
-	case playerState::HOE_DOWN:
-		break;
-	case playerState::SICKLE_RIGHT:
-		break;
-	case playerState::SICKLE_LEFT:
-		break;
-	case playerState::SICKLE_UP:
-		break;
-	case playerState::SICKLE_DOWN:
-		break;
-	case playerState::WATER_RIGHT:
-		break;
-	case playerState::WATER_LEFT:
-		break;
-	case playerState::WATER_UP:
-		break;
-	case playerState::WATER_DOWN:
-		break;
-	case playerState::TAKE_RIGHT:
-		break;
-	case playerState::TAKE_LEFT:
-		break;
-	case playerState::TAKE_UP:
-		break;
-	case playerState::TAKE_DOWN:
-		break;
-	}
-	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+				if (KEYMANAGER->isStayKeyDown(VK_DOWN))				//왼쪽 대각선 아래로 이동
+				{
+					_pos.y += 5;
+				}
+				else if (KEYMANAGER->isStayKeyDown(VK_UP))			//왼쪽 대각선 위로 이동
+				{
+					_pos.y -= 5;
+				}
 
+			}
+			else if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
+			{
+				this->changeState(STAND_LEFT);
+			}
+			break;
+		case playerState::UP_RUN:									//위로 이동중
+			if (KEYMANAGER->isStayKeyDown(VK_UP))
+			{
+				_pos.y -= 5;
+				if (KEYMANAGER->isStayKeyDown(VK_LEFT))				//위 대각선 왼쪽으로 이동
+				{
+					_pos.x -= 5;
+				}
+				else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))		//위 대각선 오른쪽으로 이동
+				{
+					_pos.x += 5;
+				}
+			}
+			else if (KEYMANAGER->isOnceKeyUp(VK_UP))
+			{
+				this->changeState(STAND_BACK);
+			}
+			break;
+		case playerState::DOWN_RUN:
+			if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+			{
+				_pos.y += 5;
+
+				if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+				{
+					_pos.x -= 5;
+				}
+				else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+				{
+					_pos.x += 5;
+				}
+			}
+			else if (KEYMANAGER->isOnceKeyUp(VK_DOWN))
+			{
+				this->changeState(STAND);
+			}
+			break;
+		case playerState::AXE_RIGHT:
+
+			break;
+		case playerState::AXE_LEFT:
+			break;
+		case playerState::AXE_UP:
+			break;
+		case playerState::AXE_DOWN:
+			break;
+		case playerState::HOE_RIGHT:
+			break;
+		case playerState::HOE_LEFT:
+			break;
+		case playerState::HOE_UP:
+			break;
+		case playerState::HOE_DOWN:
+			break;
+		case playerState::SICKLE_RIGHT:
+			break;
+		case playerState::SICKLE_LEFT:
+			break;
+		case playerState::SICKLE_UP:
+			break;
+		case playerState::SICKLE_DOWN:
+			break;
+		case playerState::WATER_RIGHT:
+			break;
+		case playerState::WATER_LEFT:
+			break;
+		case playerState::WATER_UP:
+			break;
+		case playerState::WATER_DOWN:
+			break;
+		case playerState::TAKE_RIGHT:
+			break;
+		case playerState::TAKE_LEFT:
+			break;
+		case playerState::TAKE_UP:
+			break;
+		case playerState::TAKE_DOWN:
+			break;
+		}
+		_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+	}
 }
 
 

@@ -58,6 +58,7 @@ class player : public gameObject
 private:
 	playerState::Enum _state;
 	tagPlayer _player;
+	bool _isStop;
 
 public:
 	HRESULT init(string objName, tagFloat pos);
