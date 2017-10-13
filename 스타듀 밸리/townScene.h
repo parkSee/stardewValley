@@ -2,8 +2,6 @@
 #include "gameNode.h"
 #include "worldNode.h"
 
-
-
 class townScene : public gameNode
 {
 private:

@@ -20,7 +20,18 @@ void UI::setAddCallback()
 	{
 		this->exit();
 	});
-	
+
+	this->addCallback("changePointer", [this](tagMessage msg)
+	{
+		this->timePointer();
+	});
+}
+
+
+void UI::timePointer()
+{
+	_timeUI.frameX += 1;
+	if (_timeUI.frameX >= _timeUI.pointer->getMaxFrameX())_timeUI.frameX = _timeUI.pointer->getMaxFrameX();
 }
 
 //다용도 콜백 함수 등록 
@@ -39,7 +50,8 @@ void UI::setConverSationWindow(int who, string txt)
 	_conversation.scroll = getWho(who)[1];
 	//텍스트에도 텍스트 넣어주고 
 	_txt = txt;
-
+	//시간 정지해주고
+	WORLDTIME->_isTimeFlow = false;
 }
 
 //편지창 만들어 주는 함수
@@ -48,6 +60,8 @@ void UI::setLetter(string txt)
 	_direction = uiDirection::LETTER;
 
 	_letter.txt = txt;
+	//시간 정지해 주고
+	WORLDTIME->_isTimeFlow = false;
 }
 
 //대화창에 나올 인물의 프로필 이미지와 이름표 이미지를 벡터에 담아서 반환해 준다. 
@@ -110,5 +124,5 @@ void UI::exit()
 		_cbFunction();
 		_cbFunction = NULL;			//그리고 실행했으면 다시 NULL로 비워둬라 
 	}
-
+	WORLDTIME->_isTimeFlow = true;
 }

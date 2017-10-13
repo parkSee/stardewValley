@@ -13,10 +13,14 @@ namespace publicUIType
 struct tagUI
 {
 	image*				img;
+	image*				item;
 	string				txt;
 	float				count;
 	int					index;
+	bool				sizeUp;
 	float				liveTime;
+	float				size;
+	RECT				rc;
 };
 
 class publicUI : public gameObject
@@ -33,6 +37,9 @@ public:
 
 	void addGetItemUI(tagMessage msg);
 	void addGuideUI(tagMessage msg);
+
+	void getItemUIRender();
+	void guideItemUIRender();
 
 
 	publicUI() {}

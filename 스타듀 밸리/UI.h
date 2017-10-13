@@ -47,11 +47,20 @@ struct tagLetter
 	bool				isScaleUp;
 };
 
+struct tagTimeWindow
+{
+	image*				window;
+	image*				pointer;
+	int					frameX;
+	RECT				windowRc;
+};
+
 class UI : public gameObject
 {
 private:
 	image*				_layer;					//인벤토리 창이나 대화창이 켜졌을 때 배경 알파값주는 마스킹
-	CBFUNCTION		_cbFunction;				//UI 콜백
+	CBFUNCTION			_cbFunction;			//UI 콜백
+	tagTimeWindow		_timeUI;
 
 public:
 	uiDirection::Enum	_direction;				//UI상태 창
@@ -76,7 +85,8 @@ public :
 	//편지 update  및 render함수  
 	void letterUpdate();
 	void letterRender();
-	
+	//시간UI
+	void timePointer();
 	//대화창 콜백함수
 	void setConverSationWindow(int who, string txt);
 	//편지 콜백함수

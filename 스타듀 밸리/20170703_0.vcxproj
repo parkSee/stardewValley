@@ -120,6 +120,7 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="worldNode.h" />
+    <ClInclude Include="worldTime.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="action.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />
+    <ClCompile Include="worldTime.cpp" />
     <ClCompile Include="youngJae + imageLoad.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

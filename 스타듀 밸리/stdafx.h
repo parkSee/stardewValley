@@ -33,7 +33,7 @@ using namespace std;
 //================전역 헤더======================
 #include "tagMessage.h"
 #include "townWorld.h"
-
+#include "worldTime.h"
 
 using namespace OMICRON_UTIL;
 
@@ -44,7 +44,7 @@ using namespace OMICRON_UTIL;
 #define WINNAME (LPTSTR)(TEXT("Omicron API"))
 #define WINSTARTX 20
 #define WINSTARTY 20
-#define WINSIZEX 1200
+#define WINSIZEX 1300
 #define WINSIZEY 800
 #define WINSTYLE WS_CAPTION | WS_SYSMENU
 
@@ -64,6 +64,7 @@ using namespace OMICRON_UTIL;
 #define CAMERAMANAGER cameraManager::getSingleton()
 #define TXTDATA txtData::getSingleton()
 #define INIDATA iniDataManager::getSingleton()
+#define WORLDTIME worldTime::getSingleton()
 
 
 #define TOWNWORLD townWorld::getSingleton()
@@ -84,4 +85,3 @@ extern HINSTANCE _hInstance;
 extern HWND _hWnd;
 extern POINT _ptMouse;
 extern BOOL _leftButtonDown;
-extern bool _isStop;

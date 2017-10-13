@@ -39,6 +39,7 @@ HRESULT gameNode::init(bool managerInit)
 		INIDATA->init();
 		TOWNWORLD->init();
 		CAMERAMANAGER->init();
+		WORLDTIME->init();
 
 	}
 
@@ -61,7 +62,7 @@ void gameNode::release(void)
 		INIDATA->releaseSingleton();
 		TOWNWORLD->releaseSingleton();
 		CAMERAMANAGER->releaseSingleton();
-
+		WORLDTIME->releaseSingleton();
 	}
 	
 	ReleaseDC(_hWnd, _hdc);
