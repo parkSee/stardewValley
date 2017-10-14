@@ -129,12 +129,14 @@ void UI::render()
 
 }
 
+//오른쪽 상단 UI창 랜더 함수 
 void UI::timeUIRender()
 {
+	//시간 UI창 윈도우  이미지
 	_timeUI.window->render(getMemDC(), _timeUI.windowRc.left, _timeUI.windowRc.top);
-
+	//시간 화살표 이미지 
 	_timeUI.pointer->frameRender(getMemDC(), _timeUI.windowRc.left + 5, _timeUI.windowRc.top, _timeUI.frameX, 0);
-
+	
 	RECT drawRc1 = RectMake(_timeUI.windowRc.left + 115, _timeUI.windowRc.top + 20, 200, 100);		//그려줄 범위 및 렉트 잡아줄 렉트 생성 
 	RECT drawRc2 = RectMake(_timeUI.windowRc.left + 175, _timeUI.windowRc.top + 20, 200, 100);
 	RECT drawRc3 = RectMake(_timeUI.windowRc.left + 116, _timeUI.windowRc.top + 115, 200, 100);

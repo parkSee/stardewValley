@@ -100,6 +100,7 @@ vector<image*> UI::getWho(int who)
 //대화창 및 편지 창 나갈때 처리해줘야 할것들을 처리해준다.
 void UI::exit()
 {
+	//대화창 나가기 버튼
 	if (_direction == uiDirection::CONVERSATION)
 	{
 		_txt.clear();
@@ -107,7 +108,7 @@ void UI::exit()
 		_conversation.index = 0;
 		_direction = uiDirection::NORMAL;
 	}
-
+	//편지 나가기 버튼 
 	else if (_direction == uiDirection::LETTER)
 	{
 		_letter.txt.clear();
@@ -120,5 +121,9 @@ void UI::exit()
 		_cbFunction();
 		_cbFunction = NULL;			//그리고 실행했으면 다시 NULL로 비워둬라 
 	}
+
+	//대화창 편지창 나갔으니까 시간다시 흘러가게 true로 만들어 준다.
 	WORLDTIME->_isTimeFlow = true;
 }
+
+
