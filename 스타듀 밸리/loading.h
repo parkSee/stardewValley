@@ -42,15 +42,15 @@ private:
 public:
 	HRESULT initForImage(string keyName, int width, int height);
 	HRESULT initForImage(string keyName, const char* fileName, int width, int height,
-		BOOL trans = FALSE, COLORREF transColor = FALSE);
+		BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255));
 	HRESULT initForImage(string keyName, const char* fileName, float x, float y, int width, int height,
 		BOOL trans = FALSE, COLORREF transColor = FALSE);
 
 	HRESULT initForFrameImage(string keyName, const char* fileName, int width, int height,
-		int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = FALSE);
+		int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255));
 
 	HRESULT initForFrameImage(string keyName, const char* fileName, float x, float y, int width, int height,
-		int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = FALSE);
+		int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255));
 
 	HRESULT initForSound(string keyName, const char* fileName, bool bgm = false, bool roop = false);
 
@@ -97,10 +97,10 @@ public:
 	void render();
 
 	void loadImage(string keyName, int width, int height);
-	void loadImage(string keyName, const char* fileName, int width, int height, BOOL trans = FALSE, COLORREF transColor = FALSE);
-	void loadImage(string keyName, const char* fileName, float x, float y, int width, int height, BOOL trans = FALSE, COLORREF transColor = FALSE);
-	void loadFrameImage(string keyName, const char* fileName, int width, int height, int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = FALSE);
-	void loadFrameImage(string keyName, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = FALSE);
+	void loadImage(string keyName, const char* fileName, int width, int height, BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255));
+	void loadImage(string keyName, const char* fileName, float x, float y, int width, int height, BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255));
+	void loadFrameImage(string keyName, const char* fileName, int width, int height, int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255));
+	void loadFrameImage(string keyName, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255));
 
 	void loadSound(string keyName, const char* fileName, bool bgm = false, bool roop = false);
 

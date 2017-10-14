@@ -11,6 +11,7 @@ HRESULT loadItem::initForImage(string keyName, int width, int height)
 
 	memset(&_imageResource, 0, sizeof(tagImageResource));
 
+	_imageResource.keyName = "0";
 	_imageResource.keyName = keyName;
 	_imageResource.width = width;
 	_imageResource.height = height;
@@ -25,6 +26,8 @@ HRESULT loadItem::initForImage(string keyName, const char* fileName, int width, 
 
 	memset(&_imageResource, 0, sizeof(tagImageResource));
 
+
+	_imageResource.keyName = "0";
 	_imageResource.keyName = keyName;
 	_imageResource.fileName = fileName;
 	_imageResource.width = width;
@@ -42,6 +45,7 @@ HRESULT loadItem::initForImage(string keyName, const char* fileName, float x, fl
 
 	memset(&_imageResource, 0, sizeof(tagImageResource));
 
+	_imageResource.keyName = "0";
 	_imageResource.keyName = keyName;
 	_imageResource.fileName = fileName;
 	_imageResource.x = x;
@@ -61,6 +65,7 @@ HRESULT loadItem::initForFrameImage(string keyName, const char* fileName, int wi
 
 	memset(&_imageResource, 0, sizeof(tagImageResource));
 
+	_imageResource.keyName = "0";
 	_imageResource.keyName = keyName;
 	_imageResource.fileName = fileName;
 	_imageResource.width = width;
@@ -80,6 +85,7 @@ HRESULT loadItem::initForFrameImage(string keyName, const char* fileName, float 
 
 	memset(&_imageResource, 0, sizeof(tagImageResource));
 
+	_imageResource.keyName = "0";
 	_imageResource.keyName = keyName;
 	_imageResource.fileName = fileName;
 	_imageResource.x = x;
@@ -100,6 +106,7 @@ HRESULT loadItem::initForSound(string keyName, const char* fileName, bool bgm, b
 
 	ZeroMemory(&_soundResource, sizeof(tagSoundResource));
 
+	_soundResource.keyName = "0";
 	_soundResource.keyName = keyName;
 	_soundResource.fileName = fileName;
 	_soundResource.bgm = bgm;
@@ -218,7 +225,7 @@ void loading::loadImage(string keyName, int width, int height)
 	_vLoadItem.push_back(item);
 }
 
-void loading::loadImage(string keyName, const char* fileName, int width, int height, BOOL trans, COLORREF transColor = RGB(255,0,255))
+void loading::loadImage(string keyName, const char* fileName, int width, int height, BOOL trans, COLORREF transColor )
 {
 	loadItem* item = new loadItem;
 	item->initForImage(keyName, fileName, width, height, trans, transColor);
@@ -228,7 +235,7 @@ void loading::loadImage(string keyName, const char* fileName, int width, int hei
 	_vLoadItem.push_back(item);
 }
 
-void loading::loadImage(string keyName, const char* fileName, float x, float y, int width, int height, BOOL trans, COLORREF transColor = RGB(255, 0, 255))
+void loading::loadImage(string keyName, const char* fileName, float x, float y, int width, int height, BOOL trans, COLORREF transColor )
 {
 	loadItem* item = new loadItem;
 	item->initForImage(keyName, fileName, x, y, width, height, trans, transColor);
@@ -238,7 +245,7 @@ void loading::loadImage(string keyName, const char* fileName, float x, float y, 
 	_vLoadItem.push_back(item);
 }
 
-void loading::loadFrameImage(string keyName, const char* fileName, int width, int height, int frameX, int frameY, BOOL trans, COLORREF transColor = RGB(255, 0, 255))
+void loading::loadFrameImage(string keyName, const char* fileName, int width, int height, int frameX, int frameY, BOOL trans, COLORREF transColor )
 {
 	loadItem* item = new loadItem;
 	item->initForFrameImage(keyName, fileName, width, height, frameX, frameY, trans, transColor);
@@ -248,7 +255,7 @@ void loading::loadFrameImage(string keyName, const char* fileName, int width, in
 	_vLoadItem.push_back(item);
 }
 
-void loading::loadFrameImage(string keyName, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, BOOL trans, COLORREF transColor = RGB(255, 0, 255))
+void loading::loadFrameImage(string keyName, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, BOOL trans, COLORREF transColor )
 {
 	loadItem* item = new loadItem;
 	item->initForFrameImage(keyName, fileName, x, y, width, frameX, frameY, height, trans, transColor);

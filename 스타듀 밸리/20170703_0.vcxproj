@@ -84,6 +84,7 @@
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
+    <ClInclude Include="dropItem.h" />
     <ClInclude Include="dungeonScene.h" />
     <ClInclude Include="dungeonWorld.h" />
     <ClInclude Include="effect.h" />
@@ -93,6 +94,8 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniDataManager.h" />
+    <ClInclude Include="inventory.h" />
+    <ClInclude Include="item.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="loading.h" />
@@ -129,6 +132,7 @@
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="dongjin+imageLoad.cpp" />
+    <ClCompile Include="dropItem.cpp" />
     <ClCompile Include="dungeonScene.cpp" />
     <ClCompile Include="dungeonWorld.cpp" />
     <ClCompile Include="effect.cpp" />
@@ -139,6 +143,8 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
+    <ClCompile Include="inventory.cpp" />
+    <ClCompile Include="item.cpp" />
     <ClCompile Include="jericho + imageLoad.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />

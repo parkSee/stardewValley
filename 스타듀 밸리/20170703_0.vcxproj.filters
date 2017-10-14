@@ -148,6 +148,9 @@
     <Filter Include="playGround\item">
       <UniqueIdentifier>{8dc9ae31-9615-4193-93ce-cc2e8a65876b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\UI\inventory">
+      <UniqueIdentifier>{2a0c60f5-11fd-4b83-8224-8b9b07588405}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -281,6 +284,15 @@
     </ClInclude>
     <ClInclude Include="worldTime.h">
       <Filter>playGround\worldTime</Filter>
+    </ClInclude>
+    <ClInclude Include="dropItem.h">
+      <Filter>playGround\item</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>playGround\UI\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>playGround\item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -436,6 +448,15 @@
     </ClCompile>
     <ClCompile Include="worldTime.cpp">
       <Filter>playGround\worldTime</Filter>
+    </ClCompile>
+    <ClCompile Include="dropItem.cpp">
+      <Filter>playGround\item</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>playGround\UI\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>playGround\item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
