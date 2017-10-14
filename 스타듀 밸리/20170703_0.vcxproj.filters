@@ -151,6 +151,9 @@
     <Filter Include="playGround\UI\inventory">
       <UniqueIdentifier>{2a0c60f5-11fd-4b83-8224-8b9b07588405}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\NPC">
+      <UniqueIdentifier>{fe4b28d5-8f34-4733-bb4e-945b7033f211}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -299,6 +302,9 @@
     </ClInclude>
     <ClInclude Include="tree1.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>playGround\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -469,6 +475,9 @@
     </ClCompile>
     <ClCompile Include="tree1.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>playGround\NPC</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
