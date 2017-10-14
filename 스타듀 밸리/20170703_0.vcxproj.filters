@@ -152,11 +152,16 @@
       <UniqueIdentifier>{2a0c60f5-11fd-4b83-8224-8b9b07588405}</UniqueIdentifier>
     </Filter>
 <<<<<<< HEAD
+<<<<<<< HEAD
+    <Filter Include="playGround\NPC">
+      <UniqueIdentifier>{fe4b28d5-8f34-4733-bb4e-945b7033f211}</UniqueIdentifier>
+=======
     <Filter Include="playGround\motherObject">
       <UniqueIdentifier>{12691ca0-d6f1-4290-a552-7918ee71434f}</UniqueIdentifier>
     </Filter>
     <Filter Include="playGround\map\tree">
       <UniqueIdentifier>{017c6dcb-9d01-4df4-ac0e-8fc210bb03d0}</UniqueIdentifier>
+>>>>>>> f82eec1d9ce1bb5e71d456869cf90b8ce2aeecf4
 =======
     <Filter Include="playGround\store">
       <UniqueIdentifier>{7ed9ff62-f742-4e4a-9cf7-39ef9238ef2c}</UniqueIdentifier>
@@ -317,8 +322,13 @@
     <ClInclude Include="tree3.h">
       <Filter>playGround\map\tree</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="NPC.h">
+      <Filter>playGround\NPC</Filter>
+=======
     <ClInclude Include="store.h">
       <Filter>playGround\store</Filter>
+>>>>>>> 416a1ffddc2b3b65d2dfdaff05409d3ee7ea5b3d
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -496,8 +506,13 @@
     <ClCompile Include="tree3.cpp">
       <Filter>playGround\map\tree</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="NPC.cpp">
+      <Filter>playGround\NPC</Filter>
+=======
     <ClCompile Include="store.cpp">
       <Filter>playGround\store</Filter>
+>>>>>>> 416a1ffddc2b3b65d2dfdaff05409d3ee7ea5b3d
     </ClCompile>
   </ItemGroup>
 </Project>
