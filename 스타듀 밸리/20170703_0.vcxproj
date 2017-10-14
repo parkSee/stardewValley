@@ -123,6 +123,8 @@
     <ClInclude Include="townScene.h" />
     <ClInclude Include="townWorld.h" />
     <ClInclude Include="tree1.h" />
+    <ClInclude Include="tree2.h" />
+    <ClInclude Include="tree3.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="utils.h" />
@@ -184,6 +186,8 @@
     <ClCompile Include="townScene.cpp" />
     <ClCompile Include="townWorld.cpp" />
     <ClCompile Include="tree1.cpp" />
+    <ClCompile Include="tree2.cpp" />
+    <ClCompile Include="tree3.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="ui+callBack.cpp" />
     <ClCompile Include="UI.cpp" />
