@@ -152,9 +152,10 @@ void player::update()
 void player::render()
 {
 	//gameObject::render();
-	Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
-
-	_image->aniRender(getMemDC(), _player.rc.left, _player.rc.top, _player.Motion);
+	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
+	Rectangle(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, this->rectMakeBottom().right, this->rectMakeBottom().bottom);
+	
+	_image->aniRender(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, _player.Motion);
 	
 }
 
@@ -491,6 +492,18 @@ void player::lbuttonClick()
 
 void player::changeTargetItem()
 {
+}
+
+RECT player::rectMakeBottom()
+{
+	RECT rc;
+
+	rc.left = _pos.x - _image->getFrameWidth() / 2;
+	rc.right = _pos.x + _image->getFrameWidth() / 2;
+	rc.top = _pos.y - _image->getFrameHeight();
+	rc.bottom = _pos.y;
+
+	return rc;
 }
 
 
