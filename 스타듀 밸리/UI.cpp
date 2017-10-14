@@ -177,9 +177,9 @@ void UI::timeUIRender()
 	SelectObject(getMemDC(), oldFont);
 	DeleteObject(font);
 	
-	char a[100];
-	sprintf(a, "%d, %d", _ptMouse.x - _timeUI.windowRc.left, _ptMouse.y - _timeUI.windowRc.top);
-	TextOut(getMemDC(),10,500, a, strlen(a));
+	//char a[100];
+	//sprintf(a, "%d, %d", _ptMouse.x - _timeUI.windowRc.left, _ptMouse.y - _timeUI.windowRc.top);
+	//TextOut(getMemDC(),10,500, a, strlen(a));
 }
 
 

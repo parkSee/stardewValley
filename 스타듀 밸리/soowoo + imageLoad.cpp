@@ -3,13 +3,12 @@
 
 void loadingScene::soonwoo()
 {
+	//================================= UI 이미지들 ============================================================
 	//마우스 커서 이미지 
 	_loading->loadFrameImage("mouse", "resource/UI/mouse.bmp", 66, 41, 2,1,true, RGB(255, 0, 255));
 	_loading->loadFrameImage("selectMouse", "resource/UI/selectMouse.bmp",82,41,2,1, true, RGB(255, 0, 255));
 	//검은 상자
 	_loading->loadImage("blackBox", "resource/UI/fadeOut.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
-	//서브 인벤토리 이미지
-	_loading->loadImage("mainInventory", "resource/UI/mainInventory.bmp", 800, 95, true, RGB(255, 0, 255));
 	//대화창 윈도우 이미지 
 	_loading->loadImage("tokeWindow", "resource/UI/tokeWindow.bmp", 1000, 350, true, RGB(255, 0, 255));
 	//대화창 볼 이미지
@@ -31,5 +30,17 @@ void loadingScene::soonwoo()
 	//시간 윈도우 이미지 
 	_loading->loadImage("timeWindow", "resource/UI/timeWindow.bmp", 288, 236, true, RGB(255, 0, 255));
 	_loading->loadFrameImage("timePointer", "resource/UI/timePointer.bmp", 672, 151,7,1, true, RGB(255, 0, 255));
+
+	//===============================인벤토리 및 아이템 이미지들================================================
+
+	//서브 인벤토리 이미지
+	_loading->loadImage("subInventory", "resource/UI/mainInventory.bmp", 800, 95, true, RGB(255, 0, 255));
+	//아이템 아이콘 이미지들
+	_loading->loadImage("item_axe", "resource/item/axe.bmp", 56, 56, true, RGB(255, 0, 255));
+	_loading->loadImage("item_hoe", "resource/item/hoe.bmp", 56, 56, true, RGB(255, 0, 255));
+	_loading->loadImage("item_pixHoe", "resource/item/pixHoe.bmp", 56, 56, true, RGB(255, 0, 255));
+	_loading->loadImage("item_sickle", "resource/item/sickle.bmp", 56, 56, true, RGB(255, 0, 255));
+	_loading->loadImage("item_watering", "resource/item/watering.bmp", 56, 56, true);
+	_loading->loadImage("item_sword", "resource/item/sword.bmp", 56, 56, true);
 
 }

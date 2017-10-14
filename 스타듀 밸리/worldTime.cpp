@@ -31,7 +31,7 @@ void worldTime::update()
 	//시간을 지배한다~!
 	if (_isTimeFlow == true)							//시간 불값이 활성화가 되있다면 시간계산을 해라 
 	{
-		_time.second += TIMEMANAGER->getElapsedTime() *50;	//초는 ElapsedTime으로 현실시간반영 
+		_time.second += TIMEMANAGER->getElapsedTime();	//초는 ElapsedTime으로 현실시간반영 
 		if (_time.second >= 10.0f)
 		{
 			_time.second = 0.0f;
@@ -66,6 +66,8 @@ void worldTime::update()
 			}
 		}
 	}
+
+
 }
 
 string worldTime::getMonth()

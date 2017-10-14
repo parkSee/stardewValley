@@ -218,7 +218,7 @@ void loading::loadImage(string keyName, int width, int height)
 	_vLoadItem.push_back(item);
 }
 
-void loading::loadImage(string keyName, const char* fileName, int width, int height, BOOL trans, COLORREF transColor)
+void loading::loadImage(string keyName, const char* fileName, int width, int height, BOOL trans, COLORREF transColor = RGB(255,0,255))
 {
 	loadItem* item = new loadItem;
 	item->initForImage(keyName, fileName, width, height, trans, transColor);
@@ -228,7 +228,7 @@ void loading::loadImage(string keyName, const char* fileName, int width, int hei
 	_vLoadItem.push_back(item);
 }
 
-void loading::loadImage(string keyName, const char* fileName, float x, float y, int width, int height, BOOL trans, COLORREF transColor)
+void loading::loadImage(string keyName, const char* fileName, float x, float y, int width, int height, BOOL trans, COLORREF transColor = RGB(255, 0, 255))
 {
 	loadItem* item = new loadItem;
 	item->initForImage(keyName, fileName, x, y, width, height, trans, transColor);
@@ -238,7 +238,7 @@ void loading::loadImage(string keyName, const char* fileName, float x, float y, 
 	_vLoadItem.push_back(item);
 }
 
-void loading::loadFrameImage(string keyName, const char* fileName, int width, int height, int frameX, int frameY, BOOL trans, COLORREF transColor)
+void loading::loadFrameImage(string keyName, const char* fileName, int width, int height, int frameX, int frameY, BOOL trans, COLORREF transColor = RGB(255, 0, 255))
 {
 	loadItem* item = new loadItem;
 	item->initForFrameImage(keyName, fileName, width, height, frameX, frameY, trans, transColor);
@@ -248,7 +248,7 @@ void loading::loadFrameImage(string keyName, const char* fileName, int width, in
 	_vLoadItem.push_back(item);
 }
 
-void loading::loadFrameImage(string keyName, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, BOOL trans, COLORREF transColor)
+void loading::loadFrameImage(string keyName, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, BOOL trans, COLORREF transColor = RGB(255, 0, 255))
 {
 	loadItem* item = new loadItem;
 	item->initForFrameImage(keyName, fileName, x, y, width, frameX, frameY, height, trans, transColor);
