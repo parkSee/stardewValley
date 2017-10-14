@@ -151,6 +151,9 @@
     <Filter Include="playGround\UI\inventory">
       <UniqueIdentifier>{2a0c60f5-11fd-4b83-8224-8b9b07588405}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\store">
+      <UniqueIdentifier>{7ed9ff62-f742-4e4a-9cf7-39ef9238ef2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -293,6 +296,15 @@
     </ClInclude>
     <ClInclude Include="item.h">
       <Filter>playGround\item</Filter>
+    </ClInclude>
+    <ClInclude Include="motherObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="tree1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="store.h">
+      <Filter>playGround\store</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -457,6 +469,15 @@
     </ClCompile>
     <ClCompile Include="item.cpp">
       <Filter>playGround\item</Filter>
+    </ClCompile>
+    <ClCompile Include="motherObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="tree1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="store.cpp">
+      <Filter>playGround\store</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
