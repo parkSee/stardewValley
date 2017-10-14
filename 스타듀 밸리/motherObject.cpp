@@ -2,7 +2,7 @@
 #include "motherObject.h"
 
 
-HRESULT motherObject::init(string objName, string imageKey = "", tagFloat pos = tagFloat(), pivot::Enum pivot = pivot::CENTER)
+HRESULT motherObject::init(string objName, string imageKey, tagFloat pos, pivot::Enum pivot)
 {
 	gameObject::init(objName, imageKey, pos, pivot);
 
