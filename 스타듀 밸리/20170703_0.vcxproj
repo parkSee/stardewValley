@@ -100,6 +100,7 @@
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
+    <ClInclude Include="motherObject.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="obj.h" />
     <ClInclude Include="player.h" />
@@ -119,6 +120,7 @@
     <ClInclude Include="timer.h" />
     <ClInclude Include="townScene.h" />
     <ClInclude Include="townWorld.h" />
+    <ClInclude Include="tree1.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="utils.h" />
@@ -150,6 +152,7 @@
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
+    <ClCompile Include="motherObject.cpp" />
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="obj.cpp" />
     <ClCompile Include="player.cpp" />
@@ -176,6 +179,7 @@
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="townScene.cpp" />
     <ClCompile Include="townWorld.cpp" />
+    <ClCompile Include="tree1.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="ui+callBack.cpp" />
     <ClCompile Include="UI.cpp" />
