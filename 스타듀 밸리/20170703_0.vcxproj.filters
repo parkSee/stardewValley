@@ -151,11 +151,16 @@
     <Filter Include="playGround\UI\inventory">
       <UniqueIdentifier>{2a0c60f5-11fd-4b83-8224-8b9b07588405}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="playGround\motherObject">
       <UniqueIdentifier>{12691ca0-d6f1-4290-a552-7918ee71434f}</UniqueIdentifier>
     </Filter>
     <Filter Include="playGround\map\tree">
       <UniqueIdentifier>{017c6dcb-9d01-4df4-ac0e-8fc210bb03d0}</UniqueIdentifier>
+=======
+    <Filter Include="playGround\store">
+      <UniqueIdentifier>{7ed9ff62-f742-4e4a-9cf7-39ef9238ef2c}</UniqueIdentifier>
+>>>>>>> 416a1ffddc2b3b65d2dfdaff05409d3ee7ea5b3d
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -311,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="tree3.h">
       <Filter>playGround\map\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="store.h">
+      <Filter>playGround\store</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -487,6 +495,9 @@
     </ClCompile>
     <ClCompile Include="tree3.cpp">
       <Filter>playGround\map\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="store.cpp">
+      <Filter>playGround\store</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
