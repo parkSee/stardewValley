@@ -77,7 +77,7 @@ public:
 	void eating();
 	void lbuttonClick();
 	void changeTargetItem();
-
+	RECT rectMakeBottom();
 
 	player() {};
 	~player() {};
