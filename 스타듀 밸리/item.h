@@ -13,19 +13,14 @@ namespace itemType
 
 struct tagItem
 {
+	string				name;
 	image*				img;
 	itemType::Enum		type;
 	tagFloat			pos;
 	RECT				rc;
 	int					count;
 
-	tagItem() 
-	{
-		img = NULL;
-		type = itemType::NONE;
-		pos = tagFloat(WINSIZEX / 2, WINSIZEY / 2);
-		rc = RectMakeCenter(pos.x, pos.y, 56, 56);
-		count = 0;
-	}
-
+	tagItem();
+	tagItem(string Name, tagFloat position = tagFloat(), int Count = 0 , itemType::Enum typ = itemType::NONE);
+	void addCount() { count++; }
 };

@@ -4,6 +4,7 @@
 #include "UI.h"
 #include "mouse.h"
 #include "publicUI.h"
+#include "inventory.h"
 
 void townScene::soonwooInit()
 {
@@ -19,4 +20,9 @@ void townScene::soonwooInit()
 	publicUi->init("publicUI");
 	TOWNWORLD->addObject(objectType::INTERFACE, publicUi);
 
+	inventory* inven = new inventory;
+	inven->init("inventory");
+	TOWNWORLD->addObject(objectType::INTERFACE, inven);
+
+	
 }

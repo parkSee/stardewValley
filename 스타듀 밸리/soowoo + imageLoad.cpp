@@ -36,11 +36,11 @@ void loadingScene::soonwoo()
 	//서브 인벤토리 이미지
 	_loading->loadImage("subInventory", "resource/UI/mainInventory.bmp", 800, 95, true, RGB(255, 0, 255));
 	//아이템 아이콘 이미지들
-	_loading->loadImage("item_axe", "resource/item/axe.bmp", 56, 56, true, RGB(255, 0, 255));
-	_loading->loadImage("item_hoe", "resource/item/hoe.bmp", 56, 56, true, RGB(255, 0, 255));
-	_loading->loadImage("item_pixHoe", "resource/item/pixHoe.bmp", 56, 56, true, RGB(255, 0, 255));
-	_loading->loadImage("item_sickle", "resource/item/sickle.bmp", 56, 56, true, RGB(255, 0, 255));
-	_loading->loadImage("item_watering", "resource/item/watering.bmp", 56, 56, true);
-	_loading->loadImage("item_sword", "resource/item/sword.bmp", 56, 56, true);
+	_loading->loadImage("axe", "resource/item/axe.bmp", 56, 56, true, RGB(255, 0, 255));
+	_loading->loadImage("hoe", "resource/item/hoe.bmp", 56, 56, true, RGB(255, 0, 255));
+	_loading->loadImage("pixHoe", "resource/item/pixHoe.bmp", 56, 56, true, RGB(255, 0, 255));
+	_loading->loadImage("sickle", "resource/item/sickle.bmp", 56, 56, true, RGB(255, 0, 255));
+	_loading->loadImage("watering", "resource/item/watering.bmp", 56, 56, true);
+	_loading->loadImage("sword", "resource/item/sword.bmp", 56, 56, true);
 
 }

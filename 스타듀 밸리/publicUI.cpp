@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "publicUI.h"
+#include "inventory.h"
 
 
 HRESULT publicUI::init(string name)
@@ -211,6 +212,8 @@ void publicUI::addGuideUI(tagMessage msg)
 	ui.index = 0;
 	ui.liveTime = 3.0f;
 	ui.txt = msg.conversation;
-
+	
 	_vGuideUI.push_back(ui);
+
+	//inventory* inven = (inventory*)TOWNWORLD
 }

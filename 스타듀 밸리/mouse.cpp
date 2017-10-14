@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "mouse.h"
+
 #include "UI.h"
+#include "inventory.h"
+#include "item.h"
 
 HRESULT mouse::init(string name)
 {
@@ -94,6 +97,24 @@ void mouse::mouseControll()
 			_animation = _normalAnimation;
 		}
 	}
+
+	//===================인벤토리 창 관련==================
+	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+	if (inven->getDirection() == invenDirection::SUB_BOTTOM || inven->getDirection() == invenDirection::SUB_TOP)
+	{
+		vector<tagItem*> vItem = inven->getItems();
+		for (int i = 0; i < vItem.size(); ++i)
+		{
+			if (PtInRect(&vItem[i]->rc, _ptMouse))
+			{
+				if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+				{
+					inven->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), vItem[i]->name));
+				}
+			}
+		}
+	}
+	
 
 	//애니메이션이 셀렉트 에니메이션 상태라면 
 	if (_animation == _selectAnimation)
