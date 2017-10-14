@@ -73,22 +73,22 @@ void NPC::stateUpdate(npcState::Enum state)
 	{
 		case npcState::STAND:								//NPC가 정면(아래)를 보고 서있을 때
 		{
-			if ()
-			{
-				this->changeState(WALK_UP);					//위로 움직여라
-			}
-			if ()
-			{
-				this->changeState(WALK_DOWN);				//아래로 움직여라
-			}
-			if ()
-			{
-				this->changeState(WALK_LEFT);				//왼쪽으로 움직여라
-			}
-			if ()
-			{
-				this->changeState(WALK_RIGHT);				//오른쪽으로 움직여라
-			}
+			//if ()
+			//{
+			//	this->changeState(WALK_UP);					//위로 움직여라
+			//}
+			//if ()
+			//{
+			//	this->changeState(WALK_DOWN);				//아래로 움직여라
+			//}
+			//if ()
+			//{
+			//	this->changeState(WALK_LEFT);				//왼쪽으로 움직여라
+			//}
+			//if ()
+			//{
+			//	this->changeState(WALK_RIGHT);				//오른쪽으로 움직여라
+			//}
 			break;
 		}
 	}
