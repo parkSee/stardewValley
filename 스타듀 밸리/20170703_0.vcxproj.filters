@@ -154,6 +154,9 @@
     <Filter Include="playGround\NPC">
       <UniqueIdentifier>{9254c748-2154-4615-abfe-df743c335fc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\mapToolScene">
+      <UniqueIdentifier>{879fd6f7-956a-401c-89fa-ff12a1452e23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -314,6 +317,21 @@
     </ClInclude>
     <ClInclude Include="NPC.h">
       <Filter>playGround\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="mapToolNode.h">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="mapToolScene.h">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="mapToolTile.h">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="testObject.h">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="tileMap.h">
+      <Filter>playGround\mapToolScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -499,6 +517,18 @@
     </ClCompile>
     <ClCompile Include="NPC.cpp">
       <Filter>playGround\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="mapToolScene.cpp">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="mapToolTile.cpp">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="testObject.cpp">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="tileMap.cpp">
+      <Filter>playGround\mapToolScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

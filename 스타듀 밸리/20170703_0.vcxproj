@@ -100,6 +100,9 @@
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
+    <ClInclude Include="mapToolNode.h" />
+    <ClInclude Include="mapToolScene.h" />
+    <ClInclude Include="mapToolTile.h" />
     <ClInclude Include="motherObject.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="NPC.h" />
@@ -117,7 +120,9 @@
     <ClInclude Include="store.h" />
     <ClInclude Include="tagMessage.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="testObject.h" />
     <ClInclude Include="tile.h" />
+    <ClInclude Include="tileMap.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="townScene.h" />
@@ -157,6 +162,8 @@
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
+    <ClCompile Include="mapToolScene.cpp" />
+    <ClCompile Include="mapToolTile.cpp" />
     <ClCompile Include="motherObject.cpp" />
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="NPC.cpp" />
@@ -181,7 +188,9 @@
     </ClCompile>
     <ClCompile Include="store.cpp" />
     <ClCompile Include="tagMessage.cpp" />
+    <ClCompile Include="testObject.cpp" />
     <ClCompile Include="tile.cpp" />
+    <ClCompile Include="tileMap.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="townScene.cpp" />
