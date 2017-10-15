@@ -560,9 +560,6 @@
     <ClCompile Include="grass.cpp">
       <Filter>playGround\map\herb</Filter>
     </ClCompile>
-    <ClCompile Include="store.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="mapToolScene.cpp">
       <Filter>playGround\mapToolScene</Filter>
     </ClCompile>
@@ -586,6 +583,9 @@
     </ClCompile>
     <ClCompile Include="Pierre.cpp">
       <Filter>playGround\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="store.cpp">
+      <Filter>playGround\store</Filter>
     </ClCompile>
     <ClCompile Include="store.cpp">
       <Filter>playGround\store</Filter>
