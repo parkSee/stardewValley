@@ -2,6 +2,14 @@
 #include "gameObject.h"
 
 
+struct tagStore
+{
+	image* ui;
+	image* item;
+	string txt;
+	RECT rc;
+
+};
 class store : public gameObject
 
 {
@@ -14,7 +22,7 @@ public:
 	void render();
 
 
-	store() {};
-	~store() {};
+	store() {}
+	~store() {}
 };
 

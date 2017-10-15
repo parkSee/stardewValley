@@ -91,6 +91,7 @@
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="gameObject.h" />
+    <ClInclude Include="grass.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniDataManager.h" />
@@ -98,6 +99,7 @@
     <ClInclude Include="item.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="land.h" />
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
     <ClInclude Include="mapToolNode.h" />
@@ -107,6 +109,7 @@
     <ClInclude Include="mouse.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="obj.h" />
+    <ClInclude Include="Pierre.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playGround.h" />
     <ClInclude Include="progressBar.h" />
@@ -114,9 +117,11 @@
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="seed.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="stone.h" />
     <ClInclude Include="store.h" />
     <ClInclude Include="tagMessage.h" />
     <ClInclude Include="targetver.h" />
@@ -151,6 +156,7 @@
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="geunHwa.+ imageLoad.cpp" />
+    <ClCompile Include="grass.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
@@ -160,6 +166,7 @@
     <ClCompile Include="jericho + imageLoad.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="land.cpp" />
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="mapToolScene.cpp" />
@@ -168,6 +175,7 @@
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="obj.cpp" />
+    <ClCompile Include="Pierre.cpp" />
     <ClCompile Include="player+callBackcpp.cpp" />
     <ClCompile Include="player+state.cpp" />
     <ClCompile Include="player.cpp" />
@@ -181,6 +189,7 @@
     <ClCompile Include="sceneInit + youngjae.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="sceneInit + dongjin.cpp" />
+    <ClCompile Include="seed.cpp" />
     <ClCompile Include="seeyound + imageLoad.cpp" />
     <ClCompile Include="soowoo + imageLoad.cpp" />
     <ClCompile Include="soundManager.cpp" />
@@ -188,6 +197,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="stone.cpp" />
     <ClCompile Include="store.cpp" />
     <ClCompile Include="tagMessage.cpp" />
     <ClCompile Include="testObject.cpp" />
