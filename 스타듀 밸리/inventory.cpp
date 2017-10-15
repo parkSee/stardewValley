@@ -23,11 +23,11 @@ HRESULT inventory::init(string name)
 		_vInventory.push_back(item);
 	}
 	//아이템 채워넣어 준다
-	_vInventory[0] = tagItem("axe", tagFloat(_vInventory[0].pos.x, _vInventory[0].pos.y), itemType::TOOL);
-	_vInventory[1] = tagItem("hoe", tagFloat(_vInventory[1].pos.x, _vInventory[1].pos.y), itemType::TOOL);
-	_vInventory[2] = tagItem("pixHoe", tagFloat(_vInventory[2].pos.x, _vInventory[2].pos.y), itemType::TOOL);
-	_vInventory[3] = tagItem("sickle", tagFloat(_vInventory[3].pos.x, _vInventory[3].pos.y), itemType::TOOL);
-	_vInventory[4] = tagItem("sword", tagFloat(_vInventory[4].pos.x, _vInventory[4].pos.y), itemType::TOOL);
+	_vInventory[0] = tagItem("axe", tagFloat(_vInventory[0].pos.x, _vInventory[0].pos.y),0, itemType::TOOL);
+	_vInventory[1] = tagItem("hoe", tagFloat(_vInventory[1].pos.x, _vInventory[1].pos.y),0, itemType::TOOL);
+	_vInventory[2] = tagItem("pixHoe", tagFloat(_vInventory[2].pos.x, _vInventory[2].pos.y),0, itemType::TOOL);
+	_vInventory[3] = tagItem("sickle", tagFloat(_vInventory[3].pos.x, _vInventory[3].pos.y),0, itemType::TOOL);
+	_vInventory[4] = tagItem("sword", tagFloat(_vInventory[4].pos.x, _vInventory[4].pos.y),0, itemType::TOOL);
 	//플레이어가 현재 들고있는 아이템 (포인터 형태이므로 new해준다)
 	_targetItem = new tagItem;
 	_targetItem = &_vInventory[0];		//현재 아이템 도끼로 초기화
@@ -45,6 +45,7 @@ HRESULT inventory::init(string name)
 
 	return S_OK;
 }
+
 void inventory::release()
 {
 	gameObject::release();
