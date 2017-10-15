@@ -1,5 +1,6 @@
 #pragma once
 #include "gameObject.h"
+#include "item.h"
 
 namespace playerState
 {
@@ -37,15 +38,6 @@ namespace playerState
 	};
 }
 
-struct tagItem
-{
-	//아이템 포인터 
-	//이미지 포인터
-	image* img;
-	RECT rc;
-	float x, y;
-
-};
 
 struct tagPlayer
 {
@@ -63,7 +55,7 @@ private:
 	playerState::Enum _state;
 	tagPlayer _player;
 	bool _isStop;
-	tagItem _item;
+	tagItem* _item;
 
 
 public:
