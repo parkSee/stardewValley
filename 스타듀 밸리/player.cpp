@@ -140,7 +140,7 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	this->addCallback("changeTargetItem", [this](tagMessage msg)
 	{
-		this->changeTargetItem();
+		this->changeTargetItem(msg);
 	});
 
 	

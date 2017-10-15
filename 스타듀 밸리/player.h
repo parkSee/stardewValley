@@ -73,7 +73,7 @@ public:
 	void changeState(playerState::Enum state);
 	void eating();
 	void lbuttonClick();
-	void changeTargetItem();
+	void changeTargetItem(tagMessage msg);
 	RECT rectMakeBottom();
 
 	player() {};
