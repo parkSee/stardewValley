@@ -154,6 +154,21 @@
     <Filter Include="playGround\NPC">
       <UniqueIdentifier>{9254c748-2154-4615-abfe-df743c335fc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\map\tree">
+      <UniqueIdentifier>{0833aaa5-547b-4347-9c39-e62d22b5bf79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\map\land">
+      <UniqueIdentifier>{07516a00-e895-45fb-af5d-8db5c9479e82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\map\seed">
+      <UniqueIdentifier>{22dada70-f527-4a97-95a0-f57c254805aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\map\stone">
+      <UniqueIdentifier>{6657fd4f-048a-4b81-bb0f-8a2660df2132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\map\herb">
+      <UniqueIdentifier>{f1a10cdc-221b-46f6-b9b9-f4fbada51e34}</UniqueIdentifier>
+    </Filter>
     <Filter Include="playGround\mapToolScene">
       <UniqueIdentifier>{879fd6f7-956a-401c-89fa-ff12a1452e23}</UniqueIdentifier>
     </Filter>
@@ -300,23 +315,35 @@
     <ClInclude Include="item.h">
       <Filter>playGround\item</Filter>
     </ClInclude>
-    <ClInclude Include="motherObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="tree1.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="store.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="tree2.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="tree3.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="NPC.h">
       <Filter>playGround\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="motherObject.h">
+      <Filter>playGround\map</Filter>
+    </ClInclude>
+    <ClInclude Include="tree1.h">
+      <Filter>playGround\map\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="tree2.h">
+      <Filter>playGround\map\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="tree3.h">
+      <Filter>playGround\map\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="land.h">
+      <Filter>playGround\map\land</Filter>
+    </ClInclude>
+    <ClInclude Include="seed.h">
+      <Filter>playGround\map\seed</Filter>
+    </ClInclude>
+    <ClInclude Include="stone.h">
+      <Filter>playGround\map\stone</Filter>
+    </ClInclude>
+    <ClInclude Include="grass.h">
+      <Filter>playGround\map\herb</Filter>
     </ClInclude>
     <ClInclude Include="mapToolNode.h">
       <Filter>playGround\mapToolScene</Filter>
@@ -379,9 +406,6 @@
     </ClCompile>
     <ClCompile Include="collision.cpp">
       <Filter>2DGameFramework\UTIL</Filter>
-    </ClCompile>
-    <ClCompile Include="gameObject.cpp">
-      <Filter>2DGameFramework\gameObject</Filter>
     </ClCompile>
     <ClCompile Include="tagMessage.cpp">
       <Filter>2DGameFramework\gameObject</Filter>
@@ -500,23 +524,44 @@
     <ClCompile Include="item.cpp">
       <Filter>playGround\item</Filter>
     </ClCompile>
-    <ClCompile Include="motherObject.cpp">
+    <ClCompile Include="inventory + callBack.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>playGround\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="motherObject.cpp">
+      <Filter>playGround\map</Filter>
+    </ClCompile>
     <ClCompile Include="tree1.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>playGround\map\tree</Filter>
     </ClCompile>
     <ClCompile Include="store.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="tree2.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>playGround\map\tree</Filter>
     </ClCompile>
     <ClCompile Include="tree3.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>playGround\map\tree</Filter>
     </ClCompile>
-    <ClCompile Include="NPC.cpp">
-      <Filter>playGround\NPC</Filter>
+    <ClCompile Include="gameObject.cpp">
+      <Filter>2DGameFramework\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="land.cpp">
+      <Filter>playGround\map\land</Filter>
+    </ClCompile>
+    <ClCompile Include="seed.cpp">
+      <Filter>playGround\map\seed</Filter>
+    </ClCompile>
+    <ClCompile Include="stone.cpp">
+      <Filter>playGround\map\stone</Filter>
+    </ClCompile>
+    <ClCompile Include="grass.cpp">
+      <Filter>playGround\map\herb</Filter>
+    </ClCompile>
+    <ClCompile Include="store.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="mapToolScene.cpp">
       <Filter>playGround\mapToolScene</Filter>

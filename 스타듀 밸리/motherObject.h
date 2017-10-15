@@ -8,10 +8,14 @@ namespace OBJECT
 	{
 		NONE,
 		STONE,
+		LAND,
+		WETLAND,
+		SEED,
 		TREE1_BOTTOM,
 		TREE1_TOP,
 		TREE2,
-		TREE3
+		TREE3,
+		GRASS
 	};
 }
 // ===============================================================================
@@ -40,9 +44,11 @@ public:
 	inline int getFrameY() { return _frameY; }
 	inline int getIdX() { return _idX; }
 	inline int getIdY() { return _idY; }
+	inline gameObject* getPObj() { return _pObj; }
 
 	inline void setFrameX(int x) { _frameX = x; }
 	inline void setFrameY(int y) { _frameY = y; }
 	inline void setIdX(int x) { _idX = x; }
 	inline void setIdY(int y) { _idY = y; }
+	inline void setPobj(gameObject* pobj) { _pObj = pobj; }
 };
