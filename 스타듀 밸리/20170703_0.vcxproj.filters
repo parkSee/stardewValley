@@ -169,6 +169,9 @@
     <Filter Include="playGround\map\herb">
       <UniqueIdentifier>{f1a10cdc-221b-46f6-b9b9-f4fbada51e34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\mapToolScene">
+      <UniqueIdentifier>{879fd6f7-956a-401c-89fa-ff12a1452e23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -341,6 +344,24 @@
     </ClInclude>
     <ClInclude Include="grass.h">
       <Filter>playGround\map\herb</Filter>
+    </ClInclude>
+    <ClInclude Include="mapToolNode.h">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="mapToolScene.h">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="mapToolTile.h">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="testObject.h">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="tileMap.h">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Pierre.h">
+      <Filter>playGround\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -515,6 +536,9 @@
     <ClCompile Include="tree1.cpp">
       <Filter>playGround\map\tree</Filter>
     </ClCompile>
+    <ClCompile Include="store.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="tree2.cpp">
       <Filter>playGround\map\tree</Filter>
     </ClCompile>
@@ -538,6 +562,30 @@
     </ClCompile>
     <ClCompile Include="store.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="mapToolScene.cpp">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="mapToolTile.cpp">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="testObject.cpp">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="tileMap.cpp">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory + callBack.cpp">
+      <Filter>playGround\UI\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="player+state.cpp">
+      <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="player+callBackcpp.cpp">
+      <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="Pierre.cpp">
+      <Filter>playGround\NPC</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
