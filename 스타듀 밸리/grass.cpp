@@ -19,6 +19,7 @@ HRESULT grass::init(tagFloat pos)
 		this->grassAttack();
 	});
 
+	return S_OK
 }
 void grass::release()
 {
