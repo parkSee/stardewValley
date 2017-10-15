@@ -17,7 +17,7 @@ HRESULT seed::init(tagFloat pos)
 		this->grow();
 	});
 	
-	return S_OK
+	return S_OK;
 }
  void seed::release()
 {

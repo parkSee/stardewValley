@@ -17,7 +17,7 @@ HRESULT stone::init(tagFloat pos)
 		this->stoneAttack();
 	});
 
-	return S_OK
+	return S_OK;
 }
 void stone::release()
 {
