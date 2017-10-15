@@ -83,7 +83,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	int waterDown[] = { 96,97,98,99,100,101,102,103,104,105,106,107 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerWaterDown", "player", waterDown, 12, 10, true);
 
-	//아이템들기
+	//아이템 들고 달리기
 	int takeLeft[] = { 120,121,122,123,124 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerTakeLeft", "player", takeLeft, 5, 10, true);
 
@@ -95,6 +95,20 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	int takeDown[] = { 116,130,138,139,140,141,142 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerTakeDown", "player", takeDown, 7, 10, true);
+
+	//아이템 들고 서있기
+	int standTake[] = { 116 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerStandTake", "player", standTake, 1, 0, false);
+
+	int standTakeLeft[] = { 120 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerTakeStandLeft", "player", standTakeLeft, 1, 0, false);
+
+	int standTakeRight[] = { 125 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerTakeStandRight", "player", standTakeRight, 1, 0, false);
+
+	int standTakeUp[] = { 131 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerTakeStandUp", "player", standTakeUp, 1, 0, false);
+
 //========================================================================================================
 	
 	gameObject::init(objName, "player", tagFloat(WINSIZEX / 2, WINSIZEY / 2), pivot::BOTTOM);

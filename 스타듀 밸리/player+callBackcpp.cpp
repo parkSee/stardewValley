@@ -15,30 +15,37 @@ void player::lbuttonClick()
 
 void player::changeTargetItem()
 {
-	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");		//인벤토리에서 보내는 메세지를 받아온다
 
 	_item = inven->getTargetItem();
 
-	if (_item->type == itemType::TOOL || _item->type == itemType::SEED)
+	if (_item->type == itemType::FOOD || _item->type == itemType::SEED)
 	{
 		switch (_state)
 		{
 		case playerState::STAND:
-			this->changeState(TAKE_DOWN);
+			this->changeState(STAND_TAKE);
 			break;
 		case playerState::STAND_RIGHT:
+			this->changeState(STAND_TAKE_RIGHT);
 			break;
 		case playerState::STAND_LEFT:
+			this->changeState(STAND_TAKE_LEFT);
 			break;
 		case playerState::STAND_BACK:
+			this->changeState(STAND_TAKE_BACK);
 			break;
 		case playerState::RIGHT_RUN:
+			this->changeState(TAKE_RIGHT);
 			break;
 		case playerState::LEFT_RUN:
+			this->changeState(TAKE_LEFT);
 			break;
 		case playerState::UP_RUN:
+			this->changeState(TAKE_UP);
 			break;
 		case playerState::DOWN_RUN:
+			this->changeState(TAKE_DOWN);
 			break;
 		}
 	}

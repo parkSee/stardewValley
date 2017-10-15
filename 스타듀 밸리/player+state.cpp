@@ -200,6 +200,14 @@ void player::stateUpdate(playerState::Enum state)
 		break;
 	case playerState::TAKE_DOWN:
 		break;
+	case playerState::STAND_TAKE:
+		break;
+	case playerState::STAND_TAKE_RIGHT:
+		break;
+	case playerState::STAND_TAKE_LEFT:
+		break;
+	case playerState::STAND_TAKE_BACK:
+		break;
 	}
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 }
@@ -317,6 +325,23 @@ void player::changeState(playerState::Enum state)
 		_player.Motion = KEYANIMANAGER->findAnimation("playerTakeDown");
 		_player.Motion->start();
 		break;
+	case playerState::STAND_TAKE:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerStandTake");
+		_player.Motion->start();
+		break;
+	case playerState::STAND_TAKE_RIGHT:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerTakeStandRight");
+		_player.Motion->start();
+		break;
+	case playerState::STAND_TAKE_LEFT:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerTakeStandLeft");
+		_player.Motion->start();
+		break;
+	case playerState::STAND_TAKE_BACK:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerTakeStandUp");
+		_player.Motion->start();
+		break;
+
 	}
 	_state = state;
 }
