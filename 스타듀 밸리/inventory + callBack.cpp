@@ -1,5 +1,6 @@
 #include "stdafx.h"
-#include"inventory.h"
+#include "inventory.h"
+
 
 using namespace invenDirection;
 
@@ -39,6 +40,8 @@ void inventory::setTargetItem(tagMessage msg)
 		if (_vInventory[i].name == msg.conversation)
 		{
 			_targetItem = &_vInventory[i];
+
+			
 		}
 	}
 }
