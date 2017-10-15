@@ -10,6 +10,10 @@ namespace playerState
 		STAND_RIGHT,
 		STAND_LEFT,
 		STAND_BACK,
+		STAND_TAKE,				//들고 서있기
+		STAND_TAKE_RIGHT,
+		STAND_TAKE_LEFT,
+		STAND_TAKE_BACK,
 		RIGHT_RUN,				//오른쪽
 		LEFT_RUN,				//왼쪽
 		UP_RUN,					//위로
@@ -30,10 +34,11 @@ namespace playerState
 		WATER_LEFT,				//물뿌리개 왼쪽
 		WATER_UP,				//물뿌리개 위로
 		WATER_DOWN,				//물뿌리개 아래로
-		TAKE_RIGHT,				//들고 있기 오른쪽
-		TAKE_LEFT,				//들고 있기 왼쪽
-		TAKE_UP,				//들고 있기 위
-		TAKE_DOWN				//들고 있기 아래
+		TAKE_RIGHT,				//들고 오른쪽으로 달리기
+		TAKE_LEFT,				//들고 왼쪽으로 달리기
+		TAKE_UP,				//들고 위으로 달리기
+		TAKE_DOWN				//들고 아래으로 달리기
+
 
 	};
 }
