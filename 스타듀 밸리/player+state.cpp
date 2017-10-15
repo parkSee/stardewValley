@@ -112,7 +112,6 @@ void player::stateUpdate(playerState::Enum state)
 			{
 				_pos.y -= 5;
 			}
-
 		}
 		else if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
 		{
@@ -192,21 +191,37 @@ void player::stateUpdate(playerState::Enum state)
 		break;
 	case playerState::WATER_DOWN:
 		break;
-	case playerState::TAKE_RIGHT:
+	case playerState::TAKE_RIGHT:				//들고 오른쪽으로 달리기 
+		_myItem.x = _pos.x;						//아이템의 좌표
+		_myItem.y = _pos.y -= 100;
 		break;
-	case playerState::TAKE_LEFT:
+	case playerState::TAKE_LEFT:				//들고 왼쪽으로 달리기 
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
 		break;
-	case playerState::TAKE_UP:
+	case playerState::TAKE_UP:					//들고 위로 달리기 
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
 		break;
-	case playerState::TAKE_DOWN:
+	case playerState::TAKE_DOWN:				//들고 아래로 달리기 
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
 		break;
-	case playerState::STAND_TAKE:
+	case playerState::STAND_TAKE:				//들고 서있기
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
 		break;
-	case playerState::STAND_TAKE_RIGHT:
+	case playerState::STAND_TAKE_RIGHT:			//들고 오른쪽으로 서있기		
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
 		break;
-	case playerState::STAND_TAKE_LEFT:
+	case playerState::STAND_TAKE_LEFT:			//들고 왼쪽으로 서있기
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
 		break;
-	case playerState::STAND_TAKE_BACK:
+	case playerState::STAND_TAKE_BACK:			//들고 뒤로 서있기
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
 		break;
 	}
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
@@ -278,7 +293,7 @@ void player::changeState(playerState::Enum state)
 		_player.Motion->start();
 		break;
 	case playerState::SICKLE_RIGHT:
-		_player.Motion = KEYANIMANAGER->findAnimation("playerSickleRight");	//낫
+		_player.Motion = KEYANIMANAGER->findAnimation("playerSickleRight");		//낫
 		_player.Motion->start();
 		break;
 	case playerState::SICKLE_LEFT:
@@ -293,7 +308,7 @@ void player::changeState(playerState::Enum state)
 		_player.Motion = KEYANIMANAGER->findAnimation("playerSickleDown");
 		_player.Motion->start();
 		break;
-	case playerState::WATER_RIGHT:											//물뿌리개
+	case playerState::WATER_RIGHT:												//물뿌리개
 		_player.Motion = KEYANIMANAGER->findAnimation("playerWaterRight");
 		_player.Motion->start();
 		break;

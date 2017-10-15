@@ -140,7 +140,7 @@ void cameraManager::cameraMove()
 	}
 
 	//카메라가 이동 중이 아니라면 타겟의 좌표를 따라가라 
-	if (_direction != MOVE_TO_TARGET)
+	if (_direction != MOVE_TO_TARGET && _direction != NULL_TARGET)
 	{
 		_pos.x = (int)_target->_pos.x;
 		_pos.y = (int)_target->_pos.y;

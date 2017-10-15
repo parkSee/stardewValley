@@ -51,6 +51,12 @@ struct tagPlayer
 	RECT rc;
 };
 
+struct tagMyItem			//아이템은 구조체로 되어있기 때문에 이미지와 좌표를 가져와서 플레이어 쪽에서 그려준다.
+{
+	image* img;
+	float x, y;
+
+};
 
 using namespace playerState;
 
@@ -59,9 +65,8 @@ class player : public gameObject
 private:
 	playerState::Enum _state;
 	tagPlayer _player;
-	bool _isStop;
+	tagMyItem _myItem;
 	tagItem* _item;
-
 
 public:
 	HRESULT init(string objName, tagFloat pos);

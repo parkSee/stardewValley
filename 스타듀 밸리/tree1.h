@@ -7,6 +7,8 @@ public:
 	tree1() {}
 	~tree1() {}
 
+	int _treeNum;
+
 	virtual HRESULT init(tagFloat pos);
 	virtual void release();
 	virtual void update();
@@ -40,5 +42,5 @@ public:
 	virtual void update();
 	virtual void render();
 
-	
+	void topAttack();
 };
