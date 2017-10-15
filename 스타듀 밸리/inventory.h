@@ -49,6 +49,15 @@ public:
 	// tagItem* item = inven->getTargetItem();
 	tagItem* getTargetItem() { return _targetItem; }
 
+	tagItem* findItem(string name)
+	{
+		for (int i = 0; i < _vInventory.size(); ++i)
+		{
+			if (_vInventory[i].name == name)return &_vInventory[i];
+		}
+		return NULL;
+	}
+
 	//인벤토리의 모든 아이템포인터를 벡터에 담아서 반환해준다
 	vector<tagItem*> getItems()
 	{
