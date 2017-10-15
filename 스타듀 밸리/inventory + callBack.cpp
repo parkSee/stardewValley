@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "inventory.h"
 
+#include "player.h"
 
 using namespace invenDirection;
 
@@ -41,7 +42,8 @@ void inventory::setTargetItem(tagMessage msg)
 		{
 			_targetItem = &_vInventory[i];
 
-			
+			TOWNWORLD->findObject(objectType::HUMAN, "player")
+				->sendMessage(tagMessage("changeTargetItem",0.0f,0,0,vector<gameObject*>() , _targetItem->name));
 		}
 	}
 }
