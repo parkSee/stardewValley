@@ -13,12 +13,17 @@ private:
 		KIND_OBJECT_ERASER
 	};
 
+	struct tagTileSave
+	{
+		int idX, idY;
+		TERRAIN::Enum terrain;
+	};
 	struct tagObjectSave
 	{
-		objectType::Enum objectType;
-		OBJECT::Enum object;
 		int idX, idY;
 		int frameX, frameY;
+		objectType::Enum objectType;
+		OBJECT::Enum object;
 		tagFloat pos;
 		pivot::Enum pivot;
 

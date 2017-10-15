@@ -60,13 +60,14 @@ void tileMap::update()
 		if (PtInRect(&_rc2, _ptMouse)) _kind = KIND_OBJECT;
 		if (PtInRect(&_rc3, _ptMouse)) _kind = KIND_OBJECT_ERASER;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
+	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON) &&
+		!(PtInRect(&_rc1, _ptMouse) || PtInRect(&_rc2, _ptMouse) || PtInRect(&_rc3, _ptMouse)))
 	{
-		if (0 <= _ptMouse.x && _ptMouse.x < TILEX * TILESIZE &&
-			0 <= _ptMouse.y && _ptMouse.y < TILEY * TILESIZE)
+		if (0 <= (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) && (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) < TILEX * TILESIZE &&
+			0 <= (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) && (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) < TILEY * TILESIZE)
 		{
-			int idx = _ptMouse.x / TILESIZE;
-			int idy = _ptMouse.y / TILESIZE;
+			int idx = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
+			int idy = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
 
 			switch (_kind)
 			{
@@ -126,7 +127,7 @@ void tileMap::render()
 			_pTile[i][j]->render();
 		}
 	}
-	
+
 	//지형, 오브젝트 선택 버튼 렌더
 	Rectangle(getMemDC(), _rc1.left, _rc1.top, _rc1.right, _rc1.bottom);
 	Rectangle(getMemDC(), _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
@@ -155,13 +156,29 @@ void tileMap::save()
 	file = CreateFile("mapSave.map", GENERIC_WRITE, 0, NULL,
 		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
+	tagTileSave tileSave;
+
 	for (int j = 0; j < TILEY; ++j)
 	{
 		for (int i = 0; i < TILEX; ++i)
 		{
-			WriteFile(file, _pTile[i][j]->getTagAddress(), sizeof(*_pTile[0][0]->getTagAddress()), &write, NULL);
+			memset(&tileSave, 0, sizeof(tileSave));
+
+			tileSave.idX = i;
+			tileSave.idY = j;
+			tileSave.terrain = _pTile[i][j]->getTerrain();
+
+			WriteFile(file, &tileSave, sizeof(tileSave), &write, NULL);
 		}
 	}
+
+	//for (int j = 0; j < TILEY; ++j)
+	//{
+	//	for (int i = 0; i < TILEX; ++i)
+	//	{
+	//		WriteFile(file, _pTile[i][j]->getTagAddress(), sizeof(*_pTile[0][0]->getTagAddress()), &write, NULL);
+	//	}
+	//}
 
 	CloseHandle(file);
 
@@ -201,25 +218,39 @@ void tileMap::load()
 {
 	HANDLE file;
 	DWORD read;
-	
+
 	file = CreateFile("mapSave.map", GENERIC_READ, 0, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	
+
+	tagTileSave tileSave;
+
 	for (int j = 0; j < TILEY; ++j)
 	{
 		for (int i = 0; i < TILEX; ++i)
 		{
-			ReadFile(file, _pTile[i][j]->getTagAddress(), sizeof(*_pTile[0][0]->getTagAddress()), &read, NULL);
+			memset(&tileSave, 0, sizeof(tileSave));
+
+			ReadFile(file, &tileSave, sizeof(tileSave), &read, NULL);
+
+			_pTile[i][j]->setTerrain(tileSave.terrain);
 		}
 	}
-	
+
+	//for (int j = 0; j < TILEY; ++j)
+	//{
+	//	for (int i = 0; i < TILEX; ++i)
+	//	{
+	//		ReadFile(file, _pTile[i][j]->getTagAddress(), sizeof(*_pTile[0][0]->getTagAddress()), &read, NULL);
+	//	}
+	//}
+
 	CloseHandle(file);
 
 
 
 	file = CreateFile("objectSave.map", GENERIC_READ, 0, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	
+
 	//있던 오브젝트 다 날려버리고
 	for (int j = 0; j < objectType::END; ++j)
 	{
@@ -237,7 +268,7 @@ void tileMap::load()
 			_pTile[i][j]->setObj(NULL);
 		}
 	}
-	
+
 	//읽어와서 오브젝트 생성해서 타운월드에 넣기
 	testObject* tempobj = NULL;
 	tagObjectSave tag1;
@@ -246,7 +277,7 @@ void tileMap::load()
 	{
 		ReadFile(file, &tag1, sizeof(tag1), &read, NULL);
 		if (read != sizeof(tag1)) break;
-	
+
 		tempobj = new testObject;
 		tempobj->init(tag1.name, tag1.imageKey, tag1.pos, tag1.pivot);
 		tempobj->_object = tag1.object;
@@ -254,7 +285,7 @@ void tileMap::load()
 		tempobj->setFrameY(tag1.frameY);
 		tempobj->setIdX(tag1.idX);
 		tempobj->setIdY(tag1.idY);
-	
+
 		TOWNWORLD->addObject(tag1.objectType, tempobj);
 
 		//타일에도 오브젝트 연결해주기
@@ -263,6 +294,6 @@ void tileMap::load()
 		tempobj = NULL;
 		ZeroMemory(&tag1, sizeof(tag1));
 	}
-	
+
 	CloseHandle(file);
 }

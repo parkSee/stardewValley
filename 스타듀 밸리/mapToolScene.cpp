@@ -18,6 +18,7 @@ HRESULT mapToolScene::init()
 	//IMAGEMANAGER->addFrameImage("outdoorsSpring", "Outdoors Spring(400,1264,25,79) - 그림자 제거.bmp", 400, 1264, 25, 79, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("tileSprite", "Outdoors Spring(400,1264,25,79).bmp", 400, 1264, 25, 79, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("trees", "Trees(176,645).bmp", 176, 645, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("tileSample", "tileSample(960,960,60,60).bmp", 960, 960, 60, 60, true, RGB(255, 0, 255));
 
 	_map = new tileMap;
 	_map->init();
@@ -26,7 +27,8 @@ HRESULT mapToolScene::init()
 	CAMERAMANAGER->_pos.y = WINSIZEY / 2;
 
 	CAMERAMANAGER->setMapSize(3000, 3000);
-	
+
+	_sprite = SPRITE::OUTDOORS_SPRING;
 	_mode = MODE_MAP;
 	_selectIdX = _selectIdY = 0;
 	_mapCam.x = _spriteCam.x = WINSIZEX / 2;
@@ -115,26 +117,43 @@ void mapToolScene::render()
 		TOWNWORLD->render();
 		break;
 	case mapToolScene::MODE_SPRITE:
-		IMAGEMANAGER->findImage("tileSprite")->render(getMemDC(), -CAMERAMANAGER->getRenderRc().left, -CAMERAMANAGER->getRenderRc().top);
-
-		//마우스 대고있는 칸 표시
-		image* img = IMAGEMANAGER->findImage("tileSprite");
-
-		if (0 <= CAMERAMANAGER->getRenderRc().left + _ptMouse.x && CAMERAMANAGER->getRenderRc().left + _ptMouse.x <= img->getWidth() &&
-			0 <= CAMERAMANAGER->getRenderRc().top + _ptMouse.y && CAMERAMANAGER->getRenderRc().top + _ptMouse.y <= img->getHeight())
+		switch (_sprite)
 		{
-			HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), GetStockObject(NULL_BRUSH));
-			RectangleMake(getMemDC(), -CAMERAMANAGER->getRenderRc().left + (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE * TILESIZE,
-				-CAMERAMANAGER->getRenderRc().top + (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE * TILESIZE, TILESIZE, TILESIZE);
-			DeleteObject(SelectObject(getMemDC(), oldBrush));
+		case SPRITE::OUTDOORS_SPRING:
+		{
+			IMAGEMANAGER->findImage("tileSprite")->scaleRender(getMemDC(), -CAMERAMANAGER->getRenderRc().left, -CAMERAMANAGER->getRenderRc().top, IMAGEMANAGER->findImage("tileSprite")->getWidth() * SCALE, IMAGEMANAGER->findImage("tileSprite")->getHeight() * SCALE);
+
+			//마우스 대고있는 칸 표시
+			image* img = IMAGEMANAGER->findImage("tileSprite");
+
+			if (0 <= CAMERAMANAGER->getRenderRc().left + _ptMouse.x && CAMERAMANAGER->getRenderRc().left + _ptMouse.x <= img->getWidth() * SCALE &&
+				0 <= CAMERAMANAGER->getRenderRc().top + _ptMouse.y && CAMERAMANAGER->getRenderRc().top + _ptMouse.y <= img->getHeight() * SCALE)
+			{
+				HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), GetStockObject(NULL_BRUSH));
+				RectangleMake(getMemDC(), -CAMERAMANAGER->getRenderRc().left + (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE * TILESIZE,
+					-CAMERAMANAGER->getRenderRc().top + (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE * TILESIZE, TILESIZE, TILESIZE);
+				DeleteObject(SelectObject(getMemDC(), oldBrush));
+			}
+
+			//현재 선택된 타일 표시
+			//HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), GetStockObject(NULL_BRUSH));
+			EllipseMakeCenter(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _selectIdX * TILESIZE + TILESIZE / 2,
+				-CAMERAMANAGER->getRenderRc().top + _selectIdY * TILESIZE + TILESIZE / 2, 10, 10);
+			//DeleteObject(SelectObject(getMemDC(), oldBrush));
 		}
-
-		//현재 선택된 타일 표시
-		//HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), GetStockObject(NULL_BRUSH));
-		EllipseMakeCenter(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _selectIdX * TILESIZE + TILESIZE / 2,
-			-CAMERAMANAGER->getRenderRc().top + _selectIdY * TILESIZE + TILESIZE / 2, 10, 10);
-		//DeleteObject(SelectObject(getMemDC(), oldBrush));
-
+		break;
+		case SPRITE::FARM_BUILDINGS:
+			break;
+		case SPRITE::FARMHOUSE:
+			break;
+		case SPRITE::CROPS:
+			break;
+		case SPRITE::TREES:
+			break;
+		case SPRITE::TILESAMPLE:
+			IMAGEMANAGER->findImage("tileSample")->scaleRender(getMemDC(), -CAMERAMANAGER->getRenderRc().left, -CAMERAMANAGER->getRenderRc().top, IMAGEMANAGER->findImage("tileSample")->getWidth() * SCALE, IMAGEMANAGER->findImage("tileSample")->getHeight() * SCALE);
+			break;
+		}
 
 		break;
 	}
@@ -142,68 +161,85 @@ void mapToolScene::render()
 
 void mapToolScene::selecting()
 {
-	int x = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
-	int y = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
-
-	//case tileNumber():
-	switch (spriteNumber(x, y))
+	switch (_sprite)
 	{
-		//나무1
-	case spriteNumber(0,0): case spriteNumber(1,0): case spriteNumber(2,0):
-	case spriteNumber(0,1): case spriteNumber(1,1): case spriteNumber(2,1):
-	case spriteNumber(0,2): case spriteNumber(1,2): case spriteNumber(2,2):
-	case spriteNumber(0,3): case spriteNumber(1,3): case spriteNumber(2,3):
-	case spriteNumber(1,4): case spriteNumber(1,5):
-		_selectIdX = 1; _selectIdY = 5;
+	case SPRITE::OUTDOORS_SPRING:
+	{
+		int x = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
+		int y = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
+
+		//case tileNumber():
+		switch (spriteNumber(x, y))
+		{
+			//나무1
+		case spriteNumber(0, 0): case spriteNumber(1, 0): case spriteNumber(2, 0):
+		case spriteNumber(0, 1): case spriteNumber(1, 1): case spriteNumber(2, 1):
+		case spriteNumber(0, 2): case spriteNumber(1, 2): case spriteNumber(2, 2):
+		case spriteNumber(0, 3): case spriteNumber(1, 3): case spriteNumber(2, 3):
+		case spriteNumber(1, 4): case spriteNumber(1, 5):
+			_selectIdX = 1; _selectIdY = 5;
+			break;
+			//나무2
+		case spriteNumber(3, 0): case spriteNumber(4, 0): case spriteNumber(5, 0):
+		case spriteNumber(3, 1): case spriteNumber(4, 1): case spriteNumber(5, 1):
+		case spriteNumber(3, 2): case spriteNumber(4, 2): case spriteNumber(5, 2):
+		case spriteNumber(3, 3): case spriteNumber(4, 3): case spriteNumber(5, 3):
+		case spriteNumber(4, 4): case spriteNumber(4, 5):
+			_selectIdX = 4; _selectIdY = 5;
+			break;
+			//나무3
+		case spriteNumber(6, 0): case spriteNumber(7, 0): case spriteNumber(8, 0): case spriteNumber(9, 0):
+		case spriteNumber(6, 1): case spriteNumber(7, 1): case spriteNumber(8, 1): case spriteNumber(9, 1):
+		case spriteNumber(6, 2): case spriteNumber(7, 2): case spriteNumber(8, 2): case spriteNumber(9, 2):
+		case spriteNumber(6, 3): case spriteNumber(7, 3): case spriteNumber(8, 3): case spriteNumber(9, 3):
+		case spriteNumber(7, 4): case spriteNumber(8, 4):
+		case spriteNumber(7, 5): case spriteNumber(8, 5):
+		case spriteNumber(7, 6): case spriteNumber(8, 6):
+			_selectIdX = 7; _selectIdY = 6;
+			break;
+			//나무4
+		case spriteNumber(10, 0): case spriteNumber(11, 0): case spriteNumber(12, 0):
+		case spriteNumber(10, 1): case spriteNumber(11, 1): case spriteNumber(12, 1):
+		case spriteNumber(10, 2): case spriteNumber(11, 2): case spriteNumber(12, 2):
+		case spriteNumber(10, 3): case spriteNumber(11, 3): case spriteNumber(12, 3):
+		case spriteNumber(11, 4): case spriteNumber(11, 5):
+			_selectIdX = 11; _selectIdY = 5;
+			break;
+			//큰덤불
+		case spriteNumber(13, 0): case spriteNumber(14, 0): case spriteNumber(15, 0):
+		case spriteNumber(13, 1): case spriteNumber(14, 1): case spriteNumber(15, 1):
+		case spriteNumber(13, 2): case spriteNumber(14, 2): case spriteNumber(15, 2):
+			_selectIdX = 14; _selectIdY = 2;
+			break;
+			//울타리 가로 왼쪽 끝
+		case spriteNumber(8, 14): case spriteNumber(8, 15):
+			_selectIdX = 8; _selectIdY = 15;
+			break;
+			//울타리 가로 중간
+		case spriteNumber(9, 14): case spriteNumber(9, 15):
+			_selectIdX = 9; _selectIdY = 15;
+			break;
+			//울타리 가로 오른쪽 끝
+		case spriteNumber(10, 14): case spriteNumber(10, 15):
+			_selectIdX = 10; _selectIdY = 15;
+			break;
+		default:
+			_selectIdX = x; _selectIdY = y;
+			break;
+		}
+
+		_map->setSelectIdX(_selectIdX); _map->setSelectIdY(_selectIdY);
+	}
+	break;
+	case SPRITE::FARM_BUILDINGS:
 		break;
-		//나무2
-	case spriteNumber(3, 0): case spriteNumber(4, 0): case spriteNumber(5, 0):
-	case spriteNumber(3, 1): case spriteNumber(4, 1): case spriteNumber(5, 1):
-	case spriteNumber(3, 2): case spriteNumber(4, 2): case spriteNumber(5, 2):
-	case spriteNumber(3, 3): case spriteNumber(4, 3): case spriteNumber(5, 3):
-	case spriteNumber(4, 4): case spriteNumber(4, 5):
-		_selectIdX = 4; _selectIdY = 5;
+	case SPRITE::FARMHOUSE:
 		break;
-		//나무3
-	case spriteNumber(6,0): case spriteNumber(7,0): case spriteNumber(8,0): case spriteNumber(9,0):
-	case spriteNumber(6,1): case spriteNumber(7,1): case spriteNumber(8,1): case spriteNumber(9,1):
-	case spriteNumber(6,2): case spriteNumber(7,2): case spriteNumber(8,2): case spriteNumber(9,2):
-	case spriteNumber(6,3): case spriteNumber(7,3): case spriteNumber(8,3): case spriteNumber(9,3):
-	case spriteNumber(7,4): case spriteNumber(8,4):
-	case spriteNumber(7,5): case spriteNumber(8,5):
-	case spriteNumber(7,6): case spriteNumber(8,6):
-		_selectIdX = 7; _selectIdY = 6;
+	case SPRITE::CROPS:
 		break;
-		//나무4
-	case spriteNumber(10, 0): case spriteNumber(11, 0): case spriteNumber(12, 0):
-	case spriteNumber(10, 1): case spriteNumber(11, 1): case spriteNumber(12, 1):
-	case spriteNumber(10, 2): case spriteNumber(11, 2): case spriteNumber(12, 2):
-	case spriteNumber(10, 3): case spriteNumber(11, 3): case spriteNumber(12, 3):
-	case spriteNumber(11, 4): case spriteNumber(11, 5):
-		_selectIdX = 11; _selectIdY = 5;
+	case SPRITE::TREES:
 		break;
-		//큰덤불
-	case spriteNumber(13, 0): case spriteNumber(14, 0): case spriteNumber(15, 0):
-	case spriteNumber(13, 1): case spriteNumber(14, 1): case spriteNumber(15, 1):
-	case spriteNumber(13, 2): case spriteNumber(14, 2): case spriteNumber(15, 2):
-		_selectIdX = 14; _selectIdY = 2;
-		break;
-		//울타리 가로 왼쪽 끝
-	case spriteNumber(8,14): case spriteNumber(8,15):
-		_selectIdX = 8; _selectIdY = 15;
-		break;
-		//울타리 가로 중간
-	case spriteNumber(9,14): case spriteNumber(9,15):
-		_selectIdX = 9; _selectIdY = 15;
-		break;
-		//울타리 가로 오른쪽 끝
-	case spriteNumber(10,14): case spriteNumber(10,15):
-		_selectIdX = 10; _selectIdY = 15;
-		break;
-	default:
-		_selectIdX = x; _selectIdY = y;
+	case SPRITE::TILESAMPLE:
 		break;
 	}
-
-	_map->setSelectIdX(_selectIdX); _map->setSelectIdY(_selectIdY);
 }

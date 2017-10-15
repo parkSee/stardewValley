@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "mapToolNode.h"
 #include "tileMap.h"
 
 
@@ -15,6 +16,7 @@ private:
 
 	tileMap* _map;
 
+	SPRITE::Enum _sprite;
 	MODE _mode;
 	int _selectIdX, _selectIdY;
 	tagInt _mapCam, _spriteCam;

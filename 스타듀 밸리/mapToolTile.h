@@ -3,26 +3,27 @@
 //gameObject가 worldNode 참조하고 있다
 #include "mapToolNode.h"
 
-enum  TERRAIN
-{
-	TR_GROUND, TR_ROAD, TR_WATER
-};
+//enum  TERRAIN
+//{
+//	TR_GROUND, TR_ROAD, TR_WATER
+//};
 
 class mapToolTile : public gameObject
 {
 private:
-	struct tag
-	{
-		int			indexX, indexY;
-		RECT		rc;
+	//struct tag
+	//{
+	//};
+	//
+	//tag _tag;
 
-		TERRAIN		terrain;
-		int			terrainFrameX, terrainFrameY;
-	};
+	int				_indexX, _indexY;
+	RECT			_rc;
 
-	tag _tag;
+	TERRAIN::Enum	_terrain;
+	int				_terrainFrameX, _terrainFrameY;
 
-	gameObject* _obj;
+	gameObject*		_obj;
 
 
 public:
@@ -38,25 +39,25 @@ public:
 			_image = IMAGEMANAGER->findImage(keyName);
 		}
 	}
-	void setTileFrameX(int frameX) { _tag.terrainFrameX = frameX; }
-	void setTileFrameY(int frameY) { _tag.terrainFrameY = frameY; }
+	void setTileFrameX(int frameX) { _terrainFrameX = frameX; }
+	void setTileFrameY(int frameY) { _terrainFrameY = frameY; }
 
-	inline tag* getTagAddress() { return &_tag; }
+	//inline tag* getTagAddress() { return &_tag; }
 
-	inline TERRAIN getTerrain() { return _tag.terrain; }
-	inline int getTerrainFrameX() { return _tag.terrainFrameX; }
-	inline int getTerrainFrameY() { return _tag.terrainFrameY; }
-	inline int getIndexX() { return _tag.indexX; }
-	inline int getIndexY() { return _tag.indexY; }
-	inline RECT getRect() { return _tag.rc; }
+	inline TERRAIN::Enum getTerrain() { return _terrain; }
+	inline int getTerrainFrameX() { return _terrainFrameX; }
+	inline int getTerrainFrameY() { return _terrainFrameY; }
+	inline int getIndexX() { return _indexX; }
+	inline int getIndexY() { return _indexY; }
+	inline RECT getRect() { return _rc; }
 	inline gameObject* getObj() { return _obj; }
 
-	inline void setTerrain(TERRAIN terrain) { _tag.terrain = terrain; }
-	inline void setTerrainFrameX(int x) { _tag.terrainFrameX = x; }
-	inline void setTerrainFrameY(int y) { _tag.terrainFrameY = y; }
-	inline void setIndexX(int x) { _tag.indexX = x; }
-	inline void setIndexY(int y) { _tag.indexY = y; }
-	inline void setRect(RECT rc) { _tag.rc = rc; }
+	inline void setTerrain(TERRAIN::Enum terrain) { _terrain = terrain; }
+	inline void setTerrainFrameX(int x) { _terrainFrameX = x; }
+	inline void setTerrainFrameY(int y) { _terrainFrameY = y; }
+	inline void setIndexX(int x) { _indexX = x; }
+	inline void setIndexY(int y) { _indexY = y; }
+	inline void setRect(RECT rc) { _rc = rc; }
 	inline void setObj(gameObject* obj) { _obj = obj; }
 
 
