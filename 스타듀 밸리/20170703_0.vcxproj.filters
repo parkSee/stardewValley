@@ -499,6 +499,7 @@
     </ClCompile>
     <ClCompile Include="inventory + callBack.cpp">
       <Filter>playGround\UI\inventory</Filter>
+    </ClCompile>
     <ClCompile Include="player+state.cpp">
       <Filter>playGround\player</Filter>
     </ClCompile>
