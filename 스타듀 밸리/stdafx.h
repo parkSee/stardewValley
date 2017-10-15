@@ -42,8 +42,8 @@ using namespace OMICRON_UTIL;
 //========================================
 
 #define WINNAME (LPTSTR)(TEXT("Omicron API"))
-#define WINSTARTX 20
-#define WINSTARTY 20
+#define WINSTARTX 80
+#define WINSTARTY 10
 #define WINSIZEX 1300
 #define WINSIZEY 800
 #define WINSTYLE WS_CAPTION | WS_SYSMENU

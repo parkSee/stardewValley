@@ -48,7 +48,7 @@ public:
 	// inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE , "inventory");
 	// tagItem* item = inven->getTargetItem();
 	tagItem* getTargetItem() { return _targetItem; }
-
+	//아이템을 찾아서 아이템포인터를 반환해준다. 없으면 NULL을 반환
 	tagItem* findItem(string name)
 	{
 		for (int i = 0; i < _vInventory.size(); ++i)
