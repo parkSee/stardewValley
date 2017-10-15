@@ -7,7 +7,7 @@ namespace uiDirection
 {
 	enum Enum
 	{
-		NORMAL , CONVERSATION,LETTER ,END
+		NORMAL , CONVERSATION,LETTER ,HIDE,END
 	};
 }
 
