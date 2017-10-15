@@ -172,6 +172,9 @@
     <Filter Include="playGround\mapToolScene">
       <UniqueIdentifier>{879fd6f7-956a-401c-89fa-ff12a1452e23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\store">
+      <UniqueIdentifier>{8d27d5aa-c77e-4793-b8de-f17a9bddfcec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -315,9 +318,6 @@
     <ClInclude Include="item.h">
       <Filter>playGround\item</Filter>
     </ClInclude>
-    <ClInclude Include="store.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="NPC.h">
       <Filter>playGround\NPC</Filter>
     </ClInclude>
@@ -362,6 +362,9 @@
     </ClInclude>
     <ClInclude Include="Pierre.h">
       <Filter>playGround\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="store.h">
+      <Filter>playGround\store</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -536,9 +539,6 @@
     <ClCompile Include="tree1.cpp">
       <Filter>playGround\map\tree</Filter>
     </ClCompile>
-    <ClCompile Include="store.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="tree2.cpp">
       <Filter>playGround\map\tree</Filter>
     </ClCompile>
@@ -586,6 +586,9 @@
     </ClCompile>
     <ClCompile Include="Pierre.cpp">
       <Filter>playGround\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="store.cpp">
+      <Filter>playGround\store</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
