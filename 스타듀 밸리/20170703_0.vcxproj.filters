@@ -503,9 +503,6 @@
     <ClCompile Include="tree1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="inventory + callBack.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="store.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -529,6 +526,15 @@
     </ClCompile>
     <ClCompile Include="tileMap.cpp">
       <Filter>playGround\mapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory + callBack.cpp">
+      <Filter>playGround\UI\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="player+state.cpp">
+      <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="player+callBackcpp.cpp">
+      <Filter>playGround\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

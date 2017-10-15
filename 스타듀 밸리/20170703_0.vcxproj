@@ -168,6 +168,8 @@
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="obj.cpp" />
+    <ClCompile Include="player+callBackcpp.cpp" />
+    <ClCompile Include="player+state.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="progressBar.cpp" />

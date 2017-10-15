@@ -1,5 +1,6 @@
 #pragma once
 #include "gameObject.h"
+#include "item.h"
 
 namespace playerState
 {
@@ -9,6 +10,10 @@ namespace playerState
 		STAND_RIGHT,
 		STAND_LEFT,
 		STAND_BACK,
+		STAND_TAKE,				//들고 서있기
+		STAND_TAKE_RIGHT,
+		STAND_TAKE_LEFT,
+		STAND_TAKE_BACK,
 		RIGHT_RUN,				//오른쪽
 		LEFT_RUN,				//왼쪽
 		UP_RUN,					//위로
@@ -29,23 +34,15 @@ namespace playerState
 		WATER_LEFT,				//물뿌리개 왼쪽
 		WATER_UP,				//물뿌리개 위로
 		WATER_DOWN,				//물뿌리개 아래로
-		TAKE_RIGHT,				//들고 있기 오른쪽
-		TAKE_LEFT,				//들고 있기 왼쪽
-		TAKE_UP,				//들고 있기 위
-		TAKE_DOWN				//들고 있기 아래
+		TAKE_RIGHT,				//들고 오른쪽으로 달리기
+		TAKE_LEFT,				//들고 왼쪽으로 달리기
+		TAKE_UP,				//들고 위으로 달리기
+		TAKE_DOWN				//들고 아래으로 달리기
+
 
 	};
 }
 
-struct tagItem
-{
-	//아이템 포인터 
-	//이미지 포인터
-	image* img;
-	RECT rc;
-	float x, y;
-
-};
 
 struct tagPlayer
 {
@@ -63,7 +60,7 @@ private:
 	playerState::Enum _state;
 	tagPlayer _player;
 	bool _isStop;
-	tagItem _item;
+	tagItem* _item;
 
 
 public:
@@ -76,7 +73,7 @@ public:
 	void changeState(playerState::Enum state);
 	void eating();
 	void lbuttonClick();
-	void changeTargetItem();
+	void changeTargetItem(tagMessage msg);
 	RECT rectMakeBottom();
 
 	player() {};
