@@ -17,10 +17,13 @@ void player::changeTargetItem(tagMessage msg)
 {
 	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");		//인벤토리에서 보내는 메세지를 받아온다
 
-	_item = inven->findItem(msg.conversation);
+	_item = inven->getTargetItem();
 
-	if (_item->type == itemType::TOOL )
+	//_item = inven->findItem(msg.conversation);
+
+	if (_item->name == "sword")
 	{
+		
 		switch (_state)
 		{
 		case playerState::STAND:
