@@ -100,6 +100,7 @@ void mouse::mouseControll()
 
 	//===================인벤토리 창 관련==================
 	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+	//인벤토리 창 서브 창일때 
 	if (inven->getDirection() == invenDirection::SUB_BOTTOM || inven->getDirection() == invenDirection::SUB_TOP)
 	{
 		vector<tagItem*> vItem = inven->getItems();

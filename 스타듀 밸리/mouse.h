@@ -1,5 +1,11 @@
 #pragma once
 #include "gameObject.h"
+#include "item.h"
+
+struct tagInvenItem
+{
+	image*		img;
+};
 
 class mouse : public gameObject
 {
@@ -11,6 +17,10 @@ private:
 	animation*			_selectAnimation;		//마우스 이미지 에니메이션
 	animation*			_normalAnimation;		//마우스 이미지 에니메이션 
 	
+	tagInvenItem		_invenItem;
+
+	bool				_isPicking;
+	tagItem*			_tempItem;
 public:
 	HRESULT init(string name);
 	void release();
@@ -19,7 +29,8 @@ public:
 
 	void mouseControll();
 
-	mouse() {}
+	mouse() 
+	:_isPicking(false){}
 	~mouse() {}
 };
 
