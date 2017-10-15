@@ -13,13 +13,13 @@ void player::lbuttonClick()
 
 }
 
-void player::changeTargetItem()
+void player::changeTargetItem(tagMessage msg)
 {
 	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");		//인벤토리에서 보내는 메세지를 받아온다
 
-	_item = inven->getTargetItem();
+	_item = inven->findItem(msg.conversation);
 
-	if (_item->type == itemType::FOOD || _item->type == itemType::SEED)
+	if (_item->type == itemType::TOOL )
 	{
 		switch (_state)
 		{

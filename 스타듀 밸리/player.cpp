@@ -118,7 +118,6 @@ HRESULT player::init(string objName, tagFloat pos)
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
 	
-	
 
 	//ฤÝน้
 	this->addCallback("changeState", [this](tagMessage msg)
@@ -140,7 +139,7 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	this->addCallback("changeTargetItem", [this](tagMessage msg)
 	{
-		this->changeTargetItem();
+		this->changeTargetItem(msg);
 	});
 
 	
