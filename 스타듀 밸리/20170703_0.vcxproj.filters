@@ -500,5 +500,11 @@
     <ClCompile Include="NPC.cpp">
       <Filter>playGround\NPC</Filter>
     </ClCompile>
+    <ClCompile Include="player+state.cpp">
+      <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="player+callBackcpp.cpp">
+      <Filter>playGround\player</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
