@@ -92,6 +92,7 @@
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="grass.h" />
+    <ClInclude Include="heightProgressBar.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniDataManager.h" />
@@ -157,6 +158,7 @@
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="geunHwa.+ imageLoad.cpp" />
     <ClCompile Include="grass.cpp" />
+    <ClCompile Include="heightProgressBar.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniDataManager.cpp" />

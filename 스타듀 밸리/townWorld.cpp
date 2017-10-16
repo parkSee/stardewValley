@@ -74,6 +74,11 @@ void townWorld::render()
 	{
 		zOrderObject.push_back(_totalObject[OBJ][i]);
 	}
+
+	for (int i = 0; i < _totalObject[ITEM].size(); ++i)
+	{
+		zOrderObject.push_back(_totalObject[ITEM][i]);
+	}
 	
 	//y축을 기준으로 오름차순 정렬을 해준다
 	sort(zOrderObject.begin(), zOrderObject.end(), [this](auto a, auto b) {

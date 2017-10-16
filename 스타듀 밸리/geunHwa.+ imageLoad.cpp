@@ -11,5 +11,8 @@ void loadingScene::geunhwa()
 	_loading->loadImage("cauliFlowerSeed", "resource/item/cauliFlowerSeed.bmp", 56, 56, true, RGB(255, 0, 255));
 	//°¨ÀÚ¾¾¾Ñ
 	_loading->loadImage("potatoSeed", "resource/item/potatoSeed.bmp", 56, 56, true, RGB(255, 0, 255));
+	//»óÁ¡ UI
+	_loading->loadImage("storeUi", "resource/UI/storeUi.bmp", 1088, 538, true, RGB(255, 0, 255));
+	
 
 }

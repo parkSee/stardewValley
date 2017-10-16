@@ -1,44 +1,64 @@
 #include "stdafx.h"
 #include "mapToolTile.h"
 
+
 HRESULT mapToolTile::init(int idX, int idY)
 {
-	gameObject::init("", "", tagFloat(idX * TILESIZE, idY * TILESIZE), pivot::LEFT_TOP);
+	gameObject::init("mapToolTile", "", tagFloat(idX * TILESIZE, idY * TILESIZE), pivot::LEFT_TOP);
 
-	_tag.indexX = idX;
-	_tag.indexY = idY;
+	_terrain = TERRAIN::NONE;
+	_indexX = idX;
+	_indexY = idY;
+	_rc = RectMake(idX * TILESIZE, idY * TILESIZE, TILESIZE, TILESIZE);
+
+	_pObj = NULL;
 
 	//_image = IMAGEMANAGER->findImage("tiles");
-	_tag.terrain = TERRAIN::TR_GROUND;
-	_tag.terrainFrameX = 3;
-	_tag.terrainFrameY = 6;
+	_terrainFrameX = 3;
+	_terrainFrameY = 6;
 
-	_tag.rc = RectMake(_pos.x, _pos.y, TILESIZE, TILESIZE);
-
-	_obj = NULL;
 
 	return S_OK;
 }
 void mapToolTile::release()
 {
 	gameObject::release();
-
 }
 
 void mapToolTile::update()
 {
 	gameObject::update();
 
-	_tag.rc = RectMakeCenter(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
-
+	_rc = RectMakeCenter(_indexX * TILESIZE, _indexY * TILESIZE, TILESIZE, TILESIZE);
 }
 
 void mapToolTile::render()
 {
-	RECT renderRC = CAMERAMANAGER->getRenderRc();
-	//_image->frameRender(getMemDC(), _rc.left - renderRC.left, _rc.top - renderRC.top, _terrainFrameX, _terrainFrameY);
-
-	//_image->frameRender(getMemDC(), _rc.left, _rc.top, _terrainFrameX, _terrainFrameY);
-
-	IMAGEMANAGER->findImage("tileSprite")->frameRender(getMemDC(), _tag.rc.left - renderRC.left, _tag.rc.top - renderRC.top, _tag.terrainFrameX, _tag.terrainFrameY);
+	switch (_terrain)
+	{
+	case TERRAIN::NONE:
+		IMAGEMANAGER->findImage("tileSprite")->frameScaleRender(getMemDC(),
+			-CAMERAMANAGER->getRenderRc().left + _rc.left,
+			-CAMERAMANAGER->getRenderRc().top + _rc.top,
+			_terrainFrameX, _terrainFrameY, TILESIZE, TILESIZE);
+		break;
+	case TERRAIN::DIRT:
+		IMAGEMANAGER->findImage("tileSprite")->frameScaleRender(getMemDC(),
+			-CAMERAMANAGER->getRenderRc().left + _rc.left,
+			-CAMERAMANAGER->getRenderRc().top + _rc.top,
+			3, 6, TILESIZE, TILESIZE);
+		break;
+	case TERRAIN::GRASS:
+		IMAGEMANAGER->findImage("tileSprite")->frameScaleRender(getMemDC(),
+			-CAMERAMANAGER->getRenderRc().left + _rc.left,
+			-CAMERAMANAGER->getRenderRc().top + _rc.top,
+			0, 7, TILESIZE, TILESIZE);
+		break;
+	case TERRAIN::WATER:
+		IMAGEMANAGER->findImage("tileSprite")->frameScaleRender(getMemDC(),
+			-CAMERAMANAGER->getRenderRc().left + _rc.left,
+			-CAMERAMANAGER->getRenderRc().top + _rc.top,
+			8, 13, TILESIZE, TILESIZE);
+		break;
+	}
 }
