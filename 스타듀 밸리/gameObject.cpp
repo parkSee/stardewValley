@@ -13,10 +13,10 @@ HRESULT gameObject::init(string objName, string imageKey , tagFloat pos ,
 	{
 		_image = IMAGEMANAGER->findImage(imageKey);
 
-		_animation->init(_image->getWidth(), _image->getHeight(), _image->getFrameWidth(), _image->getFrameHeight());
+		//_animation->init(_image->getWidth(), _image->getHeight(), _image->getFrameWidth(), _image->getFrameHeight());
 
-		_size.width = _image->getFrameWidth();
-		_size.height = _image->getFrameHeight();
+		//_size.width = _image->getFrameWidth();
+		//_size.height = _image->getFrameHeight();
 	}
 	else
 	{
@@ -31,6 +31,11 @@ HRESULT gameObject::init(string objName, string imageKey , tagFloat pos ,
 	_isActive = true;
 	_destroyDelayTime = 0.0f;
 	
+	this->addCallback("daysGone", [this](tagMessage msg)
+	{
+		this->daysGone(msg);
+	});
+
 	return S_OK;
 }
 
@@ -173,4 +178,10 @@ void gameObject::sendMessage(tagMessage msg )
 		_reservedMessage.emplace_back(msg);	//딜레이 타임이 있다는 것이므로 메세지 예약리스트에 넣어라 
 	}
 
+}
+
+
+void gameObject::daysGone(tagMessage msg)
+{
+	
 }

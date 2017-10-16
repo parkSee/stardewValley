@@ -63,5 +63,8 @@ public:
 		_callbackList.insert(make_pair(msgName, callbackFunc));
 	}
 
+	//하루 시간지났을 때 콜백 함수 
+	void daysGone(tagMessage msg);
+
 };
 

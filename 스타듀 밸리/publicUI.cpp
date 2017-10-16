@@ -40,6 +40,8 @@ void publicUI::update()
 			}
 			if (_vGuideUI[i].liveTime <= 0.0f)
 			{
+				inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+				inven->setDirection(invenDirection::SUB_BOTTOM);
 				_vGuideUI.erase(_vGuideUI.begin() + i);
 				--i;
 			}
@@ -85,8 +87,7 @@ void publicUI::update()
 
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{
-		this->sendMessage(tagMessage("addGetItemUI", 0, 0, 0, vector<gameObject*>(), "쉐킷바리"));
-		this->sendMessage(tagMessage("addGetItemUI", 0, 0, 0, vector<gameObject*>(), "에비바리"));
+		sendMessage(tagMessage("addGetItemUI", 0.0f, 0, 0, vector<gameObject*>(), "공간부족"));
 	}
 }
 
@@ -103,6 +104,12 @@ void publicUI::getItemUIRender()
 	{
 		_vGetItemUI[i].img->scaleRender(getMemDC(), _vGetItemUI[i].rc.left, _vGetItemUI[i].rc.top,
 			_vGetItemUI[i].img->getWidth() * _vGetItemUI[i].size, _vGetItemUI[i].img->getHeight() * _vGetItemUI[i].size);
+
+		if (_vGetItemUI[i].item != NULL)
+		{
+			_vGetItemUI[i].item->scaleRender(getMemDC(), _vGetItemUI[i].rc.left + 14, _vGetItemUI[i].rc.top + 18,
+				_vGetItemUI[i].item->getWidth()* _vGetItemUI[i].size, _vGetItemUI[i].item->getHeight()*_vGetItemUI[i].size);
+		}
 
 		//86,37
 		RECT drawRc = RectMake(_vGetItemUI[i].rc.left + 86, _vGetItemUI[i].rc.top, 100, 100);
@@ -190,6 +197,7 @@ void publicUI::addGetItemUI(tagMessage msg)
 	ZeroMemory(&ui, sizeof(tagUI));
 
 	ui.img = IMAGEMANAGER->findImage("getItemUI");
+	ui.item = IMAGEMANAGER->findImage(msg.conversation);
 	ui.liveTime = 3.0f;
 	ui.txt = msg.conversation;
 	ui.size = 0.1f;
@@ -215,5 +223,6 @@ void publicUI::addGuideUI(tagMessage msg)
 	
 	_vGuideUI.push_back(ui);
 
-	//inventory* inven = (inventory*)TOWNWORLD
+	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+	inven->setDirection(invenDirection::HIDE);
 }
