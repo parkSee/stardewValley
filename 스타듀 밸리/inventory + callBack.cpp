@@ -133,21 +133,23 @@ void inventory::addItem(tagMessage msg)
 	for (int i = 0; i < _vInventory.size(); ++i)
 	{
 		if (msg.conversation != _vInventory[i].name && _vInventory[i].type != itemType::NONE)continue;
+		
 		publicUI* ui = (publicUI*)TOWNWORLD->findObject(objectType::INTERFACE, "publicUI");
+
 		if (_vInventory[i].type == itemType::NONE)
 		{
+			if (this->isFindItem(msg.conversation))continue;
+
 			_vInventory[i] = tagItem(msg.conversation, msg.str, _vInventory[i].pos, 1, this->getItemType(msg.conversation));
 			ui->sendMessage(tagMessage("addGetItemUI",0.0f,0,0,vector<gameObject*>(),msg.conversation ));
 			break;
 		}
-		
 		else if (msg.conversation == _vInventory[i].name)
 		{
 			_vInventory[i].count++;
 			ui->sendMessage(tagMessage("addGetItemUI", 0.0f, 0, 0, vector<gameObject*>(), msg.conversation));
 			break;
 		}
-
 		//인벤토리에 공간이 없다면
 		ui->sendMessage(tagMessage("addGetItemUI", 0.0f, 0, 0, vector<gameObject*>(), "공간부족"));
 	}

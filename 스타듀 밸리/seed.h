@@ -15,5 +15,6 @@ public:
 	virtual void render();
 
 	virtual void grow();
+	virtual void growAttack();
 };
 

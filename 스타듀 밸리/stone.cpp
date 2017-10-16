@@ -32,6 +32,10 @@ void stone::stoneAttack()
 	EFFECTMANAGER->play("stoneDie", _pos.x, _pos.y);
 
 	this->setDestroy();
+
+
+	//dropItem* drop = new dropItem;
+	//drop->init("stone", "stone");
 }
 void stone::render()
 {

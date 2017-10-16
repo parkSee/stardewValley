@@ -1,5 +1,6 @@
 #pragma once
 #include "gameObject.h"
+#include "dropItem.h"
 
 // 월드노드에 넣을 거양 ============================================================
 namespace OBJECT
