@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "animation.h"
 
+#include "gameObject.h"
+#include "tagMessage.h"
 
 animation::animation()
 	: _frameNum(0),
@@ -12,6 +14,8 @@ animation::animation()
 	_nowPlayIndex(0),
 	_play(FALSE)
 {
+	_endMessage.text = "NULL";
+	_messageTarget = NULL;
 }
 
 
@@ -657,10 +661,17 @@ void animation::frameUpdate(float elapsedTime)
 					_nowPlayIndex--;
 					_play = FALSE;
 				}
+
+				if (_messageTarget)
+				{
+					_messageTarget->sendMessage(tagMessage(_endMessage.text, _endMessage.delayTime, 
+						_endMessage.data, _endMessage.data2, _endMessage.targetList, _endMessage.conversation));
+				}
 			}
 		}
 	}
 }
+
 
 
 void animation::start(void)	
@@ -686,3 +697,10 @@ void animation::resume(void)
 	_play = TRUE;
 	
 }
+
+void animation::setEndMessage(gameObject * target, tagMessage msg)
+{
+	_endMessage = std::move(msg);
+	_messageTarget = target;
+}
+
