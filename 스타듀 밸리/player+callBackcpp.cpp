@@ -29,7 +29,7 @@ void player::lbuttonClick(tagMessage msg)
 			case playerState::STAND_BACK: case playerState::UP_RUN:
 				this->changeState(AXE_UP);
 				break;
-	
+
 			}
 		}
 
@@ -51,49 +51,65 @@ void player::lbuttonClick(tagMessage msg)
 				this->changeState(HOE_UP);
 				break;
 			}
-
-			if (_item->name == "³´")
+		}
+		if (_item->name == "³´")
+		{
+			switch (_state)
 			{
-				switch (_state)
-				{
-				case playerState::STAND: case playerState::DOWN_RUN:
-					this->changeState(SICKLE_DOWN);
+			case playerState::STAND: case playerState::DOWN_RUN:
+				this->changeState(SICKLE_DOWN);
 
-					break;
-				case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
-					this->changeState(SICKLE_RIGHT);
-					break;
-				case playerState::STAND_LEFT: case playerState::LEFT_RUN:
-					this->changeState(SICKLE_LEFT);
-					break;
-				case playerState::STAND_BACK: case playerState::UP_RUN:
-					this->changeState(SICKLE_UP);
-					break;
-				}
-
+				break;
+			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
+				this->changeState(SICKLE_RIGHT);
+				break;
+			case playerState::STAND_LEFT: case playerState::LEFT_RUN:
+				this->changeState(SICKLE_LEFT);
+				break;
+			case playerState::STAND_BACK: case playerState::UP_RUN:
+				this->changeState(SICKLE_UP);
+				break;
 			}
 
-			if (_item->name == "°î±ªÀÌ")
-			{
-				switch (_state)
-				{
-				case playerState::STAND: case playerState::DOWN_RUN:
-					this->changeState(PIXHOE_DOWN);
+		}
 
-					break;
-				case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
-					this->changeState(PIXHOE_RIGHT);
-					break;
-				case playerState::STAND_LEFT: case playerState::LEFT_RUN:
-					this->changeState(PIXHOE_LEFT);
-					break;
-				case playerState::STAND_BACK: case playerState::UP_RUN:
-					this->changeState(PIXHOE_UP);
-					break;
-				}
+		if (_item->name == "°î±ªÀÌ")
+		{
+			switch (_state)
+			{
+			case playerState::STAND: case playerState::DOWN_RUN:
+				this->changeState(PIXHOE_DOWN);
+				break;
+			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
+				this->changeState(PIXHOE_RIGHT);
+				break;
+			case playerState::STAND_LEFT: case playerState::LEFT_RUN:
+				this->changeState(PIXHOE_LEFT);
+				break;
+			case playerState::STAND_BACK: case playerState::UP_RUN:
+				this->changeState(PIXHOE_UP);
+				break;
 			}
 		}
 
+		if (_item->name == "¹°»Ñ¸®°³")
+		{
+			switch (_state)
+			{
+			case playerState::STAND: case playerState::DOWN_RUN:
+				this->changeState(WATER_DOWN);
+				break;
+			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
+				this->changeState(WATER_RIGHT);
+				break;
+			case playerState::STAND_LEFT: case playerState::LEFT_RUN:
+				this->changeState(WATER_LEFT);
+				break;
+			case playerState::STAND_BACK: case playerState::UP_RUN:
+				this->changeState(WATER_UP);
+				break;
+			}
+		}
 	}
 }
 
