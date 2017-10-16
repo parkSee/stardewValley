@@ -1,6 +1,9 @@
 #pragma once
 #include "gameObject.h"
 #include "item.h"
+#include "mapToolNode.h"
+#define SPEED 2
+
 
 namespace playerState
 {
@@ -72,8 +75,8 @@ private:
 	tagPlayer _player;
 	tagMyItem _myItem;
 	tagItem* _item;
-
 	tagItem tem;
+
 
 public:
 	HRESULT init(string objName, tagFloat pos);
@@ -88,7 +91,7 @@ public:
 	void changeTargetItem(tagMessage msg);
 	RECT rectMakeBottom();
 
-
+	void tileCollision();
 
 	enum playerState::Enum getPlayerState(void) { return _state; }
 	void setPlayerState(playerState::Enum state) { _state = state; }

@@ -7,4 +7,6 @@ void townScene::seeyoungInit()
 	player* playerManager = new player;
 	playerManager->init("player", tagFloat(WINSIZEX / 2, WINSIZEY / 2));
 	TOWNWORLD->addObject(objectType::HUMAN, playerManager);
+
+	CAMERAMANAGER->connectTarget(playerManager);
 }
