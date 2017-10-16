@@ -9,6 +9,11 @@ HRESULT seed::init(tagFloat pos)
 	_object = OBJECT::SEED;
 	TOWNWORLD->addObject(objectType::OBJ, this);
 
+	EFFECTMANAGER->addEffect("seed", "¾¾¸ÂÀ»¶§.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
+	this->addCallback("pickAttack", [this](tagMessage msg)
+	{
+		this->growAttack();
+	});
 
 	_growNum == 0;
 
@@ -29,9 +34,19 @@ HRESULT seed::init(tagFloat pos)
 }
  void seed::grow()
  {
-	 _growNum++;
+	
+		 _growNum++;
+	 
 
+ }
+ void seed::growAttack()
+ {
+	 EFFECTMANAGER->play("seed", _pos.x, _pos.y);
 
+	 this->setDestroy();
+
+	 dropItem* drop = new dropItem;
+	 drop->init("seed", "seed");
  }
  void seed::render()
 {
