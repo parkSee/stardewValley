@@ -1,5 +1,8 @@
 #pragma once
 #include <vector>
+#include "tagMessage.h"
+
+class gameObject;
 
 typedef void(*CALLBACK_FUNCTION)(void);
 typedef void(*CALLBACK_FUNCTION_PARAMETER)(void*);
@@ -35,6 +38,9 @@ private:
 	CALLBACK_FUNCTION _callbackFunction;
 	CALLBACK_FUNCTION_PARAMETER _callbackFunctionParameter;
 
+	tagMessage	_endMessage;
+	gameObject* _messageTarget;
+
 public:
 	animation();
 	~animation();
@@ -64,6 +70,7 @@ public:
 	void pause(void);
 	void resume(void);
 
+
 	inline BOOL isPlay(void) { return _play; }
 	inline POINT getFramePos(void) { return _frameList[_playList[_nowPlayIndex]]; }
 	inline int getFrameWidth(void) { return _frameWidth; }
@@ -77,5 +84,7 @@ public:
 	inline int getFrameY(void) { return _playList[_nowPlayIndex] / _maxFrameX; }
 
 
+	//애니메이션이 끝날때 메세지를 던져버려!
+	void setEndMessage(gameObject* target, tagMessage msg);
 };
 
