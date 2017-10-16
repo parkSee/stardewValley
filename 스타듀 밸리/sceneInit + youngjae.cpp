@@ -1,16 +1,11 @@
 #include "stdafx.h"
 #include "townScene.h"
 
-#include "item.h"
-#include "inventory.h"
+#include "Pierre.h"
 
 void townScene::youngjaeInit()
 {
-	//item* itemManager = new item;
-	//itemManager->init("itemName", "imageKey", itemType::NONE);
-	//TOWNWORLD->addObject(objectType::ITEM, itemManager);
-	
-	//inventory* inventoryManager = new inventory;
-	//inventoryManager->init("inventory");
-	//TOWNWORLD->addObject(objectType::INTERFACE, inventoryManager);
+	Pierre* PierreNPC = new Pierre;
+	PierreNPC->init("Pierre", "Pierre", 1, 1);
+	TOWNWORLD->addObject(objectType::HUMAN, PierreNPC);
 }
