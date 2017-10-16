@@ -29,7 +29,6 @@ typedef std::function<void()> CBFUNCTION;
 
 #define PERRETESTCONVERSATION "string도 이렇게 디파인을 걸어서 대화집을 만들어 놓을 수 있단다."
 
-
 //메세지 통신 txt디파인
 
 //publicUI 클래스 콜백 함수 관련

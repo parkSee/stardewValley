@@ -53,7 +53,6 @@ namespace playerState
 struct tagPlayer
 {
 	animation* Motion;
-	
 	RECT rc;
 };
 
