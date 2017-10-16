@@ -12,7 +12,7 @@ tagMessage::tagMessage()
 }
 
 
-tagMessage::tagMessage(string txt, float time, int d, float d2, vector<gameObject*> target , string txting)
+tagMessage::tagMessage(string txt, float time, int d, float d2, vector<gameObject*> target , string txting , string STRING)
 {
 	isActive = true;
 	text = txt;
@@ -21,4 +21,5 @@ tagMessage::tagMessage(string txt, float time, int d, float d2, vector<gameObjec
 	data2 = d2;
 	targetList = target;
 	conversation = txting;
+	str = STRING;
 }

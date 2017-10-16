@@ -20,6 +20,7 @@ HRESULT mouse::init(string name)
 	_normalAnimation->init(IMAGEMANAGER->findImage("mouse")->getWidth(), IMAGEMANAGER->findImage("mouse")->getHeight(),
 		IMAGEMANAGER->findImage("mouse")->getFrameWidth(), IMAGEMANAGER->findImage("mouse")->getFrameHeight());
 
+	_animation->init(_image->getWidth(), _image->getHeight(), _image->getFrameWidth(), _image->getFrameHeight());
 
 	return S_OK;
 }
@@ -100,6 +101,7 @@ void mouse::mouseControll()
 
 	//===================인벤토리 창 관련==================
 	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+	//인벤토리 창 서브 창일때 
 	if (inven->getDirection() == invenDirection::SUB_BOTTOM || inven->getDirection() == invenDirection::SUB_TOP)
 	{
 		vector<tagItem*> vItem = inven->getItems();

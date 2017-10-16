@@ -2,7 +2,6 @@
 #include "tree1.h"
 
 
-
 HRESULT tree1::init(tagFloat pos)
 {
 	tree1_bottom* bottom = new tree1_bottom;
@@ -81,6 +80,10 @@ void tree1_bottom::update()
 	{
 		EFFECTMANAGER->play("die", _pos.x, _pos.y);
 		this->setDestroy();
+
+		dropItem* drop = new dropItem;
+		drop->init("tree_bottom", "tree");
+
 	}
 
 }
@@ -120,6 +123,7 @@ HRESULT tree1_top::init(tagFloat pos)
 		this->topAttack();
 	});
 
+
 	return S_OK;
 }
 void tree1_top::release()
@@ -140,6 +144,9 @@ void tree1_top::update()
 		EFFECTMANAGER->play("die", _pos.x, _pos.y);
 
 		this->setDestroy();
+
+		dropItem* drop = new dropItem;
+		drop->init("tree_top","tree");
 	}
 }
 void tree1_top::topAttack()

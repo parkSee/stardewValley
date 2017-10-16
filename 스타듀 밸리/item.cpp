@@ -9,9 +9,10 @@ tagItem::tagItem()
 	pos = tagFloat(WINSIZEX / 2, WINSIZEY / 2);
 	rc = RectMakeCenter(pos.x, pos.y, 56, 56);
 	count = 0;
+	size = 1.0f;
 }
 
-tagItem::tagItem(string Name, tagFloat position, int Count, itemType::Enum typ)
+tagItem::tagItem(string Name, string Explain, tagFloat position, int Count, itemType::Enum typ)
 {
 	name = Name;
 	img = IMAGEMANAGER->findImage(Name);
@@ -19,4 +20,6 @@ tagItem::tagItem(string Name, tagFloat position, int Count, itemType::Enum typ)
 	pos = position;
 	rc = RectMakeCenter(pos.x, pos.y, 56, 56);
 	count = Count;
+	size = 1.0f;
+	explain = Explain;
 }

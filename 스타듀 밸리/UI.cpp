@@ -113,7 +113,7 @@ void UI::update()
 
 void UI::render()
 {
-	if (_direction != LETTER)
+	if (_direction != LETTER && _direction != HIDE)
 	{
 		this->timeUIRender();
 	}

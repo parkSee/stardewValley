@@ -19,6 +19,7 @@ HRESULT grass::init(tagFloat pos)
 		this->grassAttack();
 	});
 
+	return S_OK;
 }
 void grass::release()
 {
@@ -40,6 +41,9 @@ void grass::grassAttack()
 		EFFECTMANAGER->play("grassDie", _pos.x, _pos.y);
 
 		this->setDestroy();
+
+		dropItem* drop = new dropItem;
+		drop->init("grass", "grass");
 	}
 }
 

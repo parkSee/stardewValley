@@ -112,7 +112,6 @@ void player::stateUpdate(playerState::Enum state)
 			{
 				_pos.y -= 5;
 			}
-
 		}
 		else if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
 		{
@@ -157,10 +156,7 @@ void player::stateUpdate(playerState::Enum state)
 		}
 		break;
 	case playerState::AXE_RIGHT:
-		if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON))
-		{
-			this->changeState(STAND_RIGHT);
-		}
+	
 		break;
 	case playerState::AXE_LEFT:
 		break;
@@ -192,21 +188,53 @@ void player::stateUpdate(playerState::Enum state)
 		break;
 	case playerState::WATER_DOWN:
 		break;
-	case playerState::TAKE_RIGHT:
+	case playerState::PIXHOE_RIGHT:
 		break;
-	case playerState::TAKE_LEFT:
+	case playerState::PIXHOE_LEFT:
 		break;
-	case playerState::TAKE_UP:
+	case playerState::PIXHOE_UP:
 		break;
-	case playerState::TAKE_DOWN:
+	case playerState::PIXHOE_DOWN:
 		break;
-	case playerState::STAND_TAKE:
+	case playerState::SWORD_RIGHT:
 		break;
-	case playerState::STAND_TAKE_RIGHT:
+	case playerState::SWORD_LEFT:
 		break;
-	case playerState::STAND_TAKE_LEFT:
+	case playerState::SWORD_UP:
 		break;
-	case playerState::STAND_TAKE_BACK:
+	case playerState::SWORD_DOWN:
+		break;
+	case playerState::TAKE_RIGHT:				//들고 오른쪽으로 달리기 
+		_myItem.x = _pos.x;						//아이템의 좌표
+		_myItem.y = _pos.y -= 100;
+		break;
+	case playerState::TAKE_LEFT:				//들고 왼쪽으로 달리기 
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
+		break;
+	case playerState::TAKE_UP:					//들고 위로 달리기 
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
+		break;
+	case playerState::TAKE_DOWN:				//들고 아래로 달리기 
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
+		break;
+	case playerState::STAND_TAKE:				//들고 서있기
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
+		break;
+	case playerState::STAND_TAKE_RIGHT:			//들고 오른쪽으로 서있기		
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
+		break;
+	case playerState::STAND_TAKE_LEFT:			//들고 왼쪽으로 서있기
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
+		break;
+	case playerState::STAND_TAKE_BACK:			//들고 뒤로 서있기
+		_myItem.x = _pos.x;
+		_myItem.y = _pos.y -= 100;
 		break;
 	}
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
@@ -245,69 +273,128 @@ void player::changeState(playerState::Enum state)
 		_player.Motion = KEYANIMANAGER->findAnimation("playerDown");
 		_player.Motion->start();
 		break;
-	case playerState::AXE_RIGHT:											//도끼 
+	case playerState::AXE_RIGHT:																				//도끼 
 		_player.Motion = KEYANIMANAGER->findAnimation("playerAxeRight");
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_RIGHT));
 		_player.Motion->start();
 		break;
 	case playerState::AXE_LEFT:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerAxeLeft");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_LEFT));
 		break;
 	case playerState::AXE_UP:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerAxeUp");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_BACK));
 		break;
 	case playerState::AXE_DOWN:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerAxeDown");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
 		break;
 	case playerState::HOE_RIGHT:
-		_player.Motion = KEYANIMANAGER->findAnimation("playerHoeRight");	//괭이
+		_player.Motion = KEYANIMANAGER->findAnimation("playerHoeRight");										//괭이
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_RIGHT));
 		break;
 	case playerState::HOE_LEFT:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerHoeLeft");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_LEFT));
 		break;
 	case playerState::HOE_UP:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerHoeUp");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_BACK));
 		break;
 	case playerState::HOE_DOWN:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerHoeDown");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
 		break;
 	case playerState::SICKLE_RIGHT:
-		_player.Motion = KEYANIMANAGER->findAnimation("playerSickleRight");	//낫
+		_player.Motion = KEYANIMANAGER->findAnimation("playerSickleRight");		//낫
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_RIGHT));
 		break;
 	case playerState::SICKLE_LEFT:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerSickleLeft");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_LEFT));
 		break;
 	case playerState::SICKLE_UP:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerSickleUp");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_BACK));
 		break;
 	case playerState::SICKLE_DOWN:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerSickleDown");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
 		break;
-	case playerState::WATER_RIGHT:											//물뿌리개
+	case playerState::PIXHOE_RIGHT:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerPixhoeRight");
+		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_RIGHT));
+		break;
+	case playerState::PIXHOE_LEFT:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerPixhoeLeft");
+		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_LEFT));
+		break;
+	case playerState::PIXHOE_UP:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerPixhoeUp");
+		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_BACK));
+		break;
+	case playerState::PIXHOE_DOWN:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerPixhoeDown");
+		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
+		break;
+	case playerState::SWORD_RIGHT:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerSwordRight");
+		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_RIGHT));
+		break;
+	case playerState::SWORD_LEFT:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerSwordLeft");
+		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_LEFT));
+		break;
+	case playerState::SWORD_UP:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerSwordUp");
+		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_BACK));
+		break;
+	case playerState::SWORD_DOWN:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerSwordDown");
+		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
+		break;
+
+
+
+	case playerState::WATER_RIGHT:												//물뿌리개
 		_player.Motion = KEYANIMANAGER->findAnimation("playerWaterRight");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_RIGHT));
 		break;
 	case playerState::WATER_LEFT:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerWaterLeft");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_LEFT));
 		break;
 	case playerState::WATER_UP:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerWaterUp");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND_BACK));
 		break;
 	case playerState::WATER_DOWN:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerWaterDown");
 		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
 		break;
 	case playerState::TAKE_RIGHT:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerTakeRight");
@@ -345,3 +432,4 @@ void player::changeState(playerState::Enum state)
 	}
 	_state = state;
 }
+

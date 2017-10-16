@@ -2,6 +2,8 @@
 #include "gameNode.h"
 #include "loadingScene.h"
 #include "townScene.h"
+#include "mapToolScene.h"
+
 
 class playGround : public gameNode
 {

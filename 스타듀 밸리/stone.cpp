@@ -16,6 +16,8 @@ HRESULT stone::init(tagFloat pos)
 	{
 		this->stoneAttack();
 	});
+
+	return S_OK;
 }
 void stone::release()
 {
@@ -30,6 +32,10 @@ void stone::stoneAttack()
 	EFFECTMANAGER->play("stoneDie", _pos.x, _pos.y);
 
 	this->setDestroy();
+
+
+	dropItem* drop = new dropItem;
+	drop->init("stone", "stone");
 }
 void stone::render()
 {

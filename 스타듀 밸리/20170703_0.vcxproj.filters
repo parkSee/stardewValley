@@ -172,6 +172,9 @@
     <Filter Include="playGround\mapToolScene">
       <UniqueIdentifier>{879fd6f7-956a-401c-89fa-ff12a1452e23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\store">
+      <UniqueIdentifier>{8d27d5aa-c77e-4793-b8de-f17a9bddfcec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -206,9 +209,6 @@
     </ClInclude>
     <ClInclude Include="image.h">
       <Filter>2DGameFramework\image</Filter>
-    </ClInclude>
-    <ClInclude Include="progressBar.h">
-      <Filter>2DGameFramework\progressBar</Filter>
     </ClInclude>
     <ClInclude Include="txtData.h">
       <Filter>2DGameFramework\txtData</Filter>
@@ -315,9 +315,6 @@
     <ClInclude Include="item.h">
       <Filter>playGround\item</Filter>
     </ClInclude>
-    <ClInclude Include="store.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="NPC.h">
       <Filter>playGround\NPC</Filter>
     </ClInclude>
@@ -363,6 +360,15 @@
     <ClInclude Include="Pierre.h">
       <Filter>playGround\NPC</Filter>
     </ClInclude>
+    <ClInclude Include="store.h">
+      <Filter>playGround\store</Filter>
+    </ClInclude>
+    <ClInclude Include="heightProgressBar.h">
+      <Filter>2DGameFramework\progressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="progressBar.h">
+      <Filter>2DGameFramework\progressBar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -382,9 +388,6 @@
     </ClCompile>
     <ClCompile Include="image.cpp">
       <Filter>2DGameFramework\image</Filter>
-    </ClCompile>
-    <ClCompile Include="progressBar.cpp">
-      <Filter>2DGameFramework\progressBar</Filter>
     </ClCompile>
     <ClCompile Include="txtData.cpp">
       <Filter>2DGameFramework\txtData</Filter>
@@ -524,9 +527,6 @@
     <ClCompile Include="item.cpp">
       <Filter>playGround\item</Filter>
     </ClCompile>
-    <ClCompile Include="inventory + callBack.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="NPC.cpp">
       <Filter>playGround\NPC</Filter>
     </ClCompile>
@@ -535,9 +535,6 @@
     </ClCompile>
     <ClCompile Include="tree1.cpp">
       <Filter>playGround\map\tree</Filter>
-    </ClCompile>
-    <ClCompile Include="store.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="tree2.cpp">
       <Filter>playGround\map\tree</Filter>
@@ -559,9 +556,6 @@
     </ClCompile>
     <ClCompile Include="grass.cpp">
       <Filter>playGround\map\herb</Filter>
-    </ClCompile>
-    <ClCompile Include="store.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="mapToolScene.cpp">
       <Filter>playGround\mapToolScene</Filter>
@@ -586,6 +580,21 @@
     </ClCompile>
     <ClCompile Include="Pierre.cpp">
       <Filter>playGround\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="store.cpp">
+      <Filter>playGround\store</Filter>
+    </ClCompile>
+    <ClCompile Include="store.cpp">
+      <Filter>playGround\store</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory + callBack.cpp">
+      <Filter>playGround\UI\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="heightProgressBar.cpp">
+      <Filter>2DGameFramework\progressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="progressBar.cpp">
+      <Filter>2DGameFramework\progressBar</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
