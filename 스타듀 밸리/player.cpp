@@ -5,6 +5,7 @@
 HRESULT player::init(string objName, tagFloat pos)
 {
 
+
 	//¾ÕµÚÁÂ¿ì
 	int stand[] = { 20 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerStand", "player", stand, 1, 0, false);
@@ -59,42 +60,42 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	//³´
 	int sickleLeft[] = { 78,79,80,81,82,83 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleLeft", "player", sickleLeft, 6, 10, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleLeft", "player", sickleLeft, 6, 15, false);
 
 	int sickleUp[] = { 84,85,86,87,88,89 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleUp", "player", sickleUp, 6, 10, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleUp", "player", sickleUp, 6, 15, false);
 
 	int sickleRight[] = { 72,73,74,75,76,77 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleRight", "player", sickleRight, 6, 10, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleRight", "player", sickleRight, 6, 15, false);
 
-	int sickleDown[] = { 84,85,86,87,88,89 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleDown", "player", sickleDown, 6, 10, false);
+	int sickleDown[] = { 65,66,67,68,69,70,71 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleDown", "player", sickleDown, 6, 15, false);
 
 	//¹°»Ñ¸®°³
 	int waterLeft[] = { 108,109,110,111,112 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerWaterLeft", "player", waterLeft, 5, 10, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerWaterLeft", "player", waterLeft, 5, 7, false);
 
 	int waterUp[] = { 113,114,115 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerWaterUp", "player", waterUp, 3, 10, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerWaterUp", "player", waterUp, 3, 7, false);
 
 	int waterRight[] = { 90,91,92,93,94 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerWaterRight", "player", waterRight, 5, 10, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerWaterRight", "player", waterRight, 5, 7, false);
 
 	int waterDown[] = { 96,97,98,99,100,101,102,103,104,105,106,107 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerWaterDown", "player", waterDown, 12, 10, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerWaterDown", "player", waterDown, 12, 20, false);
 
 	//°î±ªÀÌ
-	int pixhoeDown[] = { 167,168,169,170,171,172,173 };
+	int pixhoeDown[] = { 168,169,170,171,172,173,174 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeDown", "player", pixhoeDown, 7, 10, false);
 
-	int pixhoeUP[] = { 174,175,176,177 };
+	int pixhoeUP[] = { 175,176,177,178 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeUp", "player", pixhoeUP, 4, 10, false);
 
-	int pixhoeRight[] = { 178,179,180,181,182 };
+	int pixhoeRight[] = { 180,181,182,183,184 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeRight", "player", pixhoeRight, 5, 10, false);
 
-	int pixhoeLeft[] = { 183,184,185,186,187 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeLeft", "player", pixhoeLeft, 5, 5, false);
+	int pixhoeLeft[] = { 189,188,187,186,185 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeLeft", "player", pixhoeLeft, 5, 10, false);
 
 	//°Ë
 	int swordDown[] = { 143,144,145,146,147,148 };
@@ -143,7 +144,8 @@ HRESULT player::init(string objName, tagFloat pos)
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
-
+	tem = tagItem("µµ³¢", "³ª¹«¸¦ ¹ë ¼ö ÀÖ´Ù", tagFloat(1000000,10000000), 1, itemType::TOOL);		//¾ÆÀÌÅÛ ÃÊ±â°ª
+	_item = &tem;
 
 	//ÄÝ¹é
 	this->addCallback("changeState", [this](tagMessage msg)
@@ -156,9 +158,6 @@ HRESULT player::init(string objName, tagFloat pos)
 	{
 		this->eating();
 	});
-
-
-
 
 	//´ë»ó Å¬¸¯
 	this->addCallback("lbuttonClick", [this](tagMessage msg)
@@ -201,7 +200,7 @@ void player::render()
 {
 	//gameObject::render();
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
-	Rectangle(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, this->rectMakeBottom().right, this->rectMakeBottom().bottom);
+	//Rectangle(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, this->rectMakeBottom().right, this->rectMakeBottom().bottom);
 	
 	_image->aniRender(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, _player.Motion);
 

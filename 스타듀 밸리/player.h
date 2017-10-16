@@ -74,6 +74,8 @@ private:
 	tagMyItem _myItem;
 	tagItem* _item;
 
+	tagItem tem;
+
 public:
 	HRESULT init(string objName, tagFloat pos);
 	void release();
