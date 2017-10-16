@@ -30,3 +30,19 @@ typedef std::function<void()> CBFUNCTION;
 #define PERRETESTCONVERSATION "string도 이렇게 디파인을 걸어서 대화집을 만들어 놓을 수 있단다."
 
 
+//메세지 통신 txt디파인
+
+//publicUI 클래스 콜백 함수 관련
+#define ADDGUIDEUI		"addGuideUI"		//가이드 UI창 콜백 메세지 이름 , msg.conversatoin 에 띄울 스트링을 입력해주면 된다.
+#define ADDGETITEMUI	"addGetItemUI"		//아이템 얻었을 때 나오는 UI메세지 이름, msg.conversation에 아이템 이름(키값)을 입력
+
+//inventory클래스 콜백 함수 관련 
+#define SETTARGETTIEM	"setTargetItem"		//타겟 아이템 바뀔때 메세지 이름,msg.conversation에 아이템 이름(키값)을 입력 
+#define ADDITEM			"addItem"			//아이템 인벤토리에 추가 콜백 메세지,
+											//msg.converstation에 아이템 이름 ,msg.str에 아이템 부가 설명을 넣어준다.
+
+//대화창 및 편지창 UI콜백 함수 관련
+#define CONVERSATIONUI	"conversation"		//대화창 생성 메세지 이름, msg.conversation에 넣을 대화string을 입력
+											//msg.data에 인물 번호코드 디파인을 넣어준다 ex)PIERRE || CAROLINE
+#define 
+
