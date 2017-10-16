@@ -44,5 +44,4 @@ typedef std::function<void()> CBFUNCTION;
 //대화창 및 편지창 UI콜백 함수 관련
 #define CONVERSATIONUI	"conversation"		//대화창 생성 메세지 이름, msg.conversation에 넣을 대화string을 입력
 											//msg.data에 인물 번호코드 디파인을 넣어준다 ex)PIERRE || CAROLINE
-#define 
 
