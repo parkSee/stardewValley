@@ -40,9 +40,6 @@ private:
 	RECT _rc1, _rc2, _rc3;
 
 public:
-	tileMap();
-	~tileMap();
-
 	HRESULT init();
 	void release();
 	void update();
@@ -52,7 +49,9 @@ public:
 	void load();
 
 	inline mapToolTile* getTile(int idX, int idY) { return _pTile[idX][idY]; }
-	//inline TERRAIN getTerrain(int idX, int idY) { return _pTile[idX][idY]->getTerrain(); }
 	inline void setSelectIdX(int x) { _selectIdX = x; }
 	inline void setSelectIdY(int y) { _selectIdY = y; }
+
+	tileMap() {}
+	~tileMap() {}
 };

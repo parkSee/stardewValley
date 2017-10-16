@@ -681,13 +681,14 @@ void image::aniRender(HDC hdc, int destX, int destY, animation* ani)
 
 void image::scaleAniRender(HDC hdc, int destX, int destY, animation* ani, int scaledWidth, int scaledHeight)
 {
+
+	_imageInfo->currentFrameX = ani->getFrameX();
+	_imageInfo->currentFrameY = ani->getFrameY();
+
 	//만약 렌더링 영역이 화면 밖이라면 그리지 않는다.
 	RECT renderRC = RectMake(destX, destY, scaledWidth, scaledHeight);
 	if (renderRC.right < 0 || renderRC.left > WINSIZEX || renderRC.top > WINSIZEY || renderRC.bottom < 0)
 		return;
-
-	_imageInfo->currentFrameX = ani->getFrameX();
-	_imageInfo->currentFrameY = ani->getFrameY();
 
 	if (_trans)
 	{

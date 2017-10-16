@@ -33,55 +33,81 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	//도끼
 	int axeLeft[] = { 38,39,40,41,42 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerAxeLeft", "player", axeLeft, 5, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerAxeLeft", "player", axeLeft, 5, 10, false);
 
 	int axeUp[] = { 43,44,45,46 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerAxeUp", "player", axeUp, 4, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerAxeUp", "player", axeUp, 4, 10, false);
 
 	int axeRight[] = { 33,34,35,36,37 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerAxeRight", "player", axeRight, 5, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerAxeRight", "player", axeRight, 5, 10, false);
 
 	int axeDown[] = { 27,28,29,30,31,32 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerAxeDown", "player", axeDown, 6, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerAxeDown", "player", axeDown, 6, 10, false);
 
 	//괭이
 	int hoeLeft[] = { 60,61,62,63,64 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerHoeLeft", "player", hoeLeft, 5, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerHoeLeft", "player", hoeLeft, 5, 10, false);
 
 	int hoeUp[] = { 51,52,53,54 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerHoeUp", "player", hoeUp, 4, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerHoeUp", "player", hoeUp, 4, 10, false);
 
 	int hoeRight[] = { 55,56,57,58,59 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerHoeRight", "player", hoeRight, 5, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerHoeRight", "player", hoeRight, 5, 10, false);
 
 	int hoeDown[] = { 48,49,50 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerHoeDown", "player", hoeDown, 3, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerHoeDown", "player", hoeDown, 3, 10, false);
 
 	//낫
 	int sickleLeft[] = { 78,79,80,81,82,83 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleLeft", "player", sickleLeft, 6, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleLeft", "player", sickleLeft, 6, 10, false);
 
 	int sickleUp[] = { 84,85,86,87,88,89 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleUp", "player", sickleUp, 6, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleUp", "player", sickleUp, 6, 10, false);
 
 	int sickleRight[] = { 72,73,74,75,76,77 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleRight", "player", sickleRight, 6, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleRight", "player", sickleRight, 6, 10, false);
 
 	int sickleDown[] = { 84,85,86,87,88,89 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleDown", "player", sickleDown, 6, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleDown", "player", sickleDown, 6, 10, false);
 
 	//물뿌리개
 	int waterLeft[] = { 108,109,110,111,112 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerWaterLeft", "player", waterLeft, 5, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerWaterLeft", "player", waterLeft, 5, 10, false);
 
 	int waterUp[] = { 113,114,115 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerWaterUp", "player", waterUp, 3, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerWaterUp", "player", waterUp, 3, 10, false);
 
 	int waterRight[] = { 90,91,92,93,94 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerWaterRight", "player", waterRight, 5, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerWaterRight", "player", waterRight, 5, 10, false);
 
 	int waterDown[] = { 96,97,98,99,100,101,102,103,104,105,106,107 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerWaterDown", "player", waterDown, 12, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("playerWaterDown", "player", waterDown, 12, 10, false);
+
+	//곡괭이
+	int pixhoeDown[] = { 167,168,169,170,171,172,173 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeDown", "player", pixhoeDown, 7, 10, false);
+
+	int pixhoeUP[] = { 174,175,176,177 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeUp", "player", pixhoeUP, 4, 10, false);
+
+	int pixhoeRight[] = { 178,179,180,181,182 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeRight", "player", pixhoeRight, 5, 10, false);
+
+	int pixhoeLeft[] = { 183,184,185,186,187 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeLeft", "player", pixhoeLeft, 5, 5, false);
+
+	//검
+	int swordDown[] = { 143,144,145,146,147,148 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerSwordDown", "player", swordDown, 6, 10, false);
+	
+	int swordRight[] = { 149,150,151,152,153,154 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerSwordRight", "player", swordRight, 6, 10, false);
+
+	int swordLeft[] = { 155,156,157,158,159,160 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerSwordLeft", "player", swordLeft, 6, 10, false);
+
+	int swordUp[] = { 161,162,163 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerswordUp", "player", swordUp, 3, 10, false);
 
 	//아이템 들고 달리기
 	int takeLeft[] = { 120,121,122,123,124 };
@@ -117,7 +143,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
-	
+
 
 	//콜백
 	this->addCallback("changeState", [this](tagMessage msg)
@@ -131,11 +157,15 @@ HRESULT player::init(string objName, tagFloat pos)
 		this->eating();
 	});
 
-	//아이템 선택
-	this->addCallback("LbuttonClick", [this](tagMessage msg)
+
+
+
+	//대상 클릭
+	this->addCallback("lbuttonClick", [this](tagMessage msg)
 	{
-		this->lbuttonClick();
+		this->lbuttonClick(msg);
 	});
+
 
 	this->addCallback("changeTargetItem", [this](tagMessage msg)
 	{
@@ -154,11 +184,15 @@ void player::update()
 {
 	gameObject::update();
 	
-	if (WORLDTIME->_isTimeFlow)				//UI가 켜지면 움직이지 않는다.
+	if (WORLDTIME->_isTimeFlow)				//UI가 켜지면 움직이지 않는다. (게임상 시간의 흐름 - UI가 켜지면 시간이 멈추면서 키와 시간만 멈춘다.)
 	{
 		this->stateUpdate(_state);
 	}
-
+	
+	if (KEYMANAGER->isOnceKeyDown('Y'))
+	{
+		this->sendMessage(tagMessage("lbuttonClick"));
+	}
 
 	KEYANIMANAGER->update();
 	
