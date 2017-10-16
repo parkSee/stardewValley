@@ -11,6 +11,14 @@ HRESULT townScene::init()
 	dongjinInit();
 	soonwooInit();
 
+	_map = new tileMap;
+	_map->init();
+
+	CAMERAMANAGER->_pos.x = WINSIZEX / 2;
+	CAMERAMANAGER->_pos.y = WINSIZEY / 2;
+
+	CAMERAMANAGER->setMapSize(3000, 3000);
+
 	return S_OK;
 }
 
@@ -34,5 +42,6 @@ void townScene::update()
 
 void townScene::render()
 {
+	_map->render();
 	TOWNWORLD->render();
 }
