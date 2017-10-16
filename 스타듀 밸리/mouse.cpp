@@ -20,6 +20,7 @@ HRESULT mouse::init(string name)
 	_normalAnimation->init(IMAGEMANAGER->findImage("mouse")->getWidth(), IMAGEMANAGER->findImage("mouse")->getHeight(),
 		IMAGEMANAGER->findImage("mouse")->getFrameWidth(), IMAGEMANAGER->findImage("mouse")->getFrameHeight());
 
+	_animation->init(_image->getWidth(), _image->getHeight(), _image->getFrameWidth(), _image->getFrameHeight());
 
 	return S_OK;
 }

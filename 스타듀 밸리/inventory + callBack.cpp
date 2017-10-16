@@ -2,6 +2,7 @@
 #include "inventory.h"
 
 #include "player.h"
+#include "publicUI.h"
 
 using namespace invenDirection;
 
@@ -60,6 +61,11 @@ void inventory::changeItem()
 					{
 						if (_vInventory[i].type != itemType::NONE)
 						{
+							if (_targetItem == &_vInventory[i])
+							{
+								_targetItem = &_tempItem;
+							}
+
 							_tempItem = _vInventory[i];
 							_pickingItem = _vInventory[i];
 
@@ -76,6 +82,11 @@ void inventory::changeItem()
 					{
 						if (_vInventory[i].type == itemType::NONE)
 						{
+							if (_targetItem == &_tempItem)
+							{
+								_targetItem = &_vInventory[i];
+							}
+
 							_tempItem.pos = _vInventory[i].pos;
 							_tempItem.rc = _vInventory[i].rc;
 							_vInventory[i] = _tempItem;
@@ -113,4 +124,47 @@ void inventory::changeItem()
 
 
 
+}
+
+
+
+void inventory::addItem(tagMessage msg)
+{
+	for (int i = 0; i < _vInventory.size(); ++i)
+	{
+		if (msg.conversation != _vInventory[i].name && _vInventory[i].type != itemType::NONE)continue;
+		publicUI* ui = (publicUI*)TOWNWORLD->findObject(objectType::INTERFACE, "publicUI");
+		if (_vInventory[i].type == itemType::NONE)
+		{
+			_vInventory[i] = tagItem(msg.conversation, msg.str, _vInventory[i].pos, 1, this->getItemType(msg.conversation));
+			ui->sendMessage(tagMessage("addGetItemUI",0.0f,0,0,vector<gameObject*>(),msg.conversation ));
+			break;
+		}
+		
+		else if (msg.conversation == _vInventory[i].name)
+		{
+			_vInventory[i].count++;
+			ui->sendMessage(tagMessage("addGetItemUI", 0.0f, 0, 0, vector<gameObject*>(), msg.conversation));
+			break;
+		}
+
+		//인벤토리에 공간이 없다면
+		ui->sendMessage(tagMessage("addGetItemUI", 0.0f, 0, 0, vector<gameObject*>(), "공간부족"));
+	}
+}
+
+itemType::Enum inventory::getItemType(string itemName)
+{
+	if (itemName == "수액" || itemName == "민들레")
+	{
+		return itemType::FOOD;
+	}
+	else if (itemName == "나무" || itemName == "돌")
+	{
+		return itemType::STONE;
+	}
+	else if (itemName == "물뿌리개")
+	{
+		return itemType::TOOL;
+	}
 }

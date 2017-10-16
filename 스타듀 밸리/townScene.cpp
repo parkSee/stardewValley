@@ -4,11 +4,11 @@
 HRESULT townScene::init()
 {
 	seeyoungInit();
-	soonwooInit();
 	jerichoInit();
 	guenhwaInit();
 	youngjaeInit();
 	dongjinInit();
+	soonwooInit();
 
 	return S_OK;
 }

@@ -44,7 +44,11 @@ HRESULT inventory::init(string name)
 
 	_isPicking = false;
 
+	_layer.img = IMAGEMANAGER->findImage("blackBox");
+	_layer.isDark = false;
+
 	//msg.data -> 이거 형변환으로 인벤토리 창 상태 받자 
+	//인벤토리 상태 바뀌는거  
 	this->addCallback("changeState", [this](tagMessage msg)
 	{
 		this->changeState(msg);
@@ -54,7 +58,11 @@ HRESULT inventory::init(string name)
 	{
 		this->setTargetItem(msg);
 	});
-
+	//아이템 추가 콜백함수 
+	this->addCallback("addItem", [this](tagMessage msg)
+	{
+		this->addItem(msg);
+	});
 	
 
 	return S_OK;
@@ -70,6 +78,7 @@ void inventory::update()
 	gameObject::update();
 
 	this->keyContoroll();
+
 	this->changeItem();
 }
 
@@ -80,7 +89,8 @@ void inventory::keyContoroll()
 		if (_direction != MAIN)
 		{
 			_direction = MAIN;
-			
+			_layer.isDark = true;
+			WORLDTIME->_isTimeFlow = false;
 			for (int i = 0; i < _vInventory.size(); ++i)
 			{
 				_vInventory[i].pos = tagFloat(_mainInventory.rc.left + 79 + 64 * i, _mainInventory.rc.top + 74);
@@ -90,7 +100,8 @@ void inventory::keyContoroll()
 		else if (_direction == MAIN)
 		{
 			_direction = SUB_BOTTOM;
-
+			_layer.isDark = false;
+			WORLDTIME->_isTimeFlow = true;
 			for (int i = 0; i < _vInventory.size(); ++i)
 			{
 				_vInventory[i].pos = tagFloat(_subInventory.rc.left + 49 + 64 * i, _subInventory.pos.y);
@@ -101,12 +112,70 @@ void inventory::keyContoroll()
 		}
 	}
 
-
+	//1~23,-,= 버튼 아이템 선택 키 커맨드
+	if (this->_direction == invenDirection::SUB_BOTTOM ||
+		this->_direction == invenDirection::SUB_TOP)
+	{
+		if (KEYMANAGER->isOnceKeyDown('1'))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[0].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown('2'))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[1].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown('3'))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[2].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown('4'))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[3].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown('5'))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[4].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown('6'))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[5].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown('7'))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[6].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown('8'))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[7].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown('9'))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[8].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown('0'))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[9].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown(VK_OEM_MINUS))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[10].name));
+		}
+		else if (KEYMANAGER->isOnceKeyDown(VK_OEM_PLUS))
+		{
+			this->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), _vInventory[11].name));
+		}
+	}
 
 }
 
 void inventory::render()
 {
+	if (_layer.isDark)
+	{
+		_layer.img->alphaRender(getMemDC(), 0, 0, 150);
+	}
+
+
 	//상태가 서브 인벤토리 상태일때 서브 인벤토리 그려주자. 
 	if (_direction == SUB_BOTTOM || _direction == SUB_TOP)
 	{
@@ -133,11 +202,34 @@ void inventory::render()
 			{
 				_vInventory[i].img->scaleRender(getMemDC(), _vInventory[i].rc.left, _vInventory[i].rc.top,
 					_vInventory[i].img->getWidth() *_vInventory[i].size, _vInventory[i].img->getHeight() * _vInventory[i].size);
+
 			}
 
 			//타겟 아이템에 렉트 그려주자
 			Rectangle(getMemDC(), _vInventory[i].rc.left, _vInventory[i].rc.top,
 				_vInventory[i].rc.right, _vInventory[i].rc.bottom);
+
+			if (_vInventory[i].type != itemType::NONE &&_vInventory[i].type != itemType::TOOL)
+			{
+				char str[10];
+				sprintf(str, "%d", _vInventory[i].count);
+
+				RECT rc = RectMake(_vInventory[i].rc.right - 10, _vInventory[i].rc.bottom - 10, 50, 50);
+
+				HFONT font = CreateFont(15, 0, 0, 0, 800, false, false, false,
+					DEFAULT_CHARSET, OUT_STROKE_PRECIS, CLIP_DEFAULT_PRECIS,
+					PROOF_QUALITY, DEFAULT_PITCH | FF_SWISS, TEXT("HY엽서L"));
+				HFONT oldFont = (HFONT)SelectObject(getMemDC(), font);
+				//텍스트 색을 설정해준다.
+				SetTextColor(getMemDC(), RGB(10, 0, 0));
+				//텍스트 그려주고
+				DrawText(getMemDC(), str, strlen(str), &rc, DT_LEFT | DT_VCENTER | DT_WORDBREAK | DT_EXTERNALLEADING);
+
+
+				SelectObject(getMemDC(), oldFont);
+				DeleteObject(font);
+
+			}
 
 			SelectObject(getMemDC(), oldPen);
 			DeleteObject(pen);
@@ -160,6 +252,28 @@ void inventory::render()
 			{
 				_vInventory[i].img->scaleRender(getMemDC(), _vInventory[i].rc.left, _vInventory[i].rc.top,
 					_vInventory[i].img->getWidth() *_vInventory[i].size, _vInventory[i].img->getHeight() * _vInventory[i].size);
+
+				if (_vInventory[i].type != itemType::NONE &&_vInventory[i].type != itemType::TOOL)
+				{
+					char str[10];
+					sprintf(str, "%d", _vInventory[i].count);
+
+					RECT rc = RectMake(_vInventory[i].rc.right - 10, _vInventory[i].rc.bottom - 10, 50, 50);
+
+					HFONT font = CreateFont(15, 0, 0, 0, 800, false, false, false,
+						DEFAULT_CHARSET, OUT_STROKE_PRECIS, CLIP_DEFAULT_PRECIS,
+						PROOF_QUALITY, DEFAULT_PITCH | FF_SWISS, TEXT("HY엽서L"));
+					HFONT oldFont = (HFONT)SelectObject(getMemDC(), font);
+					//텍스트 색을 설정해준다.
+					SetTextColor(getMemDC(), RGB(10, 0, 0));
+					//텍스트 그려주고
+					DrawText(getMemDC(), str, strlen(str), &rc, DT_LEFT | DT_VCENTER | DT_WORDBREAK | DT_EXTERNALLEADING);
+
+
+					SelectObject(getMemDC(), oldFont);
+					DeleteObject(font);
+
+				}
 			}
 		}
 
@@ -230,6 +344,10 @@ void inventory::render()
 
 	}
 
+
+	char strTarget[100];
+	sprintf(strTarget, "%s", _targetItem->name.c_str());
+	TextOut(getMemDC(), 10, 100, strTarget, strlen(strTarget));
 	
 }
 

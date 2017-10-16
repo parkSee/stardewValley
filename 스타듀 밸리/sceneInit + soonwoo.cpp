@@ -5,6 +5,7 @@
 #include "mouse.h"
 #include "publicUI.h"
 #include "inventory.h"
+#include "dropItem.h"
 
 void townScene::soonwooInit()
 {
@@ -24,5 +25,8 @@ void townScene::soonwooInit()
 	inven->init("inventory");
 	TOWNWORLD->addObject(objectType::INTERFACE, inven);
 
+	dropItem* item = new dropItem;
+	item->init("물뿌리개", "무엇이든 벨 수 있다.",tagFloat(300,300));
+	TOWNWORLD->addObject(objectType::ITEM, item);
 	
 }

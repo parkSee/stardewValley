@@ -527,9 +527,6 @@
     <ClCompile Include="item.cpp">
       <Filter>playGround\item</Filter>
     </ClCompile>
-    <ClCompile Include="inventory + callBack.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="NPC.cpp">
       <Filter>playGround\NPC</Filter>
     </ClCompile>
@@ -589,6 +586,9 @@
     </ClCompile>
     <ClCompile Include="store.cpp">
       <Filter>playGround\store</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory + callBack.cpp">
+      <Filter>playGround\UI\inventory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

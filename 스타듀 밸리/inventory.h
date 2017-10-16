@@ -41,6 +41,12 @@ namespace invenDirection
 	};
 }
 
+struct tagLayer
+{
+	image*	img;
+	bool	isDark;
+};
+
 class inventory : public gameObject
 {
 private:
@@ -58,6 +64,9 @@ private:
 	bool					_isPicking;
 	tagItem					_tempItem;
 	tagItem				  _pickingItem;
+
+	//검은색 레이어 
+	tagLayer				_layer;
 
 public:
 	HRESULT init(string name);
@@ -107,10 +116,12 @@ public:
 	void changeState(tagMessage msg);
 	//타겟 아이템 바뀌는 콜백 함수 (마우스 클래스 한테 받는다)
 	void setTargetItem(tagMessage msg);
-
-	
+	//아이템 추가 콜백함수 
+	void addItem(tagMessage msg);
 	//아이템 타입 스트링으로 반환 받는 함수
 	string getStringItemType(tagItem* item);
+
+	itemType::Enum getItemType(string itemName);
 
 	inventory() {}
 	~inventory() {}

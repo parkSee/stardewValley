@@ -2,6 +2,7 @@
 #include "UI.h"
 #include "worldNode.h"
 #include <functional>
+#include "inventory.h"
 
 void UI::setAddCallback()
 {
@@ -48,6 +49,10 @@ void UI::setConverSationWindow(int who, string txt)
 	_txt = txt;
 	//시간 정지해주고
 	WORLDTIME->_isTimeFlow = false;
+	//인벤토리 상태 하이드로 바꿔주고
+	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+	inven->setDirection(invenDirection::HIDE);
+	
 }
 
 //편지창 만들어 주는 함수
@@ -58,6 +63,9 @@ void UI::setLetter(string txt)
 	_letter.txt = txt;
 	//시간 정지해 주고
 	WORLDTIME->_isTimeFlow = false;
+	//인벤토리 상태 하이드로 바꿔주고
+	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+	inven->setDirection(invenDirection::HIDE);
 }
 
 //대화창에 나올 인물의 프로필 이미지와 이름표 이미지를 벡터에 담아서 반환해 준다. 
@@ -124,6 +132,10 @@ void UI::exit()
 
 	//대화창 편지창 나갔으니까 시간다시 흘러가게 true로 만들어 준다.
 	WORLDTIME->_isTimeFlow = true;
+
+	//인벤토리 상태 원래대로 
+	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+	inven->setDirection(invenDirection::SUB_BOTTOM);
 }
 
 
