@@ -1,47 +1,39 @@
 #include "stdafx.h"
 #include "mapToolTile.h"
 
+
 HRESULT mapToolTile::init(int idX, int idY)
 {
-	gameObject::init("", "", tagFloat(idX * TILESIZE, idY * TILESIZE), pivot::LEFT_TOP);
+	gameObject::init("mapToolTile", "", tagFloat(idX * TILESIZE, idY * TILESIZE), pivot::LEFT_TOP);
 
+	_terrain = TERRAIN::NONE;
 	_indexX = idX;
 	_indexY = idY;
+	_rc = RectMake(idX * TILESIZE, idY * TILESIZE, TILESIZE, TILESIZE);
+
+	_pObj = NULL;
 
 	//_image = IMAGEMANAGER->findImage("tiles");
-	_terrain = TERRAIN::NONE;
 	_terrainFrameX = 3;
 	_terrainFrameY = 6;
 
-	_rc = RectMake(_pos.x, _pos.y, TILESIZE, TILESIZE);
-
-	_obj = NULL;
 
 	return S_OK;
 }
 void mapToolTile::release()
 {
 	gameObject::release();
-
 }
 
 void mapToolTile::update()
 {
 	gameObject::update();
 
-	_rc = RectMakeCenter(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
-
+	_rc = RectMakeCenter(_indexX * TILESIZE, _indexY * TILESIZE, TILESIZE, TILESIZE);
 }
 
 void mapToolTile::render()
 {
-	//RECT renderRC = CAMERAMANAGER->getRenderRc();
-	//_image->frameRender(getMemDC(), _rc.left - renderRC.left, _rc.top - renderRC.top, _terrainFrameX, _terrainFrameY);
-
-	//_image->frameRender(getMemDC(), _rc.left, _rc.top, _terrainFrameX, _terrainFrameY);
-
-	//IMAGEMANAGER->findImage("tileSprite")->frameRender(getMemDC(), _tag.rc.left - renderRC.left, _tag.rc.top - renderRC.top, _tag.terrainFrameX, _tag.terrainFrameY);
-
 	switch (_terrain)
 	{
 	case TERRAIN::NONE:

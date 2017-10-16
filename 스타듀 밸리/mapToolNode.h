@@ -3,8 +3,8 @@
 
 #define SCALE 2
 #define TILESIZE (16 * SCALE)
-#define TILEX 20
-#define TILEY 20
+#define TILEX 43
+#define TILEY 27
 #define SPRITEX 25
 #define SPRITEY 79
 #define spriteNumber(i, j) ((i) + (j) * SPRITEX)
@@ -22,7 +22,8 @@ namespace OBJECT
 		TREE3,
 		BIG_TREE,
 		BIG_BIG_TREE,
-		STONE
+		STONE,
+		END
 	};
 }
 namespace TERRAIN
@@ -32,7 +33,8 @@ namespace TERRAIN
 		NONE,
 		DIRT,
 		GRASS,
-		WATER
+		WATER,
+		END
 	};
 }
 
@@ -45,6 +47,7 @@ namespace SPRITE
 		FARMHOUSE,
 		CROPS,
 		TREES,
-		TILESAMPLE
+		TILESAMPLE,
+		END
 	};
 }

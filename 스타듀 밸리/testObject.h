@@ -6,13 +6,10 @@
 class testObject : public gameObject
 {
 private:
-	int _frameX, _frameY;
 	int _idX, _idY;
+	int _frameX, _frameY;
 
 public:
-	testObject();
-	~testObject();
-
 	OBJECT::Enum _object;
 
 	virtual HRESULT init(string objName, string imageKey = "", tagFloat pos = tagFloat(), pivot::Enum pivot = pivot::CENTER);
@@ -33,4 +30,7 @@ public:
 
 	inline string getName() { return _name; }
 	inline pivot::Enum getPivot() { return _pivot; }
+
+	testObject() {}
+	~testObject() {}
 };

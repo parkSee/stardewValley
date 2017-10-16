@@ -2,9 +2,6 @@
 #include "tileMap.h"
 #include "testObject.h"
 
-tileMap::tileMap() {}
-tileMap::~tileMap() {}
-
 
 HRESULT tileMap::init()
 {
@@ -18,6 +15,8 @@ HRESULT tileMap::init()
 			_pTile[i][j]->init(i, j);
 		}
 	}
+
+	load();
 
 	_rc1 = RectMake(500, 500 + 50, 70, 40);
 	_rc2 = RectMake(_rc1.right + 30, _rc1.top, 70, 40);
@@ -77,10 +76,10 @@ void tileMap::update()
 				break;
 			case tileMap::KIND_OBJECT:
 			{
-				if (_pTile[idx][idy]->getObj() != NULL)
+				if (_pTile[idx][idy]->getPObj() != NULL)
 				{
-					_pTile[idx][idy]->getObj()->setDestroy();
-					_pTile[idx][idy]->setObj(NULL);
+					_pTile[idx][idy]->getPObj()->setDestroy();
+					_pTile[idx][idy]->setPObj(NULL);
 				}
 				testObject* tempobj = new testObject;
 				tempobj->init("test", "tileSprite", tagFloat(idx * TILESIZE, idy * TILESIZE), pivot::LEFT_TOP);
@@ -103,14 +102,14 @@ void tileMap::update()
 					break;
 				}
 				TOWNWORLD->addObject(objectType::OBJ, tempobj);
-				_pTile[idx][idy]->setObj(tempobj);
+				_pTile[idx][idy]->setPObj(tempobj);
 			}
 			break;
 			case tileMap::KIND_OBJECT_ERASER:
-				if (_pTile[idx][idy]->getObj() != NULL)
+				if (_pTile[idx][idy]->getPObj() != NULL)
 				{
-					_pTile[idx][idy]->getObj()->setDestroy();
-					_pTile[idx][idy]->setObj(NULL);
+					_pTile[idx][idy]->getPObj()->setDestroy();
+					_pTile[idx][idy]->setPObj(NULL);
 				}
 				break;
 			}
@@ -265,7 +264,7 @@ void tileMap::load()
 	{
 		for (int i = 0; i < TILEX; ++i)
 		{
-			_pTile[i][j]->setObj(NULL);
+			_pTile[i][j]->setPObj(NULL);
 		}
 	}
 
@@ -289,7 +288,7 @@ void tileMap::load()
 		TOWNWORLD->addObject(tag1.objectType, tempobj);
 
 		//타일에도 오브젝트 연결해주기
-		_pTile[tag1.idX][tag1.idY]->setObj(tempobj);
+		_pTile[tag1.idX][tag1.idY]->setPObj(tempobj);
 
 		tempobj = NULL;
 		ZeroMemory(&tag1, sizeof(tag1));
