@@ -42,8 +42,8 @@ void grass::grassAttack()
 
 		this->setDestroy();
 
-		dropItem* drop = new dropItem;
-		drop->init("grass", "grass");
+		//dropItem* drop = new dropItem;
+		//drop->init("grass", "grass");
 	}
 }
 

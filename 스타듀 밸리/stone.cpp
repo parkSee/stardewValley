@@ -34,8 +34,8 @@ void stone::stoneAttack()
 	this->setDestroy();
 
 
-	dropItem* drop = new dropItem;
-	drop->init("stone", "stone");
+	//dropItem* drop = new dropItem;
+	//drop->init("stone", "stone");
 }
 void stone::render()
 {

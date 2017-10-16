@@ -81,8 +81,8 @@ void tree1_bottom::update()
 		EFFECTMANAGER->play("die", _pos.x, _pos.y);
 		this->setDestroy();
 
-		dropItem* drop = new dropItem;
-		drop->init("tree_bottom", "tree");
+		//dropItem* drop = new dropItem;
+		//drop->init("tree_bottom", "tree");
 
 	}
 
@@ -145,8 +145,8 @@ void tree1_top::update()
 
 		this->setDestroy();
 
-		dropItem* drop = new dropItem;
-		drop->init("tree_top","tree");
+		//dropItem* drop = new dropItem;
+		//drop->init("tree_top","tree",);
 	}
 }
 void tree1_top::topAttack()

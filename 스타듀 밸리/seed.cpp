@@ -45,8 +45,8 @@ HRESULT seed::init(tagFloat pos)
 
 	 this->setDestroy();
 
-	 dropItem* drop = new dropItem;
-	 drop->init("seed", "seed");
+	// dropItem* drop = new dropItem;
+	// drop->init("seed", "seed");
  }
  void seed::render()
 {
