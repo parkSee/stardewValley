@@ -32,22 +32,31 @@ private:
 	int _indexX;
 	int _indexY;
 
-	char*	_standUp;
-	char*	_standDown;
-	char*	_standLeft;
-	char*	_standRight;
-	char*	_walkUp;
-	char*	_walkDown;
-	char*	_walkLeft;
-	char*	_walkRight;
+	char charstandUp[sizeof("npcStandUp_")];
+	char charstandDown[sizeof("npcStandDown_")];
+	char charstandLeft[sizeof("npcStandLeft_")];
+	char charstandRight[sizeof("npcStandRight_")];
+	char charwalkUp[sizeof("npcWalkUp_")];
+	char charwalkDown[sizeof("npcWalkDown_")];
+	char charwalkLeft[sizeof("npcWalkLeft_")];
+	char charwalkRight[sizeof("npcWalkRight_")];
+
+	string _standUp;
+	string _standDown;
+	string _standLeft;
+	string _standRight;
+	string _walkUp;
+	string _walkDown;
+	string _walkLeft;
+	string _walkRight;
 
 public:
 	HRESULT init(string npcName,char* imageName, int indexX, int indexY);
-	void release();
-	void update(int indexX, int indexY);
-	void render();
+	virtual void release();
+	virtual void update();
+	virtual void render();
 
-	void stateUpdate(npcState::Enum state);
+	virtual void stateUpdate(npcState::Enum state);
 	void changeState(npcState::Enum state);
 
 	NPC() {}
