@@ -22,7 +22,7 @@ struct tagNPC
 	RECT rc;
 };
 
-using namespace npcState;
+//using namespace npcState;
 
 class NPC : public gameObject
 {
