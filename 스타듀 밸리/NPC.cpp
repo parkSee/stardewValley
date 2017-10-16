@@ -56,6 +56,8 @@ HRESULT NPC::init(string npcName,char* imageKey, int indexX, int indexY)
 	int walkRight[]{ 12,13,14,15 };
 	KEYANIMANAGER->addArrayFrameAnimation((string)charwalkRight, imageKey, walkRight, 4, 10, true);
 
+	_animation->init(_image->getWidth(), _image->getHeight(), _image->getFrameWidth(), _image->getFrameHeight());
+
 	_npc.Motion = new animation;
 
 	return S_OK;
