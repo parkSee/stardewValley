@@ -363,10 +363,10 @@
     <ClInclude Include="store.h">
       <Filter>playGround\store</Filter>
     </ClInclude>
-    <ClInclude Include="progressBar.h">
+    <ClInclude Include="heightProgressBar.h">
       <Filter>2DGameFramework\progressBar</Filter>
     </ClInclude>
-    <ClInclude Include="heightProgressBar.h">
+    <ClInclude Include="progressBar.h">
       <Filter>2DGameFramework\progressBar</Filter>
     </ClInclude>
   </ItemGroup>
@@ -590,10 +590,10 @@
     <ClCompile Include="inventory + callBack.cpp">
       <Filter>playGround\UI\inventory</Filter>
     </ClCompile>
-    <ClCompile Include="progressBar.cpp">
+    <ClCompile Include="heightProgressBar.cpp">
       <Filter>2DGameFramework\progressBar</Filter>
     </ClCompile>
-    <ClCompile Include="heightProgressBar.cpp">
+    <ClCompile Include="progressBar.cpp">
       <Filter>2DGameFramework\progressBar</Filter>
     </ClCompile>
   </ItemGroup>

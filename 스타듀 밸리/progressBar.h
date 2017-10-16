@@ -11,17 +11,18 @@ private:
 	image* _progressBarTop;
 	image* _progressBarBottom;
 
-	string _frontimage;
-	string _backimage;
+	float _progeressBarRight;
 
 public:
-	HRESULT init(string frontBar , string backbar, const char* frontfile,
-		const char* backfile, int x, int y, int width, int height);
+	HRESULT init(int x, int y, int width, int height);
+	HRESULT init(char* topImage, char* bottomImage, float x, float y, int width, int height);
 	void release();
-	void update(int imagecenterX, int imagetopY, float current, float max);
+	void update();
 	void render();
 
 	void setGauge(float currentGauge, float maxGauge);
+
+	float getProgerssBarRight() { return _progeressBarRight; }
 
 	void setX(int x) { _x = x; }
 	void setY(int y) { _y = y; }
