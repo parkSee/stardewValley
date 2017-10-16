@@ -127,23 +127,23 @@ void tileMap::render()
 		}
 	}
 
-	//지형, 오브젝트 선택 버튼 렌더
-	Rectangle(getMemDC(), _rc1.left, _rc1.top, _rc1.right, _rc1.bottom);
-	Rectangle(getMemDC(), _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
-	Rectangle(getMemDC(), _rc3.left, _rc3.top, _rc3.right, _rc3.bottom);
-	TextOut(getMemDC(), _rc1.left + 5, _rc1.top + 5, "지형", 4);
-	TextOut(getMemDC(), _rc2.left + 5, _rc2.top + 5, "오브젝트", 8);
-	TextOut(getMemDC(), _rc3.left + 5, _rc3.top + 5, "오브젝트 지우개", 15);
-	//지형, 오브젝트 선택된 버튼 표시
-	switch (_kind)
-	{
-	case tileMap::KIND_TERRAIN:
-		EllipseMakeCenter(getMemDC(), _rc1.left + (_rc1.right - _rc1.left) / 2, _rc1.top + (_rc1.bottom - _rc1.top) / 2, 10, 10);
-		break;
-	case tileMap::KIND_OBJECT:
-		EllipseMakeCenter(getMemDC(), _rc2.left + (_rc2.right - _rc2.left) / 2, _rc2.top + (_rc2.bottom - _rc2.top) / 2, 10, 10);
-		break;
-	}
+	////지형, 오브젝트 선택 버튼 렌더
+	//Rectangle(getMemDC(), _rc1.left, _rc1.top, _rc1.right, _rc1.bottom);
+	//Rectangle(getMemDC(), _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
+	//Rectangle(getMemDC(), _rc3.left, _rc3.top, _rc3.right, _rc3.bottom);
+	//TextOut(getMemDC(), _rc1.left + 5, _rc1.top + 5, "지형", 4);
+	//TextOut(getMemDC(), _rc2.left + 5, _rc2.top + 5, "오브젝트", 8);
+	//TextOut(getMemDC(), _rc3.left + 5, _rc3.top + 5, "오브젝트 지우개", 15);
+	////지형, 오브젝트 선택된 버튼 표시
+	//switch (_kind)
+	//{
+	//case tileMap::KIND_TERRAIN:
+	//	EllipseMakeCenter(getMemDC(), _rc1.left + (_rc1.right - _rc1.left) / 2, _rc1.top + (_rc1.bottom - _rc1.top) / 2, 10, 10);
+	//	break;
+	//case tileMap::KIND_OBJECT:
+	//	EllipseMakeCenter(getMemDC(), _rc2.left + (_rc2.right - _rc2.left) / 2, _rc2.top + (_rc2.bottom - _rc2.top) / 2, 10, 10);
+	//	break;
+	//}
 }
 
 
@@ -171,47 +171,39 @@ void tileMap::save()
 		}
 	}
 
-	//for (int j = 0; j < TILEY; ++j)
+	CloseHandle(file);
+
+
+
+	//file = CreateFile("objectSave.map", GENERIC_WRITE, 0, NULL,
+	//	CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	//
+	//for (int j = 0; j < objectType::END; ++j)
 	//{
-	//	for (int i = 0; i < TILEX; ++i)
+	//	auto vObj = *TOWNWORLD->getObjectList((objectType::Enum)j);
+	//	for (int i = 0; i < vObj.size(); ++i)
 	//	{
-	//		WriteFile(file, _pTile[i][j]->getTagAddress(), sizeof(*_pTile[0][0]->getTagAddress()), &write, NULL);
+	//		auto obj = (testObject*)vObj[i];
+	//
+	//		tagObjectSave tag1;
+	//		ZeroMemory(&tag1, sizeof(tag1));
+	//
+	//		tag1.objectType = (objectType::Enum)j;
+	//		tag1.object = obj->_object;
+	//		tag1.frameX = obj->getFrameX();
+	//		tag1.frameY = obj->getFrameY();
+	//		tag1.idX = obj->getIdX();
+	//		tag1.idY = obj->getIdY();
+	//		tag1.imageKey = "tileSprite";
+	//		tag1.name = obj->getName();
+	//		tag1.pivot = obj->getPivot();
+	//		tag1.pos = obj->_pos;
+	//
+	//		WriteFile(file, &tag1, sizeof(tag1), &write, NULL);
 	//	}
 	//}
-
-	CloseHandle(file);
-
-
-
-	file = CreateFile("objectSave.map", GENERIC_WRITE, 0, NULL,
-		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-
-	for (int j = 0; j < objectType::END; ++j)
-	{
-		auto vObj = *TOWNWORLD->getObjectList((objectType::Enum)j);
-		for (int i = 0; i < vObj.size(); ++i)
-		{
-			auto obj = (testObject*)vObj[i];
-
-			tagObjectSave tag1;
-			ZeroMemory(&tag1, sizeof(tag1));
-
-			tag1.objectType = (objectType::Enum)j;
-			tag1.object = obj->_object;
-			tag1.frameX = obj->getFrameX();
-			tag1.frameY = obj->getFrameY();
-			tag1.idX = obj->getIdX();
-			tag1.idY = obj->getIdY();
-			tag1.imageKey = "tileSprite";
-			tag1.name = obj->getName();
-			tag1.pivot = obj->getPivot();
-			tag1.pos = obj->_pos;
-
-			WriteFile(file, &tag1, sizeof(tag1), &write, NULL);
-		}
-	}
-
-	CloseHandle(file);
+	//
+	//CloseHandle(file);
 }
 void tileMap::load()
 {
@@ -235,64 +227,56 @@ void tileMap::load()
 		}
 	}
 
+	CloseHandle(file);
+
+
+
+	//file = CreateFile("objectSave.map", GENERIC_READ, 0, NULL,
+	//	OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	//
+	////있던 오브젝트 다 날려버리고
+	//for (int j = 0; j < objectType::END; ++j)
+	//{
+	//	auto vObj = *TOWNWORLD->getObjectList((objectType::Enum)j);
+	//	for (int i = 0; i < vObj.size(); ++i)
+	//	{
+	//		vObj[i]->setDestroy();
+	//	}
+	//}
+	////타일이 들고있던 포인터도 다 날려버리고
 	//for (int j = 0; j < TILEY; ++j)
 	//{
 	//	for (int i = 0; i < TILEX; ++i)
 	//	{
-	//		ReadFile(file, _pTile[i][j]->getTagAddress(), sizeof(*_pTile[0][0]->getTagAddress()), &read, NULL);
+	//		_pTile[i][j]->setPObj(NULL);
 	//	}
 	//}
-
-	CloseHandle(file);
-
-
-
-	file = CreateFile("objectSave.map", GENERIC_READ, 0, NULL,
-		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-
-	//있던 오브젝트 다 날려버리고
-	for (int j = 0; j < objectType::END; ++j)
-	{
-		auto vObj = *TOWNWORLD->getObjectList((objectType::Enum)j);
-		for (int i = 0; i < vObj.size(); ++i)
-		{
-			vObj[i]->setDestroy();
-		}
-	}
-	//타일이 들고있던 포인터도 다 날려버리고
-	for (int j = 0; j < TILEY; ++j)
-	{
-		for (int i = 0; i < TILEX; ++i)
-		{
-			_pTile[i][j]->setPObj(NULL);
-		}
-	}
-
-	//읽어와서 오브젝트 생성해서 타운월드에 넣기
-	testObject* tempobj = NULL;
-	tagObjectSave tag1;
-	ZeroMemory(&tag1, sizeof(tag1));
-	while (true)
-	{
-		ReadFile(file, &tag1, sizeof(tag1), &read, NULL);
-		if (read != sizeof(tag1)) break;
-
-		tempobj = new testObject;
-		tempobj->init(tag1.name, tag1.imageKey, tag1.pos, tag1.pivot);
-		tempobj->_object = tag1.object;
-		tempobj->setFrameX(tag1.frameX);
-		tempobj->setFrameY(tag1.frameY);
-		tempobj->setIdX(tag1.idX);
-		tempobj->setIdY(tag1.idY);
-
-		TOWNWORLD->addObject(tag1.objectType, tempobj);
-
-		//타일에도 오브젝트 연결해주기
-		_pTile[tag1.idX][tag1.idY]->setPObj(tempobj);
-
-		tempobj = NULL;
-		ZeroMemory(&tag1, sizeof(tag1));
-	}
-
-	CloseHandle(file);
+	//
+	////읽어와서 오브젝트 생성해서 타운월드에 넣기
+	//testObject* tempobj = NULL;
+	//tagObjectSave tag1;
+	//ZeroMemory(&tag1, sizeof(tag1));
+	//while (true)
+	//{
+	//	ReadFile(file, &tag1, sizeof(tag1), &read, NULL);
+	//	if (read != sizeof(tag1)) break;
+	//
+	//	tempobj = new testObject;
+	//	tempobj->init(tag1.name, tag1.imageKey, tag1.pos, tag1.pivot);
+	//	tempobj->_object = tag1.object;
+	//	tempobj->setFrameX(tag1.frameX);
+	//	tempobj->setFrameY(tag1.frameY);
+	//	tempobj->setIdX(tag1.idX);
+	//	tempobj->setIdY(tag1.idY);
+	//
+	//	TOWNWORLD->addObject(tag1.objectType, tempobj);
+	//
+	//	//타일에도 오브젝트 연결해주기
+	//	_pTile[tag1.idX][tag1.idY]->setPObj(tempobj);
+	//
+	//	tempobj = NULL;
+	//	ZeroMemory(&tag1, sizeof(tag1));
+	//}
+	//
+	//CloseHandle(file);
 }

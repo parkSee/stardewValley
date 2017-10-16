@@ -73,6 +73,7 @@ void gameNode::release(void)
 void gameNode::update(void)
 {
 	KEYMANAGER->update();
+	CAMERAMANAGER->update();
 }
 
 //±×¸®±â

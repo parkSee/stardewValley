@@ -3,7 +3,7 @@
 
 HRESULT NPC::init(string npcName,char* imageKey, int indexX, int indexY)
 {
-	gameObject::init(npcName, imageKey,tagFloat(100,100),pivot::BOTTOM);
+	gameObject::init(npcName, imageKey, tagFloat(100,100), pivot::BOTTOM);
 
 	_state = STAND;
 	_npc.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
@@ -65,9 +65,7 @@ HRESULT NPC::init(string npcName,char* imageKey, int indexX, int indexY)
 
 void NPC::release()
 {
-	gameObject::release();
-
-	
+	gameObject::release();	
 }
 
 void NPC::update()
@@ -124,7 +122,7 @@ void NPC::stateUpdate(npcState::Enum state)
 	//			this->changeState(WALK_RIGHT);				//오른쪽으로 움직여라
 	//		}
 	//		break;
-
+	//
 	//	case npcState::STAND_LEFT:							//NPC가 왼쪽을 보고 서있을 때
 	//		if (KEYMANAGER->isOnceKeyDown('W'))
 	//		{
@@ -143,7 +141,7 @@ void NPC::stateUpdate(npcState::Enum state)
 	//			this->changeState(WALK_RIGHT);				//오른쪽으로 움직여라
 	//		}
 	//		break;
-
+	//
 	//	case npcState::STAND_RIGHT:							//NPC가 오른쪽을 보고 서있을 때
 	//		if (KEYMANAGER->isOnceKeyDown('W'))
 	//		{
@@ -162,12 +160,12 @@ void NPC::stateUpdate(npcState::Enum state)
 	//			this->changeState(WALK_RIGHT);				//오른쪽으로 움직여라
 	//		}
 	//		break;
-
+	//
 	//	case npcState::WALK_UP:								//위로 이동 중일때
 	//		if (KEYMANAGER->isStayKeyDown('W'))
 	//		{
 	//			_pos.y -= 5;
-
+	//
 	//			if (KEYMANAGER->isStayKeyDown('A'))
 	//			{
 	//				_pos.x -= 5;							//왼쪽 대각선 위로 이동
@@ -182,12 +180,12 @@ void NPC::stateUpdate(npcState::Enum state)
 	//			this->changeState(STAND_UP);
 	//		}
 	//		break;
-
+	//
 	//	case npcState::WALK_DOWN:							//아래로 이동 중일때
 	//		if (KEYMANAGER->isStayKeyDown('S'))
 	//		{
 	//			_pos.y += 5;
-
+	//
 	//			if (KEYMANAGER->isStayKeyDown('A'))
 	//			{
 	//				_pos.x -= 5;							//왼쪽 대각선 아래로 이동
@@ -202,12 +200,12 @@ void NPC::stateUpdate(npcState::Enum state)
 	//			this->changeState(STAND);
 	//		}
 	//		break;
-
+	//
 	//	case npcState::WALK_LEFT:							//왼쪽으로 이동 중일때
 	//		if (KEYMANAGER->isStayKeyDown('A'))
 	//		{
 	//			_pos.x -= 5;
-
+	//
 	//			if (KEYMANAGER->isStayKeyDown('W'))
 	//			{
 	//				_pos.y -= 5;							//왼쪽 대각선 위로 이동
@@ -222,12 +220,12 @@ void NPC::stateUpdate(npcState::Enum state)
 	//			this->changeState(STAND_LEFT);
 	//		}
 	//		break;
-
+	//
 	//	case npcState::WALK_RIGHT:							//오른쪽으로 이동 중일때
 	//		if (KEYMANAGER->isStayKeyDown('D'))
 	//		{
 	//			_pos.x += 5;
-
+	//
 	//			if (KEYMANAGER->isStayKeyDown('W'))
 	//			{
 	//				_pos.y -= 5;							//오른쪽 대각선 위로 이동
@@ -243,41 +241,41 @@ void NPC::stateUpdate(npcState::Enum state)
 	//		}
 	//		break;
 	//}
-	//_npc.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+	_npc.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 }
 
 void NPC::changeState(npcState::Enum state)
 {
-	/*switch (state)
-	{
-	case npcState::STAND:
-		_npc.Motion = KEYANIMANAGER->findAnimation(charstandDown);
-		break;
-	case npcState::STAND_UP:
-		_npc.Motion = KEYANIMANAGER->findAnimation(charstandUp);
-		break;
-	case npcState::STAND_LEFT:
-		_npc.Motion = KEYANIMANAGER->findAnimation(charstandLeft);
-		break;
-	case npcState::STAND_RIGHT:
-		_npc.Motion = KEYANIMANAGER->findAnimation(charstandRight);
-		break;
-	case npcState::WALK_UP:
-		_npc.Motion = KEYANIMANAGER->findAnimation(charwalkUp);
-		_npc.Motion->start();
-		break;
-	case npcState::WALK_DOWN:
-		_npc.Motion = KEYANIMANAGER->findAnimation(charwalkDown);
-		_npc.Motion->start();
-		break;
-	case npcState::WALK_LEFT:
-		_npc.Motion = KEYANIMANAGER->findAnimation(charwalkLeft);
-		_npc.Motion->start();
-		break;
-	case npcState::WALK_RIGHT:
-		_npc.Motion = KEYANIMANAGER->findAnimation(charwalkRight);
-		_npc.Motion->start();
-		break;
-	}
-	_state = state;*/
+	//switch (state)
+	//{
+	//case npcState::STAND:
+	//	_npc.Motion = KEYANIMANAGER->findAnimation(charstandDown);
+	//	break;
+	//case npcState::STAND_UP:
+	//	_npc.Motion = KEYANIMANAGER->findAnimation(charstandUp);
+	//	break;
+	//case npcState::STAND_LEFT:
+	//	_npc.Motion = KEYANIMANAGER->findAnimation(charstandLeft);
+	//	break;
+	//case npcState::STAND_RIGHT:
+	//	_npc.Motion = KEYANIMANAGER->findAnimation(charstandRight);
+	//	break;
+	//case npcState::WALK_UP:
+	//	_npc.Motion = KEYANIMANAGER->findAnimation(charwalkUp);
+	//	_npc.Motion->start();
+	//	break;
+	//case npcState::WALK_DOWN:
+	//	_npc.Motion = KEYANIMANAGER->findAnimation(charwalkDown);
+	//	_npc.Motion->start();
+	//	break;
+	//case npcState::WALK_LEFT:
+	//	_npc.Motion = KEYANIMANAGER->findAnimation(charwalkLeft);
+	//	_npc.Motion->start();
+	//	break;
+	//case npcState::WALK_RIGHT:
+	//	_npc.Motion = KEYANIMANAGER->findAnimation(charwalkRight);
+	//	_npc.Motion->start();
+	//	break;
+	//}
+	//_state = state;
 }
