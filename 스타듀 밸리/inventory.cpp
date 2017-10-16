@@ -269,7 +269,6 @@ void inventory::render()
 					//텍스트 그려주고
 					DrawText(getMemDC(), str, strlen(str), &rc, DT_LEFT | DT_VCENTER | DT_WORDBREAK | DT_EXTERNALLEADING);
 
-
 					SelectObject(getMemDC(), oldFont);
 					DeleteObject(font);
 

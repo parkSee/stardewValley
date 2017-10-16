@@ -466,6 +466,10 @@ void image::frameRender(HDC hdc, int destX, int destY)
 
 void image::frameRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY)
 {
+
+	RECT renderRC = RectMake(destX, destY, _imageInfo->frameWidth, _imageInfo->frameHeight);
+	if (renderRC.right < 0 || renderRC.left > WINSIZEX || renderRC.top > WINSIZEY || renderRC.bottom < 0)
+		return;
 	_imageInfo->currentFrameX = currentFrameX;
 	_imageInfo->currentFrameY = currentFrameY;
 
@@ -661,13 +665,14 @@ void image::alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int
 
 void image::aniRender(HDC hdc, int destX, int destY, animation* ani)
 {
-	_imageInfo->currentFrameX = ani->getFrameX();
-	_imageInfo->currentFrameY = ani->getFrameY();
 
 	//만약 렌더링 영역이 화면 밖이라면 그리지 않는다.
 	RECT renderRC = RectMake(destX, destY, ani->getFrameWidth(), ani->getFrameHeight());
 	if (renderRC.right < 0 || renderRC.left > WINSIZEX || renderRC.top > WINSIZEY || renderRC.bottom < 0)
 		return;
+
+	_imageInfo->currentFrameX = ani->getFrameX();
+	_imageInfo->currentFrameY = ani->getFrameY();
 
 	render(hdc, destX, destY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
 }
@@ -840,13 +845,13 @@ void image::scaleRender(HDC hdc, int destX, int destY, int scaledWidth, int scal
 void image::alphaScaleFrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, int scaledWidth, int scaledHeight, float alpha)
 {
 
-	_imageInfo->currentFrameX = frameX;
-	_imageInfo->currentFrameY = frameY;
-
 	//만약 렌더링 영역이 화면 밖이라면 그리지 않는다.
 	RECT renderRC = RectMake(destX, destY, scaledWidth, scaledHeight);
 	if (renderRC.right < 0 || renderRC.left > WINSIZEX || renderRC.top > WINSIZEY || renderRC.bottom < 0)
 		return;
+
+	_imageInfo->currentFrameX = frameX;
+	_imageInfo->currentFrameY = frameY;
 
 	if (_trans)
 	{
@@ -883,14 +888,14 @@ void image::alphaScaleFrameRender(HDC hdc, int destX, int destY, int frameX, int
 
 void image::frameScaleRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY, int scaledWidth, int scaledHeight)
 {
-	_imageInfo->currentFrameX = currentFrameX;
-	_imageInfo->currentFrameY = currentFrameY;
 
 	//만약 렌더링 영역이 화면 밖이라면 그리지 않는다.
 	RECT renderRC = RectMake(destX, destY, scaledWidth, scaledHeight);
 	if (renderRC.right < 0 || renderRC.left > WINSIZEX || renderRC.top > WINSIZEY || renderRC.bottom < 0)
 		return;
 
+	_imageInfo->currentFrameX = currentFrameX;
+	_imageInfo->currentFrameY = currentFrameY;
 
 	if (_trans)
 	{
