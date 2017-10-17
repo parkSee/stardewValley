@@ -183,6 +183,9 @@ void player::release()
 void player::update() 
 {
 	gameObject::update();
+
+	_indexX = (int)_pos.x / TILESIZE;			//나의 인덱스 번호 X
+	_indexY = (int)_pos.y / TILESIZE;			//나의 인덱스 번호 Y
 	
 	if (WORLDTIME->_isTimeFlow)				//UI가 켜지면 움직이지 않는다. (게임상 시간의 흐름 - UI가 켜지면 시간이 멈추면서 키와 시간만 멈춘다.)
 	{
@@ -202,7 +205,6 @@ void player::render()
 	//gameObject::render();
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 	//Rectangle(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, this->rectMakeBottom().right, this->rectMakeBottom().bottom);
-	
 	_image->scaleAniRender(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, _player.Motion, _player.Motion->getFrameWidth() * 0.7, _player.Motion->getFrameHeight() *0.7);
 
 	if (_state == STAND_TAKE && _state ==STAND_TAKE_LEFT && _state == STAND_TAKE_RIGHT &&_state == STAND_TAKE_BACK &&		//아이템을 들고있는 상태일때만 그린다.
@@ -215,44 +217,29 @@ void player::render()
 
 void player::tileCollision()
 {
-	int tileIndex[4];						//타일 검출용
-	RECT _rcCollision;						//충돌체크용 가상 렉트
-	int _tileX, _tileY;						
+	int _tileIndex[4];							//타일 검출용
+	RECT _rcCollision;							//충돌체크용 가상 렉트				
 
 	_rcCollision = _player.rc;
 
-	_tileX = _rcCollision.left / TILEX;
-	_tileY = _rcCollision.top / TILEY;
-
-	switch (_state)
-	{
-	case playerState::STAND:
-		break;
-	case playerState::STAND_RIGHT:
-		break;
-	case playerState::STAND_LEFT:
-		break;
-	case playerState::STAND_BACK:
-		break;
-	case playerState::STAND_TAKE:
-		break;
-	case playerState::STAND_TAKE_RIGHT:
-		break;
-	case playerState::STAND_TAKE_LEFT:
-		break;
-	case playerState::STAND_TAKE_BACK:
-		break;
-	case playerState::RIGHT_RUN:
-		break;
-	case playerState::LEFT_RUN:
-		break;
-	case playerState::UP_RUN:
-		break;
-	case playerState::DOWN_RUN:
-		break;
+	_map->getTile(_indexX, _indexY + 1);
+	_map->getTile(_indexX - 1, _indexY);
+	_map->getTile(_indexX, _indexY-1);
+	_map->getTile(_indexX + 1, _indexY);
 	
-	}
 
+	RECT _rc1;				//충돌 확인할 렉트
+	RECT _rc2;				// 이하동문
+
+
+	if ((IntersectRect(&_rc1, &_rcCollision, &_map->getTile(_indexX, _indexY + 1)->getRect())))
+	{
+		//if (_map->getTile(_indexX, _indexY + 1)->getPObj() )
+		//{
+			exit(0);
+			//메세지
+		//}
+	}
 }
 
 

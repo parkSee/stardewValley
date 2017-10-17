@@ -238,6 +238,7 @@ void player::stateUpdate(playerState::Enum state)
 		break;
 	}
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+	tileCollision();
 }
 
 
