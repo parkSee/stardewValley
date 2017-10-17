@@ -5,6 +5,8 @@
 #include <unordered_map>
 
 class gameObject;
+class mapToolTile;
+class tileMap;
 
 namespace objectType
 {
@@ -22,6 +24,7 @@ public:
 	typedef unordered_map<objectType::Enum, arrObject>::iterator	mIter;
 private:
 	objectContainer _totalObject;
+	tileMap* _tileMap;
 
 public:
 	HRESULT init();
@@ -42,6 +45,13 @@ public:
 	vector<gameObject*>* getObjectList(objectType::Enum type);
 	//전체 모든 오브젝트를 백터에 담아서 반환해준다.
 	vector<gameObject*> getTotalObject();
+
+	//타일맵 겟셋
+	inline tileMap* getMap() { return _tileMap; }
+	inline void setMapAddress(tileMap* address) { _tileMap = address; }
+
+	//타일 겟
+	mapToolTile* getTile(int indexX, int indexY);
 
 	townWorld() {}
 	~townWorld() {}
