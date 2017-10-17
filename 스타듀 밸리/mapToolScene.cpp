@@ -25,7 +25,7 @@ HRESULT mapToolScene::init()
 
 	CAMERAMANAGER->setMapSize(3000, 3000);
 
-	_sprite = SPRITE::OUTDOORS_SPRING;
+	_sprite = SPRITE::TILESAMPLE;
 	_mode = MODE_MAP;
 	_selectIdX = _selectIdY = 0;
 	_mapCam.x = _spriteCam.x = WINSIZEX / 2;
