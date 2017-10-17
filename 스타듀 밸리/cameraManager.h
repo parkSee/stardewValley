@@ -64,7 +64,6 @@ public:
 	HRESULT init();
 	void release();
 	void update();
-	void render();
 	void cameraMove();
 
 	//카메라의 타겟을 설정해준다. 딜레이 타임이 있다면 예약타겟에 넣어 둔다.
@@ -82,7 +81,7 @@ public:
 	//맵 사이즈 접근자
 	tagInt getMapSize() { return _mapSize; }
 	//랜더 렉트 접근자
-	RECT getRenderRc() { return _renderRc; }
+	RECT getRenderRc();
 
 	cameraManager()
 		:_cbCamera(NULL){}

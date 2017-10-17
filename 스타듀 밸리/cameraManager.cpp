@@ -86,14 +86,7 @@ void cameraManager::update()
 
 }
 
-void cameraManager::render()
-{
-	//싱글톤이라 멤디씨를 못가져오므로 따로 만들어야할듯
-	//if (_isFadeOut)
-	//{
-	//	_fadeOut->alphaRender(getMemDC(), 0, 0, _fadeAlpha);
-	//}
-}
+
 
 //카메라가 쫓아갈 타겟을 설정해준다. 만약 딜레이 타임이 있다면 예약타겟으로 설정해준다.
 void cameraManager::connectTarget(gameObject* target, float delayTime)
@@ -138,21 +131,16 @@ void cameraManager::cameraMove()
 			if (_cbCamera != NULL)_cbCamera();		
 		}
 	}
-
 	//카메라가 이동 중이 아니라면 타겟의 좌표를 따라가라 
 	if (_direction != MOVE_TO_TARGET && _direction != NULL_TARGET)
 	{
 		_pos.x = (int)_target->_pos.x;
 		_pos.y = (int)_target->_pos.y;
 	}
-	
-	//랜더 렉트 좌표 초기화
-	_renderRc = RectMakeCenter(_pos.x, _pos.y, WINSIZEX, WINSIZEY);
-
 	//카메라가 맵의 밖으로 나갔을 경우 보정해준다.
 	if (_renderRc.left < 0)
 	{
-		_pos.x -= _renderRc.left; 
+		_pos.x -= _renderRc.left;
 	}
 	if (_renderRc.right > _mapSize.x)
 	{
@@ -166,6 +154,10 @@ void cameraManager::cameraMove()
 	{
 		_pos.y -= _renderRc.bottom - _mapSize.y;
 	}
+
+	//랜더 렉트 좌표 초기화
+	_renderRc = RectMakeCenter(_pos.x, _pos.y, WINSIZEX, WINSIZEY);
+
 
 }
 
@@ -212,4 +204,36 @@ void cameraManager::fadeOut()
 	{
 		_isFadeOut = true;
 	}
+}
+
+
+RECT cameraManager::getRenderRc()
+{
+	//카메라가 맵의 밖으로 나갔을 경우 보정해준다.
+	if (_renderRc.left < 0)
+	{
+		_pos.x -= _renderRc.left;
+		//랜더 렉트 좌표 초기화
+		_renderRc = RectMakeCenter(_pos.x, _pos.y, 1300, 800);
+	}
+	else if (_renderRc.right > _mapSize.x)
+	{
+		_pos.x -= _renderRc.right - _mapSize.x;
+		//랜더 렉트 좌표 초기화
+		_renderRc = RectMakeCenter(_pos.x, _pos.y, 1300, 800);
+	}
+	else if (_renderRc.top < 0)
+	{
+		_pos.y -= _renderRc.top;
+		//랜더 렉트 좌표 초기화
+		_renderRc = RectMakeCenter(_pos.x, _pos.y, 1300, 800);
+	}
+	else if (_renderRc.bottom > _mapSize.y)
+	{
+		_pos.y -= _renderRc.bottom - _mapSize.y;
+		//랜더 렉트 좌표 초기화
+		_renderRc = RectMakeCenter(_pos.x, _pos.y, 1300, 800);
+	}
+
+	return _renderRc;
 }

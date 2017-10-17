@@ -5,7 +5,7 @@ HRESULT NPC::init(string npcName,char* imageKey, int indexX, int indexY)
 {
 	gameObject::init(npcName, imageKey, tagFloat(100,100), pivot::BOTTOM);
 
-	_state = STAND;
+	_state = npcState::STAND;
 	_npc.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 
 	_standUp = "npcStandUp_";

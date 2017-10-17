@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "mapToolTile.h"
+#include "gameObject.h"
 
 
 class tileMap : public gameNode
@@ -47,6 +48,8 @@ public:
 
 	void save();
 	void load();
+
+	void setFrameByAround(int indexX, int indexY);
 
 	inline mapToolTile* getTile(int idX, int idY) { return _pTile[idX][idY]; }
 	inline void setSelectIdX(int x) { _selectIdX = x; }
