@@ -31,7 +31,7 @@ void testObject::render()
 		break;
 	case OBJECT::TREE1:
 	{
-		img = IMAGEMANAGER->findImage("tileSprite");
+		img = IMAGEMANAGER->findImage("outdoorsSpring");
 		int tempx = 1; int tempy = 5;
 		img->frameScaleRender(getMemDC(), -CAMX + _pos.x, -CAMY + _pos.y,
 			tempx, tempy, img->getFrameWidth() * SCALE, img->getFrameHeight() * SCALE);
@@ -51,7 +51,7 @@ void testObject::render()
 	break;
 	case OBJECT::TREE2:
 	{
-		img = IMAGEMANAGER->findImage("tileSprite");
+		img = IMAGEMANAGER->findImage("outdoorsSpring");
 		int tempx = 4; int tempy = 5;
 		img->frameScaleRender(getMemDC(), -CAMX + _pos.x, -CAMY + _pos.y,
 			tempx, tempy, img->getFrameWidth() * SCALE, img->getFrameHeight() * SCALE);
@@ -71,7 +71,7 @@ void testObject::render()
 	break;
 	case OBJECT::TREE3:
 	{
-		img = IMAGEMANAGER->findImage("tileSprite");
+		img = IMAGEMANAGER->findImage("outdoorsSpring");
 		int tempx = 11; int tempy = 5;
 		img->frameScaleRender(getMemDC(), -CAMX + _pos.x, -CAMY + _pos.y,
 			tempx, tempy, img->getFrameWidth() * SCALE, img->getFrameHeight() * SCALE);
@@ -96,7 +96,7 @@ void testObject::render()
 	case OBJECT::STONE:
 		break;
 	case OBJECT::FARMLAND:
-		img = IMAGEMANAGER->findImage("tileSprite");
+		img = IMAGEMANAGER->findImage("outdoorsSpring");
 		//6,22
 		img->frameScaleRender(getMemDC(), -CAMX + _pos.x, -CAMY + _pos.y,
 			6, 22, img->getFrameWidth() * SCALE, img->getFrameHeight() * SCALE);

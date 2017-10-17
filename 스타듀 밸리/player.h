@@ -2,6 +2,7 @@
 #include "gameObject.h"
 #include "item.h"
 #include "tileMap.h"
+#include "mapToolTile.h"
 #define SPEED 4
 
 
@@ -79,7 +80,11 @@ private:
 	tagItem tem;
 	tileMap* _map;
 
+	mapToolTile* _tile1;
+	mapToolTile* _tile2;
+
 	int _indexX, _indexY;
+	RECT _rcCollision;							//충돌체크용 가상 렉트
 
 public:
 	HRESULT init(string objName, tagFloat pos);

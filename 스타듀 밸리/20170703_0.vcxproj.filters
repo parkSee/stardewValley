@@ -175,6 +175,9 @@
     <Filter Include="playGround\store">
       <UniqueIdentifier>{8d27d5aa-c77e-4793-b8de-f17a9bddfcec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\UI\energyProgress">
+      <UniqueIdentifier>{7e5aff7e-8350-448b-98ff-851300043cfd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -368,6 +371,9 @@
     </ClInclude>
     <ClInclude Include="progressBar.h">
       <Filter>2DGameFramework\progressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="eProgressBar.h">
+      <Filter>playGround\UI\energyProgress</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -595,6 +601,9 @@
     </ClCompile>
     <ClCompile Include="progressBar.cpp">
       <Filter>2DGameFramework\progressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="eProgressBar.cpp">
+      <Filter>playGround\UI\energyProgress</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
