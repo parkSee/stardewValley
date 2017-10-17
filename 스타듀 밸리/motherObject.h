@@ -3,22 +3,7 @@
 #include "dropItem.h"
 
 // 월드노드에 넣을 거양 ============================================================
-namespace OBJECT
-{
-	enum Enum
-	{
-		NONE,
-		STONE,
-		LAND,
-		WETLAND,
-		SEED,
-		TREE1_BOTTOM,
-		TREE1_TOP,
-		TREE2,
-		TREE3,
-		GRASS
-	};
-}
+
 // ===============================================================================
 
 
