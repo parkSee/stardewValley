@@ -147,7 +147,7 @@ void tileMap::render()
 }
 
 
-void tileMap::setFrameByAround(int indexX, int indexY)
+void tileMap::setTileFrameByAround(int indexX, int indexY)
 {
 	mapToolTile* tile = _pTile[indexX][indexY];
 
