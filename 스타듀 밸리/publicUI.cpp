@@ -74,21 +74,21 @@ void publicUI::update()
 	}
 
 	
-	if (KEYMANAGER->isOnceKeyDown('A'))
-	{
-		string str = "9:00 ~ 22:00까지만 영업합니다";
-		this->sendMessage(tagMessage("addGuideUI", 0, 0, 0, vector<gameObject*>(),str));
-	}
-
-	if (KEYMANAGER->isOnceKeyDown('S'))
-	{
-		this->sendMessage(tagMessage("addGetItemUI", 0, 0, 0, vector<gameObject*>(), "다금바리"));
-	}
-
-	if (KEYMANAGER->isOnceKeyDown('D'))
-	{
-		sendMessage(tagMessage("addGetItemUI", 0.0f, 0, 0, vector<gameObject*>(), "공간부족"));
-	}
+	//if (KEYMANAGER->isOnceKeyDown('A'))
+	//{
+	//	string str = "9:00 ~ 22:00까지만 영업합니다";
+	//	this->sendMessage(tagMessage("addGuideUI", 0, 0, 0, vector<gameObject*>(),str));
+	//}
+	//
+	//if (KEYMANAGER->isOnceKeyDown('S'))
+	//{
+	//	this->sendMessage(tagMessage("addGetItemUI", 0, 0, 0, vector<gameObject*>(), "다금바리"));
+	//}
+	//
+	//if (KEYMANAGER->isOnceKeyDown('D'))
+	//{
+	//	sendMessage(tagMessage("addGetItemUI", 0.0f, 0, 0, vector<gameObject*>(), "공간부족"));
+	//}
 }
 
 void publicUI::render()

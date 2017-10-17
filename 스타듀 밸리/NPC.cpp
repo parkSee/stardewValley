@@ -241,7 +241,7 @@ void NPC::stateUpdate(npcState::Enum state)
 	//		}
 	//		break;
 	//}
-	_npc.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+	//_npc.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 }
 
 void NPC::changeState(npcState::Enum state)

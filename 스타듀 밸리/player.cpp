@@ -144,6 +144,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
+	
 	tem = tagItem("도끼", "나무를 밸 수 있다", tagFloat(1000000,10000000), 1, itemType::TOOL);		//아이템 초기값
 	_item = &tem;
 
@@ -202,7 +203,7 @@ void player::render()
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 	//Rectangle(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, this->rectMakeBottom().right, this->rectMakeBottom().bottom);
 	
-	_image->aniRender(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, _player.Motion);
+	_image->scaleAniRender(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, _player.Motion, _player.Motion->getFrameWidth() * 0.7, _player.Motion->getFrameHeight() *0.7);
 
 	if (_state == STAND_TAKE && _state ==STAND_TAKE_LEFT && _state == STAND_TAKE_RIGHT &&_state == STAND_TAKE_BACK &&		//아이템을 들고있는 상태일때만 그린다.
 		_state == TAKE_UP && _state == TAKE_LEFT && _state == TAKE_RIGHT && _state == TAKE_DOWN)
@@ -212,6 +213,47 @@ void player::render()
 	
 }
 
+void player::tileCollision()
+{
+	int tileIndex[4];						//타일 검출용
+	RECT _rcCollision;						//충돌체크용 가상 렉트
+	int _tileX, _tileY;						
+
+	_rcCollision = _player.rc;
+
+	_tileX = _rcCollision.left / TILEX;
+	_tileY = _rcCollision.top / TILEY;
+
+	switch (_state)
+	{
+	case playerState::STAND:
+		break;
+	case playerState::STAND_RIGHT:
+		break;
+	case playerState::STAND_LEFT:
+		break;
+	case playerState::STAND_BACK:
+		break;
+	case playerState::STAND_TAKE:
+		break;
+	case playerState::STAND_TAKE_RIGHT:
+		break;
+	case playerState::STAND_TAKE_LEFT:
+		break;
+	case playerState::STAND_TAKE_BACK:
+		break;
+	case playerState::RIGHT_RUN:
+		break;
+	case playerState::LEFT_RUN:
+		break;
+	case playerState::UP_RUN:
+		break;
+	case playerState::DOWN_RUN:
+		break;
+	
+	}
+
+}
 
 
 
