@@ -2,7 +2,7 @@
 #include "gameObject.h"
 #include "item.h"
 #include "tileMap.h"
-#define SPEED 2
+#define SPEED 3
 
 
 namespace playerState
