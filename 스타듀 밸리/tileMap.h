@@ -55,7 +55,7 @@ public:
 	inline void setSelectIdY(int y) { _selectIdY = y; }
 
 	//≈∏¿œ ∞Ÿ
-	inline mapToolTile* getTile(int idX, int idY) { return _pTile[idX][idY]; }
+	inline mapToolTile* getTile(int indexX, int indexY) { return _pTile[indexX][indexY]; }
 
 	tileMap() {}
 	~tileMap() {}

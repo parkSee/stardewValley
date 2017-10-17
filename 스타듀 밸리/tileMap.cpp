@@ -5,8 +5,6 @@
 
 HRESULT tileMap::init()
 {
-	_selectIdX = _selectIdY = 0;
-
 	for (int j = 0; j < TILEY; ++j)
 	{
 		for (int i = 0; i < TILEX; ++i)
@@ -17,6 +15,10 @@ HRESULT tileMap::init()
 	}
 
 	load();
+
+
+	//맵툴용
+	_selectIdX = _selectIdY = 0;
 
 	_rc1 = RectMake(500, 500 + 50, 70, 40);
 	_rc2 = RectMake(_rc1.right + 30, _rc1.top, 70, 40);
@@ -31,14 +33,10 @@ void tileMap::release()
 }
 void tileMap::update()
 {
-	//for (int j = 0; j < TILEY; ++j)
-	//{
-	//	for (int i = 0; i < TILEX; ++i)
-	//	{
-	//		_pTile[i][j]->update();
-	//	}
-	//}
+	//타일은 업데이트 돌리지 말자 -----
 
+
+	//업데이트는 전부다 맵툴용이네. 나중에 맵툴씬에다 빼자
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
 	{
 		save();
@@ -126,6 +124,7 @@ void tileMap::render()
 			_pTile[i][j]->render();
 		}
 	}
+
 
 	////지형, 오브젝트 선택 버튼 렌더
 	//Rectangle(getMemDC(), _rc1.left, _rc1.top, _rc1.right, _rc1.bottom);
