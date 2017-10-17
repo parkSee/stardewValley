@@ -33,7 +33,7 @@ void townScene::update()
 {
 	TOWNWORLD->update();
 	WORLDTIME->update();
-
+	
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
 		dropItem* item = new dropItem;
@@ -46,4 +46,5 @@ void townScene::render()
 {
 	_map->render();
 	TOWNWORLD->render();
+	
 }

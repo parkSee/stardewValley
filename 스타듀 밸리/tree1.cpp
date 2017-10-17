@@ -52,8 +52,8 @@ HRESULT tree1_bottom::init(tagFloat pos)
 
 	_object = OBJECT::TREE1_BOTTOM;
 	TOWNWORLD->addObject(objectType::OBJ, this);
-	EFFECTMANAGER->addEffect("die", "나무쓰러짐.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
-	EFFECTMANAGER->addEffect("attack", "나무맞을때.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
+	EFFECTMANAGER->addEffect("die", "나무.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
+	EFFECTMANAGER->addEffect("attack", "나무.bmp", 20700, 370, 450, 370, 1.0f, 1.0f, 1.0f);
 
 	this->addCallback("axeAttack", [this](tagMessage msg)
 	{
@@ -72,10 +72,13 @@ void tree1_bottom::update()
 {
 	motherObject::update();
 
-	if (_hp > 0)
-	{
-		EFFECTMANAGER->play("attack", _pos.x, _pos.y);
-	}
+	//if (_hp > 0)
+	//{
+		if(KEYMANAGER->isOnceKeyDown(VK_F7))
+		{
+			EFFECTMANAGER->play("attack", _pos.x, _pos.y);
+		}
+	//}
 	if (_hp <= 0)
 	{
 		EFFECTMANAGER->play("die", _pos.x, _pos.y);
@@ -155,5 +158,5 @@ void tree1_top::topAttack()
 }
 void tree1_top::render()
 {
-	_image->render(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x, -CAMERAMANAGER->getRenderRc().top + _pos.y);
+	_image->render(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x - 15, -CAMERAMANAGER->getRenderRc().top + _pos.y - 80);
 }
