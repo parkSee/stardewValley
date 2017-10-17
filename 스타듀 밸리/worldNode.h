@@ -18,6 +18,45 @@ struct tagFloat
 	tagFloat(float X, float Y) { x = X; y = Y; }
 };
 
+namespace OBJECT
+{
+	enum Enum
+	{
+		NONE,
+		STONE,
+		FARMLAND,
+		SEED,
+		TREE1_BOTTOM,
+		TREE1_TOP,
+		TREE1,
+		TREE2,
+		TREE3,
+		BIG_TREE,
+		BIG_BIG_TREE,
+		GRASS,
+		END
+	};
+}
+
+namespace TERRAIN
+{
+	enum Enum
+	{
+		NONE,
+		DIRT,
+		GRASS,
+		WATER,
+		END
+	};
+}
+
+//================== 타일 =====================
+#define SCALE 4
+#define TILESIZE (16 * SCALE)
+#define TILEX 43
+#define TILEY 27
+
+
 //=================== UI ======================
 
 //콜백~
@@ -44,3 +83,6 @@ typedef std::function<void()> CBFUNCTION;
 #define CONVERSATIONUI	"conversation"		//대화창 생성 메세지 이름, msg.conversation에 넣을 대화string을 입력
 											//msg.data에 인물 번호코드 디파인을 넣어준다 ex)PIERRE || CAROLINE
 
+
+//에너지 바 콜백 함수 관련					
+#define CONSUME	"consume"					//에너지 소모 메세지 이름,msg.data에 깍을 데미지를  입력한다.

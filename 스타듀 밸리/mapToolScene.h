@@ -1,5 +1,6 @@
 #pragma once
-#include "gameNode.h"
+#include "gameNode.h"		//이미 전역화 된 헤더지만 그냥 달아주자
+#include "worldNode.h"		//이미 전역화 된 헤더지만 그냥 달아주자
 #include "mapToolNode.h"
 #include "tileMap.h"
 #include "testObject.h"

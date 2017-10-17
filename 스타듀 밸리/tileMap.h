@@ -49,11 +49,13 @@ public:
 	void save();
 	void load();
 
-	void setFrameByAround(int indexX, int indexY);
+	void setTileFrameByAround(int indexX, int indexY);
 
-	inline mapToolTile* getTile(int idX, int idY) { return _pTile[idX][idY]; }
 	inline void setSelectIdX(int x) { _selectIdX = x; }
 	inline void setSelectIdY(int y) { _selectIdY = y; }
+
+	//≈∏¿œ ∞Ÿ
+	inline mapToolTile* getTile(int indexX, int indexY) { return _pTile[indexX][indexY]; }
 
 	tileMap() {}
 	~tileMap() {}

@@ -22,19 +22,19 @@ HRESULT mapToolTile::init(int idX, int idY, TERRAIN::Enum terrain)
 	{
 	case TERRAIN::NONE:
 		//기본적으로 흙으로 설정
-		_image = IMAGEMANAGER->findImage("tileSprite");
+		_image = IMAGEMANAGER->findImage("outdoorsSpring");
 		_frameX = 3; _frameY = 6;
 		break;
 	case TERRAIN::DIRT:
-		_image = IMAGEMANAGER->findImage("tileSprite");
+		_image = IMAGEMANAGER->findImage("outdoorsSpring");
 		_frameX = 3; _frameY = 6;
 		break;
 	case TERRAIN::GRASS:
-		_image = IMAGEMANAGER->findImage("tileSprite");
+		_image = IMAGEMANAGER->findImage("outdoorsSpring");
 		_frameX = 0; _frameY = 7;
 		break;
 	case TERRAIN::WATER:
-		_image = IMAGEMANAGER->findImage("tileSprite");
+		_image = IMAGEMANAGER->findImage("outdoorsSpring");
 		_frameX = 8; _frameY = 13;
 		break;
 	}

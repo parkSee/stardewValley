@@ -6,6 +6,7 @@
 #include "publicUI.h"
 #include "inventory.h"
 #include "dropItem.h"
+#include "eProgressBar.h"
 
 void townScene::soonwooInit()
 {
@@ -28,5 +29,13 @@ void townScene::soonwooInit()
 	dropItem* item = new dropItem;
 	item->init("물뿌리개", "무엇이든 벨 수 있다.",tagFloat(300,300));
 	TOWNWORLD->addObject(objectType::ITEM, item);
+
+	eProgressBar* energy = new eProgressBar;
+	energy->init("energyBar");
+	TOWNWORLD->addObject(objectType::INTERFACE, energy);
+
+	dropItem* item2 = new dropItem;
+	item2->init("나무", "무엇이든 벨 수 있다.", tagFloat(100, 500));
+	TOWNWORLD->addObject(objectType::ITEM, item2);
 	
 }
