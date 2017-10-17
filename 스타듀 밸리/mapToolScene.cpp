@@ -357,7 +357,11 @@ void mapToolScene::selecting()
 	case SPRITE::TILESAMPLE:
 		for (int i = 0; i < _vtileSampleSelect.size(); ++i)
 		{
-			if (PtInRect(&_vtileSampleSelect[i].rc, _ptMouse))
+			POINT pt;
+			pt.x = CAMERAMANAGER->getRenderRc().left + _ptMouse.x;
+			pt.y = CAMERAMANAGER->getRenderRc().top + _ptMouse.y;
+
+			if (PtInRect(&_vtileSampleSelect[i].rc, pt))
 			{
 				_selectKind = _vtileSampleSelect[i].kind;
 				_selectTerrain = _vtileSampleSelect[i].terrain;
@@ -433,7 +437,7 @@ void mapToolScene::tileSampleToMap()
 			case mapToolScene::KIND_NONE:
 				break;
 			case mapToolScene::KIND_TERRAIN:
-				_map->getTile(idx, idy)->setTerrain(_selectTerrain);
+				_map->getTile(idx, idy)->init(idx, idy, _selectTerrain);
 				break;
 			case mapToolScene::KIND_OBJECT:
 				if (_map->getTile(idx, idy)->getPObj() != NULL)
