@@ -228,6 +228,7 @@ void loading::loadImage(string keyName, int width, int height)
 void loading::loadImage(string keyName, const char* fileName, int width, int height, BOOL trans, COLORREF transColor )
 {
 	loadItem* item = new loadItem;
+	string  a = "0";
 	item->initForImage(keyName, fileName, width, height, trans, transColor);
 
 

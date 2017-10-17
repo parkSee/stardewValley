@@ -161,9 +161,13 @@ itemType::Enum inventory::getItemType(string itemName)
 	{
 		return itemType::FOOD;
 	}
-	else if (itemName == "³ª¹«" || itemName == "µ¹")
+	else if ( itemName == "µ¹¸ÍÀÌ" || itemName == "¼®Åº")
 	{
 		return itemType::STONE;
+	}
+	else if (itemName == "³ª¹«")
+	{
+		return itemType::WOOD;
 	}
 	else if (itemName == "¹°»Ñ¸®°³" || itemName == "µµ³¢" || itemName == "player")
 	{
