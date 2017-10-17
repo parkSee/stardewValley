@@ -144,7 +144,12 @@ HRESULT player::init(string objName, tagFloat pos)
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
-	
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 80, 50, 20);
+
+
+	_indexX = (int)_pos.x / TILESIZE;			//나의 인덱스 번호 X
+	_indexY = (int)_pos.y / TILESIZE;			//나의 인덱스 번호 Y
+
 	tem = tagItem("도끼", "나무를 밸 수 있다", tagFloat(1000000,10000000), 1, itemType::TOOL);		//아이템 초기값
 	_item = &tem;
 
@@ -198,14 +203,20 @@ void player::update()
 	}
 
 	KEYANIMANAGER->update();
-	
+
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 80, 50, 20);
+	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 }
 void player::render()
 {
 	//gameObject::render();
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
-	//Rectangle(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, this->rectMakeBottom().right, this->rectMakeBottom().bottom);
 	RECT rc = CAMERAMANAGER->getRenderRc();
+	//Rectangle(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top, 
+		//this->rectMakeBottom().right - rc.left, this->rectMakeBottom().bottom - rc.top);
+	
+	Rectangle(getMemDC(), _rcCollision.left -rc.left, _rcCollision.top - rc.top, _rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
+	
 	_image->aniRender(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top, _player.Motion);
 
 	if (_state == STAND_TAKE && _state ==STAND_TAKE_LEFT && _state == STAND_TAKE_RIGHT &&_state == STAND_TAKE_BACK &&		//아이템을 들고있는 상태일때만 그린다.
@@ -218,29 +229,137 @@ void player::render()
 
 void player::tileCollision()
 {
-	int _tileIndex[4];							//타일 검출용
-	RECT _rcCollision;							//충돌체크용 가상 렉트				
+	int centerX, centerY;
 
 	_rcCollision = _player.rc;
 
-	_map->getTile(_indexX, _indexY + 1);
-	_map->getTile(_indexX - 1, _indexY);
-	_map->getTile(_indexX, _indexY-1);
-	_map->getTile(_indexX + 1, _indexY);
+	switch (_state)
+	{
+	case playerState::STAND:
+
+		centerX = TOWNWORLD->getTile(_indexX,_indexY)->getRect().left + TILESIZE / 2;
+
+		_tile1 = TOWNWORLD->getTile(_indexX, _indexY + 1);
+
+		if (centerX < _pos.x)
+		{
+			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
+		}
+		else if (centerX > _pos.x)
+		{
+			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY + 1);
+		}
+		
+		break;
+	case playerState::STAND_RIGHT:
+		break;
+	case playerState::STAND_LEFT:
+		break;
+	case playerState::STAND_BACK:
+		break;
+	case playerState::STAND_TAKE: case playerState::DOWN_RUN:
+
+		centerX = TOWNWORLD->getTile(_indexX, _indexY)->getRect().left + TILESIZE / 2;
+
+		_tile1 = TOWNWORLD->getTile(_indexX, _indexY + 1);
+
+		if (centerX < _pos.x)
+		{
+			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
+		}
+		else if (centerX > _pos.x)
+		{
+			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY + 1);
+		}
+		break;
+	case playerState::STAND_TAKE_RIGHT: case playerState::RIGHT_RUN:
+		centerY = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
+
+		_tile1 = TOWNWORLD->getTile(_indexX + 1, _indexY);
+
+		if (centerY < _pos.y)
+		{
+			_tile2 = TOWNWORLD->getTile(_indexX + 1, +_indexY - 1);
+		}
+		else if (centerY > _pos.y)
+		{
+			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY + 1);
+		}
+		break;
+	case playerState::STAND_TAKE_LEFT: case playerState::LEFT_RUN:
+		
+		centerY = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
+
+		_tile1 = TOWNWORLD->getTile(_indexX - 1, _indexY);
+
+		if (centerY < _pos.x)
+		{
+			_tile2 - TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
+		}
+		else if (centerY > _pos.x)
+		{
+			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
+		}
+		break;
+	case playerState::STAND_TAKE_BACK: case playerState::UP_RUN:
+		
+		centerX = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
+
+		_tile1 = TOWNWORLD->getTile(_indexX, _indexY - 1);
+
+		if (centerX < _pos.x)
+		{
+			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
+		}
+		else if (centerX > _pos.x)
+		{
+			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY - 1);
+		}
+		break;
+	
+	}
 	
 
 	RECT _rc1;				//충돌 확인할 렉트
 	RECT _rc2;				// 이하동문
 
-
-	if ((IntersectRect(&_rc1, &_rcCollision, &_map->getTile(_indexX, _indexY + 1)->getRect())))
+	if (IntersectRect(&_rc1, &_tile1->getRect(), &_rcCollision))
 	{
-		//if (_map->getTile(_indexX, _indexY + 1)->getPObj() )
-		//{
-			exit(0);
-			//메세지
-		//}
+		if (_tile1->getTerrain() == TERRAIN::WATER||_tile2->getTerrain() == TERRAIN::WATER )
+		{
+			switch (_state)
+			{
+			case playerState::STAND:
+				break;
+			case playerState::STAND_RIGHT:
+				break;
+			case playerState::STAND_LEFT:
+				break;
+			case playerState::STAND_BACK:
+				break;
+			case playerState::STAND_TAKE:
+				break;
+			case playerState::STAND_TAKE_RIGHT:
+				break;
+			case playerState::STAND_TAKE_LEFT:
+				break;
+			case playerState::STAND_TAKE_BACK:
+				break;
+			case playerState::RIGHT_RUN:
+				_rcCollision.right = TOWNWORLD->getTile(_indexX, _indexY)->getRect().left;
+				_rcCollision.left = _rcCollision.right;
+				_pos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;
+				break;
+			case playerState::LEFT_RUN:
+				break;
+			case playerState::UP_RUN:
+				break;
+			case playerState::DOWN_RUN:
+				break;
+			}
+		}
 	}
+
 }
 
 
