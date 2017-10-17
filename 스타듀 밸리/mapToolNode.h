@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define SCALE 2
+#define SCALE 3
 #define TILESIZE (16 * SCALE)
 #define TILEX 43
 #define TILEY 27

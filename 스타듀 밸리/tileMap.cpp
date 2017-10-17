@@ -71,8 +71,8 @@ void tileMap::update()
 			switch (_kind)
 			{
 			case tileMap::KIND_TERRAIN:
-				_pTile[idx][idy]->setTileFrameX(_selectIdX);
-				_pTile[idx][idy]->setTileFrameY(_selectIdY);
+				_pTile[idx][idy]->setFrameX(_selectIdX);
+				_pTile[idx][idy]->setFrameY(_selectIdY);
 				break;
 			case tileMap::KIND_OBJECT:
 			{
@@ -146,6 +146,31 @@ void tileMap::render()
 	//}
 }
 
+
+void tileMap::setFrameByAround(int indexX, int indexY)
+{
+	mapToolTile* tile = _pTile[indexX][indexY];
+
+	TERRAIN::Enum left, right, top, bottom;
+	left = right = top = bottom = TERRAIN::NONE;
+
+	left = _pTile[indexX - 1][indexY]->getTerrain();
+	right = _pTile[indexX + 1][indexY]->getTerrain();
+	top = _pTile[indexX][indexY - 1]->getTerrain();
+	bottom = _pTile[indexX][indexY + 1]->getTerrain();
+
+	switch (tile->getTerrain())
+	{
+	case TERRAIN::NONE:
+		break;
+	case TERRAIN::DIRT:
+		break;
+	case TERRAIN::GRASS:
+		break;
+	case TERRAIN::WATER:
+		break;
+	}
+}
 
 void tileMap::save()
 {
@@ -223,7 +248,8 @@ void tileMap::load()
 
 			ReadFile(file, &tileSave, sizeof(tileSave), &read, NULL);
 
-			_pTile[i][j]->setTerrain(tileSave.terrain);
+			_pTile[i][j]->init(i, j, tileSave.terrain);
+			//_pTile[i][j]->setTerrain(tileSave.terrain);
 		}
 	}
 
