@@ -15,8 +15,7 @@ private:
 	string _backimage;
 	
 public:
-	HRESULT init(string frontBar, string backbar, const char* frontfile, const char* backfile,
-		int x, int y, int width, int height);
+	HRESULT init(string frontBar, string backbar,int x, int y, int width, int height);
 	void release();
 	void update(int imagecenterX, int imagetopY, float current, float max);
 	void render();

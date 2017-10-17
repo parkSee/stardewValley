@@ -31,6 +31,11 @@ void loadingScene::soonwoo()
 	_loading->loadImage("timeWindow", "resource/UI/timeWindow.bmp", 288, 236, true, RGB(255, 0, 255));
 	_loading->loadFrameImage("timePointer", "resource/UI/timePointer.bmp", 672, 151,7,1, true, RGB(255, 0, 255));
 
+	//에너지 프로그래스 바 이미지
+	_loading->loadImage("energyWindow", "resource/UI/energyWindow.bmp", 48, 244, true, RGB(255, 0, 255));
+	_loading->loadImage("energyBackBar", "resource/UI/energyBackBar.bmp", 24, 183, true, RGB(255, 0, 255));
+	_loading->loadImage("energyFrontBar", "resource/UI/energyFrontBar.bmp", 24, 183, true, RGB(255, 0, 255));
+
 	//===============================인벤토리 및 아이템 이미지들================================================
 	//메인인벤토리 창 이미지
 	_loading->loadImage("mainInven1", "resource/UI/mainInven1.bmp", 859, 588, true, RGB(255, 0, 255));
@@ -47,5 +52,5 @@ void loadingScene::soonwoo()
 	//인벤토리 설명 창 이미지
 	_loading->loadImage("explainUI", "resource/UI/explainUI.bmp", 258, 214, true, RGB(255, 0, 255));
 	_loading->loadImage("공간부족", "resource/UI/fullInventory.bmp", 56, 56, true, RGB(255, 0, 255));
-	
+
 }
