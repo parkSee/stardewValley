@@ -46,7 +46,7 @@ void tree1::render()
 
 HRESULT tree1_bottom::init(tagFloat pos)
 {
-	motherObject::init("tree1_bottom", "tileSprite", pos, pivot::LEFT_TOP);
+	motherObject::init("tree1_bottom", "tree", pos, pivot::LEFT_TOP);
 
 	_hp = 15;
 
@@ -101,14 +101,14 @@ void tree1_bottom::bottomAttack()
 }
 void tree1_bottom::render()
 {
-	
+	_image->render(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x, -CAMERAMANAGER->getRenderRc().top + _pos.y);
 }
 
 //---------------------------------------------------
 
 HRESULT tree1_top::init(tagFloat pos)
 {
-	motherObject::init("tree1_top", "tileSprite", pos, pivot::LEFT_TOP);
+	motherObject::init("tree1_top", "treetop", pos, pivot::LEFT_TOP);
 
 	_hp = 15;
 
@@ -145,8 +145,8 @@ void tree1_top::update()
 
 		this->setDestroy();
 
-		//dropItem* drop = new dropItem;
-		//drop->init("tree_top","tree",);
+		dropItem* drop = new dropItem;
+		drop->init("tree_top","tree", tagFloat(_pos.x, _pos.y));
 	}
 }
 void tree1_top::topAttack()
@@ -155,5 +155,5 @@ void tree1_top::topAttack()
 }
 void tree1_top::render()
 {
-
+	_image->render(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x, -CAMERAMANAGER->getRenderRc().top + _pos.y);
 }

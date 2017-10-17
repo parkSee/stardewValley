@@ -4,21 +4,22 @@
 
 HRESULT townScene::init()
 {
-	seeyoungInit();
 	jerichoInit();
-	guenhwaInit();
-	youngjaeInit();
-	dongjinInit();
-	soonwooInit();
 
 	_map = new tileMap;
 	TOWNWORLD->setMapAddress(_map);
 	_map->init();
 
+	CAMERAMANAGER->setMapSize(3000, 3000);
+
 	CAMERAMANAGER->_pos.x = WINSIZEX / 2;
 	CAMERAMANAGER->_pos.y = WINSIZEY / 2;
 
-	CAMERAMANAGER->setMapSize(3000, 3000);
+	seeyoungInit();
+	guenhwaInit();
+	youngjaeInit();
+	dongjinInit();
+	soonwooInit();
 
 	return S_OK;
 }

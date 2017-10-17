@@ -205,7 +205,8 @@ void player::render()
 	//gameObject::render();
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 	//Rectangle(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, this->rectMakeBottom().right, this->rectMakeBottom().bottom);
-	_image->aniRender(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, _player.Motion);
+	RECT rc = CAMERAMANAGER->getRenderRc();
+	_image->aniRender(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top, _player.Motion);
 
 	if (_state == STAND_TAKE && _state ==STAND_TAKE_LEFT && _state == STAND_TAKE_RIGHT &&_state == STAND_TAKE_BACK &&		//아이템을 들고있는 상태일때만 그린다.
 		_state == TAKE_UP && _state == TAKE_LEFT && _state == TAKE_RIGHT && _state == TAKE_DOWN)
