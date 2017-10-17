@@ -145,8 +145,8 @@ void tree1_top::update()
 
 		this->setDestroy();
 
-		//dropItem* drop = new dropItem;
-		//drop->init("tree_top","tree",);
+		dropItem* drop = new dropItem;
+		drop->init("tree_top","tree", tagFloat(_pos.x, _pos.y));
 	}
 }
 void tree1_top::topAttack()

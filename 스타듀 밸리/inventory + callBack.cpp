@@ -165,7 +165,7 @@ itemType::Enum inventory::getItemType(string itemName)
 	{
 		return itemType::STONE;
 	}
-	else if (itemName == "¹°»Ñ¸®°³")
+	else if (itemName == "¹°»Ñ¸®°³" || itemName == "µµ³¢" || itemName == "player")
 	{
 		return itemType::TOOL;
 	}
