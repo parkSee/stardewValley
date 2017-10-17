@@ -213,27 +213,25 @@ RECT cameraManager::getRenderRc()
 	if (_renderRc.left < 0)
 	{
 		_pos.x -= _renderRc.left;
-		//랜더 렉트 좌표 초기화
-		_renderRc = RectMakeCenter(_pos.x, _pos.y, 1300, 800);
 	}
 	else if (_renderRc.right > _mapSize.x)
 	{
 		_pos.x -= _renderRc.right - _mapSize.x;
-		//랜더 렉트 좌표 초기화
-		_renderRc = RectMakeCenter(_pos.x, _pos.y, 1300, 800);
+
 	}
 	else if (_renderRc.top < 0)
 	{
 		_pos.y -= _renderRc.top;
-		//랜더 렉트 좌표 초기화
-		_renderRc = RectMakeCenter(_pos.x, _pos.y, 1300, 800);
+		
 	}
 	else if (_renderRc.bottom > _mapSize.y)
 	{
 		_pos.y -= _renderRc.bottom - _mapSize.y;
-		//랜더 렉트 좌표 초기화
-		_renderRc = RectMakeCenter(_pos.x, _pos.y, 1300, 800);
+		
 	}
+
+	//랜더 렉트 좌표 초기화
+	_renderRc = RectMakeCenter(_pos.x, _pos.y, WINSIZEX, WINSIZEY);
 
 	return _renderRc;
 }
