@@ -4,26 +4,23 @@
 
 HRESULT mapToolScene::init()
 {
-	////타일 크기 32
-	IMAGEMANAGER->addFrameImage("tiles", "Tile Sample 01(352,352,11,11).bmp", 352, 352, 11, 11, true, RGB(255, 0, 255));
-	//IMAGEMANAGER->addFrameImage("tileSprite", "(x2)Outdoors Spring(800,2528,25,79).bmp", 800, 2528, 25, 79, true, RGB(255, 0, 255));
-
 	//타일 크기 16
 	IMAGEMANAGER->addFrameImage("crops", "Crops(256,672,16,42).bmp", 256, 672, 16, 42, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("farmBuildings", "Farm Buildings(913,412).bmp", 913, 412, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("farmHouse", "Farmhouse(192,320,12,20).bmp", 192, 320, 12, 20, true, RGB(255, 0, 255));
-	//IMAGEMANAGER->addFrameImage("outdoorsSpring", "Outdoors Spring(400,1264,25,79) - 그림자 제거.bmp", 400, 1264, 25, 79, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tileSprite", "Outdoors Spring(400,1264,25,79).bmp", 400, 1264, 25, 79, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("outdoorsSpring", "Outdoors Spring(400,1264,25,79).bmp", 400, 1264, 25, 79, true, RGB(255, 0, 255));
+	//IMAGEMANAGER->addFrameImage("tileSprite", "Outdoors Spring(400,1264,25,79).bmp", 400, 1264, 25, 79, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("trees", "Trees(176,645).bmp", 176, 645, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("tileSample", "tileSample(960,960,60,60).bmp", 960, 960, 60, 60, true, RGB(255, 0, 255));
+
 
 	_map = new tileMap;
 	_map->init();
 
+	CAMERAMANAGER->setMapSize(3000, 3000);
+
 	CAMERAMANAGER->_pos.x = WINSIZEX / 2;
 	CAMERAMANAGER->_pos.y = WINSIZEY / 2;
-
-	CAMERAMANAGER->setMapSize(3000, 3000);
 
 	_sprite = SPRITE::TILESAMPLE;
 	_mode = MODE_MAP;
@@ -47,9 +44,6 @@ void mapToolScene::release()
 }
 void mapToolScene::update()
 {
-	vector<testObject*> vTest[10][10];
-	vTest[1][2].size();
-
 	//F1, F2 세이브 로드
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
 	{
@@ -80,6 +74,7 @@ void mapToolScene::update()
 		}
 	}
 
+	//모드에 따라 업데이트
 	switch (_mode)
 	{
 	case mapToolScene::MODE_MAP:
@@ -97,6 +92,7 @@ void mapToolScene::update()
 		break;
 	}
 
+	//카메라 이동
 	int spd = 20;
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
@@ -114,11 +110,10 @@ void mapToolScene::update()
 	{
 		CAMERAMANAGER->_pos.y += spd;
 	}
-
-	CAMERAMANAGER->update();
 }
 void mapToolScene::render()
 {
+	//모드에 따라 렌더
 	switch (_mode)
 	{
 	case mapToolScene::MODE_MAP:
@@ -143,53 +138,53 @@ void mapToolScene::render()
 		{
 		case SPRITE::OUTDOORS_SPRING:
 		{
-			img = IMAGEMANAGER->findImage("tileSprite");
-			IMAGEMANAGER->findImage("tileSprite")->scaleRender(getMemDC(),
+			img = IMAGEMANAGER->findImage("outdoorsSpring");
+			img->scaleRender(getMemDC(),
 				-CAMERAMANAGER->getRenderRc().left,
 				-CAMERAMANAGER->getRenderRc().top,
-				IMAGEMANAGER->findImage("tileSprite")->getWidth() * SCALE,
-				IMAGEMANAGER->findImage("tileSprite")->getHeight() * SCALE);
+				img->getWidth() * SCALE,
+				img->getHeight() * SCALE);
 		}
 		break;
 		case SPRITE::FARM_BUILDINGS:
 			img = IMAGEMANAGER->findImage("farmBuildings");
-			IMAGEMANAGER->findImage("farmBuildings")->scaleRender(getMemDC(),
+			img->scaleRender(getMemDC(),
 				-CAMERAMANAGER->getRenderRc().left,
 				-CAMERAMANAGER->getRenderRc().top,
-				IMAGEMANAGER->findImage("farmBuildings")->getWidth() * SCALE,
-				IMAGEMANAGER->findImage("farmBuildings")->getHeight() * SCALE);
+				img->getWidth() * SCALE,
+				img->getHeight() * SCALE);
 			break;
 		case SPRITE::FARMHOUSE:
 			img = IMAGEMANAGER->findImage("farmHouse");
-			IMAGEMANAGER->findImage("farmHouse")->scaleRender(getMemDC(),
+			img->scaleRender(getMemDC(),
 				-CAMERAMANAGER->getRenderRc().left,
 				-CAMERAMANAGER->getRenderRc().top,
-				IMAGEMANAGER->findImage("farmHouse")->getWidth() * SCALE,
-				IMAGEMANAGER->findImage("farmHouse")->getHeight() * SCALE);
+				img->getWidth() * SCALE,
+				img->getHeight() * SCALE);
 			break;
 		case SPRITE::CROPS:
 			img = IMAGEMANAGER->findImage("crops");
-			IMAGEMANAGER->findImage("crops")->scaleRender(getMemDC(),
+			img->scaleRender(getMemDC(),
 				-CAMERAMANAGER->getRenderRc().left,
 				-CAMERAMANAGER->getRenderRc().top,
-				IMAGEMANAGER->findImage("crops")->getWidth() * SCALE,
-				IMAGEMANAGER->findImage("crops")->getHeight() * SCALE);
+				img->getWidth() * SCALE,
+				img->getHeight() * SCALE);
 			break;
 		case SPRITE::TREES:
 			img = IMAGEMANAGER->findImage("trees");
-			IMAGEMANAGER->findImage("trees")->scaleRender(getMemDC(),
+			img->scaleRender(getMemDC(),
 				-CAMERAMANAGER->getRenderRc().left,
 				-CAMERAMANAGER->getRenderRc().top,
-				IMAGEMANAGER->findImage("trees")->getWidth() * SCALE,
-				IMAGEMANAGER->findImage("trees")->getHeight() * SCALE);
+				img->getWidth() * SCALE,
+				img->getHeight() * SCALE);
 			break;
 		case SPRITE::TILESAMPLE:
 			img = IMAGEMANAGER->findImage("tileSample");
-			IMAGEMANAGER->findImage("tileSample")->scaleRender(getMemDC(),
+			img->scaleRender(getMemDC(),
 				-CAMERAMANAGER->getRenderRc().left,
 				-CAMERAMANAGER->getRenderRc().top,
-				IMAGEMANAGER->findImage("tileSample")->getWidth() * SCALE,
-				IMAGEMANAGER->findImage("tileSample")->getHeight() * SCALE);
+				img->getWidth() * SCALE,
+				img->getHeight() * SCALE);
 
 			//선택하는 렉트 표시하고 이름까지 표시
 			for (int i = 0; i < _vtileSampleSelect.size(); ++i)
@@ -259,6 +254,7 @@ void mapToolScene::render()
 	break;
 	}
 }
+
 
 void mapToolScene::selecting()
 {
@@ -446,7 +442,7 @@ void mapToolScene::tileSampleToMap()
 					_map->getTile(idx, idy)->setPObj(NULL);
 				}
 				testObject* tempobj = new testObject;
-				tempobj->init("test", "tileSprite", tagFloat(idx * TILESIZE, idy * TILESIZE), pivot::LEFT_TOP);
+				tempobj->init("test", "outdoorsSpring", tagFloat(idx * TILESIZE, idy * TILESIZE), pivot::LEFT_TOP);
 				tempobj->setIdX(idx);
 				tempobj->setIdY(idy);
 				tempobj->setFrameX(1);
