@@ -2,6 +2,8 @@
 #include "townWorld.h"
 #include <algorithm>
 #include "gameObject.h"
+#include "tileMap.h"
+#include "mapToolTile.h"
 
 using namespace objectType;
 
@@ -167,4 +169,10 @@ vector<gameObject*> townWorld::getTotalObject()
 	}
 	
 	return objects;
+}
+
+//Å¸ÀÏ °Ù
+mapToolTile* townWorld::getTile(int indexX, int indexY)
+{
+	return _tileMap->getTile(indexX, indexY);
 }

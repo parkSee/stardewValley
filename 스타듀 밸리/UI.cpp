@@ -104,10 +104,7 @@ void UI::update()
 
 		this->sendMessage(tagMessage("letter", 0.0f, 0, 0, vector<gameObject*>(), str));
 	}
-	if (KEYMANAGER->isOnceKeyDown('F'))
-	{
-		_timeUI.frameX++;
-	}
+	
 	
 }
 

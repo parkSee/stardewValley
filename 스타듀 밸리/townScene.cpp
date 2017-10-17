@@ -12,6 +12,7 @@ HRESULT townScene::init()
 	soonwooInit();
 
 	_map = new tileMap;
+	TOWNWORLD->setMapAddress(_map);
 	_map->init();
 
 	CAMERAMANAGER->_pos.x = WINSIZEX / 2;

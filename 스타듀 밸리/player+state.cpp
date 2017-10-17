@@ -8,149 +8,149 @@ void player::stateUpdate(playerState::Enum state)
 	switch (_state)
 	{
 	case playerState::STAND:									//플레이어가 아래로(앞을보고) 서있을때
-		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+		if (KEYMANAGER->isOnceKeyDown('A'))
 		{
 			this->changeState(LEFT_RUN);						//왼쪽으로 이동상태로	바껴라
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+		if (KEYMANAGER->isOnceKeyDown('D'))
 		{
 			this->changeState(RIGHT_RUN);						//오른쪽으로 이동상태로 바껴라
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_UP))
+		if (KEYMANAGER->isOnceKeyDown('W'))
 		{
 			this->changeState(UP_RUN);							//위로가는 이동상태로 바껴라
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+		if (KEYMANAGER->isOnceKeyDown('S'))
 		{
 			this->changeState(DOWN_RUN);						//아래로가는 이동상태로 바껴라
 		}
 		break;
 
 	case playerState::STAND_RIGHT:								//RIGHT_STAND
-		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+		if (KEYMANAGER->isOnceKeyDown('D'))
 		{
 			this->changeState(RIGHT_RUN);						//오른쪽으로 계속가라~
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+		if (KEYMANAGER->isOnceKeyDown('A'))
 		{
 			this->changeState(LEFT_RUN);						//왼쪽으로 가는 상태로 바껴라
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_UP))
+		if (KEYMANAGER->isOnceKeyDown('W'))
 		{
 			this->changeState(UP_RUN);							//위로가는 상태로 바껴라
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+		if (KEYMANAGER->isOnceKeyDown('S'))
 		{
 			this->changeState(DOWN_RUN);						//아래로 가는 상태로 바껴라
 		}
 		break;
 	case playerState::STAND_LEFT:
-		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))					//LEFT_STAND
+		if (KEYMANAGER->isOnceKeyDown('A'))					//LEFT_STAND
 		{
 			this->changeState(LEFT_RUN);						//왼쪽으로 계속가라~
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+		if (KEYMANAGER->isOnceKeyDown('D'))
 		{
 			this->changeState(RIGHT_RUN);						//오른쪽으로 가는 상태로 바껴라
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_UP))
+		if (KEYMANAGER->isOnceKeyDown('W'))
 		{
 			this->changeState(UP_RUN);							//위로 가는 상태로 바껴라
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+		if (KEYMANAGER->isOnceKeyDown('S'))
 		{
 			this->changeState(DOWN_RUN);						//아래로 가는 상태로 바껴라
 		}
 		break;
 	case playerState::STAND_BACK:
-		if (KEYMANAGER->isOnceKeyDown(VK_UP))
+		if (KEYMANAGER->isOnceKeyDown('W'))
 		{
 			this->changeState(UP_RUN);							//계속 위로 가렴
 		}
 
-		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+		if (KEYMANAGER->isOnceKeyDown('S'))
 		{
 			this->changeState(DOWN_RUN);						//아래로 가는 상태로 바껴라				
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+		if (KEYMANAGER->isOnceKeyDown('A'))
 		{
 			this->changeState(LEFT_RUN);						//왼쪽으로 가는 상태로 바껴라
 		}
-		if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+		if (KEYMANAGER->isOnceKeyDown('D'))
 		{
 			this->changeState(RIGHT_RUN);						//오른쪽으로 가는 상태로 바껴라
 		}
 
 		break;
 	case playerState::RIGHT_RUN:								//오른쪽으로 이동중
-		if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+		if (KEYMANAGER->isStayKeyDown('D'))
 		{
-			_pos.x += 5;
-			if (KEYMANAGER->isStayKeyDown(VK_DOWN))				//오른쪽 대각선 아래로 이동
+			_pos.x += SPEED;
+			if (KEYMANAGER->isStayKeyDown('S'))				//오른쪽 대각선 아래로 이동
 			{
-				_pos.y += 5;
+				_pos.y += SPEED;
 			}
-			else if (KEYMANAGER->isStayKeyDown(VK_UP))
+			else if (KEYMANAGER->isStayKeyDown('W'))
 			{
-				_pos.y -= 5;									//오른쪽 대각선 위로 이동
+				_pos.y -= SPEED;									//오른쪽 대각선 위로 이동
 			}
 		}
-		else if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
+		else if (KEYMANAGER->isOnceKeyUp('D'))
 		{
 			this->changeState(STAND_RIGHT);
 		}
 		break;
 	case playerState::LEFT_RUN:									//왼쪽으로 이동중
-		if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER->isStayKeyDown('A'))
 		{
-			_pos.x -= 5;
-			if (KEYMANAGER->isStayKeyDown(VK_DOWN))				//왼쪽 대각선 아래로 이동
+			_pos.x -= SPEED;
+			if (KEYMANAGER->isStayKeyDown('S'))				//왼쪽 대각선 아래로 이동
 			{
-				_pos.y += 5;
+				_pos.y += SPEED;
 			}
-			else if (KEYMANAGER->isStayKeyDown(VK_UP))			//왼쪽 대각선 위로 이동
+			else if (KEYMANAGER->isStayKeyDown('W'))			//왼쪽 대각선 위로 이동
 			{
-				_pos.y -= 5;
+				_pos.y -= SPEED;
 			}
 		}
-		else if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
+		else if (KEYMANAGER->isOnceKeyUp('A'))
 		{
 			this->changeState(STAND_LEFT);
 		}
 		break;
 	case playerState::UP_RUN:									//위로 이동중
-		if (KEYMANAGER->isStayKeyDown(VK_UP))
+		if (KEYMANAGER->isStayKeyDown('W'))
 		{
-			_pos.y -= 5;
-			if (KEYMANAGER->isStayKeyDown(VK_LEFT))				//위 대각선 왼쪽으로 이동
+			_pos.y -= SPEED;
+			if (KEYMANAGER->isStayKeyDown('A'))				//위 대각선 왼쪽으로 이동
 			{
-				_pos.x -= 5;
+				_pos.x -= SPEED;
 			}
-			else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))		//위 대각선 오른쪽으로 이동
+			else if (KEYMANAGER->isStayKeyDown('D'))		//위 대각선 오른쪽으로 이동
 			{
-				_pos.x += 5;
+				_pos.x += SPEED;
 			}
 		}
-		else if (KEYMANAGER->isOnceKeyUp(VK_UP))
+		else if (KEYMANAGER->isOnceKeyUp('W'))
 		{
 			this->changeState(STAND_BACK);
 		}
 		break;
 	case playerState::DOWN_RUN:
-		if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+		if (KEYMANAGER->isStayKeyDown('S'))
 		{
-			_pos.y += 5;
+			_pos.y += SPEED;
 
-			if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+			if (KEYMANAGER->isStayKeyDown('A'))
 			{
-				_pos.x -= 5;
+				_pos.x -= SPEED;
 			}
-			else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+			else if (KEYMANAGER->isStayKeyDown('D'))
 			{
-				_pos.x += 5;
+				_pos.x += SPEED;
 			}
 		}
-		else if (KEYMANAGER->isOnceKeyUp(VK_DOWN))
+		else if (KEYMANAGER->isOnceKeyUp('S'))
 		{
 			this->changeState(STAND);
 		}
@@ -238,6 +238,7 @@ void player::stateUpdate(playerState::Enum state)
 		break;
 	}
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+	//tileCollision();
 }
 
 

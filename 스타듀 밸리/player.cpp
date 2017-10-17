@@ -144,6 +144,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
+	
 	tem = tagItem("도끼", "나무를 밸 수 있다", tagFloat(1000000,10000000), 1, itemType::TOOL);		//아이템 초기값
 	_item = &tem;
 
@@ -182,6 +183,9 @@ void player::release()
 void player::update() 
 {
 	gameObject::update();
+
+	_indexX = (int)_pos.x / TILESIZE;			//나의 인덱스 번호 X
+	_indexY = (int)_pos.y / TILESIZE;			//나의 인덱스 번호 Y
 	
 	if (WORLDTIME->_isTimeFlow)				//UI가 켜지면 움직이지 않는다. (게임상 시간의 흐름 - UI가 켜지면 시간이 멈추면서 키와 시간만 멈춘다.)
 	{
@@ -201,7 +205,6 @@ void player::render()
 	//gameObject::render();
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 	//Rectangle(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, this->rectMakeBottom().right, this->rectMakeBottom().bottom);
-	
 	_image->aniRender(getMemDC(), this->rectMakeBottom().left, this->rectMakeBottom().top, _player.Motion);
 
 	if (_state == STAND_TAKE && _state ==STAND_TAKE_LEFT && _state == STAND_TAKE_RIGHT &&_state == STAND_TAKE_BACK &&		//아이템을 들고있는 상태일때만 그린다.
@@ -212,6 +215,32 @@ void player::render()
 	
 }
 
+void player::tileCollision()
+{
+	int _tileIndex[4];							//타일 검출용
+	RECT _rcCollision;							//충돌체크용 가상 렉트				
+
+	_rcCollision = _player.rc;
+
+	_map->getTile(_indexX, _indexY + 1);
+	_map->getTile(_indexX - 1, _indexY);
+	_map->getTile(_indexX, _indexY-1);
+	_map->getTile(_indexX + 1, _indexY);
+	
+
+	RECT _rc1;				//충돌 확인할 렉트
+	RECT _rc2;				// 이하동문
+
+
+	if ((IntersectRect(&_rc1, &_rcCollision, &_map->getTile(_indexX, _indexY + 1)->getRect())))
+	{
+		//if (_map->getTile(_indexX, _indexY + 1)->getPObj() )
+		//{
+			exit(0);
+			//메세지
+		//}
+	}
+}
 
 
 

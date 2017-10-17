@@ -1,6 +1,9 @@
 #pragma once
 #include "gameObject.h"
 #include "item.h"
+#include "tileMap.h"
+#define SPEED 3
+
 
 namespace playerState
 {
@@ -53,8 +56,8 @@ namespace playerState
 struct tagPlayer
 {
 	animation* Motion;
-	
 	RECT rc;
+	int now;
 };
 
 struct tagMyItem			//아이템은 구조체로 되어있기 때문에 이미지와 좌표를 가져와서 플레이어 쪽에서 그려준다.
@@ -73,8 +76,10 @@ private:
 	tagPlayer _player;
 	tagMyItem _myItem;
 	tagItem* _item;
-
 	tagItem tem;
+	tileMap* _map;
+
+	int _indexX, _indexY;
 
 public:
 	HRESULT init(string objName, tagFloat pos);
@@ -89,7 +94,7 @@ public:
 	void changeTargetItem(tagMessage msg);
 	RECT rectMakeBottom();
 
-
+	void tileCollision();
 
 	enum playerState::Enum getPlayerState(void) { return _state; }
 	void setPlayerState(playerState::Enum state) { _state = state; }

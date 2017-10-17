@@ -5,54 +5,54 @@ HRESULT NPC::init(string npcName,char* imageKey, int indexX, int indexY)
 {
 	gameObject::init(npcName, imageKey, tagFloat(100,100), pivot::BOTTOM);
 
-	_state = STAND;
+	_state = npcState::STAND;
 	_npc.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 
 	_standUp = "npcStandUp_";
 	charstandUp;
-	sprintf(charstandUp, "npcStandUp_%s", npcName);
+	sprintf(charstandUp, "npcStandUp_%s", npcName.c_str());
 	int standUp[]{ 8 };
 	KEYANIMANAGER->addArrayFrameAnimation((string)charstandUp, imageKey, standUp, 1, 0, false);
 
 	_standDown = "npcStandDown_";
 	charstandDown;
-	sprintf(charstandDown, "npcStandDown_%s", npcName);
+	sprintf(charstandDown, "npcStandDown_%s", npcName.c_str());
 	int standDown[]{ 0 };
 	KEYANIMANAGER->addArrayFrameAnimation((string)charstandDown, imageKey, standDown, 1, 0, false);
 	
 	_standLeft = "npcStandLeft_";
 	charstandLeft;
-	sprintf(charstandLeft, "npcStandLeft_%s", npcName);
+	sprintf(charstandLeft, "npcStandLeft_%s", npcName.c_str());
 	int standLeft[]{ 4 };
 	KEYANIMANAGER->addArrayFrameAnimation((string)charstandLeft, imageKey, standLeft, 1, 0, false);
 	
 	_standRight = "npcStandRight_";
 	charstandRight;
-	sprintf(charstandRight, "npcStandRight_%s", npcName);
+	sprintf(charstandRight, "npcStandRight_%s", npcName.c_str());
 	int standRight[]{ 12 };
 	KEYANIMANAGER->addArrayFrameAnimation(charstandRight, imageKey, standRight, 1, 0, false);
 	
 	_walkUp = "npcWalkUp_";
 	charwalkUp;
-	sprintf(charwalkUp, "npcWalkUp_%s", npcName);
+	sprintf(charwalkUp, "npcWalkUp_%s", npcName.c_str());
 	int walkUp[]{ 8,9,10,11 };
 	KEYANIMANAGER->addArrayFrameAnimation((string)charwalkUp, imageKey, walkUp, 4, 10, true);
 	
 	_walkDown = "npcWalkDown_";
 	charwalkDown;
-	sprintf(charwalkDown, "npcWalkDown_%s", npcName);
+	sprintf(charwalkDown, "npcWalkDown_%s", npcName.c_str());
 	int walkDown[]{ 0,1,2,3 };
 	KEYANIMANAGER->addArrayFrameAnimation((string)charwalkDown, imageKey, walkDown, 4, 10, true);
 	
 	_walkLeft = "npcWalkLeft_";
 	charwalkLeft;
-	sprintf(charwalkLeft, "npcWalkLeft_%s", npcName);
+	sprintf(charwalkLeft, "npcWalkLeft_%s", npcName.c_str());
 	int walkLeft[]{ 4,5,6,7 };
 	KEYANIMANAGER->addArrayFrameAnimation((string)charwalkLeft, imageKey, walkLeft, 4, 10, true);
 	
 	_walkRight = "npcWalkRight_";
 	char charwalkRight[sizeof(_walkRight)];
-	sprintf(charwalkRight, "npcWalkRight_%s", npcName);
+	sprintf(charwalkRight, "npcWalkRight_%s", npcName.c_str());
 	int walkRight[]{ 12,13,14,15 };
 	KEYANIMANAGER->addArrayFrameAnimation((string)charwalkRight, imageKey, walkRight, 4, 10, true);
 
@@ -241,7 +241,7 @@ void NPC::stateUpdate(npcState::Enum state)
 	//		}
 	//		break;
 	//}
-	_npc.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+	//_npc.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 }
 
 void NPC::changeState(npcState::Enum state)

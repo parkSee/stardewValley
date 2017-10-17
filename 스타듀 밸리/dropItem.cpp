@@ -78,5 +78,6 @@ void dropItem::update()
 }
 void dropItem::render()
 {
-	_image->scaleRender(getMemDC(), _rc.left, _rc.top, _image->getWidth(), _image->getHeight());
+	RECT rc = CAMERAMANAGER->getRenderRc();
+	_image->scaleRender(getMemDC(), _rc.left-rc.left, _rc.top-rc.top, _image->getWidth(), _image->getHeight());
 }
