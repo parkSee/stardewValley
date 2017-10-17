@@ -31,7 +31,11 @@ void townScene::soonwooInit()
 	TOWNWORLD->addObject(objectType::ITEM, item);
 
 	eProgressBar* energy = new eProgressBar;
-	energy->init();
+	energy->init("energyBar");
 	TOWNWORLD->addObject(objectType::INTERFACE, energy);
+
+	dropItem* item2 = new dropItem;
+	item2->init("나무", "무엇이든 벨 수 있다.", tagFloat(100, 500));
+	TOWNWORLD->addObject(objectType::ITEM, item2);
 	
 }

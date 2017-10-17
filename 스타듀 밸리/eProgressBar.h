@@ -17,10 +17,12 @@ private:
 
 	float					_playerEnergy;			//증가 할수록 피가 감소한다.
 public:
-	HRESULT init();
+	HRESULT init(string name);
 	void release();
 	void update();
 	void render();
+
+	void consume(tagMessage msg);
 
 	eProgressBar() {}
 	 ~eProgressBar() {}
