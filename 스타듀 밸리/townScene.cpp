@@ -40,11 +40,28 @@ void townScene::update()
 		item->init("물뿌리개", "무엇이든 벨 수 있다.", tagFloat(_ptMouse.x, _ptMouse.y));
 		TOWNWORLD->addObject(objectType::ITEM, item);
 	}
+
+	//에이스타 실험용
+	if (KEYMANAGER->isOnceKeyDown('N'))
+	{
+		int idx = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
+		int idy = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
+		_vRoute = TOWNWORLD->getMap()->getShortestAStar(2, 3, idx,idy, true);
+	}
 }
 
 void townScene::render()
 {
 	_map->render();
 	TOWNWORLD->render();
-	
+
+	//에이스타 실험용
+	for (int i = 0; i < _vRoute.size(); ++i)
+	{
+		RECT rc = _vRoute[i]->getRect();
+		EllipseMakeCenter(getMemDC(),
+			-CAMERAMANAGER->getRenderRc().left + rc.left + (rc.right - rc.left) / 2,
+			-CAMERAMANAGER->getRenderRc().top + rc.top + (rc.bottom - rc.top) / 2,
+			10, 10);
+	}
 }

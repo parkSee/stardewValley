@@ -9,6 +9,9 @@ HRESULT mapToolTile::init(int idX, int idY, TERRAIN::Enum terrain)
 	_indexY = idY;
 	_terrain = terrain;
 	_rc = RectMake(idX * TILESIZE, idY * TILESIZE, TILESIZE, TILESIZE);
+	//에이스타 상속하면서 _pos 사용
+	_pos.x = idX * TILESIZE + TILESIZE / 2;
+	_pos.y = idY * TILESIZE + TILESIZE / 2;
 
 	_pObj = NULL;
 

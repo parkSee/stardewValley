@@ -1,64 +1,66 @@
 #pragma once
 #include "gameObject.h"
+#include "mapToolTile.h"
 
-namespace npcState
+namespace npcDirection
 {
 	enum Enum
 	{
-		STAND,
+		STAND_DOWN,
 		STAND_UP,
 		STAND_LEFT,
 		STAND_RIGHT,
-		WALK_UP,
-		WALK_DOWN,
-		WALK_LEFT,
-		WALK_RIGHT,
+		MOVE_DOWN,
+		MOVE_UP,
+		MOVE_RIGHT,
+		MOVE_LEFT
 	};
 }
 
-struct tagNPC
+struct tagKeyAniString
 {
-	animation* Motion;
-	RECT rc;
+	string standDown;
+	string standUp;
+	string standRight;
+	string standLeft;
+	string moveDown;
+	string moveUp;
+	string moveRight;
+	string moveLeft;
 };
 
-//using namespace npcState;
-
-class NPC : public gameObject
+class npc : public gameObject
 {
 private:
-	npcState::Enum _state;
-	tagNPC _npc;
-	int _indexX;
-	int _indexY;
+	npcDirection::Enum		_direction;
+	RECT					_collisionRc;
+	
+	float					_scale;
+	
+	vector<gameObject*>		_vMoveTile;
 
-	char charstandUp[sizeof("npcStandUp_")];
-	char charstandDown[sizeof("npcStandDown_")];
-	char charstandLeft[sizeof("npcStandLeft_")];
-	char charstandRight[sizeof("npcStandRight_")];
-	char charwalkUp[sizeof("npcWalkUp_")];
-	char charwalkDown[sizeof("npcWalkDown_")];
-	char charwalkLeft[sizeof("npcWalkLeft_")];
-	char charwalkRight[sizeof("npcWalkRight_")];
+	bool					_isMove;
 
-	string _standUp;
-	string _standDown;
-	string _standLeft;
-	string _standRight;
-	string _walkUp;
-	string _walkDown;
-	string _walkLeft;
-	string _walkRight;
+private:
+	tagKeyAniString			_keyAniString;
 
 public:
-	HRESULT init(string npcName,char* imageName, int indexX, int indexY);
+	virtual HRESULT init(string name, string imageKey,tagFloat pos);
 	virtual void release();
 	virtual void update();
 	virtual void render();
+	RECT getRect();
 
-	virtual void stateUpdate(npcState::Enum state);
-	void changeState(npcState::Enum state);
+	void move();
 
-	NPC() {}
-	~NPC() {}
+	void changeState(npcDirection::Enum direction);
+	void stateUpdate();
+
+	void setMoveRoute(tagMessage msg);
+	
+	void keyAniInit(string name , string imageKey);
+
+	npc() {}
+	virtual ~npc() {}
 };
+

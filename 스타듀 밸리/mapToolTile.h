@@ -1,17 +1,16 @@
 #pragma once		//stdafx.h -> townWorld.h -> worldNode.h, gameObject 클래스 전방선언
-#include "gameNode.h"
+#include "gameObject.h"
 #include "worldNode.h"
 #include "mapToolNode.h"
 
-//class gameObject;
 
-
-class mapToolTile : public gameNode		//게임오브젝트 상속을 없애보았다
+class mapToolTile : public gameObject		//다시 게임오브젝트를 상속해보았다
 {
 private:
 	int				_indexX, _indexY;
 	TERRAIN::Enum	_terrain;
 	RECT			_rc;
+	//게임오브젝트 상속받으면서 tagFloat _pos 사용함
 
 	gameObject*		_pObj;
 
@@ -49,6 +48,9 @@ public:
 	inline void setPObj(gameObject* pObj) { _pObj = pObj; }
 	inline void setFrameX(int x) { _frameX = x; }
 	inline void setFrameY(int y) { _frameY = y; }
+
+	//에이스타
+	inline bool getIsUnmovable() { return false; }
 
 
 	mapToolTile() {}

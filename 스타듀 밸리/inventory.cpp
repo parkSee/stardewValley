@@ -221,7 +221,7 @@ void inventory::render()
 					PROOF_QUALITY, DEFAULT_PITCH | FF_SWISS, TEXT("HY엽서L"));
 				HFONT oldFont = (HFONT)SelectObject(getMemDC(), font);
 				//텍스트 색을 설정해준다.
-				SetTextColor(getMemDC(), RGB(10, 0, 0));
+				SetTextColor(getMemDC(), RGB(86, 22, 12));
 				//텍스트 그려주고
 				DrawText(getMemDC(), str, strlen(str), &rc, DT_LEFT | DT_VCENTER | DT_WORDBREAK | DT_EXTERNALLEADING);
 

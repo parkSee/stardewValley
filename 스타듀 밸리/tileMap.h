@@ -51,6 +51,11 @@ public:
 
 	void setTileFrameByAround(int indexX, int indexY);
 
+	//에이스타
+	int getHeuristic(int idX1, int idY1, int idX2, int idY2, bool eightDirection);
+	vector<mapToolTile*> getShortestAStar(int startIdX, int startIdY, int endIdX, int endIdY, bool eightDirection);
+
+
 	inline void setSelectIdX(int x) { _selectIdX = x; }
 	inline void setSelectIdY(int y) { _selectIdY = y; }
 
