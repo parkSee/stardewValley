@@ -2,6 +2,7 @@
 #include "motherObject.h"
 #include "dropItem.h"
 
+
 HRESULT motherObject::init(string objName, string imageKey, tagFloat pos, pivot::Enum pivot)
 {
 	gameObject::init(objName, imageKey, pos, pivot);

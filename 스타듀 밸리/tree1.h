@@ -42,5 +42,7 @@ public:
 	virtual void update();
 	virtual void render();
 
+	virtual void setDestroy(float time = 0.0f);
+
 	void topAttack();
 };
