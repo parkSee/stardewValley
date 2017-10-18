@@ -605,5 +605,8 @@
     <ClCompile Include="eProgressBar.cpp">
       <Filter>playGround\UI\energyProgress</Filter>
     </ClCompile>
+    <ClCompile Include="tileMap + AStar.cpp">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

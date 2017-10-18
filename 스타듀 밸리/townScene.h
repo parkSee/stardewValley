@@ -22,6 +22,9 @@ public:
 	void youngjaeInit();
 	void dongjinInit();
 
+	//에이스타 실험용
+	vector<mapToolTile*> _vRoute;
+
 	townScene() 
 	: a(false){}
 	~townScene() {}
