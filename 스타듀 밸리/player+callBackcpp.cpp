@@ -18,7 +18,7 @@ void player::lbuttonClick(tagMessage msg)
 			{
 			case playerState::STAND: case playerState::DOWN_RUN:
 				this->changeState(AXE_DOWN);
-
+				//this->sendMessage()
 				break;
 			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
 				this->changeState(AXE_RIGHT);

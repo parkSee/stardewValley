@@ -94,6 +94,7 @@ void player::stateUpdate(playerState::Enum state)
 			{
 				_pos.y -= SPEED;									//오른쪽 대각선 위로 이동
 			}
+			//tileCollision();
 		}
 		else if (KEYMANAGER->isOnceKeyUp('D'))
 		{
@@ -237,7 +238,9 @@ void player::stateUpdate(playerState::Enum state)
 		_myItem.y = _pos.y -= 100;
 		break;
 	}
-	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 80, 50, 20);
+
 	tileCollision();
 }
 

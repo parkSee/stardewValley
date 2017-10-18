@@ -146,12 +146,18 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 80, 50, 20);
 
+	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;
+	_tilePos.y = _rcCollision.bottom;
 
-	_indexX = (int)_pos.x / TILESIZE;			//나의 인덱스 번호 X
-	_indexY = (int)_pos.y / TILESIZE;			//나의 인덱스 번호 Y
+	_indexX = (int)(_tilePos.x / (TILESIZE));
+	_indexY = (int)(_tilePos.y / (TILESIZE));
+
 
 	tem = tagItem("도끼", "나무를 밸 수 있다", tagFloat(1000000,10000000), 1, itemType::TOOL);		//아이템 초기값
 	_item = &tem;
+
+	_tile1 = NULL;
+	_tile2 = NULL;
 
 	//콜백
 	this->addCallback("changeState", [this](tagMessage msg)
@@ -189,9 +195,13 @@ void player::update()
 {
 	gameObject::update();
 
-	_indexX = (int)_pos.x / TILESIZE;			//나의 인덱스 번호 X
-	_indexY = (int)_pos.y / TILESIZE;			//나의 인덱스 번호 Y
-	
+	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;
+	_tilePos.y = _rcCollision.bottom;
+
+	_indexX = (int)(_tilePos.x / (TILESIZE));			//나의 인덱스 번호 X
+	_indexY = (int)(_tilePos.y / (TILESIZE));		//나의 인덱스 번호 Y
+
+
 	if (WORLDTIME->_isTimeFlow)				//UI가 켜지면 움직이지 않는다. (게임상 시간의 흐름 - UI가 켜지면 시간이 멈추면서 키와 시간만 멈춘다.)
 	{
 		this->stateUpdate(_state);
@@ -205,7 +215,8 @@ void player::update()
 	KEYANIMANAGER->update();
 
 	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 80, 50, 20);
-	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+	_player.rc = RectMake(_tilePos.x, _tilePos.y, _image->getFrameWidth(), _image->getFrameHeight());
+
 }
 void player::render()
 {
@@ -213,7 +224,7 @@ void player::render()
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 	RECT rc = CAMERAMANAGER->getRenderRc();
 	//Rectangle(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top, 
-		//this->rectMakeBottom().right - rc.left, this->rectMakeBottom().bottom - rc.top);
+	//	this->rectMakeBottom().right - rc.left, this->rectMakeBottom().bottom - rc.top);
 	
 	Rectangle(getMemDC(), _rcCollision.left -rc.left, _rcCollision.top - rc.top, _rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
 	
@@ -225,13 +236,33 @@ void player::render()
 		_myItem.img->render(getMemDC(), _myItem.x, _myItem.y);										
 	}
 	
+	if (_tile1 != NULL && _tile2 != NULL)
+	{
+		RECT rc1 = _tile1->getRect();
+		RECT rc2 = _tile2->getRect();
+
+		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
+		HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), brush);
+
+		Rectangle(getMemDC(), rc1.left - rc.left, rc1.top-rc.top, rc1.right-rc.left, rc1.bottom-rc.top);
+		Rectangle(getMemDC(), rc2.left - rc.left, rc2.top - rc.top, rc2.right - rc.left, rc2.bottom - rc.top);
+
+		SelectObject(getMemDC(), oldBrush);
+		DeleteObject(brush);
+
+		char str[100];
+		sprintf(str, "%d,%d", _indexX, _indexY);
+		TextOut(getMemDC(), 10, 50, str, strlen(str));
+	}
+
+	RectangleMakeCenter(getMemDC(), _pos.x - rc.left, _pos.y - rc.top, 30, 30);
+
 }
 
 void player::tileCollision()
 {
 	int centerX, centerY;
 
-	_rcCollision = _player.rc;
 
 	switch (_state)
 	{
@@ -241,11 +272,11 @@ void player::tileCollision()
 
 		_tile1 = TOWNWORLD->getTile(_indexX, _indexY + 1);
 
-		if (centerX < _pos.x)
+		if (centerX < _tilePos.x)
 		{
 			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
 		}
-		else if (centerX > _pos.x)
+		else if (centerX > _tilePos.x)
 		{
 			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY + 1);
 		}
@@ -263,11 +294,11 @@ void player::tileCollision()
 
 		_tile1 = TOWNWORLD->getTile(_indexX, _indexY + 1);
 
-		if (centerX < _pos.x)
+		if (centerX < _tilePos.x)
 		{
 			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
 		}
-		else if (centerX > _pos.x)
+		else if (centerX > _tilePos.x)
 		{
 			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY + 1);
 		}
@@ -277,13 +308,13 @@ void player::tileCollision()
 
 		_tile1 = TOWNWORLD->getTile(_indexX + 1, _indexY);
 
-		if (centerY < _pos.y)
+		if (centerY < _tilePos.y)
 		{
-			_tile2 = TOWNWORLD->getTile(_indexX + 1, +_indexY - 1);
+			_tile2 = TOWNWORLD->getTile(_indexX + 1, +_indexY + 1);
 		}
-		else if (centerY > _pos.y)
+		else if (centerY > _tilePos.y)
 		{
-			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY + 1);
+			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY - 1);
 		}
 		break;
 	case playerState::STAND_TAKE_LEFT: case playerState::LEFT_RUN:
@@ -292,11 +323,11 @@ void player::tileCollision()
 
 		_tile1 = TOWNWORLD->getTile(_indexX - 1, _indexY);
 
-		if (centerY < _pos.x)
+		if (centerY < _tilePos.x)
 		{
 			_tile2 - TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
 		}
-		else if (centerY > _pos.x)
+		else if (centerY > _tilePos.x)
 		{
 			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
 		}
@@ -307,11 +338,11 @@ void player::tileCollision()
 
 		_tile1 = TOWNWORLD->getTile(_indexX, _indexY - 1);
 
-		if (centerX < _pos.x)
+		if (centerX < _tilePos.x)
 		{
 			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
 		}
-		else if (centerX > _pos.x)
+		else if (centerX > _tilePos.x)
 		{
 			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY - 1);
 		}
@@ -322,40 +353,139 @@ void player::tileCollision()
 
 	RECT _rc1;				//충돌 확인할 렉트
 	RECT _rc2;				// 이하동문
-
+	
 	if (IntersectRect(&_rc1, &_tile1->getRect(), &_rcCollision))
 	{
-		if (_tile1->getTerrain() == TERRAIN::WATER||_tile2->getTerrain() == TERRAIN::WATER )
-		{
-			switch (_state)
+			if (_tile1->getTerrain() == TERRAIN::WATER)
 			{
-			case playerState::STAND:
-				break;
-			case playerState::STAND_RIGHT:
-				break;
-			case playerState::STAND_LEFT:
-				break;
-			case playerState::STAND_BACK:
-				break;
-			case playerState::STAND_TAKE:
-				break;
-			case playerState::STAND_TAKE_RIGHT:
-				break;
-			case playerState::STAND_TAKE_LEFT:
-				break;
-			case playerState::STAND_TAKE_BACK:
-				break;
-			case playerState::RIGHT_RUN:
-				_rcCollision.right = TOWNWORLD->getTile(_indexX, _indexY)->getRect().left;
-				_rcCollision.left = _rcCollision.right;
-				_pos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;
-				break;
-			case playerState::LEFT_RUN:
-				break;
-			case playerState::UP_RUN:
-				break;
-			case playerState::DOWN_RUN:
-				break;
+				switch (_state)
+				{
+				case playerState::STAND:
+					break;
+				case playerState::STAND_RIGHT:
+
+					break;
+				case playerState::STAND_LEFT:
+					break;
+				case playerState::STAND_BACK:
+					break;
+				case playerState::TAKE_UP: case playerState::UP_RUN:
+					_pos.y += SPEED;
+					if (KEYMANAGER->isStayKeyDown('A'))
+					{
+						_pos.x += SPEED;
+					}
+					else if (KEYMANAGER->isStayKeyDown('D'))
+					{
+						_pos.x -= SPEED;
+					}
+					break;
+				case playerState::TAKE_RIGHT: case playerState::RIGHT_RUN:
+					_pos.x -= SPEED;
+					if (KEYMANAGER->isStayKeyDown('S'))
+					{
+						_pos.y -= SPEED;
+					}
+					else if (KEYMANAGER->isStayKeyDown('W'))
+					{
+						_pos.y += SPEED;
+					}
+					break;
+				case playerState::TAKE_LEFT: case playerState::LEFT_RUN:
+					_pos.x += SPEED;
+					if (KEYMANAGER->isStayKeyDown('S'))
+					{
+						_pos.y -= SPEED;
+					}
+					else if (KEYMANAGER->isStayKeyDown('W'))
+					{
+						_pos.y += SPEED;
+					}
+					break;
+				case playerState::TAKE_DOWN: case playerState::DOWN_RUN:
+					_pos.y -= SPEED;
+					if (KEYMANAGER->isStayKeyDown('A'))
+					{
+						_pos.x += SPEED;
+					}
+					else if (KEYMANAGER->isStayKeyDown('D'))
+					{
+						_pos.x -= SPEED;
+					}
+					break;
+				}
+		}
+	}
+
+	if (IntersectRect(&_rc2, &_tile2->getRect(), &_rcCollision))
+	{
+		if(_tile1->getTerrain() != TERRAIN::WATER)
+		{ 
+			if (_tile2->getTerrain() == TERRAIN::WATER)
+			{
+				switch (_state)
+				{
+				case playerState::STAND:
+					break;
+				case playerState::STAND_RIGHT:
+					break;
+				case playerState::STAND_LEFT:
+					break;
+				case playerState::STAND_BACK:
+					break;
+				case playerState::TAKE_UP: case playerState::UP_RUN:
+
+					_pos.y += SPEED;
+
+					if (KEYMANAGER->isStayKeyDown('A'))
+					{
+						_pos.x += SPEED;
+					}
+					else if (KEYMANAGER->isStayKeyDown('D'))
+					{
+						_pos.x -= SPEED;
+					}
+					break;
+				case playerState::TAKE_RIGHT: case playerState::RIGHT_RUN:
+
+					_pos.x -= SPEED;
+
+					if (KEYMANAGER->isStayKeyDown('S'))
+					{
+						_pos.y -= SPEED;
+					}
+					else if (KEYMANAGER->isStayKeyDown('W'))
+					{
+						_pos.y += SPEED;
+					}
+					break;
+				case playerState::TAKE_LEFT: case playerState::LEFT_RUN:
+
+					_pos.x += SPEED;
+
+					if (KEYMANAGER->isStayKeyDown('S'))
+					{
+						_pos.y -= SPEED;
+					}
+					else if (KEYMANAGER->isStayKeyDown('W'))
+					{
+						_pos.y += SPEED;
+					}
+					break;
+				case playerState::TAKE_DOWN: case playerState::DOWN_RUN:
+
+					_pos.y -= SPEED;
+
+					if (KEYMANAGER->isStayKeyDown('A'))
+					{
+						_pos.x += SPEED;
+					}
+					else if (KEYMANAGER->isStayKeyDown('D'))
+					{
+						_pos.x -= SPEED;
+					}
+					break;
+				}
 			}
 		}
 	}
