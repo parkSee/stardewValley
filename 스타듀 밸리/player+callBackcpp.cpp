@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "player.h"
 #include "inventory.h"
+#include "eProgressBar.h"
 
 
 void player::eating()
@@ -14,11 +15,12 @@ void player::lbuttonClick(tagMessage msg)
 	{
 		if (_item->name == "µµ³¢")
 		{
+			eProgressBar* energe = (eProgressBar*)TOWNWORLD->findObject(objectType::INTERFACE, "energyBar");
+			energe->sendMessage(tagMessage("consume", 0.0f, 1));
 			switch (_state)
 			{
 			case playerState::STAND: case playerState::DOWN_RUN:
 				this->changeState(AXE_DOWN);
-				//this->sendMessage()
 				break;
 			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
 				this->changeState(AXE_RIGHT);
@@ -160,9 +162,11 @@ RECT player::rectMakeBottom()
 	RECT rc;
 
 	rc.left = _pos.x - _image->getFrameWidth() / 2;
-	rc.right = _pos.x + _image->getFrameWidth() / 2;
-	rc.top = _pos.y - _image->getFrameHeight();
+	rc.right = _pos.x + _image->getFrameWidth() / 2 ;
+	rc.top = _pos.y - _image->getFrameHeight()/2 - 70;
 	rc.bottom = _pos.y;
 
 	return rc;
 }
+
+
