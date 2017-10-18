@@ -144,7 +144,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y, 50, 20);
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 5, 50, 20);
 
 	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;
 	_tilePos.y = _rcCollision.bottom;
@@ -217,26 +217,32 @@ void player::update()
 
 	KEYANIMANAGER->update();
 
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y, 50, 20);
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 5, 50, 20);
 	_player.rc = RectMake(_tilePos.x, _tilePos.y, _image->getFrameWidth(), _image->getFrameHeight());
 
 }
 void player::render()
 {
 	//gameObject::render();
-	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
+	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);				//실제 플레이어 렉트
 	RECT rc = CAMERAMANAGER->getRenderRc();
-	//Rectangle(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top, 
+	//Rectangle(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top,			//_pos 좌표 보정렉트 및 플레이어 현 렉트
 	//	this->rectMakeBottom().right - rc.left, this->rectMakeBottom().bottom - rc.top);
 
-	Rectangle(getMemDC(), _rcCollision.left - rc.left, _rcCollision.top - rc.top, _rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
+	RectangleMakeCenter(getMemDC(), _pos.x - rc.left, _pos.y - rc.top, 30, 30);									//_pos 좌표
 
-	_image->aniRender(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top, _player.Motion);
+	Rectangle(getMemDC(), _rcCollision.left - rc.left, _rcCollision.top - rc.top,								//타일 충돌렉트
+		_rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
 
-	if (_state == STAND_TAKE || _state == STAND_TAKE_LEFT || _state == STAND_TAKE_RIGHT ||_state == STAND_TAKE_BACK ||		//아이템을 들고있는 상태일때만 그린다.
-		_state == TAKE_UP || _state == TAKE_LEFT || _state == TAKE_RIGHT || _state == TAKE_DOWN)
+	//Rectangle(getMemDC(), _tilePos.x - rc.left, _tilePos.y - rc.top, 50, 50);
+
+	_image->aniRender(getMemDC(), this->rectMakeBottom().left - rc.left,										// 이미지 렌더 
+		this->rectMakeBottom().top - rc.top, _player.Motion);
+
+	if (_state == STAND_TAKE || _state == STAND_TAKE_LEFT || _state == STAND_TAKE_RIGHT ||						//아이템을 들고있는 상태일때만 그린다.
+		_state == STAND_TAKE_BACK || _state == TAKE_UP || _state == TAKE_LEFT || _state == TAKE_RIGHT || _state == TAKE_DOWN)
 	{
-		_myItem.img->render(getMemDC(), _myItem.x - rc.left, _myItem.y - rc.top);	
+		_myItem.img->render(getMemDC(), _myItem.x - rc.left, _myItem.y - rc.top);								//아이템 렌더
 	}
 	
 	if (_tile1 != NULL && _tile2 != NULL)
@@ -247,19 +253,18 @@ void player::render()
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), brush);
 
-		Rectangle(getMemDC(), rc1.left - rc.left, rc1.top-rc.top, rc1.right-rc.left, rc1.bottom-rc.top);
-		Rectangle(getMemDC(), rc2.left - rc.left, rc2.top - rc.top, rc2.right - rc.left, rc2.bottom - rc.top);
+		Rectangle(getMemDC(), rc1.left - rc.left, rc1.top-rc.top, rc1.right-rc.left, rc1.bottom-rc.top);		//플레이어 바로 앞 타일
+		Rectangle(getMemDC(), rc2.left - rc.left, rc2.top - rc.top, rc2.right - rc.left, rc2.bottom - rc.top);	//플레이어 옆 타일
 
 		SelectObject(getMemDC(), oldBrush);
 		DeleteObject(brush);
 
 		char str[100];
-		sprintf(str, "%d,%d", _myItem.x, _myItem.y);
+		sprintf(str, "%d,%d", _indexX, _indexY);
 		TextOut(getMemDC(), 10, 300, str, strlen(str));
 	}
 
-	RectangleMakeCenter(getMemDC(), _pos.x - rc.left, _pos.y - rc.top, 30, 30);
-
+	
 }
 
 void player::tileCollision()
@@ -310,7 +315,6 @@ void player::tileCollision()
 		centerY = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
 
 		_tile1 = TOWNWORLD->getTile(_indexX + 1, _indexY);
-
 		if (centerY < _tilePos.y)
 		{
 			_tile2 = TOWNWORLD->getTile(_indexX + 1, +_indexY + 1);
@@ -328,11 +332,11 @@ void player::tileCollision()
 
 		if (centerY < _tilePos.x)
 		{
-			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
+			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY+1);
 		}
 		else if (centerY > _tilePos.x)
 		{
-			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
+			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
 		}
 		break;
 	case playerState::TAKE_UP: case playerState::UP_RUN:
@@ -343,11 +347,11 @@ void player::tileCollision()
 
 		if (centerX < _tilePos.x)
 		{
-			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
+			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY - 1);
 		}
 		else if (centerX > _tilePos.x)
 		{
-			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY - 1);
+			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
 		}
 		break;
 	
@@ -357,21 +361,31 @@ void player::tileCollision()
 	RECT _rc1;				//충돌 확인할 렉트
 	RECT _rc2;				// 이하동문
 	
+							//if (_tile1->getPObj() != NULL)
+							//{
+							//	exit(0);
+							//	if (_state == AXE_LEFT)
+							//	{
+							//		tree1_bottom* _target = (tree1_bottom*)TOWNWORLD->findObject(objectType::OBJ, "tree1_bottom");
+							//		_target->sendMessage(tagMessage("treeTarget"));
+							//	
+							//	}
+							//	
+							//
+							//}
+
 	if (IntersectRect(&_rc1, &_tile1->getRect(), &_rcCollision))
 	{
 		if (_tile1->getPObj() != NULL)
 		{
-			exit(0);
-			if (_state == AXE_LEFT)
+			if (_state == playerState::HOE_LEFT)
 			{
+			
 				tree1_bottom* _target = (tree1_bottom*)TOWNWORLD->findObject(objectType::OBJ, "tree1_bottom");
 				_target->sendMessage(tagMessage("treeTarget"));
-			
 			}
-			
-
 		}
-		
+
 			if (_tile1->getTerrain() == TERRAIN::WATER)
 			{
 				switch (_state)
@@ -386,6 +400,7 @@ void player::tileCollision()
 				case playerState::STAND_BACK:
 					break;
 				case playerState::TAKE_UP: case playerState::UP_RUN:
+				
 					_pos.y += SPEED;
 					if (KEYMANAGER->isStayKeyDown('A'))
 					{
@@ -397,6 +412,7 @@ void player::tileCollision()
 					}
 					break;
 				case playerState::TAKE_RIGHT: case playerState::RIGHT_RUN:
+				
 					_pos.x -= SPEED;
 					if (KEYMANAGER->isStayKeyDown('S'))
 					{

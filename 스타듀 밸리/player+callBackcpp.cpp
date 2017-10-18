@@ -170,7 +170,7 @@ RECT player::rectMakeBottom()
 
 	rc.left = _pos.x - _image->getFrameWidth() / 2;
 	rc.right = _pos.x + _image->getFrameWidth() / 2 ;
-	rc.top = _pos.y - _image->getFrameHeight()/2 - 70;
+	rc.top = _pos.y - _image->getFrameHeight() /2 - 70;
 	rc.bottom = _pos.y;
 
 	return rc;
