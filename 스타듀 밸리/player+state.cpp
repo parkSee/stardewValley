@@ -82,6 +82,8 @@ void player::stateUpdate(playerState::Enum state)
 		}
 
 		break;
+
+		//================================================================================================달리는 모션
 	case playerState::RIGHT_RUN:								//오른쪽으로 이동중
 		if (KEYMANAGER->isStayKeyDown('D'))
 		{
@@ -156,6 +158,8 @@ void player::stateUpdate(playerState::Enum state)
 			this->changeState(STAND);
 		}
 		break;
+
+		//=======================================================================================무기
 	case playerState::AXE_RIGHT:
 	
 		break;
@@ -205,37 +209,180 @@ void player::stateUpdate(playerState::Enum state)
 		break;
 	case playerState::SWORD_DOWN:
 		break;
+		//====================================================================================물건 들고 달릴떄
 	case playerState::TAKE_RIGHT:				//들고 오른쪽으로 달리기 
-		_myItem.x = _pos.x;						//아이템의 좌표
-		_myItem.y = _pos.y -= 100;
+		_myItem.x = _pos.x - 50;				//아이템의 좌표
+		_myItem.y = _pos.y - CARRY;
+
+		if (KEYMANAGER->isStayKeyDown('D'))
+		{
+			_pos.x += SPEED;
+			if (KEYMANAGER->isStayKeyDown('S'))				//오른쪽 대각선 아래로 이동
+			{
+				_pos.y += SPEED;
+			}
+			else if (KEYMANAGER->isStayKeyDown('W'))
+			{
+				_pos.y -= SPEED;									//오른쪽 대각선 위로 이동
+			}
+		}
+		else if (KEYMANAGER->isOnceKeyUp('D'))
+		{
+			this->changeState(STAND_TAKE_RIGHT);
+		}
 		break;
 	case playerState::TAKE_LEFT:				//들고 왼쪽으로 달리기 
 		_myItem.x = _pos.x;
-		_myItem.y = _pos.y -= 100;
+		_myItem.y = _pos.y - CARRY;
+	
+		if (KEYMANAGER->isStayKeyDown('A'))
+		{
+			_pos.x -= SPEED;
+			if (KEYMANAGER->isStayKeyDown('S'))				//왼쪽 대각선 아래로 이동
+			{
+				_pos.y += SPEED;
+			}
+			else if (KEYMANAGER->isStayKeyDown('W'))			//왼쪽 대각선 위로 이동
+			{
+				_pos.y -= SPEED;
+			}
+		}
+		else if (KEYMANAGER->isOnceKeyUp('A'))
+		{
+			this->changeState(STAND_TAKE_LEFT);
+		}
 		break;
 	case playerState::TAKE_UP:					//들고 위로 달리기 
 		_myItem.x = _pos.x;
-		_myItem.y = _pos.y -= 100;
+		_myItem.y = _pos.y - CARRY;
+
+		if (KEYMANAGER->isStayKeyDown('W'))
+		{
+			_pos.y -= SPEED;
+			if (KEYMANAGER->isStayKeyDown('A'))				//위 대각선 왼쪽으로 이동
+			{
+				_pos.x -= SPEED;
+			}
+			else if (KEYMANAGER->isStayKeyDown('D'))		//위 대각선 오른쪽으로 이동
+			{
+				_pos.x += SPEED;
+			}
+		}
+		else if (KEYMANAGER->isOnceKeyUp('W'))
+		{
+			this->changeState(STAND_TAKE_BACK);
+		}
 		break;
 	case playerState::TAKE_DOWN:				//들고 아래로 달리기 
 		_myItem.x = _pos.x;
-		_myItem.y = _pos.y -= 100;
+		_myItem.y = _pos.y - CARRY;
+
+		if (KEYMANAGER->isStayKeyDown('S'))
+		{
+			_pos.y += SPEED;
+
+			if (KEYMANAGER->isStayKeyDown('A'))
+			{
+				_pos.x -= SPEED;
+			}
+			else if (KEYMANAGER->isStayKeyDown('D'))
+			{
+				_pos.x += SPEED;
+			}
+		}
+		else if (KEYMANAGER->isOnceKeyUp('S'))
+		{
+			this->changeState(STAND_TAKE);
+		}
 		break;
 	case playerState::STAND_TAKE:				//들고 서있기
-		_myItem.x = _pos.x;
-		_myItem.y = _pos.y -= 100;
+		_myItem.x = _pos.x - 30;
+		_myItem.y = _pos.y - CARRY;
+
+		if (KEYMANAGER->isOnceKeyDown('A'))
+		{
+			this->changeState(TAKE_LEFT);						//왼쪽으로 이동상태로	바껴라
+		}
+		if (KEYMANAGER->isOnceKeyDown('D'))
+		{
+			this->changeState(TAKE_RIGHT);						//오른쪽으로 이동상태로 바껴라
+		}
+		if (KEYMANAGER->isOnceKeyDown('W'))
+		{
+			this->changeState(TAKE_UP);							//위로가는 이동상태로 바껴라
+		}
+		if (KEYMANAGER->isOnceKeyDown('S'))
+		{
+			this->changeState(TAKE_DOWN);						//아래로가는 이동상태로 바껴라
+		}
+		break;
+
 		break;
 	case playerState::STAND_TAKE_RIGHT:			//들고 오른쪽으로 서있기		
 		_myItem.x = _pos.x;
-		_myItem.y = _pos.y -= 100;
+		_myItem.y = _pos.y - CARRY;
+
+		if (KEYMANAGER->isOnceKeyDown('D'))
+		{
+			this->changeState(TAKE_RIGHT);						//오른쪽으로 계속가라~
+		}
+		if (KEYMANAGER->isOnceKeyDown('A'))
+		{
+			this->changeState(TAKE_LEFT);						//왼쪽으로 가는 상태로 바껴라
+		}
+		if (KEYMANAGER->isOnceKeyDown('W'))
+		{
+			this->changeState(TAKE_UP);							//위로가는 상태로 바껴라
+		}
+		if (KEYMANAGER->isOnceKeyDown('S'))
+		{
+			this->changeState(TAKE_DOWN);						//아래로 가는 상태로 바껴라
+		}
 		break;
 	case playerState::STAND_TAKE_LEFT:			//들고 왼쪽으로 서있기
 		_myItem.x = _pos.x;
-		_myItem.y = _pos.y -= 100;
+		_myItem.y = _pos.y - CARRY;
+		
+		if (KEYMANAGER->isOnceKeyDown('A'))					//LEFT_STAND
+		{
+			this->changeState(TAKE_LEFT);						//왼쪽으로 계속가라~
+		}
+		if (KEYMANAGER->isOnceKeyDown('D'))
+		{
+			this->changeState(TAKE_RIGHT);						//오른쪽으로 가는 상태로 바껴라
+		}
+		if (KEYMANAGER->isOnceKeyDown('W'))
+		{
+			this->changeState(TAKE_UP);							//위로 가는 상태로 바껴라
+		}
+		if (KEYMANAGER->isOnceKeyDown('S'))
+		{
+			this->changeState(TAKE_DOWN);						//아래로 가는 상태로 바껴라
+		}
+
 		break;
 	case playerState::STAND_TAKE_BACK:			//들고 뒤로 서있기
 		_myItem.x = _pos.x;
-		_myItem.y = _pos.y -= 100;
+		_myItem.y = _pos.y - CARRY;
+
+		if (KEYMANAGER->isOnceKeyDown('W'))
+		{
+			this->changeState(TAKE_UP);							//계속 위로 가렴
+		}
+
+		if (KEYMANAGER->isOnceKeyDown('S'))
+		{
+			this->changeState(TAKE_DOWN);						//아래로 가는 상태로 바껴라				
+		}
+		if (KEYMANAGER->isOnceKeyDown('A'))
+		{
+			this->changeState(TAKE_LEFT);						//왼쪽으로 가는 상태로 바껴라
+		}
+		if (KEYMANAGER->isOnceKeyDown('D'))
+		{
+			this->changeState(TAKE_RIGHT);						//오른쪽으로 가는 상태로 바껴라
+		}
+
 		break;
 	}
 
@@ -377,9 +524,6 @@ void player::changeState(playerState::Enum state)
 		_player.Motion->start();
 		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
 		break;
-
-
-
 	case playerState::WATER_RIGHT:												//물뿌리개
 		_player.Motion = KEYANIMANAGER->findAnimation("playerWaterRight");
 		_player.Motion->start();

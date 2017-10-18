@@ -3,8 +3,9 @@
 #include "item.h"
 #include "tileMap.h"
 #include "mapToolTile.h"
+#include "eProgressBar.h"
 #define SPEED 4
-
+#define CARRY 210
 
 namespace playerState
 {
@@ -79,7 +80,7 @@ private:
 	tagItem* _item;
 	tagItem tem;
 	tileMap* _map;
-
+	eProgressBar* _power;
 	mapToolTile* _tile1;
 	mapToolTile* _tile2;
 
@@ -110,6 +111,9 @@ public:
 
 	animation* getPlayerMotion(void) { return _player.Motion; }
 	void setPlayerMotion(animation* ani) { _player.Motion = ani; }
+
+	int getIndexX(void) { return _indexX; }
+	int getIndexY(void) { return _indexY; }
 
 	player() {};
 	~player() {};
