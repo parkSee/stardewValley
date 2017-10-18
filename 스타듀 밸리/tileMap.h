@@ -4,7 +4,7 @@
 #include "gameObject.h"
 
 
-class tileMap : public gameNode
+class tileMap : public gameObject		//게임오브젝트 상속받았당 수누야
 {
 private:
 	enum KIND
