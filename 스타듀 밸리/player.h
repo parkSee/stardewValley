@@ -85,6 +85,7 @@ private:
 
 	tagFloat	_tilePos;
 
+
 	int _indexX, _indexY;
 	RECT _rcCollision;							//충돌체크용 가상 렉트
 
@@ -102,6 +103,7 @@ public:
 	RECT rectMakeBottom();
 
 	void tileCollision();
+	
 
 	enum playerState::Enum getPlayerState(void) { return _state; }
 	void setPlayerState(playerState::Enum state) { _state = state; }
