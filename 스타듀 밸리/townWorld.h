@@ -12,7 +12,7 @@ namespace objectType
 {
 	enum Enum
 	{
-		HUMAN , OBJ , TILE ,ITEM ,INTERFACE,MOUSE, END
+		HUMAN , OBJ , TILE ,ITEM ,INTERFACE,MOUSE,WEATHER, END
 	};
 }
 

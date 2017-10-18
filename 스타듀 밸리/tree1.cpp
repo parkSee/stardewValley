@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "tree1.h"
+#include "mapToolTile.h"
 
 
 HRESULT tree1::init(tagFloat pos)
@@ -22,7 +23,10 @@ void tree1::release()
 }
 void tree1::update()
 {
+	if (KEYMANAGER->isOnceKeyDown('L'))
+	{
 
+	}
 }
 void tree1::render()
 {
@@ -50,8 +54,11 @@ HRESULT tree1_bottom::init(tagFloat pos)
 
 	_hp = 15;
 
+	
+
 	_object = OBJECT::TREE1_BOTTOM;
 	TOWNWORLD->addObject(objectType::OBJ, this);
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
 	EFFECTMANAGER->addEffect("die", "나무.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
 	EFFECTMANAGER->addEffect("attack", "나무.bmp", 20700, 370, 450, 370, 1.0f, 1.0f, 1.0f);
 
@@ -72,13 +79,12 @@ void tree1_bottom::update()
 {
 	motherObject::update();
 
-	//if (_hp > 0)
-	//{
-		if(KEYMANAGER->isOnceKeyDown(VK_F7))
-		{
-			EFFECTMANAGER->play("attack", _pos.x, _pos.y);
-		}
-	//}
+	if (_hp > 0)
+	{
+		
+			EFFECTMANAGER->play("attack", _pos.x / TILESIZE, _pos.y / TILESIZE);
+		
+	}
 	if (_hp <= 0)
 	{
 		EFFECTMANAGER->play("die", _pos.x, _pos.y);
@@ -87,6 +93,11 @@ void tree1_bottom::update()
 		//dropItem* drop = new dropItem;
 		//drop->init("tree_bottom", "tree");
 
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('L'))
+	{
+		this->sendMessage(tagMessage("axeAttack", 0.0f));
 	}
 
 }
@@ -145,12 +156,14 @@ void tree1_top::update()
 	if (_hp <= 0)
 	{
 		EFFECTMANAGER->play("die", _pos.x, _pos.y);
-
 		this->setDestroy();
+		
 
-		dropItem* drop = new dropItem;
-		drop->init("tree_top","tree", tagFloat(_pos.x, _pos.y));
+		//dropItem* drop = new dropItem;
+		//drop->init("tree_top","tree", tagFloat(_pos.x, _pos.y));
 	}
+
+	
 }
 void tree1_top::topAttack()
 {
@@ -159,4 +172,11 @@ void tree1_top::topAttack()
 void tree1_top::render()
 {
 	_image->render(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x - 15, -CAMERAMANAGER->getRenderRc().top + _pos.y - 80);
+}
+
+void tree1_top::setDestroy(float time)
+{
+	gameObject::setDestroy(time);
+
+	((motherObject*)TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->getPObj())->setPobj(NULL);
 }

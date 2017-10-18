@@ -51,7 +51,7 @@ public:
 	RECT getRect();										//피봇에 따른 랜더 렉트를 반환해 준다
 
 	bool isActiveObject();								//활성화 상태인지에 대한 불값을 반환 해준다.
-	void setDestroy(float time = 0.0f);					//오브젝트 삭제명령
+	virtual void setDestroy(float time = 0.0f);					//오브젝트 삭제명령
 
 	void sendMessage(tagMessage msg = tagMessage());	//메세지 전송
 	
