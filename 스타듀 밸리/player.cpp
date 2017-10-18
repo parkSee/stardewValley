@@ -114,13 +114,13 @@ HRESULT player::init(string objName, tagFloat pos)
 	int takeLeft[] = { 120,121,122,123,124 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerTakeLeft", "player", takeLeft, 5, 10, true);
 
-	int takeUp[] = { 131,132,133,134,135,136 };
+	int takeUp[] = { 132,133,134,135,136,137 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerTakeUp", "player", takeUp, 6, 10, true);
 
 	int takeRight[] = { 125,126,127,128,129 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerTakeRight", "player", takeRight, 5, 10, true);
 
-	int takeDown[] = { 116,130,138,139,140,141,142 };
+	int takeDown[] = { 130,131,139,140,141,142,143 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerTakeDown", "player", takeDown, 7, 10, true);
 
 	//아이템 들고 서있기
@@ -133,7 +133,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	int standTakeRight[] = { 125 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerTakeStandRight", "player", standTakeRight, 1, 0, false);
 
-	int standTakeUp[] = { 131 };
+	int standTakeUp[] = { 134 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerTakeStandUp", "player", standTakeUp, 1, 0, false);
 
 //========================================================================================================
@@ -144,7 +144,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 80, 50, 20);
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y, 50, 20);
 
 	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;
 	_tilePos.y = _rcCollision.bottom;
@@ -158,6 +158,9 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	_tile1 = NULL;
 	_tile2 = NULL;
+
+	_myItem.x = 0;
+	_myItem.y = 0;
 
 	//콜백
 	this->addCallback("changeState", [this](tagMessage msg)
@@ -214,7 +217,7 @@ void player::update()
 
 	KEYANIMANAGER->update();
 
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 80, 50, 20);
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y, 50, 20);
 	_player.rc = RectMake(_tilePos.x, _tilePos.y, _image->getFrameWidth(), _image->getFrameHeight());
 
 }
@@ -225,15 +228,15 @@ void player::render()
 	RECT rc = CAMERAMANAGER->getRenderRc();
 	//Rectangle(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top, 
 	//	this->rectMakeBottom().right - rc.left, this->rectMakeBottom().bottom - rc.top);
-	
-	Rectangle(getMemDC(), _rcCollision.left -rc.left, _rcCollision.top - rc.top, _rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
-	
+
+	Rectangle(getMemDC(), _rcCollision.left - rc.left, _rcCollision.top - rc.top, _rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
+
 	_image->aniRender(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top, _player.Motion);
 
-	if (_state == STAND_TAKE && _state ==STAND_TAKE_LEFT && _state == STAND_TAKE_RIGHT &&_state == STAND_TAKE_BACK &&		//아이템을 들고있는 상태일때만 그린다.
-		_state == TAKE_UP && _state == TAKE_LEFT && _state == TAKE_RIGHT && _state == TAKE_DOWN)
+	if (_state == STAND_TAKE || _state == STAND_TAKE_LEFT || _state == STAND_TAKE_RIGHT ||_state == STAND_TAKE_BACK ||		//아이템을 들고있는 상태일때만 그린다.
+		_state == TAKE_UP || _state == TAKE_LEFT || _state == TAKE_RIGHT || _state == TAKE_DOWN)
 	{
-		_myItem.img->render(getMemDC(), _myItem.x, _myItem.y);										
+		_myItem.img->render(getMemDC(), _myItem.x - rc.left, _myItem.y - rc.top);	
 	}
 	
 	if (_tile1 != NULL && _tile2 != NULL)
@@ -251,8 +254,8 @@ void player::render()
 		DeleteObject(brush);
 
 		char str[100];
-		sprintf(str, "%d,%d", _indexX, _indexY);
-		TextOut(getMemDC(), 10, 50, str, strlen(str));
+		sprintf(str, "%d,%d", _myItem.x, _myItem.y);
+		TextOut(getMemDC(), 10, 300, str, strlen(str));
 	}
 
 	RectangleMakeCenter(getMemDC(), _pos.x - rc.left, _pos.y - rc.top, 30, 30);
@@ -288,7 +291,7 @@ void player::tileCollision()
 		break;
 	case playerState::STAND_BACK:
 		break;
-	case playerState::STAND_TAKE: case playerState::DOWN_RUN:
+	case playerState::TAKE_DOWN: case playerState::DOWN_RUN:
 
 		centerX = TOWNWORLD->getTile(_indexX, _indexY)->getRect().left + TILESIZE / 2;
 
@@ -303,7 +306,7 @@ void player::tileCollision()
 			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY + 1);
 		}
 		break;
-	case playerState::STAND_TAKE_RIGHT: case playerState::RIGHT_RUN:
+	case playerState::TAKE_RIGHT: case playerState::RIGHT_RUN:
 		centerY = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
 
 		_tile1 = TOWNWORLD->getTile(_indexX + 1, _indexY);
@@ -317,7 +320,7 @@ void player::tileCollision()
 			_tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY - 1);
 		}
 		break;
-	case playerState::STAND_TAKE_LEFT: case playerState::LEFT_RUN:
+	case playerState::TAKE_LEFT: case playerState::LEFT_RUN:
 		
 		centerY = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
 
@@ -332,7 +335,7 @@ void player::tileCollision()
 			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
 		}
 		break;
-	case playerState::STAND_TAKE_BACK: case playerState::UP_RUN:
+	case playerState::TAKE_UP: case playerState::UP_RUN:
 		
 		centerX = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
 
