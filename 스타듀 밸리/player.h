@@ -4,6 +4,7 @@
 #include "tileMap.h"
 #include "mapToolTile.h"
 #include "eProgressBar.h"
+#include "tree1.h"
 #define SPEED 4
 #define CARRY 210
 
@@ -83,6 +84,7 @@ private:
 	eProgressBar* _power;
 	mapToolTile* _tile1;
 	mapToolTile* _tile2;
+	tree1_bottom* _tree;
 
 	tagFloat	_tilePos;
 

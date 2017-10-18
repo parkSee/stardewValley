@@ -328,7 +328,7 @@ void player::tileCollision()
 
 		if (centerY < _tilePos.x)
 		{
-			_tile2 - TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
+			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
 		}
 		else if (centerY > _tilePos.x)
 		{
@@ -359,6 +359,19 @@ void player::tileCollision()
 	
 	if (IntersectRect(&_rc1, &_tile1->getRect(), &_rcCollision))
 	{
+		if (_tile1->getPObj() != NULL)
+		{
+			exit(0);
+			if (_state == AXE_LEFT)
+			{
+				tree1_bottom* _target = (tree1_bottom*)TOWNWORLD->findObject(objectType::OBJ, "tree1_bottom");
+				_target->sendMessage(tagMessage("treeTarget"));
+			
+			}
+			
+
+		}
+		
 			if (_tile1->getTerrain() == TERRAIN::WATER)
 			{
 				switch (_state)
