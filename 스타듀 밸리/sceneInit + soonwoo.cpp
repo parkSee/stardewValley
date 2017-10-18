@@ -7,6 +7,8 @@
 #include "inventory.h"
 #include "dropItem.h"
 #include "eProgressBar.h"
+#include "pierre.h"
+
 
 void townScene::soonwooInit()
 {
@@ -30,12 +32,16 @@ void townScene::soonwooInit()
 	item->init("물뿌리개", "무엇이든 벨 수 있다.",tagFloat(300,300));
 	TOWNWORLD->addObject(objectType::ITEM, item);
 
+	dropItem* item2 = new dropItem;
+	item2->init("수액", "나무에서 나온 끈적앤 액채",tagFloat(700, 700));
+	TOWNWORLD->addObject(objectType::ITEM, item2);
+
 	eProgressBar* energy = new eProgressBar;
 	energy->init("energyBar");
 	TOWNWORLD->addObject(objectType::INTERFACE, energy);
 
-	dropItem* item2 = new dropItem;
-	item2->init("나무", "무엇이든 벨 수 있다.", tagFloat(100, 500));
-	TOWNWORLD->addObject(objectType::ITEM, item2);
-	
+	pierre*	storeNpc = new pierre;
+	storeNpc->init("pierre", "pierre", tagFloat(300, 500));
+	TOWNWORLD->addObject(objectType::HUMAN, storeNpc);
+
 }

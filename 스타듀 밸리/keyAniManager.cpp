@@ -44,7 +44,7 @@ void keyAniManager::render()
 
 
 //디폴트 애니메이션
-void keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imageKeyName, int fps, bool reverse, bool loop)								
+void keyAniManager::addDefaultFrameAnimation(string animationKeyName, string imageKeyName, int fps, bool reverse, bool loop)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;
@@ -58,7 +58,7 @@ void keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imag
 
 }
 
-void keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imageKeyName, int fps, bool reverse, bool loop, void* cbFunction)			
+void keyAniManager::addDefaultFrameAnimation(string animationKeyName, string imageKeyName, int fps, bool reverse, bool loop, void* cbFunction)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;
@@ -70,7 +70,7 @@ void keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imag
 	_mTotalAnimation.insert(pair<string, animation*>(animationKeyName, ani));
 }
 
-void keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imageKeyName, int fps, bool reverse, bool loop, void* cbFunction, void* obj)
+void keyAniManager::addDefaultFrameAnimation(string animationKeyName, string imageKeyName, int fps, bool reverse, bool loop, void* cbFunction, void* obj)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;
@@ -84,7 +84,7 @@ void keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imag
 
 
 //배열 애니메이션
-void keyAniManager::addArrayFrameAnimation(string animationKeyName, char* imageKeyName, int* arr, int arrLen, int fps, bool loop)							  
+void keyAniManager::addArrayFrameAnimation(string animationKeyName, string imageKeyName, int* arr, int arrLen, int fps, bool loop)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;
@@ -96,7 +96,7 @@ void keyAniManager::addArrayFrameAnimation(string animationKeyName, char* imageK
 	_mTotalAnimation.insert(pair<string, animation*>(animationKeyName, ani));
 }
 
-void keyAniManager::addArrayFrameAnimation(string animationKeyName, char* imageKeyName, int* arr, int arrLen, int fps, bool loop, void* cbFunction)			  
+void keyAniManager::addArrayFrameAnimation(string animationKeyName, string imageKeyName, int* arr, int arrLen, int fps, bool loop, void* cbFunction)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;
@@ -108,7 +108,7 @@ void keyAniManager::addArrayFrameAnimation(string animationKeyName, char* imageK
 	_mTotalAnimation.insert(pair<string, animation*>(animationKeyName, ani));
 }
 
-void keyAniManager::addArrayFrameAnimation(string animationKeyName, char* imageKeyName, int* arr, int arrLen, int fps, bool loop, void* cbFunction, void* obj)
+void keyAniManager::addArrayFrameAnimation(string animationKeyName, string imageKeyName, int* arr, int arrLen, int fps, bool loop, void* cbFunction, void* obj)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;
@@ -122,7 +122,7 @@ void keyAniManager::addArrayFrameAnimation(string animationKeyName, char* imageK
 
 
 //구간 애니메이션
-void keyAniManager::addCoordinateFrameAnimation(string animationKeyName, char* imageKeyName, int start, int end, int fps, bool reverse, bool loop)							   
+void keyAniManager::addCoordinateFrameAnimation(string animationKeyName, string imageKeyName, int start, int end, int fps, bool reverse, bool loop)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;
@@ -134,7 +134,7 @@ void keyAniManager::addCoordinateFrameAnimation(string animationKeyName, char* i
 	_mTotalAnimation.insert(pair<string, animation*>(animationKeyName, ani));
 }
 
-void keyAniManager::addCoordinateFrameAnimation(string animationKeyName, char* imageKeyName, int start, int end, int fps, bool reverse, bool loop, void* cbFunction)		   
+void keyAniManager::addCoordinateFrameAnimation(string animationKeyName, string imageKeyName, int start, int end, int fps, bool reverse, bool loop, void* cbFunction)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;
@@ -146,7 +146,7 @@ void keyAniManager::addCoordinateFrameAnimation(string animationKeyName, char* i
 	_mTotalAnimation.insert(pair<string, animation*>(animationKeyName, ani));
 }
 
-void keyAniManager::addCoordinateFrameAnimation(string animationKeyName, char* imageKeyName, int start, int end, int fps, bool reverse, bool loop, void* cbFunction, void* obj)
+void keyAniManager::addCoordinateFrameAnimation(string animationKeyName, string imageKeyName, int start, int end, int fps, bool reverse, bool loop, void* cbFunction, void* obj)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;

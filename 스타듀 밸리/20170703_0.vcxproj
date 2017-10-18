@@ -109,9 +109,9 @@
     <ClInclude Include="mapToolTile.h" />
     <ClInclude Include="motherObject.h" />
     <ClInclude Include="mouse.h" />
-    <ClInclude Include="NPC.h" />
+    <ClInclude Include="npc.h" />
     <ClInclude Include="obj.h" />
-    <ClInclude Include="Pierre.h" />
+    <ClInclude Include="pierre.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playGround.h" />
     <ClInclude Include="progressBar.h" />
@@ -177,9 +177,11 @@
     <ClCompile Include="mapToolTile.cpp" />
     <ClCompile Include="motherObject.cpp" />
     <ClCompile Include="mouse.cpp" />
-    <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="npc + aStar.cpp" />
+    <ClCompile Include="npc + direction.cpp" />
+    <ClCompile Include="npc.cpp" />
     <ClCompile Include="obj.cpp" />
-    <ClCompile Include="Pierre.cpp" />
+    <ClCompile Include="pierre.cpp" />
     <ClCompile Include="player+callBackcpp.cpp" />
     <ClCompile Include="player+state.cpp" />
     <ClCompile Include="player.cpp" />

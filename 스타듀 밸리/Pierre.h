@@ -1,17 +1,18 @@
 #pragma once
-#include "NPC.h"
+#include "npc.h"
 
-class Pierre : public NPC
+class pierre : public npc
 {
 private:
+	
 
 public:
-	HRESULT init(string npcName, char* imageName, int indexX, int indexY);
+	HRESULT init(string name, string imageKey, tagFloat pos);
 	void release();
 	void update();
 	void render();
 
-	Pierre() {}
-	~Pierre() {}
+	pierre() {}
+	~pierre() {}
 };
 

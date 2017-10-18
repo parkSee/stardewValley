@@ -1,24 +1,27 @@
 #include "stdafx.h"
-#include "Pierre.h"
+#include "pierre.h"
 
-HRESULT Pierre::init(string npcName, char* imageName, int indexX, int indexY)
+
+
+
+HRESULT pierre::init(string name, string imageKey, tagFloat pos)
 {
-	NPC::init(npcName, imageName, indexX, indexY);
+	npc::init(name, imageKey, pos);
 
 	return S_OK;
 }
 
-void Pierre::release()  
+void pierre::release()
 {
-	NPC::release();
+	npc::release();
 }
 
-void Pierre::update()   
+void pierre::update() 
 {
-	NPC::update();
+	npc::update();
 }
 
-void Pierre::render()   
+void pierre::render() 
 {
-	NPC::render();
+	npc::render();
 }

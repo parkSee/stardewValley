@@ -48,13 +48,17 @@ void loadingScene::soonwoo()
 	_loading->loadImage("낫", "resource/item/sickle.bmp", 56, 56, true, RGB(255, 0, 255));
 	_loading->loadImage("물뿌리개", "resource/item/watering.bmp", 56, 56, true);
 	_loading->loadImage("검", "resource/item/sword.bmp", 56, 56, true);
-	_loading->loadImage("나무", "resource/item/Wood.bmp", 56, 56, true);
-	_loading->loadImage("돌맹이", "resource/item/Stone.bmp", 56, 56, true);
-	_loading->loadImage("석탄", "resource/item/Coal.bmp", 56, 56, true);
+	_loading->loadImage("나무", "resource/item/wood.bmp", 56, 56, true);
+	_loading->loadImage("돌맹이", "resource/item/stone.bmp", 56, 56, true);
+	_loading->loadImage("석탄", "resource/item/coal.bmp", 56, 56, true);
+	_loading->loadImage("수액", "resource/item/수액.bmp", 56, 56, true);
 	
 	
 	//인벤토리 설명 창 이미지
 	_loading->loadImage("explainUI", "resource/UI/explainUI.bmp", 258, 214, true, RGB(255, 0, 255));
 	_loading->loadImage("공간부족", "resource/UI/fullInventory.bmp", 56, 56, true, RGB(255, 0, 255));
 
+	//========================================NPC=====================================
+	_loading->loadFrameImage("pierre", "resource/npc/pierre.bmp", 128, 128,4,4, true, RGB(255, 0, 255));
+	
 }

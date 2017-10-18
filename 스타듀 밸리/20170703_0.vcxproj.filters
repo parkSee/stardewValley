@@ -178,6 +178,9 @@
     <Filter Include="playGround\UI\energyProgress">
       <UniqueIdentifier>{7e5aff7e-8350-448b-98ff-851300043cfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\NPC\pierre">
+      <UniqueIdentifier>{82831ab8-ac20-42d2-9281-4da94859a09e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -318,9 +321,6 @@
     <ClInclude Include="item.h">
       <Filter>playGround\item</Filter>
     </ClInclude>
-    <ClInclude Include="NPC.h">
-      <Filter>playGround\NPC</Filter>
-    </ClInclude>
     <ClInclude Include="motherObject.h">
       <Filter>playGround\map</Filter>
     </ClInclude>
@@ -360,9 +360,6 @@
     <ClInclude Include="tileMap.h">
       <Filter>playGround\mapToolScene</Filter>
     </ClInclude>
-    <ClInclude Include="Pierre.h">
-      <Filter>playGround\NPC</Filter>
-    </ClInclude>
     <ClInclude Include="store.h">
       <Filter>playGround\store</Filter>
     </ClInclude>
@@ -374,6 +371,12 @@
     </ClInclude>
     <ClInclude Include="eProgressBar.h">
       <Filter>playGround\UI\energyProgress</Filter>
+    </ClInclude>
+    <ClInclude Include="npc.h">
+      <Filter>playGround\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="pierre.h">
+      <Filter>playGround\NPC\pierre</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -533,9 +536,6 @@
     <ClCompile Include="item.cpp">
       <Filter>playGround\item</Filter>
     </ClCompile>
-    <ClCompile Include="NPC.cpp">
-      <Filter>playGround\NPC</Filter>
-    </ClCompile>
     <ClCompile Include="motherObject.cpp">
       <Filter>playGround\map</Filter>
     </ClCompile>
@@ -584,9 +584,6 @@
     <ClCompile Include="player+callBackcpp.cpp">
       <Filter>playGround\player</Filter>
     </ClCompile>
-    <ClCompile Include="Pierre.cpp">
-      <Filter>playGround\NPC</Filter>
-    </ClCompile>
     <ClCompile Include="store.cpp">
       <Filter>playGround\store</Filter>
     </ClCompile>
@@ -604,6 +601,18 @@
     </ClCompile>
     <ClCompile Include="eProgressBar.cpp">
       <Filter>playGround\UI\energyProgress</Filter>
+    </ClCompile>
+    <ClCompile Include="npc.cpp">
+      <Filter>playGround\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="npc + direction.cpp">
+      <Filter>playGround\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="pierre.cpp">
+      <Filter>playGround\NPC\pierre</Filter>
+    </ClCompile>
+    <ClCompile Include="npc + aStar.cpp">
+      <Filter>playGround\NPC</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
