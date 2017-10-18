@@ -378,9 +378,9 @@ void player::tileCollision()
 	{
 		if (_tile1->getPObj() != NULL)
 		{
-			if (_state == playerState::HOE_LEFT)
+			if (_state == playerState::AXE_LEFT)
 			{
-			
+				exit(0);
 				tree1_bottom* _target = (tree1_bottom*)TOWNWORLD->findObject(objectType::OBJ, "tree1_bottom");
 				_target->sendMessage(tagMessage("treeTarget"));
 			}
