@@ -84,6 +84,7 @@
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
+    <ClInclude Include="darkNight.h" />
     <ClInclude Include="dropItem.h" />
     <ClInclude Include="dungeonScene.h" />
     <ClInclude Include="dungeonWorld.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="txtData.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="weather.h" />
     <ClInclude Include="worldNode.h" />
     <ClInclude Include="worldTime.h" />
   </ItemGroup>
@@ -149,6 +151,7 @@
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="collision.cpp" />
+    <ClCompile Include="darkNight.cpp" />
     <ClCompile Include="dongjin+imageLoad.cpp" />
     <ClCompile Include="dropItem.cpp" />
     <ClCompile Include="dungeonScene.cpp" />
@@ -221,6 +224,7 @@
     <ClCompile Include="ui+callBack.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="weather.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="worldTime.cpp" />
     <ClCompile Include="youngJae + imageLoad.cpp" />

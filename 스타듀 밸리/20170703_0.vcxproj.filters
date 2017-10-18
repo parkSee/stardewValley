@@ -181,6 +181,9 @@
     <Filter Include="playGround\NPC\pierre">
       <UniqueIdentifier>{6e733d29-2fd5-48c5-9ba3-692bd0f1e475}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\weather">
+      <UniqueIdentifier>{03f356b7-bc37-43df-a07d-b1bfe135724f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -377,6 +380,12 @@
     </ClInclude>
     <ClInclude Include="pierre.h">
       <Filter>playGround\NPC\pierre</Filter>
+    </ClInclude>
+    <ClInclude Include="weather.h">
+      <Filter>playGround\weather</Filter>
+    </ClInclude>
+    <ClInclude Include="darkNight.h">
+      <Filter>playGround\weather</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -616,6 +625,12 @@
     </ClCompile>
     <ClCompile Include="npc + direction.cpp">
       <Filter>playGround\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="weather.cpp">
+      <Filter>playGround\weather</Filter>
+    </ClCompile>
+    <ClCompile Include="darkNight.cpp">
+      <Filter>playGround\weather</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
