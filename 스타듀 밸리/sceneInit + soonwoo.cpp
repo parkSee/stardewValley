@@ -8,7 +8,7 @@
 #include "dropItem.h"
 #include "eProgressBar.h"
 #include "pierre.h"
-
+#include "weather.h"
 
 void townScene::soonwooInit()
 {
@@ -44,4 +44,8 @@ void townScene::soonwooInit()
 	storeNpc->init("pierre", "pierre", tagFloat(300, 500));
 	TOWNWORLD->addObject(objectType::HUMAN, storeNpc);
 
+	
+	weather* day = new weather;
+	day->init("weather");
+	TOWNWORLD->addObject(objectType::WEATHER, day);
 }

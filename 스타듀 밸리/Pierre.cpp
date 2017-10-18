@@ -1,9 +1,6 @@
 #include "stdafx.h"
 #include "pierre.h"
 
-
-
-
 HRESULT pierre::init(string name, string imageKey, tagFloat pos)
 {
 	npc::init(name, imageKey, pos);

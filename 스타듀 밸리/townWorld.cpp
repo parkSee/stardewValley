@@ -98,11 +98,16 @@ void townWorld::render()
 	}
 
 	//z오더를 다해 준후에 UI를 그리자
+	for (int i = 0; i < _totalObject[WEATHER].size(); ++i)
+	{
+		_totalObject[WEATHER][i]->render();
+	}
+
 	for (int i = 0; i < _totalObject[INTERFACE].size(); ++i)
 	{
 		_totalObject[INTERFACE][i]->render();
 	}
-	
+
 	for (int i = 0; i < _totalObject[MOUSE].size(); ++i)
 	{
 		_totalObject[MOUSE][i]->render();
