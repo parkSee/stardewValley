@@ -51,6 +51,7 @@ private:
 	MODE _mode;
 	int _selectIdX, _selectIdY;
 	tagInt _mapCam, _spriteCam;
+	image* _spriteImage;
 
 	//샘플타일용
 	KIND _selectKind;

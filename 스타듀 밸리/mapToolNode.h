@@ -47,6 +47,7 @@ namespace SPRITE
 		FARMHOUSE,
 		CROPS,
 		TREES,
+		TOWNINTERIOR,
 		TILESAMPLE,
 		END
 	};
