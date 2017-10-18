@@ -3,6 +3,7 @@
 #include "gameObject.h"
 
 using namespace month;
+using namespace dayDirection;
 
 HRESULT worldTime::init()
 {
@@ -17,6 +18,8 @@ HRESULT worldTime::init()
 	_time.day = 1;
 	_isTimeFlow = true;
 	_saveHour = 6;
+
+	_dayDirection = DEEP_NIGHT;
 
 	return S_OK;
 }
@@ -47,6 +50,7 @@ void worldTime::update()
 					_time.hour = 0;
 					_time.day += 1;
 					_time.ap = "am";
+					_dayDirection = BRIGHT;
 
 					if (_time.day >= 31)
 					{
@@ -63,6 +67,9 @@ void worldTime::update()
 					_time.hour = 0;
 					_time.ap = "pm";
 				}
+				if (_time.ap == "pm" && _time.hour == 19)_dayDirection == dayDirection::EARLY_NIGHT;
+				if (_time.ap == "pm" && _time.hour == 21)_dayDirection == dayDirection::MID_NIGHT;
+				if (_time.ap == "pm" && _time.hour == 22)_dayDirection == dayDirection::DEEP_NIGHT;
 			}
 		}
 	}

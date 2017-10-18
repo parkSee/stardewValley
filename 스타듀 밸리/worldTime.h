@@ -9,6 +9,15 @@ namespace month
 	};
 }
 
+
+namespace dayDirection
+{
+	enum Enum
+	{
+		BRIGHT,EARLY_NIGHT,MID_NIGHT,DEEP_NIGHT
+	};
+}
+
 struct tagTime
 {
 	float	second;
@@ -21,12 +30,13 @@ struct tagTime
 class worldTime : public singletonBase<worldTime>
 {
 private:
-	int				_day;
-	month::Enum		_month;
-	int				_saveHour;
+	int						_day;
+	month::Enum				_month;
+	int						_saveHour;
 public:
-	tagTime			_time;
-	bool			_isTimeFlow;
+	tagTime					_time;
+	bool					_isTimeFlow;
+	dayDirection::Enum		_dayDirection;
 
 	HRESULT init();
 	void release();

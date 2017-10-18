@@ -85,3 +85,12 @@ typedef std::function<void()> CBFUNCTION;
 
 //에너지 바 콜백 함수 관련					
 #define CONSUME	"consume"					//에너지 소모 메세지 이름,msg.data에 깍을 데미지를  입력한다.
+
+
+//========================= 어두워 지는 정도 디파인===================================
+
+#define DARKLEVEL0 0
+#define DARKLEVEL1 100
+#define DARKLEVEL2 150
+#define DARKLEVEL3 200
+#define DARKLEVEL4 247
