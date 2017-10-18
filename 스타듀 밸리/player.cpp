@@ -330,11 +330,11 @@ void player::tileCollision()
 
 		_tile1 = TOWNWORLD->getTile(_indexX - 1, _indexY);
 
-		if (centerY < _tilePos.x)
+		if (centerY < _tilePos.y)
 		{
 			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY+1);
 		}
-		else if (centerY > _tilePos.x)
+		else if (centerY > _tilePos.y)
 		{
 			_tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
 		}
