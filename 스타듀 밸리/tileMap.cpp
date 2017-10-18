@@ -169,9 +169,12 @@ void tileMap::setTileFrameByAround(int indexX, int indexY)
 		for (int i = 0; i < 3; ++i)
 		{
 			terrain[i][j] = TERRAIN::NONE;
+
+			int x = indexX - 1 + i;
+			int y = indexY - 1 + j;
 			//타일 범위 벗어나는거 방지
-			if (i < 0 || i >= TILEX || j < 0 || j >= TILEY) continue;
-			terrain[i][j] = _pTile[indexX - 1 + i][indexY - 1 + j]->getTerrain();
+			if (x < 0 || x >= TILEX || y < 0 || y >= TILEY) continue;
+			terrain[i][j] = _pTile[x][y]->getTerrain();
 		}
 	}
 
@@ -183,6 +186,18 @@ void tileMap::setTileFrameByAround(int indexX, int indexY)
 		break;
 	case TERRAIN::GRASS:
 		//6, 7
+		if (terrain[0][0] == TERRAIN::DIRT &&
+			terrain[1][0] == TERRAIN::GRASS &&
+			terrain[2][0] == TERRAIN::GRASS &&
+			terrain[0][1] == TERRAIN::GRASS &&
+			terrain[2][1] == TERRAIN::GRASS &&
+			terrain[0][2] == TERRAIN::GRASS &&
+			terrain[1][2] == TERRAIN::GRASS &&
+			terrain[2][2] == TERRAIN::GRASS)
+		{
+			tile->setFrameX(3);
+			tile->setFrameY(10);
+		}
 		break;
 	case TERRAIN::WATER:
 		break;

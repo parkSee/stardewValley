@@ -207,6 +207,13 @@ void mapToolScene::render()
 			RectangleMake(getMemDC(), -CAMERAMANAGER->getRenderRc().left + (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE * TILESIZE,
 				-CAMERAMANAGER->getRenderRc().top + (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE * TILESIZE, TILESIZE, TILESIZE);
 			DeleteObject(SelectObject(getMemDC(), oldBrush));
+
+			//인덱스 표시
+			int x = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
+			int y = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
+			char str[64];
+			sprintf_s(str, "(%d, %d)", x, y);
+			TextOut(getMemDC(), _ptMouse.x + 10, _ptMouse.y, str, strlen(str));
 		}
 
 		//현재 선택된 타일 표시
@@ -431,6 +438,15 @@ void mapToolScene::tileSampleToMap()
 				break;
 			case mapToolScene::KIND_TERRAIN:
 				_map->getTile(idx, idy)->init(idx, idy, _selectTerrain);
+				for (int j = idy - 1; j <= idy + 1; ++j)
+				{
+					for (int i = idx - 1; i <= idx + 1; ++i)
+					{
+						//범위 안벗어나게
+						if (i < 0 || i >= TILEX || j < 0 || j >= TILEY) continue;
+						_map->setTileFrameByAround(i, j);
+					}
+				}
 				break;
 			case mapToolScene::KIND_OBJECT:
 				if (_map->getTile(idx, idy)->getPObj() != NULL)
