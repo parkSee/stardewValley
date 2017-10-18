@@ -28,6 +28,7 @@ HRESULT mapToolScene::init()
 	_selectIdX = _selectIdY = 0;
 	_mapCam.x = _spriteCam.x = WINSIZEX / 2;
 	_mapCam.y = _spriteCam.y = WINSIZEY / 2;
+	_spriteImage = NULL;
 
 	for (int i = 0; i < SPRITE::END; ++i)
 	{
@@ -111,6 +112,34 @@ void mapToolScene::update()
 	{
 		CAMERAMANAGER->_pos.y += spd;
 	}
+
+	//현재 선택 스프라이트에 따라서 이미지 바꾸기
+	switch (_sprite)
+	{
+	case SPRITE::OUTDOORS_SPRING:
+		_spriteImage = IMAGEMANAGER->findImage("outdoorsSpring");
+		break;
+	case SPRITE::FARM_BUILDINGS:
+		_spriteImage = IMAGEMANAGER->findImage("farmBuildings");
+		break;
+	case SPRITE::FARMHOUSE:
+		_spriteImage = IMAGEMANAGER->findImage("farmHouse");
+		break;
+	case SPRITE::CROPS:
+		_spriteImage = IMAGEMANAGER->findImage("crops");
+		break;
+	case SPRITE::TREES:
+		_spriteImage = IMAGEMANAGER->findImage("trees");
+		break;
+	case SPRITE::TOWNINTERIOR:
+		_spriteImage = IMAGEMANAGER->findImage("townInterior");
+		break;
+	case SPRITE::TILESAMPLE:
+		_spriteImage = IMAGEMANAGER->findImage("tileSample");
+		break;
+	case SPRITE::END:
+		break;
+	}
 }
 void mapToolScene::render()
 {
@@ -134,58 +163,15 @@ void mapToolScene::render()
 		break;
 	case mapToolScene::MODE_SPRITE:
 	{
-		image* img = NULL;
 		switch (_sprite)
 		{
-		case SPRITE::OUTDOORS_SPRING:
-		{
-			img = IMAGEMANAGER->findImage("outdoorsSpring");
-			img->scaleRender(getMemDC(),
-				-CAMERAMANAGER->getRenderRc().left,
-				-CAMERAMANAGER->getRenderRc().top,
-				img->getWidth() * SCALE,
-				img->getHeight() * SCALE);
-		}
-		break;
-		case SPRITE::FARM_BUILDINGS:
-			img = IMAGEMANAGER->findImage("farmBuildings");
-			img->scaleRender(getMemDC(),
-				-CAMERAMANAGER->getRenderRc().left,
-				-CAMERAMANAGER->getRenderRc().top,
-				img->getWidth() * SCALE,
-				img->getHeight() * SCALE);
-			break;
-		case SPRITE::FARMHOUSE:
-			img = IMAGEMANAGER->findImage("farmHouse");
-			img->scaleRender(getMemDC(),
-				-CAMERAMANAGER->getRenderRc().left,
-				-CAMERAMANAGER->getRenderRc().top,
-				img->getWidth() * SCALE,
-				img->getHeight() * SCALE);
-			break;
-		case SPRITE::CROPS:
-			img = IMAGEMANAGER->findImage("crops");
-			img->scaleRender(getMemDC(),
-				-CAMERAMANAGER->getRenderRc().left,
-				-CAMERAMANAGER->getRenderRc().top,
-				img->getWidth() * SCALE,
-				img->getHeight() * SCALE);
-			break;
-		case SPRITE::TREES:
-			img = IMAGEMANAGER->findImage("trees");
-			img->scaleRender(getMemDC(),
-				-CAMERAMANAGER->getRenderRc().left,
-				-CAMERAMANAGER->getRenderRc().top,
-				img->getWidth() * SCALE,
-				img->getHeight() * SCALE);
-			break;
 		case SPRITE::TILESAMPLE:
-			img = IMAGEMANAGER->findImage("tileSample");
-			img->scaleRender(getMemDC(),
+			_spriteImage = IMAGEMANAGER->findImage("tileSample");
+			_spriteImage->scaleRender(getMemDC(),
 				-CAMERAMANAGER->getRenderRc().left,
 				-CAMERAMANAGER->getRenderRc().top,
-				img->getWidth() * SCALE,
-				img->getHeight() * SCALE);
+				_spriteImage->getWidth() * SCALE,
+				_spriteImage->getHeight() * SCALE);
 
 			//선택하는 렉트 표시하고 이름까지 표시
 			for (int i = 0; i < _vtileSampleSelect.size(); ++i)
@@ -204,11 +190,18 @@ void mapToolScene::render()
 					-CAMERAMANAGER->getRenderRc().top + rc.top + 2, str, strlen(str));
 			}
 			break;
+		default:
+			_spriteImage->scaleRender(getMemDC(),
+				-CAMERAMANAGER->getRenderRc().left,
+				-CAMERAMANAGER->getRenderRc().top,
+				_spriteImage->getWidth() * SCALE,
+				_spriteImage->getHeight() * SCALE);
+			break;
 		}
 
 		//마우스 대고있는 칸 표시
-		if (0 <= CAMERAMANAGER->getRenderRc().left + _ptMouse.x && CAMERAMANAGER->getRenderRc().left + _ptMouse.x <= img->getWidth() * SCALE &&
-			0 <= CAMERAMANAGER->getRenderRc().top + _ptMouse.y && CAMERAMANAGER->getRenderRc().top + _ptMouse.y <= img->getHeight() * SCALE)
+		if (0 <= CAMERAMANAGER->getRenderRc().left + _ptMouse.x && CAMERAMANAGER->getRenderRc().left + _ptMouse.x <= _spriteImage->getWidth() * SCALE &&
+			0 <= CAMERAMANAGER->getRenderRc().top + _ptMouse.y && CAMERAMANAGER->getRenderRc().top + _ptMouse.y <= _spriteImage->getHeight() * SCALE)
 		{
 			HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), GetStockObject(NULL_BRUSH));
 			RectangleMake(getMemDC(), -CAMERAMANAGER->getRenderRc().left + (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE * TILESIZE,
@@ -245,6 +238,9 @@ void mapToolScene::render()
 				break;
 			case SPRITE::TREES:
 				TextOut(getMemDC(), rc.left + 2, rc.top + 2, "Trees", strlen("Trees"));
+				break;
+			case SPRITE::TOWNINTERIOR:
+				TextOut(getMemDC(), rc.left + 2, rc.top + 2, "Town Interior", strlen("Town Interior"));
 				break;
 			case SPRITE::TILESAMPLE:
 				TextOut(getMemDC(), rc.left + 2, rc.top + 2, "TileSample", strlen("TileSample"));

@@ -11,12 +11,19 @@ void player::eating()
 
 void player::lbuttonClick(tagMessage msg)
 {
+	if (_state == AXE_DOWN || _state == AXE_LEFT || _state == AXE_UP || _state == AXE_RIGHT || _state == HOE_DOWN || _state == HOE_LEFT || _state == HOE_UP ||
+		_state== HOE_RIGHT || _state == SICKLE_DOWN || _state == SICKLE_LEFT || _state == SICKLE_UP || _state == SICKLE_RIGHT || _state == PIXHOE_DOWN || 
+		_state == PIXHOE_LEFT || _state == PIXHOE_UP || _state == PIXHOE_RIGHT || _state == WATER_DOWN || _state == WATER_LEFT || _state == WATER_UP || 
+		_state == WATER_RIGHT)return;
+
+	eProgressBar* energe = (eProgressBar*)TOWNWORLD->findObject(objectType::INTERFACE, "energyBar");
+	energe->sendMessage(tagMessage("consume", 0.0f, 1));
+
 	if (_item->type == itemType::TOOL)
 	{
 		if (_item->name == "µµ³¢")
 		{
-			eProgressBar* energe = (eProgressBar*)TOWNWORLD->findObject(objectType::INTERFACE, "energyBar");
-			energe->sendMessage(tagMessage("consume", 0.0f, 1));
+     
 			switch (_state)
 			{
 			case playerState::STAND: case playerState::DOWN_RUN:
