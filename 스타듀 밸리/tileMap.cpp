@@ -155,13 +155,25 @@ void tileMap::setTileFrameByAround(int indexX, int indexY)
 {
 	mapToolTile* tile = _pTile[indexX][indexY];
 
-	TERRAIN::Enum left, right, top, bottom;
-	left = right = top = bottom = TERRAIN::NONE;
+	//TERRAIN::Enum left, right, top, bottom;
+	//left = right = top = bottom = TERRAIN::NONE;
+	//
+	//left = _pTile[indexX - 1][indexY]->getTerrain();
+	//right = _pTile[indexX + 1][indexY]->getTerrain();
+	//top = _pTile[indexX][indexY - 1]->getTerrain();
+	//bottom = _pTile[indexX][indexY + 1]->getTerrain();
 
-	left = _pTile[indexX - 1][indexY]->getTerrain();
-	right = _pTile[indexX + 1][indexY]->getTerrain();
-	top = _pTile[indexX][indexY - 1]->getTerrain();
-	bottom = _pTile[indexX][indexY + 1]->getTerrain();
+	TERRAIN::Enum terrain[3][3];
+	for (int j = 0; j < 3; ++j)
+	{
+		for (int i = 0; i < 3; ++i)
+		{
+			terrain[i][j] = TERRAIN::NONE;
+			//타일 범위 벗어나는거 방지
+			if (i < 0 || i >= TILEX || j < 0 || j >= TILEY) continue;
+			terrain[i][j] = _pTile[indexX - 1 + i][indexY - 1 + j]->getTerrain();
+		}
+	}
 
 	switch (tile->getTerrain())
 	{
@@ -170,6 +182,7 @@ void tileMap::setTileFrameByAround(int indexX, int indexY)
 	case TERRAIN::DIRT:
 		break;
 	case TERRAIN::GRASS:
+		//6, 7
 		break;
 	case TERRAIN::WATER:
 		break;
