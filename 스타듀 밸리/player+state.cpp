@@ -386,7 +386,7 @@ void player::stateUpdate(playerState::Enum state)
 		break;
 	}
 
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 80, 50, 20);
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 5, 50, 20);
 
 	tileCollision();
 }
