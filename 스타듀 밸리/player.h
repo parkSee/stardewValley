@@ -83,6 +83,8 @@ private:
 	mapToolTile* _tile1;
 	mapToolTile* _tile2;
 
+	tagFloat	_tilePos;
+
 	int _indexX, _indexY;
 	RECT _rcCollision;							//충돌체크용 가상 렉트
 

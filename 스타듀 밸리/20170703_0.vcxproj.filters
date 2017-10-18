@@ -179,7 +179,7 @@
       <UniqueIdentifier>{7e5aff7e-8350-448b-98ff-851300043cfd}</UniqueIdentifier>
     </Filter>
     <Filter Include="playGround\NPC\pierre">
-      <UniqueIdentifier>{82831ab8-ac20-42d2-9281-4da94859a09e}</UniqueIdentifier>
+      <UniqueIdentifier>{6e733d29-2fd5-48c5-9ba3-692bd0f1e475}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -321,6 +321,9 @@
     <ClInclude Include="item.h">
       <Filter>playGround\item</Filter>
     </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>playGround\NPC</Filter>
+    </ClInclude>
     <ClInclude Include="motherObject.h">
       <Filter>playGround\map</Filter>
     </ClInclude>
@@ -371,9 +374,6 @@
     </ClInclude>
     <ClInclude Include="eProgressBar.h">
       <Filter>playGround\UI\energyProgress</Filter>
-    </ClInclude>
-    <ClInclude Include="npc.h">
-      <Filter>playGround\NPC</Filter>
     </ClInclude>
     <ClInclude Include="pierre.h">
       <Filter>playGround\NPC\pierre</Filter>
@@ -536,6 +536,9 @@
     <ClCompile Include="item.cpp">
       <Filter>playGround\item</Filter>
     </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>playGround\NPC</Filter>
+    </ClCompile>
     <ClCompile Include="motherObject.cpp">
       <Filter>playGround\map</Filter>
     </ClCompile>
@@ -602,16 +605,16 @@
     <ClCompile Include="eProgressBar.cpp">
       <Filter>playGround\UI\energyProgress</Filter>
     </ClCompile>
-    <ClCompile Include="npc.cpp">
-      <Filter>playGround\NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="npc + direction.cpp">
-      <Filter>playGround\NPC</Filter>
+    <ClCompile Include="tileMap + AStar.cpp">
+      <Filter>playGround\mapToolScene</Filter>
     </ClCompile>
     <ClCompile Include="pierre.cpp">
       <Filter>playGround\NPC\pierre</Filter>
     </ClCompile>
     <ClCompile Include="npc + aStar.cpp">
+      <Filter>playGround\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="npc + direction.cpp">
       <Filter>playGround\NPC</Filter>
     </ClCompile>
   </ItemGroup>
