@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "player.h"
 #include "inventory.h"
+#include "eProgressBar.h"
 
 
 void player::stateUpdate(playerState::Enum state)
@@ -161,7 +162,6 @@ void player::stateUpdate(playerState::Enum state)
 
 		//=======================================================================================¹«±â
 	case playerState::AXE_RIGHT:
-	
 		break;
 	case playerState::AXE_LEFT:
 		break;

@@ -115,7 +115,7 @@ void tree1_bottom::bottomAttack()
 }
 void tree1_bottom::render()
 {
-	_image->render(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x, -CAMERAMANAGER->getRenderRc().top + _pos.y);
+	_image->alphaScaleFrameRender(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x, -CAMERAMANAGER->getRenderRc().top + _pos.y, 0, 0, 70, 70, 0.0f);
 }
 
 //---------------------------------------------------
@@ -171,7 +171,7 @@ void tree1_top::topAttack()
 }
 void tree1_top::render()
 {
-	_image->render(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x - 15, -CAMERAMANAGER->getRenderRc().top + _pos.y - 80);
+	_image->alphaScaleFrameRender(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x - 65 , -CAMERAMANAGER->getRenderRc().top + _pos.y - 230, 0, 0, 200, 250, 0.0f);
 }
 
 void tree1_top::setDestroy(float time)
