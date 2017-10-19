@@ -139,7 +139,8 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	//¸ÔÀÚ ³È³È
 
-	int eat[] = {}
+	int eat[] = { 192,193,194,195,196,197,198,199,100,101 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerEat", "player", eat, 10, 10, false);
 
 //========================================================================================================
 	
