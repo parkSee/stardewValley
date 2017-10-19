@@ -18,6 +18,9 @@ private:
 	{
 		int idX, idY;
 		TERRAIN::Enum terrain;
+
+		char imageKey[64];
+		int frameX, frameY;
 	};
 	struct tagObjectSave
 	{
@@ -46,8 +49,10 @@ public:
 	void update();
 	void render();
 
-	void save();
-	void load();
+	void mapSave();
+	void mapLoad();
+	void objectSave();
+	void objectLoad();
 
 	void setTileFrameByAround(int indexX, int indexY);
 

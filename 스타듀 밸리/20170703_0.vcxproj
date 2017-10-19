@@ -218,6 +218,7 @@
     <ClCompile Include="testObject.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="tileMap + AStar.cpp" />
+    <ClCompile Include="tileMap + saveLoad.cpp" />
     <ClCompile Include="tileMap.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />

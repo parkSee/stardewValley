@@ -95,9 +95,12 @@ private:
 
 
 	int _indexX, _indexY;
-	RECT _rcCollision;							//충돌체크용 가상 렉트
+						
 
 public:
+
+	RECT _rcCollision;				//충돌체크용 가상 렉트
+
 	HRESULT init(string objName, tagFloat pos);
 	void release();
 	void update();

@@ -187,9 +187,6 @@
     <Filter Include="playGround\NPC\caroline">
       <UniqueIdentifier>{7c6597d4-77b1-4963-9f83-4440a101f2b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\UI\selectUI">
-      <UniqueIdentifier>{0c55e474-9862-4ffc-913b-73fa3cfa1a14}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -398,9 +395,6 @@
     </ClInclude>
     <ClInclude Include="caroline.h">
       <Filter>playGround\NPC\caroline</Filter>
-    </ClInclude>
-    <ClInclude Include="selectUI.h">
-      <Filter>playGround\UI\selectUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -656,8 +650,8 @@
     <ClCompile Include="caroline.cpp">
       <Filter>playGround\NPC\caroline</Filter>
     </ClCompile>
-    <ClCompile Include="selectUI.cpp">
-      <Filter>playGround\UI\selectUI</Filter>
+    <ClCompile Include="tileMap + saveLoad.cpp">
+      <Filter>playGround\mapToolScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
