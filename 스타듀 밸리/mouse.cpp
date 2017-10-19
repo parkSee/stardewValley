@@ -4,6 +4,7 @@
 #include "UI.h"
 #include "inventory.h"
 #include "item.h"
+#include "player.h"
 
 HRESULT mouse::init(string name)
 {
@@ -114,6 +115,15 @@ void mouse::mouseControll()
 					inven->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), vItem[i]->name));
 				}
 			}
+		}
+	}
+
+	if (inven->getTargetItem()->type == itemType::FOOD)
+	{
+
+		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+		{
+			//if(PtInRect(&))
 		}
 	}
 	

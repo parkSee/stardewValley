@@ -63,5 +63,8 @@ void loadingScene::soonwoo()
 	_loading->loadFrameImage("caroline", "resource/npc/calorine.bmp", 128, 128, 4, 4, true, RGB(255, 0, 255));
 	//어둠 타일 이미지
 	_loading->loadFrameImage("dark", "resource/UI/fadeOut.bmp", TILESIZE, TILESIZE, true, RGB(255, 0, 255));
+
+	//선택지 UI 창 이미지
+	_loading->loadImage("selectUI", "resource/UI/selectUI.bmp", 859, 276, true, RGB(255, 0, 255));
 	
 }
