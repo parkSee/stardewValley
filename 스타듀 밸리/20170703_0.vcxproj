@@ -121,6 +121,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="seed.h" />
+    <ClInclude Include="shadow.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="sceneInit + dongjin.cpp" />
     <ClCompile Include="seed.cpp" />
     <ClCompile Include="seeyound + imageLoad.cpp" />
+    <ClCompile Include="shadow.cpp" />
     <ClCompile Include="soowoo + imageLoad.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stdafx.cpp">

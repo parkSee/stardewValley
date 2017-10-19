@@ -387,6 +387,9 @@
     <ClInclude Include="darkNight.h">
       <Filter>playGround\weather</Filter>
     </ClInclude>
+    <ClInclude Include="shadow.h">
+      <Filter>playGround\player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -631,6 +634,9 @@
     </ClCompile>
     <ClCompile Include="darkNight.cpp">
       <Filter>playGround\weather</Filter>
+    </ClCompile>
+    <ClCompile Include="shadow.cpp">
+      <Filter>playGround\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

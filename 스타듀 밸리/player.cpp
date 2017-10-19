@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "player.h"
 #include "inventory.h"
+#include "shadow.h"
 
 HRESULT player::init(string objName, tagFloat pos)
 {
@@ -152,6 +153,9 @@ HRESULT player::init(string objName, tagFloat pos)
 	_indexX = (int)(_tilePos.x / (TILESIZE));														//나의 인덱스 번호를 구할때 좀더 간결하게 쓰기위해서도 있다.
 	_indexY = (int)(_tilePos.y / (TILESIZE));
 
+	_shadow = new shadow;
+	_shadow->init(objName, "shadow",tagFloat( this->_pos.x - 30, this->_pos.y));
+
 
 	tem = tagItem("도끼", "나무를 밸 수 있다", tagFloat(1000000,10000000), 1, itemType::TOOL);		//아이템 초기값
 	_item = &tem;
@@ -193,6 +197,7 @@ HRESULT player::init(string objName, tagFloat pos)
 void player::release()
 {
 	gameObject::release();
+	_shadow->release();
 }
 void player::update() 
 {
@@ -220,6 +225,11 @@ void player::update()
 	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 
+
+	_shadow->_pos.x = this->_pos.x;
+	_shadow->_pos.y = this->_pos.y -20;
+
+	_shadow->update();
 }
 void player::render()
 {
@@ -236,8 +246,8 @@ void player::render()
 
 	//RectangleMakeCenter(getMemDC(), _pos.x - rc.left, _pos.y - rc.top, 30, 30);									//_pos 좌표
 
-	Rectangle(getMemDC(), _rcCollision.left - rc.left, _rcCollision.top - rc.top,								//타일 충돌렉트
-		_rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
+	//Rectangle(getMemDC(), _rcCollision.left - rc.left, _rcCollision.top - rc.top,								//타일 충돌렉트
+	//	_rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
 
 	//Rectangle(getMemDC(), _tilePos.x - rc.left, _tilePos.y - rc.top, 50, 50);
 
@@ -267,6 +277,7 @@ void player::render()
 		sprintf(str, "%d,%d", _indexX, _indexY);
 		TextOut(getMemDC(), 10, 300, str, strlen(str));
 	}
+	_shadow->render();
 	//EllipseMakeCenter(getMemDC(), _pos.x-rc.left, _pos.y-rc.top, 10, 10);
 }
 
