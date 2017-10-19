@@ -60,6 +60,8 @@ void loadingScene::soonwoo()
 
 	//========================================NPC=====================================
 	_loading->loadFrameImage("pierre", "resource/npc/pierre.bmp", 128, 128,4,4, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("caroline", "resource/npc/calorine.bmp", 128, 128, 4, 4, true, RGB(255, 0, 255));
+	//어둠 타일 이미지
 	_loading->loadFrameImage("dark", "resource/UI/fadeOut.bmp", TILESIZE, TILESIZE, true, RGB(255, 0, 255));
 	
 }

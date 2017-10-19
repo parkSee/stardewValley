@@ -5,9 +5,13 @@
 #include "mapToolTile.h"
 #include "eProgressBar.h"
 #include "tree1.h"
+
+
 #define SPEED 4
 #define CARRYX 30
 #define CARRYY 160
+
+class shadow;
 
 namespace playerState
 {
@@ -86,7 +90,7 @@ private:
 	mapToolTile* _tile1;
 	mapToolTile* _tile2;
 	tree1_bottom* _tree;
-
+	shadow* _shadow;
 	tagFloat	_tilePos;
 
 
@@ -118,6 +122,8 @@ public:
 
 	int getIndexX(void) { return _indexX; }
 	int getIndexY(void) { return _indexY; }
+
+
 
 	player() {};
 	~player() {};
