@@ -5,7 +5,6 @@
 #include "mapToolTile.h"
 #include "eProgressBar.h"
 #include "tree1.h"
-#include <functional>
 
 
 #define SPEED 4
@@ -13,7 +12,6 @@
 #define CARRYY 160
 
 class shadow;
-typedef std::function<void()>EAT_CALLBACK;
 
 namespace playerState
 {
@@ -108,14 +106,7 @@ private:
 	tagFloat						_eatCenter;
 	int								_indexX, _indexY;
 	
-	//================================================ ฤÝน้
 	
-	tagEatItem						_start;
-	tagEatItem						_end;
-	float							_range;
-	float							_worldTimeCount;
-	float							_time;
-	EAT_CALLBACK					_cbEat;
 
 public:
 
@@ -132,7 +123,6 @@ public:
 	void lbuttonClick(tagMessage msg);
 	void changeTargetItem(tagMessage msg);
 	void tileCollision();
-	void moveToEat(int endX, int endY, float time, EAT_CALLBACK cd = NULL);
 	RECT rectMakeBottom();
 
 

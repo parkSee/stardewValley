@@ -21,11 +21,6 @@ void player::eating(tagMessage msg)
 	
 }
 
-void player::moveToEat(int endX, int endY, float time, EAT_CALLBACK cd)
-{
-	
-}
-
 
 void player::lbuttonClick(tagMessage msg)
 {
