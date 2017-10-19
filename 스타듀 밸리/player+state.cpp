@@ -164,6 +164,11 @@ void player::stateUpdate(playerState::Enum state)
 	case playerState::AXE_RIGHT:
 		break;
 	case playerState::AXE_LEFT:
+		if (_tile1->getPObj() != NULL)
+		{
+			exit(0);
+			_tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
+		}
 		break;
 	case playerState::AXE_UP:
 		break;
@@ -386,7 +391,7 @@ void player::stateUpdate(playerState::Enum state)
 		break;
 	}
 
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 5, 50, 20);
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
 
 	tileCollision();
 }
