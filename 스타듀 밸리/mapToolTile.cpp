@@ -24,9 +24,9 @@ HRESULT mapToolTile::init(int idX, int idY, TERRAIN::Enum terrain)
 	switch (_terrain)
 	{
 	case TERRAIN::NONE:
-		//기본적으로 흙으로 설정
+		//비어있으면 타일인지 모르니까 나뭇잎 하나
 		_image = IMAGEMANAGER->findImage("outdoorsSpring");
-		_frameX = 3; _frameY = 6;
+		_frameX = 10; _frameY = 4;
 		break;
 	case TERRAIN::DIRT:
 		_image = IMAGEMANAGER->findImage("outdoorsSpring");
@@ -39,6 +39,8 @@ HRESULT mapToolTile::init(int idX, int idY, TERRAIN::Enum terrain)
 	case TERRAIN::WATER:
 		_image = IMAGEMANAGER->findImage("outdoorsSpring");
 		_frameX = 8; _frameY = 13;
+		break;
+	case TERRAIN::END:
 		break;
 	}
 

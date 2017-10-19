@@ -169,9 +169,12 @@ void tileMap::setTileFrameByAround(int indexX, int indexY)
 		for (int i = 0; i < 3; ++i)
 		{
 			terrain[i][j] = TERRAIN::NONE;
+
+			int x = indexX - 1 + i;
+			int y = indexY - 1 + j;
 			//Å¸ÀÏ ¹üÀ§ ¹þ¾î³ª´Â°Å ¹æÁö
-			if (i < 0 || i >= TILEX || j < 0 || j >= TILEY) continue;
-			terrain[i][j] = _pTile[indexX - 1 + i][indexY - 1 + j]->getTerrain();
+			if (x < 0 || x >= TILEX || y < 0 || y >= TILEY) continue;
+			terrain[i][j] = _pTile[x][y]->getTerrain();
 		}
 	}
 
@@ -182,7 +185,92 @@ void tileMap::setTileFrameByAround(int indexX, int indexY)
 	case TERRAIN::DIRT:
 		break;
 	case TERRAIN::GRASS:
-		//6, 7
+		if (terrain[0][0] == TERRAIN::GRASS && terrain[1][0] == TERRAIN::GRASS && terrain[2][0] == TERRAIN::GRASS &&
+			terrain[0][1] == TERRAIN::GRASS && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::GRASS &&
+			terrain[0][2] == TERRAIN::GRASS && terrain[1][2] == TERRAIN::GRASS && terrain[2][2] == TERRAIN::GRASS)
+		{		//ÁÖº¯ ´Ù ÀÜµð
+			tile->setFrameX(0); tile->setFrameY(7); break;
+		}
+		if (terrain[1][0] == TERRAIN::DIRT &&
+			terrain[0][1] == TERRAIN::DIRT && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::DIRT &&
+			terrain[1][2] == TERRAIN::DIRT)
+		{		//»óÇÏÁÂ¿ì Èë
+			tile->setFrameX(6); tile->setFrameY(7); break;
+		}
+		if (terrain[0][0] == TERRAIN::DIRT && terrain[1][0] == TERRAIN::GRASS && terrain[2][0] == TERRAIN::GRASS &&
+			terrain[0][1] == TERRAIN::GRASS && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::GRASS &&
+			terrain[0][2] == TERRAIN::GRASS && terrain[1][2] == TERRAIN::GRASS && terrain[2][2] == TERRAIN::GRASS)
+		{		//¿ÞÂÊ À§¸¸ Èë
+			tile->setFrameX(3); tile->setFrameY(10); break;
+		}
+		if (terrain[0][0] == TERRAIN::GRASS && terrain[1][0] == TERRAIN::GRASS && terrain[2][0] == TERRAIN::DIRT &&
+			terrain[0][1] == TERRAIN::GRASS && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::GRASS &&
+			terrain[0][2] == TERRAIN::GRASS && terrain[1][2] == TERRAIN::GRASS && terrain[2][2] == TERRAIN::GRASS)
+		{		//¿À¸¥ÂÊ À§¸¸ Èë
+			tile->setFrameX(0); tile->setFrameY(10); break;
+		}
+		if (terrain[0][0] == TERRAIN::GRASS && terrain[1][0] == TERRAIN::GRASS && terrain[2][0] == TERRAIN::GRASS &&
+			terrain[0][1] == TERRAIN::GRASS && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::GRASS &&
+			terrain[0][2] == TERRAIN::DIRT && terrain[1][2] == TERRAIN::GRASS && terrain[2][2] == TERRAIN::GRASS)
+		{		//¿ÞÂÊ ¾Æ·¡¸¸ Èë
+			tile->setFrameX(3); tile->setFrameY(8); break;
+		}
+		if (terrain[0][0] == TERRAIN::GRASS && terrain[1][0] == TERRAIN::GRASS && terrain[2][0] == TERRAIN::GRASS &&
+			terrain[0][1] == TERRAIN::GRASS && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::GRASS &&
+			terrain[0][2] == TERRAIN::GRASS && terrain[1][2] == TERRAIN::GRASS && terrain[2][2] == TERRAIN::DIRT)
+		{		//¿À¸¥ÂÊ ¾Æ·¡¸¸ Èë
+			tile->setFrameX(0); tile->setFrameY(8); break;
+		}
+		if (terrain[1][0] == TERRAIN::GRASS && terrain[2][0] == TERRAIN::GRASS &&
+			terrain[0][1] == TERRAIN::DIRT && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::GRASS &&
+			terrain[1][2] == TERRAIN::GRASS && terrain[2][2] == TERRAIN::GRASS)
+		{		//¿ÞÂÊ Èë
+			tile->setFrameX(3); tile->setFrameY(9); break;
+		}
+		if (terrain[0][0] == TERRAIN::GRASS && terrain[1][0] == TERRAIN::GRASS &&
+			terrain[0][1] == TERRAIN::GRASS && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::DIRT &&
+			terrain[0][2] == TERRAIN::GRASS && terrain[1][2] == TERRAIN::GRASS)
+		{		//¿À¸¥ÂÊ Èë
+			tile->setFrameX(0); tile->setFrameY(9); break;
+		}
+		if (terrain[1][0] == TERRAIN::DIRT &&
+			terrain[0][1] == TERRAIN::GRASS && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::GRASS &&
+			terrain[0][2] == TERRAIN::GRASS && terrain[1][2] == TERRAIN::GRASS && terrain[2][2] == TERRAIN::GRASS)
+		{		//À§ÂÊ Èë
+			tile->setFrameX(1); tile->setFrameY(10); break;
+		}
+		if (terrain[0][0] == TERRAIN::GRASS && terrain[1][0] == TERRAIN::GRASS && terrain[2][0] == TERRAIN::GRASS &&
+			terrain[0][1] == TERRAIN::GRASS && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::GRASS &&
+			terrain[1][2] == TERRAIN::DIRT)
+		{		//¾Æ·¡ÂÊ Èë
+			tile->setFrameX(1); tile->setFrameY(8); break;
+		}
+		if (terrain[1][0] == TERRAIN::DIRT &&
+			terrain[0][1] == TERRAIN::DIRT && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::GRASS &&
+			terrain[1][2] == TERRAIN::GRASS && terrain[2][2] == TERRAIN::GRASS)
+		{		//¿ÞÂÊ À§ ³¡ ÀÜµð
+			tile->setFrameX(3); tile->setFrameY(7); break;
+		}
+		if (terrain[1][0] == TERRAIN::DIRT &&
+			terrain[0][1] == TERRAIN::GRASS && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::DIRT &&
+			terrain[0][2] == TERRAIN::GRASS && terrain[1][2] == TERRAIN::GRASS)
+		{		//¿À¸¥ÂÊ À§ ³¡ ÀÜµð
+			tile->setFrameX(2); tile->setFrameY(10); break;
+		}
+		if (terrain[1][0] == TERRAIN::GRASS && terrain[2][0] == TERRAIN::GRASS &&
+			terrain[0][1] == TERRAIN::DIRT && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::GRASS &&
+			terrain[1][2] == TERRAIN::DIRT)
+		{		//¿ÞÂÊ ¾Æ·¡ ³¡ ÀÜµð
+			tile->setFrameX(2); tile->setFrameY(7); break;
+		}
+		if (terrain[0][0] == TERRAIN::GRASS && terrain[1][0] == TERRAIN::GRASS &&
+			terrain[0][1] == TERRAIN::GRASS && terrain[1][1] == TERRAIN::GRASS && terrain[2][1] == TERRAIN::DIRT &&
+			terrain[1][2] == TERRAIN::DIRT)
+		{		//¿À¸¥ÂÊ ¾Æ·¡ ³¡ ÀÜµð
+			tile->setFrameX(2); tile->setFrameY(8); break;
+		}
+		//ÀÔ·ÂµÈ »óÈ² ¾Æ´Ï¸é ÇÏ³ªÂ¥¸® ÀÜµð·Î
+		tile->setFrameX(6); tile->setFrameY(7); break;
 		break;
 	case TERRAIN::WATER:
 		break;

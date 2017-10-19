@@ -30,6 +30,7 @@ HRESULT mapToolScene::init()
 	_mapCam.y = _spriteCam.y = WINSIZEY / 2;
 	_spriteImage = NULL;
 
+	//스프라이트 개수만큼 렉트 생성 (스프라이트 변경할 버튼)
 	for (int i = 0; i < SPRITE::END; ++i)
 	{
 		RECT rc = RectMake(WINSIZEX - 210, 10 + i * 50, 200, 40);
@@ -54,6 +55,15 @@ void mapToolScene::update()
 	if (KEYMANAGER->isOnceKeyDown(VK_F2))
 	{
 		_map->load();
+
+		//로드 하고 지형 종류에 따라서 프레임 맞춰준다
+		for (int j = 0; j < TILEY; ++j)
+		{
+			for (int i = 0; i < TILEX; ++i)
+			{
+				_map->setTileFrameByAround(i, j);
+			}
+		}
 	}
 
 	//탭 누르면 맵 - 스프라이트 전환
@@ -250,6 +260,13 @@ void mapToolScene::render()
 	}
 	break;
 	}
+
+	//마우스 인덱스 표시
+	int x = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
+	int y = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
+	char str[64];
+	sprintf_s(str, "(%d, %d)", x, y);
+	TextOut(getMemDC(), _ptMouse.x + 10, _ptMouse.y, str, strlen(str));
 }
 
 
@@ -431,6 +448,15 @@ void mapToolScene::tileSampleToMap()
 				break;
 			case mapToolScene::KIND_TERRAIN:
 				_map->getTile(idx, idy)->init(idx, idy, _selectTerrain);
+				for (int j = idy - 1; j <= idy + 1; ++j)
+				{
+					for (int i = idx - 1; i <= idx + 1; ++i)
+					{
+						//범위 안벗어나게
+						if (i < 0 || i >= TILEX || j < 0 || j >= TILEY) continue;
+						_map->setTileFrameByAround(i, j);
+					}
+				}
 				break;
 			case mapToolScene::KIND_OBJECT:
 				if (_map->getTile(idx, idy)->getPObj() != NULL)

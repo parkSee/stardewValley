@@ -59,8 +59,18 @@ public:
 	inline void setSelectIdX(int x) { _selectIdX = x; }
 	inline void setSelectIdY(int y) { _selectIdY = y; }
 
+	inline bool isInRange(int indexX, int indexY)
+	{
+		if (0 <= indexX && indexX < TILEX && 0 <= indexY && indexY < TILEY) return true;
+		return false;
+	}
+
 	//Å¸ÀÏ °Ù
-	inline mapToolTile* getTile(int indexX, int indexY) { return _pTile[indexX][indexY]; }
+	inline mapToolTile* getTile(int indexX, int indexY)
+	{
+		if (0 <= indexX && indexX < TILEX && 0 <= indexY && indexY < TILEY) return _pTile[indexX][indexY];
+		return NULL;
+	}
 
 	tileMap() {}
 	~tileMap() {}
