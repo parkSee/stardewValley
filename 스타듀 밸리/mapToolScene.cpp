@@ -54,11 +54,11 @@ void mapToolScene::update()
 	//F1, F2 세이브 로드
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
 	{
-		_map->save();
+		_map->mapSave();
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_F2))
 	{
-		_map->load();
+		_map->mapLoad();
 
 		//로드하고나서 지형 종류에 따라서 프레임 맞춰준다
 		for (int j = 0; j < TILEY; ++j)
@@ -96,7 +96,7 @@ void mapToolScene::update()
 	case mapToolScene::MODE_MAP:
 		//_map->update();
 
-		tileSampleToMap();
+		modeMapUpdate();
 
 		TOWNWORLD->update();
 		break;
@@ -253,24 +253,31 @@ void mapToolScene::changeSprite(SPRITE::Enum spriteEnum)
 	{
 	case SPRITE::OUTDOORS_SPRING:
 		_spriteImage = IMAGEMANAGER->findImage("outdoorsSpring");
+		_spriteImageKey = "outdoorsSpring";
 		break;
 	case SPRITE::FARM_BUILDINGS:
 		_spriteImage = IMAGEMANAGER->findImage("farmBuildings");
+		_spriteImageKey = "farmBuildings";
 		break;
 	case SPRITE::FARMHOUSE:
 		_spriteImage = IMAGEMANAGER->findImage("farmHouse");
+		_spriteImageKey = "farmHouse";
 		break;
 	case SPRITE::CROPS:
 		_spriteImage = IMAGEMANAGER->findImage("crops");
+		_spriteImageKey = "crops";
 		break;
 	case SPRITE::TREES:
 		_spriteImage = IMAGEMANAGER->findImage("trees");
+		_spriteImageKey = "trees";
 		break;
 	case SPRITE::TOWNINTERIOR:
 		_spriteImage = IMAGEMANAGER->findImage("townInterior");
+		_spriteImageKey = "townInterior";
 		break;
 	case SPRITE::TILESAMPLE:
 		_spriteImage = IMAGEMANAGER->findImage("tileSample");
+		_spriteImageKey = "tileSample";
 		break;
 	case SPRITE::END:
 		break;
@@ -389,11 +396,19 @@ void mapToolScene::leftClickInSprite()
 				return;
 			}
 		}
+
+		//선택 구조체 안만들어둔 부분 누르면 일반 스프라이트처럼 사용 가능하게
+		_selectKind = KIND_NONE;
+		_selectIdX = ABSMOUSEX / TILESIZE;
+		_selectIdY = ABSMOUSEY / TILESIZE;
+
 		break;
 	case SPRITE::END:
 		break;
 	default:
 		//이미지는 이미 스프라이트 선택하면서 이미지값 바뀌어있으므로 그대로 넣으면 된다
+		_selectIdX = ABSMOUSEX / TILESIZE;
+		_selectIdY = ABSMOUSEY / TILESIZE;
 		break;
 	}
 }
@@ -444,63 +459,86 @@ void mapToolScene::setTileSampleSelect()
 	tag.str = "farmland";
 	_vtileSampleSelect.push_back(tag);
 }
-void mapToolScene::tileSampleToMap()
+
+void mapToolScene::modeMapUpdate()
 {
+	//마우스 절대좌표의 인덱스 구해놓고 쓰자
+	int idx = ABSMOUSEX / TILESIZE;
+	int idy = ABSMOUSEY / TILESIZE;
+
+	//좌클릭
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 	{
-		if (0 <= (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) &&
-			(CAMERAMANAGER->getRenderRc().left + _ptMouse.x) < TILEX * TILESIZE &&
-			0 <= (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) &&
-			(CAMERAMANAGER->getRenderRc().top + _ptMouse.y) < TILEY * TILESIZE)
+		if (0 <= idx && idx < TILEX &&
+			0 <= idy && idy < TILEY)
 		{
-			int idx = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
-			int idy = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
-
-			switch (_selectKind)
+			switch (_sprite)
 			{
-			case mapToolScene::KIND_NONE:
-				break;
-			case mapToolScene::KIND_TERRAIN:
-				_map->getTile(idx, idy)->init(idx, idy, _selectTerrain);
-				for (int j = idy - 1; j <= idy + 1; ++j)
+			case SPRITE::TILESAMPLE:
+				switch (_selectKind)
 				{
-					for (int i = idx - 1; i <= idx + 1; ++i)
+				case mapToolScene::KIND_NONE:
+					//일반 스프라이트처럼
+					_map->getTile(idx, idy)->setTerrain(TERRAIN::SOMETHING);
+					_map->getTile(idx, idy)->changeImage(_spriteImageKey);
+					//_map->getTile(idx, idy)->setImage(_spriteImage);
+					_map->getTile(idx, idy)->setFrameX(_selectIdX);
+					_map->getTile(idx, idy)->setFrameY(_selectIdY);
+					break;
+				case mapToolScene::KIND_TERRAIN:
+					_map->getTile(idx, idy)->init(idx, idy, _selectTerrain);
+
+					//주변 9타일 프레임 조정
+					for (int j = idy - 1; j <= idy + 1; ++j)
 					{
-						//범위 안벗어나게
-						if (i < 0 || i >= TILEX || j < 0 || j >= TILEY) continue;
-						_map->setTileFrameByAround(i, j);
+						for (int i = idx - 1; i <= idx + 1; ++i)
+						{
+							//범위 안벗어나게
+							if (i < 0 || i >= TILEX || j < 0 || j >= TILEY) continue;
+							_map->setTileFrameByAround(i, j);
+						}
 					}
+					break;
+				case mapToolScene::KIND_OBJECT:
+					//타일에 오브젝트 올라가있으면 없애버리기
+					if (_map->getTile(idx, idy)->getPObj() != NULL)
+					{
+						_map->getTile(idx, idy)->getPObj()->setDestroy();
+						_map->getTile(idx, idy)->setPObj(NULL);
+					}
+
+					//타일에 오브젝트 만들어서 올리기
+					testObject* tempobj = new testObject;
+					tempobj->init("test", "outdoorsSpring", tagFloat(idx * TILESIZE, idy * TILESIZE), pivot::LEFT_TOP);
+					tempobj->setIdX(idx);
+					tempobj->setIdY(idy);
+					tempobj->setFrameX(1);
+					tempobj->setFrameY(5);
+					tempobj->_object = _selectObject;
+					TOWNWORLD->addObject(objectType::OBJ, tempobj);
+					_map->getTile(idx, idy)->setPObj(tempobj);
+					break;
 				}
 				break;
-			case mapToolScene::KIND_OBJECT:
-				if (_map->getTile(idx, idy)->getPObj() != NULL)
-				{
-					_map->getTile(idx, idy)->getPObj()->setDestroy();
-					_map->getTile(idx, idy)->setPObj(NULL);
-				}
-				testObject* tempobj = new testObject;
-				tempobj->init("test", "outdoorsSpring", tagFloat(idx * TILESIZE, idy * TILESIZE), pivot::LEFT_TOP);
-				tempobj->setIdX(idx);
-				tempobj->setIdY(idy);
-				tempobj->setFrameX(1);
-				tempobj->setFrameY(5);
-				tempobj->_object = _selectObject;
-				TOWNWORLD->addObject(objectType::OBJ, tempobj);
-				_map->getTile(idx, idy)->setPObj(tempobj);
+			case SPRITE::END:
+				break;
+			default:
+				_map->getTile(idx, idy)->setTerrain(TERRAIN::SOMETHING);
+				_map->getTile(idx, idy)->changeImage(_spriteImageKey);
+				//_map->getTile(idx, idy)->setImage(_spriteImage);
+				_map->getTile(idx, idy)->setFrameX(_selectIdX);
+				_map->getTile(idx, idy)->setFrameY(_selectIdY);
 				break;
 			}
 		}
 	}
+
+	//우클릭
 	if (KEYMANAGER->isStayKeyDown(VK_RBUTTON))
 	{
-		if (0 <= (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) &&
-			(CAMERAMANAGER->getRenderRc().left + _ptMouse.x) < TILEX * TILESIZE &&
-			0 <= (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) &&
-			(CAMERAMANAGER->getRenderRc().top + _ptMouse.y) < TILEY * TILESIZE)
+		if (0 <= idx && idx < TILEX &&
+			0 <= idy && idy < TILEY)
 		{
-			int idx = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
-			int idy = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
-
 			if (_map->getTile(idx, idy)->getPObj() != NULL)
 			{
 				_map->getTile(idx, idy)->getPObj()->setDestroy();

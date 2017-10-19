@@ -16,29 +16,39 @@ HRESULT mapToolTile::init(int idX, int idY, TERRAIN::Enum terrain)
 	_pObj = NULL;
 
 	_image = NULL;
+	_imageKey = "";
 	_frameX = 0;
 	_frameY = 0;
+	_isMovable = true;
 
 
-	//지형 종류에 따라서 이미지, 프레임 설정
+	//지형 종류에 따라서 이미지, 프레임, 이동가능여부 설정
 	switch (_terrain)
 	{
 	case TERRAIN::NONE:
 		//비어있으면 타일인지 모르니까 나뭇잎 하나
-		_image = IMAGEMANAGER->findImage("outdoorsSpring");
+		changeImage("outdoorsSpring");
 		_frameX = 10; _frameY = 4;
 		break;
+	case TERRAIN::SOMETHING:
+		//비어있으면 타일인지 모르니까 나뭇잎 두개
+		changeImage("outdoorsSpring");
+		_frameX = 9; _frameY = 4;
+		break;
 	case TERRAIN::DIRT:
-		_image = IMAGEMANAGER->findImage("outdoorsSpring");
+		changeImage("outdoorsSpring");
 		_frameX = 3; _frameY = 6;
+		_isMovable = true;
 		break;
 	case TERRAIN::GRASS:
-		_image = IMAGEMANAGER->findImage("outdoorsSpring");
+		changeImage("outdoorsSpring");
 		_frameX = 0; _frameY = 7;
+		_isMovable = true;
 		break;
 	case TERRAIN::WATER:
-		_image = IMAGEMANAGER->findImage("outdoorsSpring");
+		changeImage("outdoorsSpring");
 		_frameX = 8; _frameY = 13;
+		_isMovable = false;
 		break;
 	case TERRAIN::END:
 		break;

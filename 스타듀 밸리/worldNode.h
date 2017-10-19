@@ -43,6 +43,7 @@ namespace TERRAIN
 	enum Enum
 	{
 		NONE,
+		SOMETHING,
 		DIRT,
 		GRASS,
 		WATER,

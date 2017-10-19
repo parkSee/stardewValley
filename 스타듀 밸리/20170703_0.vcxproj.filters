@@ -632,5 +632,8 @@
     <ClCompile Include="darkNight.cpp">
       <Filter>playGround\weather</Filter>
     </ClCompile>
+    <ClCompile Include="tileMap + saveLoad.cpp">
+      <Filter>playGround\mapToolScene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
