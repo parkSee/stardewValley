@@ -110,6 +110,8 @@ void tree1_bottom::bottomAttack()
 	else
 	{
 		_hp -= 5;
+
+		
 	}
 
 }

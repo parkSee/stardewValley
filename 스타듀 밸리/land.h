@@ -4,20 +4,24 @@
 class land  : public motherObject
 {
 private:
-	
+	bool _isWet;
 
 public:
 	land() {}
 	~land() {}
 
-	bool _isWet;
+	
 
 	virtual HRESULT init(tagFloat pos);
 	virtual void release();
 	virtual void update();
 	virtual void render();
 
-	
+	inline bool getWet() { return  _isWet; }
+
+	inline void setWet(bool isWet) { _isWet = isWet; }
+
+	void hoeAttack();
 
 };
 
