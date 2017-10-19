@@ -184,12 +184,6 @@
     <Filter Include="playGround\weather">
       <UniqueIdentifier>{03f356b7-bc37-43df-a07d-b1bfe135724f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\NPC\caroline">
-      <UniqueIdentifier>{b5a72b7d-8e28-4123-916b-cdd92836fbb0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\UI\selectUI">
-      <UniqueIdentifier>{8cd1d909-765d-4f0f-b20d-43deb94d7f84}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -393,11 +387,8 @@
     <ClInclude Include="darkNight.h">
       <Filter>playGround\weather</Filter>
     </ClInclude>
-    <ClInclude Include="caroline.h">
-      <Filter>playGround\NPC\caroline</Filter>
-    </ClInclude>
-    <ClInclude Include="selectUI.h">
-      <Filter>playGround\UI\selectUI</Filter>
+    <ClInclude Include="shadow.h">
+      <Filter>playGround\player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -644,14 +635,8 @@
     <ClCompile Include="darkNight.cpp">
       <Filter>playGround\weather</Filter>
     </ClCompile>
-    <ClCompile Include="caroline.cpp">
-      <Filter>playGround\NPC\caroline</Filter>
-    </ClCompile>
-    <ClCompile Include="worldTime + story.cpp">
-      <Filter>playGround\worldTime</Filter>
-    </ClCompile>
-    <ClCompile Include="selectUI.cpp">
-      <Filter>playGround\UI\selectUI</Filter>
+    <ClCompile Include="shadow.cpp">
+      <Filter>playGround\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

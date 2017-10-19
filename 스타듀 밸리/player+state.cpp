@@ -2,6 +2,7 @@
 #include "player.h"
 #include "inventory.h"
 #include "eProgressBar.h"
+#include "shadow.h"
 
 
 void player::stateUpdate(playerState::Enum state)
@@ -121,6 +122,8 @@ void player::stateUpdate(playerState::Enum state)
 		{
 			this->changeState(STAND_LEFT);
 		}
+
+		//_shadow->startAni();
 		break;
 	case playerState::UP_RUN:									//위로 이동중
 		if (KEYMANAGER->isStayKeyDown('W'))

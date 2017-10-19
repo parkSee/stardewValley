@@ -82,7 +82,6 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
-    <ClInclude Include="caroline.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="darkNight.h" />
@@ -122,7 +121,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="seed.h" />
-    <ClInclude Include="selectUI.h" />
+    <ClInclude Include="shadow.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -152,7 +151,6 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />
-    <ClCompile Include="caroline.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="darkNight.cpp" />
     <ClCompile Include="dongjin+imageLoad.cpp" />
@@ -203,7 +201,7 @@
     <ClCompile Include="sceneInit + dongjin.cpp" />
     <ClCompile Include="seed.cpp" />
     <ClCompile Include="seeyound + imageLoad.cpp" />
-    <ClCompile Include="selectUI.cpp" />
+    <ClCompile Include="shadow.cpp" />
     <ClCompile Include="soowoo + imageLoad.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -230,7 +228,6 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="weather.cpp" />
     <ClCompile Include="winMain.cpp" />
-    <ClCompile Include="worldTime + story.cpp" />
     <ClCompile Include="worldTime.cpp" />
     <ClCompile Include="youngJae + imageLoad.cpp" />
   </ItemGroup>
