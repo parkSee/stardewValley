@@ -54,6 +54,14 @@ void mapToolScene::update()
 	if (KEYMANAGER->isOnceKeyDown(VK_F2))
 	{
 		_map->load();
+
+		for (int j = 0; j < TILEY; ++j)
+		{
+			for (int i = 0; i < TILEX; ++i)
+			{
+				_map->setTileFrameByAround(i, j);
+			}
+		}
 	}
 
 	//탭 누르면 맵 - 스프라이트 전환
@@ -207,13 +215,6 @@ void mapToolScene::render()
 			RectangleMake(getMemDC(), -CAMERAMANAGER->getRenderRc().left + (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE * TILESIZE,
 				-CAMERAMANAGER->getRenderRc().top + (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE * TILESIZE, TILESIZE, TILESIZE);
 			DeleteObject(SelectObject(getMemDC(), oldBrush));
-
-			//인덱스 표시
-			int x = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
-			int y = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
-			char str[64];
-			sprintf_s(str, "(%d, %d)", x, y);
-			TextOut(getMemDC(), _ptMouse.x + 10, _ptMouse.y, str, strlen(str));
 		}
 
 		//현재 선택된 타일 표시
@@ -257,6 +258,13 @@ void mapToolScene::render()
 	}
 	break;
 	}
+
+	//마우스 인덱스 표시
+	int x = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
+	int y = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
+	char str[64];
+	sprintf_s(str, "(%d, %d)", x, y);
+	TextOut(getMemDC(), _ptMouse.x + 10, _ptMouse.y, str, strlen(str));
 }
 
 
