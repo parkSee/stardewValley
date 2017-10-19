@@ -6,7 +6,8 @@
 #include "eProgressBar.h"
 #include "tree1.h"
 #define SPEED 4
-#define CARRY 210
+#define CARRYX 30
+#define CARRYY 160
 
 namespace playerState
 {

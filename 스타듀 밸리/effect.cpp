@@ -53,8 +53,8 @@ void effect::update(void)
 void effect::render(void)
 {
 	if (!_isRunning) return;
-
-	_effectImage->aniRender(getMemDC(), _x, _y, _effectAnimation);
+	RECT rc = CAMERAMANAGER->getRenderRc();
+	_effectImage->aniRender(getMemDC(), _x-rc.left, _y-rc.top, _effectAnimation);
 }
 
 

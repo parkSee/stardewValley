@@ -2,6 +2,8 @@
 #include "gameObject.h"
 #include "mapToolTile.h"
 
+#define NPCSPEED	3;
+
 namespace npcDirection
 {
 	enum Enum
@@ -37,9 +39,17 @@ private:
 	
 	float					_scale;
 	
-	vector<gameObject*>		_vMoveTile;
+	vector<mapToolTile*>		_vMoveTile;
 
 	bool					_isMove;
+
+	int						_indexX;
+	int						_indexY;
+
+	float					_angle;
+
+	float					_saveAngle;
+	npcDirection::Enum		_saveDirection;
 
 private:
 	tagKeyAniString			_keyAniString;
@@ -51,6 +61,9 @@ public:
 	virtual void render();
 	RECT getRect();
 
+	int getIndexX() { return _indexX; }
+	int getIndexY() { return _indexY; }
+
 	void move();
 
 	void changeState(npcDirection::Enum direction);
@@ -59,6 +72,8 @@ public:
 	void setMoveRoute(tagMessage msg);
 	
 	void keyAniInit(string name , string imageKey);
+
+	npcDirection::Enum	 getAngleDirection(float angle);
 
 	npc() {}
 	virtual ~npc() {}

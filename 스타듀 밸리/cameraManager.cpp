@@ -223,20 +223,17 @@ RECT cameraManager::getRenderRc()
 	{
 		_pos.x -= _renderRc.left;
 	}
-	else if (_renderRc.right > _mapSize.x)
+	if (_renderRc.right > _mapSize.x)
 	{
 		_pos.x -= _renderRc.right - _mapSize.x;
-
 	}
-	else if (_renderRc.top < 0)
+	if (_renderRc.top < 0)
 	{
 		_pos.y -= _renderRc.top;
-		
 	}
-	else if (_renderRc.bottom > _mapSize.y)
+	if (_renderRc.bottom > _mapSize.y)
 	{
 		_pos.y -= _renderRc.bottom - _mapSize.y;
-		
 	}
 
 	//랜더 렉트 좌표 초기화
