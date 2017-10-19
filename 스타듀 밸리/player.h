@@ -103,9 +103,10 @@ public:
 	void eating();
 	void lbuttonClick(tagMessage msg);
 	void changeTargetItem(tagMessage msg);
+	void tileCollision();
 	RECT rectMakeBottom();
 
-	void tileCollision();
+
 	
 
 	enum playerState::Enum getPlayerState(void) { return _state; }
