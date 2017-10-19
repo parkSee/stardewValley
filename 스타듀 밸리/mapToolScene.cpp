@@ -23,12 +23,15 @@ HRESULT mapToolScene::init()
 	CAMERAMANAGER->_pos.x = WINSIZEX / 2;
 	CAMERAMANAGER->_pos.y = WINSIZEY / 2;
 
-	_sprite = SPRITE::TILESAMPLE;
+	//초기화
+
+	//_sprite = SPRITE::TILESAMPLE;
+	//_spriteImage = NULL;
+	changeSprite(SPRITE::TILESAMPLE);
 	_mode = MODE_MAP;
-	_selectIdX = _selectIdY = 0;
 	_mapCam.x = _spriteCam.x = WINSIZEX / 2;
 	_mapCam.y = _spriteCam.y = WINSIZEY / 2;
-	_spriteImage = NULL;
+	_selectIdX = _selectIdY = 0;
 
 	//스프라이트 개수만큼 렉트 생성 (스프라이트 변경할 버튼)
 	for (int i = 0; i < SPRITE::END; ++i)
@@ -37,6 +40,7 @@ HRESULT mapToolScene::init()
 		_vSpriteRect.push_back(rc);
 	}
 
+	//타일샘플 전용 선택버튼 구조체 세팅
 	setTileSampleSelect();
 
 	return S_OK;
@@ -56,7 +60,7 @@ void mapToolScene::update()
 	{
 		_map->load();
 
-		//로드 하고 지형 종류에 따라서 프레임 맞춰준다
+		//로드하고나서 지형 종류에 따라서 프레임 맞춰준다
 		for (int j = 0; j < TILEY; ++j)
 		{
 			for (int i = 0; i < TILEX; ++i)
@@ -99,7 +103,7 @@ void mapToolScene::update()
 	case mapToolScene::MODE_SPRITE:
 		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 		{
-			selecting();
+			leftClickInSprite();
 		}
 		break;
 	}
@@ -121,34 +125,6 @@ void mapToolScene::update()
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
 		CAMERAMANAGER->_pos.y += spd;
-	}
-
-	//현재 선택 스프라이트에 따라서 이미지 바꾸기
-	switch (_sprite)
-	{
-	case SPRITE::OUTDOORS_SPRING:
-		_spriteImage = IMAGEMANAGER->findImage("outdoorsSpring");
-		break;
-	case SPRITE::FARM_BUILDINGS:
-		_spriteImage = IMAGEMANAGER->findImage("farmBuildings");
-		break;
-	case SPRITE::FARMHOUSE:
-		_spriteImage = IMAGEMANAGER->findImage("farmHouse");
-		break;
-	case SPRITE::CROPS:
-		_spriteImage = IMAGEMANAGER->findImage("crops");
-		break;
-	case SPRITE::TREES:
-		_spriteImage = IMAGEMANAGER->findImage("trees");
-		break;
-	case SPRITE::TOWNINTERIOR:
-		_spriteImage = IMAGEMANAGER->findImage("townInterior");
-		break;
-	case SPRITE::TILESAMPLE:
-		_spriteImage = IMAGEMANAGER->findImage("tileSample");
-		break;
-	case SPRITE::END:
-		break;
 	}
 }
 void mapToolScene::render()
@@ -176,7 +152,6 @@ void mapToolScene::render()
 		switch (_sprite)
 		{
 		case SPRITE::TILESAMPLE:
-			_spriteImage = IMAGEMANAGER->findImage("tileSample");
 			_spriteImage->scaleRender(getMemDC(),
 				-CAMERAMANAGER->getRenderRc().left,
 				-CAMERAMANAGER->getRenderRc().top,
@@ -207,7 +182,7 @@ void mapToolScene::render()
 				_spriteImage->getWidth() * SCALE,
 				_spriteImage->getHeight() * SCALE);
 			break;
-		}
+		}		//스프라이트 이넘 스위치문 끝
 
 		//마우스 대고있는 칸 표시
 		if (0 <= CAMERAMANAGER->getRenderRc().left + _ptMouse.x && CAMERAMANAGER->getRenderRc().left + _ptMouse.x <= _spriteImage->getWidth() * SCALE &&
@@ -259,7 +234,7 @@ void mapToolScene::render()
 		}
 	}
 	break;
-	}
+	}		//맵-스프라이트 모드 이넘 스위치문 끝
 
 	//마우스 인덱스 표시
 	int x = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
@@ -270,13 +245,46 @@ void mapToolScene::render()
 }
 
 
-void mapToolScene::selecting()
+void mapToolScene::changeSprite(SPRITE::Enum spriteEnum)
 {
+	_sprite = spriteEnum;
+
+	switch (spriteEnum)
+	{
+	case SPRITE::OUTDOORS_SPRING:
+		_spriteImage = IMAGEMANAGER->findImage("outdoorsSpring");
+		break;
+	case SPRITE::FARM_BUILDINGS:
+		_spriteImage = IMAGEMANAGER->findImage("farmBuildings");
+		break;
+	case SPRITE::FARMHOUSE:
+		_spriteImage = IMAGEMANAGER->findImage("farmHouse");
+		break;
+	case SPRITE::CROPS:
+		_spriteImage = IMAGEMANAGER->findImage("crops");
+		break;
+	case SPRITE::TREES:
+		_spriteImage = IMAGEMANAGER->findImage("trees");
+		break;
+	case SPRITE::TOWNINTERIOR:
+		_spriteImage = IMAGEMANAGER->findImage("townInterior");
+		break;
+	case SPRITE::TILESAMPLE:
+		_spriteImage = IMAGEMANAGER->findImage("tileSample");
+		break;
+	case SPRITE::END:
+		break;
+	}
+}
+
+void mapToolScene::leftClickInSprite()
+{
+	//스프라이트 선택 버튼을 누른 경우
 	for (int i = 0; i < SPRITE::END; ++i)
 	{
 		if (PtInRect(&_vSpriteRect[i], _ptMouse))
 		{
-			_sprite = (SPRITE::Enum)i;
+			changeSprite((SPRITE::Enum)i);
 
 			//스프라이트 바꾸면 좌표 초기화
 			CAMERAMANAGER->_pos.x = WINSIZEX / 2;
@@ -285,91 +293,92 @@ void mapToolScene::selecting()
 			return;
 		}
 	}
+	
 
+	//스프라이트 종류에 따라서 선택을 다르게 하는데,
+	//타일 샘플의 경우 빼고는 스프라이트를 그대로 쓰니
+	//지형 종류 SOMETHING 같은거로 해서
+	//이미지값이랑 프레임번호 저장해주면
+	//하나하나 찍어서 맵 만들 수 있다.
+	//거기에다가 이동 가능 여부를 같이 지정해주면?
+	//맵을 제대로 찍을 수 있겠다
 	switch (_sprite)
 	{
-	case SPRITE::OUTDOORS_SPRING:
-	{
-		int x = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
-		int y = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
+	//case SPRITE::OUTDOORS_SPRING:
+	//{
+	//	int x = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
+	//	int y = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
+	//
+	//	//case tileNumber():
+	//	switch (spriteNumber(x, y))
+	//	{
+	//		//나무1
+	//	case spriteNumber(0, 0): case spriteNumber(1, 0): case spriteNumber(2, 0):
+	//	case spriteNumber(0, 1): case spriteNumber(1, 1): case spriteNumber(2, 1):
+	//	case spriteNumber(0, 2): case spriteNumber(1, 2): case spriteNumber(2, 2):
+	//	case spriteNumber(0, 3): case spriteNumber(1, 3): case spriteNumber(2, 3):
+	//	case spriteNumber(1, 4): case spriteNumber(1, 5):
+	//		_selectIdX = 1; _selectIdY = 5;
+	//		break;
+	//		//나무2
+	//	case spriteNumber(3, 0): case spriteNumber(4, 0): case spriteNumber(5, 0):
+	//	case spriteNumber(3, 1): case spriteNumber(4, 1): case spriteNumber(5, 1):
+	//	case spriteNumber(3, 2): case spriteNumber(4, 2): case spriteNumber(5, 2):
+	//	case spriteNumber(3, 3): case spriteNumber(4, 3): case spriteNumber(5, 3):
+	//	case spriteNumber(4, 4): case spriteNumber(4, 5):
+	//		_selectIdX = 4; _selectIdY = 5;
+	//		break;
+	//		//나무3
+	//	case spriteNumber(6, 0): case spriteNumber(7, 0): case spriteNumber(8, 0): case spriteNumber(9, 0):
+	//	case spriteNumber(6, 1): case spriteNumber(7, 1): case spriteNumber(8, 1): case spriteNumber(9, 1):
+	//	case spriteNumber(6, 2): case spriteNumber(7, 2): case spriteNumber(8, 2): case spriteNumber(9, 2):
+	//	case spriteNumber(6, 3): case spriteNumber(7, 3): case spriteNumber(8, 3): case spriteNumber(9, 3):
+	//	case spriteNumber(7, 4): case spriteNumber(8, 4):
+	//	case spriteNumber(7, 5): case spriteNumber(8, 5):
+	//	case spriteNumber(7, 6): case spriteNumber(8, 6):
+	//		_selectIdX = 7; _selectIdY = 6;
+	//		break;
+	//		//나무4
+	//	case spriteNumber(10, 0): case spriteNumber(11, 0): case spriteNumber(12, 0):
+	//	case spriteNumber(10, 1): case spriteNumber(11, 1): case spriteNumber(12, 1):
+	//	case spriteNumber(10, 2): case spriteNumber(11, 2): case spriteNumber(12, 2):
+	//	case spriteNumber(10, 3): case spriteNumber(11, 3): case spriteNumber(12, 3):
+	//	case spriteNumber(11, 4): case spriteNumber(11, 5):
+	//		_selectIdX = 11; _selectIdY = 5;
+	//		break;
+	//		//큰덤불
+	//	case spriteNumber(13, 0): case spriteNumber(14, 0): case spriteNumber(15, 0):
+	//	case spriteNumber(13, 1): case spriteNumber(14, 1): case spriteNumber(15, 1):
+	//	case spriteNumber(13, 2): case spriteNumber(14, 2): case spriteNumber(15, 2):
+	//		_selectIdX = 14; _selectIdY = 2;
+	//		break;
+	//		//울타리 가로 왼쪽 끝
+	//	case spriteNumber(8, 14): case spriteNumber(8, 15):
+	//		_selectIdX = 8; _selectIdY = 15;
+	//		break;
+	//		//울타리 가로 중간
+	//	case spriteNumber(9, 14): case spriteNumber(9, 15):
+	//		_selectIdX = 9; _selectIdY = 15;
+	//		break;
+	//		//울타리 가로 오른쪽 끝
+	//	case spriteNumber(10, 14): case spriteNumber(10, 15):
+	//		_selectIdX = 10; _selectIdY = 15;
+	//		break;
+	//	default:
+	//		_selectIdX = x; _selectIdY = y;
+	//		break;
+	//	}
+	//
+	//	_map->setSelectIdX(_selectIdX); _map->setSelectIdY(_selectIdY);
+	//}
+	//break;
 
-		//case tileNumber():
-		switch (spriteNumber(x, y))
-		{
-			//나무1
-		case spriteNumber(0, 0): case spriteNumber(1, 0): case spriteNumber(2, 0):
-		case spriteNumber(0, 1): case spriteNumber(1, 1): case spriteNumber(2, 1):
-		case spriteNumber(0, 2): case spriteNumber(1, 2): case spriteNumber(2, 2):
-		case spriteNumber(0, 3): case spriteNumber(1, 3): case spriteNumber(2, 3):
-		case spriteNumber(1, 4): case spriteNumber(1, 5):
-			_selectIdX = 1; _selectIdY = 5;
-			break;
-			//나무2
-		case spriteNumber(3, 0): case spriteNumber(4, 0): case spriteNumber(5, 0):
-		case spriteNumber(3, 1): case spriteNumber(4, 1): case spriteNumber(5, 1):
-		case spriteNumber(3, 2): case spriteNumber(4, 2): case spriteNumber(5, 2):
-		case spriteNumber(3, 3): case spriteNumber(4, 3): case spriteNumber(5, 3):
-		case spriteNumber(4, 4): case spriteNumber(4, 5):
-			_selectIdX = 4; _selectIdY = 5;
-			break;
-			//나무3
-		case spriteNumber(6, 0): case spriteNumber(7, 0): case spriteNumber(8, 0): case spriteNumber(9, 0):
-		case spriteNumber(6, 1): case spriteNumber(7, 1): case spriteNumber(8, 1): case spriteNumber(9, 1):
-		case spriteNumber(6, 2): case spriteNumber(7, 2): case spriteNumber(8, 2): case spriteNumber(9, 2):
-		case spriteNumber(6, 3): case spriteNumber(7, 3): case spriteNumber(8, 3): case spriteNumber(9, 3):
-		case spriteNumber(7, 4): case spriteNumber(8, 4):
-		case spriteNumber(7, 5): case spriteNumber(8, 5):
-		case spriteNumber(7, 6): case spriteNumber(8, 6):
-			_selectIdX = 7; _selectIdY = 6;
-			break;
-			//나무4
-		case spriteNumber(10, 0): case spriteNumber(11, 0): case spriteNumber(12, 0):
-		case spriteNumber(10, 1): case spriteNumber(11, 1): case spriteNumber(12, 1):
-		case spriteNumber(10, 2): case spriteNumber(11, 2): case spriteNumber(12, 2):
-		case spriteNumber(10, 3): case spriteNumber(11, 3): case spriteNumber(12, 3):
-		case spriteNumber(11, 4): case spriteNumber(11, 5):
-			_selectIdX = 11; _selectIdY = 5;
-			break;
-			//큰덤불
-		case spriteNumber(13, 0): case spriteNumber(14, 0): case spriteNumber(15, 0):
-		case spriteNumber(13, 1): case spriteNumber(14, 1): case spriteNumber(15, 1):
-		case spriteNumber(13, 2): case spriteNumber(14, 2): case spriteNumber(15, 2):
-			_selectIdX = 14; _selectIdY = 2;
-			break;
-			//울타리 가로 왼쪽 끝
-		case spriteNumber(8, 14): case spriteNumber(8, 15):
-			_selectIdX = 8; _selectIdY = 15;
-			break;
-			//울타리 가로 중간
-		case spriteNumber(9, 14): case spriteNumber(9, 15):
-			_selectIdX = 9; _selectIdY = 15;
-			break;
-			//울타리 가로 오른쪽 끝
-		case spriteNumber(10, 14): case spriteNumber(10, 15):
-			_selectIdX = 10; _selectIdY = 15;
-			break;
-		default:
-			_selectIdX = x; _selectIdY = y;
-			break;
-		}
-
-		_map->setSelectIdX(_selectIdX); _map->setSelectIdY(_selectIdY);
-	}
-	break;
-	case SPRITE::FARM_BUILDINGS:
-		break;
-	case SPRITE::FARMHOUSE:
-		break;
-	case SPRITE::CROPS:
-		break;
-	case SPRITE::TREES:
-		break;
 	case SPRITE::TILESAMPLE:
 		for (int i = 0; i < _vtileSampleSelect.size(); ++i)
 		{
 			POINT pt;
-			pt.x = CAMERAMANAGER->getRenderRc().left + _ptMouse.x;
-			pt.y = CAMERAMANAGER->getRenderRc().top + _ptMouse.y;
+			pt.x = ABSMOUSEX;
+			pt.y = ABSMOUSEY;
 
 			if (PtInRect(&_vtileSampleSelect[i].rc, pt))
 			{
@@ -380,6 +389,11 @@ void mapToolScene::selecting()
 				return;
 			}
 		}
+		break;
+	case SPRITE::END:
+		break;
+	default:
+		//이미지는 이미 스프라이트 선택하면서 이미지값 바뀌어있으므로 그대로 넣으면 된다
 		break;
 	}
 }
