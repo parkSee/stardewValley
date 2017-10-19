@@ -90,7 +90,7 @@ void player::stateUpdate(playerState::Enum state)
 		//================================================================================================달리는 모션
 	case playerState::RIGHT_RUN:								//오른쪽으로 이동중
 		
-
+		_shadow->startAni(true);
 		if (KEYMANAGER->isStayKeyDown('D'))
 		{
 			_pos.x += SPEED;

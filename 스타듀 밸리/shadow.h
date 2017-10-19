@@ -13,15 +13,15 @@ struct tagShadow
 class shadow :public gameObject
 {
 private:
-	tagShadow _shadow;
+	tagShadow	_shadow;
 
 
-	float _scale;
+	float		_scale;
 
 public:
 
-	int _alpha;
-	bool	_isChange;
+	int			_alpha;
+	bool		_isChange;
 
 	HRESULT init(string objectName, string imagKeyName, tagFloat pos);
 	void release();

@@ -137,6 +137,10 @@ HRESULT player::init(string objName, tagFloat pos)
 	int standTakeUp[] = { 134 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerTakeStandUp", "player", standTakeUp, 1, 0, false);
 
+	//¸ÔÀÚ ³È³È
+
+	int eat[] = {}
+
 //========================================================================================================
 	
 	gameObject::init(objName, "player", tagFloat(WINSIZEX / 2, WINSIZEY / 2), pivot::BOTTOM);
