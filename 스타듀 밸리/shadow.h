@@ -28,10 +28,7 @@ public:
 	void update();
 	void render();
 
-	void startAni();
-	void stopAni();
-
-	bool setChange(bool change) { _isChange = change; }
+	void setChange(bool change) { _isChange = change; }
 	bool getChange() { return _isChange; }
 
 	shadow() {}

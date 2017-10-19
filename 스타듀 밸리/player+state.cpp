@@ -88,7 +88,6 @@ void player::stateUpdate(playerState::Enum state)
 
 		//================================================================================================달리는 모션
 	case playerState::RIGHT_RUN:								//오른쪽으로 이동중
-		
 	
 		if (KEYMANAGER->isStayKeyDown('D'))
 		{
@@ -428,6 +427,7 @@ void player::changeState(playerState::Enum state)
 		break;
 	case playerState::STAND_RIGHT:
 		_player.Motion = KEYANIMANAGER->findAnimation("rightStand");
+
 		break;
 	case playerState::STAND_LEFT:
 		_player.Motion = KEYANIMANAGER->findAnimation("leftStand");
