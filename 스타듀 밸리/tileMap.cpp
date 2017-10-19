@@ -14,17 +14,6 @@ HRESULT tileMap::init()
 		}
 	}
 
-	//mapLoad();
-
-
-	////맵툴용
-	//_selectIdX = _selectIdY = 0;
-	//
-	//_rc1 = RectMake(500, 500 + 50, 70, 40);
-	//_rc2 = RectMake(_rc1.right + 30, _rc1.top, 70, 40);
-	//_rc3 = RectMake(_rc2.left, _rc2.bottom + 20, 150, 40);
-	//_kind = KIND_TERRAIN;
-
 	return S_OK;
 }
 void tileMap::release()
@@ -36,76 +25,6 @@ void tileMap::update()
 	//타일은 업데이트 돌리지 말자 -----
 
 
-	////업데이트는 전부다 맵툴용이네. 나중에 맵툴씬에다 빼자
-	////엥;; 맵툴씬에서도 여기 업데이트 안돌리고 있네;;
-	//if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
-	//{
-	//	//if (WINSIZEX - IMAGEMANAGER->findImage("tiles")->getWidth() <= _ptMouse.x && _ptMouse.x <= WINSIZEX &&
-	//	//	0 <= _ptMouse.y && _ptMouse.y <= IMAGEMANAGER->findImage("tiles")->getHeight())
-	//	//{
-	//	//	_selectIdX = (_ptMouse.x - (WINSIZEX - IMAGEMANAGER->findImage("tiles")->getWidth())) / TILESIZE;
-	//	//	_selectIdY = _ptMouse.y / TILESIZE;
-	//	//}
-	//	if (PtInRect(&_rc1, _ptMouse)) _kind = KIND_TERRAIN;
-	//	if (PtInRect(&_rc2, _ptMouse)) _kind = KIND_OBJECT;
-	//	if (PtInRect(&_rc3, _ptMouse)) _kind = KIND_OBJECT_ERASER;
-	//}
-	//if (KEYMANAGER->isStayKeyDown(VK_LBUTTON) &&
-	//	!(PtInRect(&_rc1, _ptMouse) || PtInRect(&_rc2, _ptMouse) || PtInRect(&_rc3, _ptMouse)))
-	//{
-	//	if (0 <= (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) && (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) < TILEX * TILESIZE &&
-	//		0 <= (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) && (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) < TILEY * TILESIZE)
-	//	{
-	//		int idx = (CAMERAMANAGER->getRenderRc().left + _ptMouse.x) / TILESIZE;
-	//		int idy = (CAMERAMANAGER->getRenderRc().top + _ptMouse.y) / TILESIZE;
-	//
-	//		switch (_kind)
-	//		{
-	//		case tileMap::KIND_TERRAIN:
-	//			_pTile[idx][idy]->setFrameX(_selectIdX);
-	//			_pTile[idx][idy]->setFrameY(_selectIdY);
-	//			break;
-	//		case tileMap::KIND_OBJECT:
-	//		{
-	//			if (_pTile[idx][idy]->getPObj() != NULL)
-	//			{
-	//				_pTile[idx][idy]->getPObj()->setDestroy();
-	//				_pTile[idx][idy]->setPObj(NULL);
-	//			}
-	//			testObject* tempobj = new testObject;
-	//			tempobj->init("test", "tileSprite", tagFloat(idx * TILESIZE, idy * TILESIZE), pivot::LEFT_TOP);
-	//			tempobj->setIdX(idx);
-	//			tempobj->setIdY(idy);
-	//			tempobj->setFrameX(_selectIdX);
-	//			tempobj->setFrameY(_selectIdY);
-	//			switch (spriteNumber(_selectIdX, _selectIdY))
-	//			{
-	//			case (spriteNumber(1, 5)):
-	//				tempobj->_object = OBJECT::TREE1;
-	//				break;
-	//			case (spriteNumber(4, 5)):
-	//				tempobj->_object = OBJECT::TREE2;
-	//				break;
-	//			case (spriteNumber(11, 5)):
-	//				tempobj->_object = OBJECT::TREE3;
-	//				break;
-	//			default:
-	//				break;
-	//			}
-	//			TOWNWORLD->addObject(objectType::OBJ, tempobj);
-	//			_pTile[idx][idy]->setPObj(tempobj);
-	//		}
-	//		break;
-	//		case tileMap::KIND_OBJECT_ERASER:
-	//			if (_pTile[idx][idy]->getPObj() != NULL)
-	//			{
-	//				_pTile[idx][idy]->getPObj()->setDestroy();
-	//				_pTile[idx][idy]->setPObj(NULL);
-	//			}
-	//			break;
-	//		}
-	//	}
-	//}
 }
 void tileMap::render()
 {
@@ -129,39 +48,12 @@ void tileMap::render()
 			_pTile[i][j]->render();
 		}
 	}
-
-
-	////지형, 오브젝트 선택 버튼 렌더
-	//Rectangle(getMemDC(), _rc1.left, _rc1.top, _rc1.right, _rc1.bottom);
-	//Rectangle(getMemDC(), _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
-	//Rectangle(getMemDC(), _rc3.left, _rc3.top, _rc3.right, _rc3.bottom);
-	//TextOut(getMemDC(), _rc1.left + 5, _rc1.top + 5, "지형", 4);
-	//TextOut(getMemDC(), _rc2.left + 5, _rc2.top + 5, "오브젝트", 8);
-	//TextOut(getMemDC(), _rc3.left + 5, _rc3.top + 5, "오브젝트 지우개", 15);
-	////지형, 오브젝트 선택된 버튼 표시
-	//switch (_kind)
-	//{
-	//case tileMap::KIND_TERRAIN:
-	//	EllipseMakeCenter(getMemDC(), _rc1.left + (_rc1.right - _rc1.left) / 2, _rc1.top + (_rc1.bottom - _rc1.top) / 2, 10, 10);
-	//	break;
-	//case tileMap::KIND_OBJECT:
-	//	EllipseMakeCenter(getMemDC(), _rc2.left + (_rc2.right - _rc2.left) / 2, _rc2.top + (_rc2.bottom - _rc2.top) / 2, 10, 10);
-	//	break;
-	//}
 }
 
 
 void tileMap::setTileFrameByAround(int indexX, int indexY)
 {
 	mapToolTile* tile = _pTile[indexX][indexY];
-
-	//TERRAIN::Enum left, right, top, bottom;
-	//left = right = top = bottom = TERRAIN::NONE;
-	//
-	//left = _pTile[indexX - 1][indexY]->getTerrain();
-	//right = _pTile[indexX + 1][indexY]->getTerrain();
-	//top = _pTile[indexX][indexY - 1]->getTerrain();
-	//bottom = _pTile[indexX][indexY + 1]->getTerrain();
 
 	TERRAIN::Enum terrain[3][3];
 	for (int j = 0; j < 3; ++j)

@@ -59,20 +59,6 @@ void tileMap::mapLoad()
 		}
 	}
 
-	////--------------
-	//for (int j = 0; j < TILEY; ++j)
-	//{
-	//	for (int i = 0; i < TILEX; ++i)
-	//	{
-	//		memset(&tileSave, 0, sizeof(tileSave));
-	//
-	//		ReadFile(file, &tileSave, sizeof(tileSave), &read, NULL);
-	//
-	//		_pTile[i][j]->init(i, j, tileSave.terrain);
-	//		//_pTile[i][j]->setTerrain(tileSave.terrain);
-	//	}
-	//}
-
 	CloseHandle(file);
 }
 
