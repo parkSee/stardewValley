@@ -31,6 +31,7 @@ public:
 	inline int getIdX() { return _idX; }
 	inline int getIdY() { return _idY; }
 	inline gameObject* getPObj() { return _pObj; }
+	
 
 	inline void setFrameX(int x) { _frameX = x; }
 	inline void setFrameY(int y) { _frameY = y; }

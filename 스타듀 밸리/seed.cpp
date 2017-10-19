@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "seed.h"
+#include "mapToolTile.h"
+#include "land.h"
+
 
 
 HRESULT seed::init(tagFloat pos) 
@@ -8,6 +11,7 @@ HRESULT seed::init(tagFloat pos)
 
 	_object = OBJECT::SEED;
 	TOWNWORLD->addObject(objectType::OBJ, this);
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
 
 	EFFECTMANAGER->addEffect("seed", "¾¾¸ÂÀ»¶§.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
 	this->addCallback("pickAttack", [this](tagMessage msg)
@@ -34,9 +38,10 @@ HRESULT seed::init(tagFloat pos)
 }
  void seed::grow()
  {
-	
+	 if (((land*)TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->getPObj())->getWet() == true)
+	 {
 		 _growNum++;
-	 
+	 }
 
  }
  void seed::growAttack()
