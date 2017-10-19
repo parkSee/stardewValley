@@ -24,6 +24,8 @@ HRESULT npc::init(string name, string imageKey,tagFloat pos)
 
 	_isMove = false;
 
+	_cb = NULL;
+
 	this->addCallback("changeState", [this](tagMessage msg)
 	{
 		this->changeState((Enum)msg.data);
@@ -70,10 +72,10 @@ void npc::render()
 
 	//RectangleMakeCenter(getMemDC(), _pos.x- cameraRc.left, _pos.y- cameraRc.top, 30, 30);
 
-	for (int i = 0; i < _vMoveTile.size(); ++i)
-	{
-		RectangleMakeCenter(getMemDC(), _vMoveTile[i]->_pos.x - cameraRc.left, _vMoveTile[i]->_pos.y- cameraRc.top, 20, 20);
-	}
+	//for (int i = 0; i < _vMoveTile.size(); ++i)
+	//{
+	//	RectangleMakeCenter(getMemDC(), _vMoveTile[i]->_pos.x - cameraRc.left, _vMoveTile[i]->_pos.y- cameraRc.top, 20, 20);
+	//}
 
 }
 
@@ -88,6 +90,8 @@ RECT npc::getRect()
 
 	return rc;
 }
+
+
 
 void npc::keyAniInit(string name, string imageKey)
 {

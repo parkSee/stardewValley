@@ -12,7 +12,7 @@ void npc::setMoveRoute(tagMessage msg)
 		_vMoveTile.push_back((mapToolTile*)msg.targetList[i]);
 	}
 	_vMoveTile.erase(_vMoveTile.begin());
-
+	changeState(this->getAngleDirection(_angle));
 	_isMove = true;
 }
 
@@ -32,6 +32,12 @@ void npc::move()
 			else if (_direction == MOVE_RIGHT)changeState(STAND_RIGHT);
 			else if (_direction == MOVE_UP)changeState(STAND_UP);
 			else if (_direction == MOVE_LEFT)changeState(STAND_LEFT);
+
+			if (_cb != NULL)
+			{
+				_cb();
+				_cb = NULL;
+			}
 
 			_isMove = false;
 			return;

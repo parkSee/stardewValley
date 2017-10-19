@@ -15,7 +15,10 @@ private:
 	gameObject*		_pObj;
 
 	image*			_image;
+	string			_imageKey;			//저장용
 	int				_frameX, _frameY;
+
+	bool			_isMovable;
 
 
 public:
@@ -38,16 +41,26 @@ public:
 	inline TERRAIN::Enum getTerrain() { return _terrain; }
 	inline RECT getRect() { return _rc; }
 	inline gameObject* getPObj() { return _pObj; }
-	inline int getTerrainFrameX() { return _frameX; }
-	inline int getTerrainFrameY() { return _frameY; }
+	inline image* getImage() { return _image; }
+	inline string getImageKey() { return _imageKey; }
+	inline int getFrameX() { return _frameX; }
+	inline int getFrameY() { return _frameY; }
 
 	inline void setIndexX(int x) { _indexX = x; }
 	inline void setIndexY(int y) { _indexY = y; }
 	inline void setTerrain(TERRAIN::Enum terrain) { _terrain = terrain; }
 	inline void setRect(RECT rc) { _rc = rc; }
 	inline void setPObj(gameObject* pObj) { _pObj = pObj; }
+	inline void setImage(image* image) { _image = image; }
+	inline void setImageKey(string str) { _imageKey = str; }
 	inline void setFrameX(int x) { _frameX = x; }
 	inline void setFrameY(int y) { _frameY = y; }
+
+	inline void changeImage(string imageKey)
+	{
+		_imageKey = imageKey;
+		_image = IMAGEMANAGER->findImage(imageKey);
+	}
 
 	//에이스타
 	inline bool getIsUnmovable() { return false; }

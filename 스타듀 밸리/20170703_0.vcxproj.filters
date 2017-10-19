@@ -184,6 +184,9 @@
     <Filter Include="playGround\weather">
       <UniqueIdentifier>{03f356b7-bc37-43df-a07d-b1bfe135724f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\NPC\caroline">
+      <UniqueIdentifier>{7c6597d4-77b1-4963-9f83-4440a101f2b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -389,6 +392,9 @@
     </ClInclude>
     <ClInclude Include="shadow.h">
       <Filter>playGround\player</Filter>
+    </ClInclude>
+    <ClInclude Include="caroline.h">
+      <Filter>playGround\NPC\caroline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -637,6 +643,15 @@
     </ClCompile>
     <ClCompile Include="shadow.cpp">
       <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="worldTime + story.cpp">
+      <Filter>playGround\worldTime</Filter>
+    </ClCompile>
+    <ClCompile Include="caroline.cpp">
+      <Filter>playGround\NPC\caroline</Filter>
+    </ClCompile>
+    <ClCompile Include="tileMap + saveLoad.cpp">
+      <Filter>playGround\mapToolScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
