@@ -137,6 +137,13 @@ HRESULT player::init(string objName, tagFloat pos)
 	int standTakeUp[] = { 134 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerTakeStandUp", "player", standTakeUp, 1, 0, false);
 
+	//먹자 냠냠
+	int qustionEat[] = { 192 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerQustionEat", "player", qustionEat, 1, 0, false);
+
+	int eating[] = { 193,194,195,196,197,198,199,100,101 };
+	KEYANIMANAGER->addArrayFrameAnimation("playerEating", "player", eating, 10, 10, false);
+
 //========================================================================================================
 	
 	gameObject::init(objName, "player", tagFloat(WINSIZEX / 2, WINSIZEY / 2), pivot::BOTTOM);
@@ -165,6 +172,7 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	_myItem.x = 0;
 	_myItem.y = 0;
+	_myItem.gravity = 0.5f;
 
 	//콜백
 	this->addCallback("changeState", [this](tagMessage msg)											//특정프레임이 다 돌면 원래 프레임으로 돌아와라! 명령하는 콜백
@@ -175,7 +183,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	//아이템 먹기 
 	this->addCallback("eating", [this](tagMessage msg)												//왜만들어놨지?
 	{
-		this->eating();
+		this->eating(msg);
 	});
 
 	//대상 클릭

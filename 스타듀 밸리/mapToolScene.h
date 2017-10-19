@@ -49,11 +49,12 @@ private:
 	vector<tagTileSampleRect> _vtileSampleSelect;		//타일샘플 전용 선택버튼 구조체
 	SPRITE::Enum _sprite;			//현재 선택한 스프라이트 이넘
 	image* _spriteImage;			//현재 선택한 스프라이트의 이미지
+	string _spriteImageKey;			//현재 선택한 스프라이트의 이미지 키 저장용
 	MODE _mode;						//맵인지 스프라이트인지 모드
 	tagInt _mapCam, _spriteCam;		//맵이랑 스프라이트랑 왔다갔다 할 때 카메라 좌표 저장
 
 
-	int _selectIdX, _selectIdY;
+	int _selectIdX, _selectIdY;		//스프라이트에서 선택한 인덱스 저장
 
 	//샘플타일용
 	KIND _selectKind;
@@ -70,7 +71,7 @@ public:
 	void leftClickInSprite();
 
 	void setTileSampleSelect();
-	void tileSampleToMap();
+	void modeMapUpdate();
 
 	mapToolScene() {}
 	~mapToolScene() {}
