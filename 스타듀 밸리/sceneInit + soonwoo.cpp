@@ -10,6 +10,7 @@
 #include "pierre.h"
 #include "weather.h"
 #include "caroline.h"
+#include "selectUI.h"
 
 void townScene::soonwooInit()
 {
@@ -53,5 +54,8 @@ void townScene::soonwooInit()
 	carolineNpc->init("caroline", "caroline", tagFloat(900, 900));
 	TOWNWORLD->addObject(objectType::HUMAN, carolineNpc);
 
+	selectUI*select = new selectUI;
+	select->init("selectUI");
+	TOWNWORLD->addObject(objectType::INTERFACE, select);
 	
 }

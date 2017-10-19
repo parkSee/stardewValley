@@ -5,9 +5,15 @@ namespace selectUIDirection
 {
 	enum Enum
 	{
-		ACTIVE,NONEACTIVE
+		ACTIVE,NONE_ACTIVE
 	};
 }
+
+struct tagChoice
+{
+	RECT rc;
+	bool choice;
+};
 
 class selectUI : public gameObject
 {
@@ -15,8 +21,9 @@ private:
 	selectUIDirection::Enum		_direction;
 	image*						_window;
 	RECT						_windowRc;
-	RECT						_yes;
-	RECT						_no;
+	tagChoice					_yes;
+	tagChoice					_no;
+	string						_txt;
 	
 public:
 	HRESULT init(string name);

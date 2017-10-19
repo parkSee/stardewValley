@@ -4,6 +4,8 @@
 #include "UI.h"
 #include "inventory.h"
 #include "item.h"
+#include "player.h"
+#include "selectUI.h"
 
 HRESULT mouse::init(string name)
 {
@@ -113,6 +115,25 @@ void mouse::mouseControll()
 				{
 					inven->sendMessage(tagMessage("setTargetItem", 0.0f, 0, 0, vector<gameObject*>(), vItem[i]->name));
 				}
+			}
+		}
+	}
+
+	if (inven->getTargetItem()->type == itemType::FOOD)
+	{
+		if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
+		{
+			player* ply = (player*)TOWNWORLD->findObject(objectType::HUMAN, "player");
+			RECT rc;
+			rc.left = ply->_pos.x -= 25;
+			rc.right = ply->_pos.x += 25;
+			rc.top = ply->_pos.y -= (TILESIZE * 2);
+			rc.bottom = ply->_pos.y;
+
+			if (PtInRect(&rc, _ptMouse))
+			{
+				selectUI* select = (selectUI*)TOWNWORLD->findObject(objectType::INTERFACE,"selectUI");
+				select->sendMessage(tagMessage("setSelectUI"));
 			}
 		}
 	}
