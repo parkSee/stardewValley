@@ -9,7 +9,6 @@ HRESULT mapToolScene::init()
 	IMAGEMANAGER->addImage("farmBuildings", "resource/jerichoImage/Farm Buildings(913,412).bmp", 913, 412, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("farmHouse", "resource/jerichoImage/Farmhouse(192,320,12,20).bmp", 192, 320, 12, 20, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("outdoorsSpring", "resource/jerichoImage/Outdoors Spring(400,1264,25,79).bmp", 400, 1264, 25, 79, true, RGB(255, 0, 255));
-	//IMAGEMANAGER->addFrameImage("tileSprite", "resource/jerichoImage/Outdoors Spring(400,1264,25,79).bmp", 400, 1264, 25, 79, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("trees", "resource/jerichoImage/Trees(176,645).bmp", 176, 645, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("townInterior", "resource/jerichoImage/Town Interior(512,1088,32,68).bmp", 512, 1088, 32, 68, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("tileSample", "resource/jerichoImage/tileSample(960,960,60,60).bmp", 960, 960, 60, 60, true, RGB(255, 0, 255));
@@ -17,6 +16,7 @@ HRESULT mapToolScene::init()
 
 	_map = new tileMap;
 	_map->init();
+	_map->mapLoad();
 
 	CAMERAMANAGER->setMapSize(3000, 3000);
 
@@ -60,14 +60,14 @@ void mapToolScene::update()
 	{
 		_map->mapLoad();
 
-		//로드하고나서 지형 종류에 따라서 프레임 맞춰준다
-		for (int j = 0; j < TILEY; ++j)
-		{
-			for (int i = 0; i < TILEX; ++i)
-			{
-				_map->setTileFrameByAround(i, j);
-			}
-		}
+		////로드하고나서 지형 종류에 따라서 프레임 맞춰준다
+		//for (int j = 0; j < TILEY; ++j)
+		//{
+		//	for (int i = 0; i < TILEX; ++i)
+		//	{
+		//		_map->setTileFrameByAround(i, j);
+		//	}
+		//}
 	}
 
 	//탭 누르면 맵 - 스프라이트 전환
@@ -247,8 +247,10 @@ void mapToolScene::render()
 
 void mapToolScene::changeSprite(SPRITE::Enum spriteEnum)
 {
+	//이넘 바꾸고
 	_sprite = spriteEnum;
 
+	//이미지랑 이미지키 바꿔줌
 	switch (spriteEnum)
 	{
 	case SPRITE::OUTDOORS_SPRING:
@@ -406,7 +408,7 @@ void mapToolScene::leftClickInSprite()
 	case SPRITE::END:
 		break;
 	default:
-		//이미지는 이미 스프라이트 선택하면서 이미지값 바뀌어있으므로 그대로 넣으면 된다
+		//이미지는 이미 스프라이트 선택하면서 이미지값 바뀌어있으므로 프레임만 가져오면 된다
 		_selectIdX = ABSMOUSEX / TILESIZE;
 		_selectIdY = ABSMOUSEY / TILESIZE;
 		break;
