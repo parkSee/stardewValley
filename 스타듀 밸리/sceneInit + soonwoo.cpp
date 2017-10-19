@@ -41,10 +41,9 @@ void townScene::soonwooInit()
 	TOWNWORLD->addObject(objectType::INTERFACE, energy);
 
 	pierre*	storeNpc = new pierre;
-	storeNpc->init("pierre", "pierre", tagFloat(300, 500));
+	storeNpc->init("pierre", "pierre", tagFloat(480, 500));
 	TOWNWORLD->addObject(objectType::HUMAN, storeNpc);
 
-	
 	weather* day = new weather;
 	day->init("weather");
 	TOWNWORLD->addObject(objectType::WEATHER, day);

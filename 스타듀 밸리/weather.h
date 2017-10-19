@@ -3,10 +3,13 @@
 #include "darkNight.h"
 #include "player.h"
 
+#define DARKTILEX (TILEX+3)
+#define DARKTILEY (TILEY+3)
+
 class weather : public gameObject
 {
 private:
-	darkNight*			_darkNight[TILEX][TILEY];
+	darkNight*			_darkNight[DARKTILEX][DARKTILEY];
 	player*				_player;
 	
 	int					_saveIndexX;

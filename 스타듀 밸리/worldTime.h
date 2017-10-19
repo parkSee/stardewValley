@@ -42,6 +42,8 @@ public:
 	void release();
 	void update();
 
+	void story();
+
 	string getMonth();
 
 

@@ -111,7 +111,6 @@ void inventory::changeItem()
 				_explain.pos = tagFloat(_ptMouse.x + 30 , _ptMouse.y + 30);
 				_explain.rc = RectMake(_explain.pos.x, _explain.pos.y, _explain.img->getWidth() / 2,
 					_explain.img->getHeight() / 2);
-			
 			}
 
 			else if (!PtInRect(&_vInventory[i].rc, _ptMouse))

@@ -22,6 +22,7 @@ HRESULT npc::init(string name, string imageKey,tagFloat pos)
 
 	_collisionRc = { getRect().left + 25,getRect().top + 25,getRect().right - 25,getRect().bottom - 25 };
 
+	_isMove = false;
 
 	this->addCallback("changeState", [this](tagMessage msg)
 	{
@@ -42,6 +43,18 @@ void npc::release()
 }
 void npc::update() 
 {
+	gameObject::update();
+
+	_indexX = _pos.x / TILESIZE;
+	_indexY = _pos.y / TILESIZE;
+
+	if (_isMove)
+	{
+		this->move();
+
+		this->stateUpdate();
+	}
+
 	_collisionRc = { getRect().left + 25,getRect().top + 10,getRect().right - 25,getRect().bottom - 10 };
 }
 void npc::render() 
@@ -56,6 +69,11 @@ void npc::render()
 		_image->getFrameWidth() * _scale, _image->getFrameHeight() * _scale);
 
 	//RectangleMakeCenter(getMemDC(), _pos.x- cameraRc.left, _pos.y- cameraRc.top, 30, 30);
+
+	for (int i = 0; i < _vMoveTile.size(); ++i)
+	{
+		RectangleMakeCenter(getMemDC(), _vMoveTile[i]->_pos.x - cameraRc.left, _vMoveTile[i]->_pos.y- cameraRc.top, 20, 20);
+	}
 
 }
 
@@ -103,16 +121,16 @@ void npc::keyAniInit(string name, string imageKey)
 	int standLeft[]{ 12 };
 	KEYANIMANAGER->addArrayFrameAnimation(_keyAniString.standLeft, imageKey, standLeft, 1, 10, false);
 
-	int moveDown[]{ 0,1,2,3 };
-	KEYANIMANAGER->addArrayFrameAnimation(_keyAniString.moveDown, imageKey, moveDown, 4, 10, false);
+	int moveDown[]{ 1,2,3,2 };
+	KEYANIMANAGER->addArrayFrameAnimation(_keyAniString.moveDown, imageKey, moveDown, 4, 10, true);
 
-	int moveRight[]{ 4,5,6,7 };
-	KEYANIMANAGER->addArrayFrameAnimation(_keyAniString.moveRight, imageKey, moveRight, 4, 10, false);
+	int moveRight[]{ 5,6,7,6 };
+	KEYANIMANAGER->addArrayFrameAnimation(_keyAniString.moveRight, imageKey, moveRight, 4, 10, true);
 	
-	int moveUp[]{ 8,9,10,11 };
-	KEYANIMANAGER->addArrayFrameAnimation(_keyAniString.moveUp, imageKey, moveUp, 4, 10, false);
+	int moveUp[]{ 9,10,11,10 };
+	KEYANIMANAGER->addArrayFrameAnimation(_keyAniString.moveUp, imageKey, moveUp, 4, 10, true);
 
-	int moveLeft[]{ 12,13,14,15 };
-	KEYANIMANAGER->addArrayFrameAnimation(_keyAniString.moveLeft, imageKey, moveLeft, 4, 10, false);
+	int moveLeft[]{ 13,14,15,14 };
+	KEYANIMANAGER->addArrayFrameAnimation(_keyAniString.moveLeft, imageKey, moveLeft, 4, 10, true);
 	
 }

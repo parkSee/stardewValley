@@ -2,6 +2,9 @@
 #include "worldTime.h"
 #include "gameObject.h"
 
+#include "pierre.h"
+#include "player.h"
+
 using namespace month;
 using namespace dayDirection;
 
@@ -19,7 +22,7 @@ HRESULT worldTime::init()
 	_isTimeFlow = true;
 	_saveHour = 6;
 
-	_dayDirection = DEEP_NIGHT;
+	_dayDirection = EARLY_NIGHT;
 
 	return S_OK;
 }
@@ -74,6 +77,7 @@ void worldTime::update()
 		}
 	}
 
+	this->story();
 
 }
 
@@ -95,4 +99,25 @@ string worldTime::getMonth()
 	if (_month == OCT)return "Oct";
 	if (_month == DEC)return "Dec";
 
+}
+
+
+
+void worldTime::story()
+{
+	if (KEYMANAGER->isOnceKeyDown('M'))
+	{
+		pierre* pirre = (pierre*)TOWNWORLD->findObject(objectType::HUMAN, "pierre");
+		player* target =(player*)TOWNWORLD->findObject(objectType::HUMAN, "player");
+		vector<gameObject*>	sendList;
+		vector<mapToolTile*> vList = TOWNWORLD->getMap()->getShortestAStar(pirre->getIndexX(), pirre->getIndexY()
+			, target->getIndexX(), target->getIndexY(), false);
+
+		for (int i = 0; i < vList.size(); ++i)
+		{
+			sendList.push_back((gameObject*)vList[i]);
+		}
+
+		pirre->sendMessage(tagMessage("setMoveRoute", 0.0f, 0, 0, sendList));
+	}
 }
