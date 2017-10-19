@@ -2,8 +2,16 @@
 #include "worldTime.h"
 #include "gameObject.h"
 
+#include "UI.h"
+#include "mouse.h"
+#include "publicUI.h"
+#include "inventory.h"
+#include "dropItem.h"
+#include "eProgressBar.h"
 #include "pierre.h"
+#include "weather.h"
 #include "player.h"
+#include "caroline.h"
 
 using namespace month;
 using namespace dayDirection;
@@ -22,7 +30,9 @@ HRESULT worldTime::init()
 	_isTimeFlow = true;
 	_saveHour = 6;
 
-	_dayDirection = EARLY_NIGHT;
+	_dayDirection = DEEP_NIGHT;
+
+	_timeFast = 1.0f;
 
 	return S_OK;
 }
@@ -37,7 +47,7 @@ void worldTime::update()
 	//시간을 지배한다~!
 	if (_isTimeFlow == true)							//시간 불값이 활성화가 되있다면 시간계산을 해라 
 	{
-		_time.second += TIMEMANAGER->getElapsedTime();	//초는 ElapsedTime으로 현실시간반영 
+		_time.second += TIMEMANAGER->getElapsedTime() * _timeFast;	//초는 ElapsedTime으로 현실시간반영 
 		if (_time.second >= 10.0f)
 		{
 			_time.second = 0.0f;
@@ -48,9 +58,13 @@ void worldTime::update()
 				_time.hour += 1;
 				_time.minute = 0;
 
+				if (_time.ap == "pm" && _time.hour == 6 && _time.minute == 0)_dayDirection = dayDirection::EARLY_NIGHT;
+				if (_time.ap == "pm" && _time.hour == 8 && _time.minute == 0)_dayDirection = dayDirection::MID_NIGHT;
+				if (_time.ap == "pm" && _time.hour == 10 && _time.minute == 0)_dayDirection = dayDirection::DEEP_NIGHT;
+
 				if (_time.ap == "pm" && _time.hour >= 13)
 				{
-					_time.hour = 0;
+					_time.hour = 6;
 					_time.day += 1;
 					_time.ap = "am";
 					_dayDirection = BRIGHT;
@@ -70,14 +84,17 @@ void worldTime::update()
 					_time.hour = 0;
 					_time.ap = "pm";
 				}
-				if (_time.ap == "pm" && _time.hour == 19)_dayDirection == dayDirection::EARLY_NIGHT;
-				if (_time.ap == "pm" && _time.hour == 21)_dayDirection == dayDirection::MID_NIGHT;
-				if (_time.ap == "pm" && _time.hour == 22)_dayDirection == dayDirection::DEEP_NIGHT;
+		
 			}
 		}
 	}
 
 	this->story();
+
+	if (KEYMANAGER->isOnceKeyDown('P'))
+	{
+		_timeFast += 2;
+	}
 
 }
 
@@ -102,22 +119,3 @@ string worldTime::getMonth()
 }
 
 
-
-void worldTime::story()
-{
-	if (KEYMANAGER->isOnceKeyDown('M'))
-	{
-		pierre* pirre = (pierre*)TOWNWORLD->findObject(objectType::HUMAN, "pierre");
-		player* target =(player*)TOWNWORLD->findObject(objectType::HUMAN, "player");
-		vector<gameObject*>	sendList;
-		vector<mapToolTile*> vList = TOWNWORLD->getMap()->getShortestAStar(pirre->getIndexX(), pirre->getIndexY()
-			, target->getIndexX(), target->getIndexY(), false);
-
-		for (int i = 0; i < vList.size(); ++i)
-		{
-			sendList.push_back((gameObject*)vList[i]);
-		}
-
-		pirre->sendMessage(tagMessage("setMoveRoute", 0.0f, 0, 0, sendList));
-	}
-}

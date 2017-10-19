@@ -2,7 +2,7 @@
 #include "gameObject.h"
 #include "mapToolTile.h"
 
-#define NPCSPEED	3;
+#define NPCSPEED 3;
 
 namespace npcDirection
 {
@@ -51,6 +51,8 @@ private:
 	float					_saveAngle;
 	npcDirection::Enum		_saveDirection;
 
+	CBFUNCTION				_cb;
+
 private:
 	tagKeyAniString			_keyAniString;
 
@@ -74,6 +76,8 @@ public:
 	void keyAniInit(string name , string imageKey);
 
 	npcDirection::Enum	 getAngleDirection(float angle);
+
+	void setCallback(CBFUNCTION cb) { _cb = cb; }
 
 	npc() {}
 	virtual ~npc() {}

@@ -33,6 +33,9 @@ private:
 	int						_day;
 	month::Enum				_month;
 	int						_saveHour;
+
+
+	float					_timeFast;
 public:
 	tagTime					_time;
 	bool					_isTimeFlow;

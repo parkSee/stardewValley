@@ -39,21 +39,25 @@ void darkNight::render()
 	RECT rc = CAMERAMANAGER->getRenderRc();
 	_image->alphaRender(getMemDC(), _rc.left - rc.left, _rc.top - rc.top, _alpha);
 
+	if (WORLDTIME->_dayDirection == dayDirection::BRIGHT)
+	{
+		_alpha = DARKLEVEL0;
+		return;
+	}
 	if (WORLDTIME->_dayDirection == dayDirection::DEEP_NIGHT)
 	{
 		_alpha =DARKLEVEL4;
+		return;
 	}
-	else if (WORLDTIME->_dayDirection == dayDirection::MID_NIGHT)
+	if (WORLDTIME->_dayDirection == dayDirection::MID_NIGHT)
 	{
 		_alpha = DARKLEVEL3;
+		return;
 	}
-	else if (WORLDTIME->_dayDirection == dayDirection::EARLY_NIGHT)
+	if (WORLDTIME->_dayDirection == dayDirection::EARLY_NIGHT)
 	{
 		_alpha = DARKLEVEL1;
-	}
-	else if (WORLDTIME->_dayDirection == dayDirection::BRIGHT)
-	{
-		_alpha = DARKLEVEL0;
+		return;
 	}
 
 

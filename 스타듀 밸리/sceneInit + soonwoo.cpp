@@ -9,6 +9,7 @@
 #include "eProgressBar.h"
 #include "pierre.h"
 #include "weather.h"
+#include "caroline.h"
 
 void townScene::soonwooInit()
 {
@@ -47,4 +48,10 @@ void townScene::soonwooInit()
 	weather* day = new weather;
 	day->init("weather");
 	TOWNWORLD->addObject(objectType::WEATHER, day);
+
+	caroline* carolineNpc = new caroline;
+	carolineNpc->init("caroline", "caroline", tagFloat(900, 900));
+	TOWNWORLD->addObject(objectType::HUMAN, carolineNpc);
+
+	
 }
