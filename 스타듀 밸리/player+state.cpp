@@ -10,6 +10,8 @@ void player::stateUpdate(playerState::Enum state)
 	switch (_state)
 	{
 	case playerState::STAND:									//플레이어가 아래로(앞을보고) 서있을때
+
+		
 		if (KEYMANAGER->isOnceKeyDown('A'))
 		{
 			this->changeState(LEFT_RUN);						//왼쪽으로 이동상태로	바껴라
@@ -87,6 +89,8 @@ void player::stateUpdate(playerState::Enum state)
 
 		//================================================================================================달리는 모션
 	case playerState::RIGHT_RUN:								//오른쪽으로 이동중
+		
+
 		if (KEYMANAGER->isStayKeyDown('D'))
 		{
 			_pos.x += SPEED;
@@ -123,7 +127,7 @@ void player::stateUpdate(playerState::Enum state)
 			this->changeState(STAND_LEFT);
 		}
 
-		//_shadow->startAni();
+		
 		break;
 	case playerState::UP_RUN:									//위로 이동중
 		if (KEYMANAGER->isStayKeyDown('W'))
