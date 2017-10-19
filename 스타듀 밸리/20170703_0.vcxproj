@@ -82,6 +82,7 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
+    <ClInclude Include="caroline.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="darkNight.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />
+    <ClCompile Include="caroline.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="darkNight.cpp" />
     <ClCompile Include="dongjin+imageLoad.cpp" />
@@ -228,6 +230,7 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="weather.cpp" />
     <ClCompile Include="winMain.cpp" />
+    <ClCompile Include="worldTime + story.cpp" />
     <ClCompile Include="worldTime.cpp" />
     <ClCompile Include="youngJae + imageLoad.cpp" />
   </ItemGroup>
