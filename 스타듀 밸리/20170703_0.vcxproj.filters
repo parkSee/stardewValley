@@ -608,9 +608,6 @@
     <ClCompile Include="player+state.cpp">
       <Filter>playGround\player</Filter>
     </ClCompile>
-    <ClCompile Include="player+callBackcpp.cpp">
-      <Filter>playGround\player</Filter>
-    </ClCompile>
     <ClCompile Include="store.cpp">
       <Filter>playGround\store</Filter>
     </ClCompile>
@@ -661,6 +658,9 @@
     </ClCompile>
     <ClCompile Include="selectUI.cpp">
       <Filter>playGround\UI\selectUI</Filter>
+    </ClCompile>
+    <ClCompile Include="player+callBack.cpp">
+      <Filter>playGround\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include "mapToolTile.h"
 #include "eProgressBar.h"
 #include "tree1.h"
+#include <functional>
 
 
 #define SPEED 4
@@ -12,6 +13,7 @@
 #define CARRYY 160
 
 class shadow;
+typedef std::function<void()>EAT_CALLBACK;
 
 namespace playerState
 {
@@ -75,7 +77,14 @@ struct tagMyItem			//아이템은 구조체로 되어있기 때문에 이미지와 좌표를 가져와서 
 	image* img;
 	float x, y;
 	float gravity;
+	float jumpPower;
 
+};
+
+struct tagEatItem
+{
+	int x;
+	int y;
 };
 
 using namespace playerState;
@@ -83,22 +92,30 @@ using namespace playerState;
 class player : public gameObject
 {
 private:
-	playerState::Enum _state;
-	tagPlayer _player;
-	tagMyItem _myItem;
-	tagItem* _item;
-	tagItem tem;
-	tileMap* _map;
-	eProgressBar* _power;
-	mapToolTile* _tile1;
-	mapToolTile* _tile2;
-	tree1_bottom* _tree;
-	shadow* _shadow;
-	tagFloat	_tilePos;
-
-
-	int _indexX, _indexY;
-						
+	playerState::Enum				_state;
+	tagPlayer						_player;
+	tagMyItem						_myItem;
+	tagItem*						_item;
+	tagItem							 tem;
+	tileMap*						_map;
+	eProgressBar*					_power;
+	mapToolTile*					_tile1;
+	mapToolTile*					_tile2;
+	tree1_bottom*					_tree;
+	shadow*							_shadow;
+	tagFloat						_tilePos;
+	RECT							_eatingRc;
+	tagFloat						_eatCenter;
+	int								_indexX, _indexY;
+	
+	//================================================ 콜백
+	
+	tagEatItem						_start;
+	tagEatItem						_end;
+	float							_range;
+	float							_worldTimeCount;
+	float							_time;
+	EAT_CALLBACK					_cbEat;
 
 public:
 
@@ -115,16 +132,20 @@ public:
 	void lbuttonClick(tagMessage msg);
 	void changeTargetItem(tagMessage msg);
 	void tileCollision();
+	void moveToEat(int endX, int endY, float time, EAT_CALLBACK cd = NULL);
 	RECT rectMakeBottom();
 
 
-	
 
+
+	//반환형 함수이름(매개변수){실행내용}
 	enum playerState::Enum getPlayerState(void) { return _state; }
 	void setPlayerState(playerState::Enum state) { _state = state; }
 
 	animation* getPlayerMotion(void) { return _player.Motion; }
 	void setPlayerMotion(animation* ani) { _player.Motion = ani; }
+
+
 
 	int getIndexX(void) { return _indexX; }
 	int getIndexY(void) { return _indexY; }

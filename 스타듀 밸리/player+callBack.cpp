@@ -6,16 +6,26 @@
 
 void player::eating(tagMessage msg)
 {
-	_state == EATING;
+	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+	_item = inven->getTargetItem();
+
+	if (_item->type == itemType::FOOD)
+	{
+		this->changeState(EATING);
+		//this->moveToEat();
+		_myItem.img = _item->img;						//아이템 이미지를 띄우는 
 	
-	_myItem.img = _item->img;						//아이템 이미지를 띄우는 
-	_myItem.x = _pos.x;
-	_myItem.y -= 3;
-	_myItem.gravity = 0.5f;
-	_myItem.y += _myItem.gravity;
+		
+	}
 
-
+	
 }
+
+void player::moveToEat(int endX, int endY, float time, EAT_CALLBACK cd)
+{
+	
+}
+
 
 void player::lbuttonClick(tagMessage msg)
 {

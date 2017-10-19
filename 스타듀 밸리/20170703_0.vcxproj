@@ -189,7 +189,7 @@
     <ClCompile Include="npc.cpp" />
     <ClCompile Include="obj.cpp" />
     <ClCompile Include="pierre.cpp" />
-    <ClCompile Include="player+callBackcpp.cpp" />
+    <ClCompile Include="player+callBack.cpp" />
     <ClCompile Include="player+state.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playGround.cpp" />

@@ -141,8 +141,8 @@ HRESULT player::init(string objName, tagFloat pos)
 	int qustionEat[] = { 192 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerQustionEat", "player", qustionEat, 1, 0, false);
 
-	int eating[] = { 193,194,195,196,197,198,199,100,101 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerEating", "player", eating, 10, 10, false);
+	int eating[] = { 193,194,195,196,197,198,199,200,201, };
+	KEYANIMANAGER->addArrayFrameAnimation("playerEating", "player", eating, 9, 8, false);
 
 //========================================================================================================
 	
@@ -153,6 +153,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
 	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);										//플레이어 발밑 충돌렉트
+	_eatingRc = RectMakeCenter(_pos.x, _pos.y - 80, 20, 20);
 
 	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;					//타일pos를 따로 만든 이유는 ?
 	_tilePos.y = _rcCollision.bottom;
@@ -170,9 +171,11 @@ HRESULT player::init(string objName, tagFloat pos)
 	_tile1 = NULL;
 	_tile2 = NULL;
 
+	_myItem.img = _item->img;
 	_myItem.x = 0;
 	_myItem.y = 0;
 	_myItem.gravity = 0.5f;
+	_myItem.jumpPower = 8.0f;
 
 	//콜백
 	this->addCallback("changeState", [this](tagMessage msg)											//특정프레임이 다 돌면 원래 프레임으로 돌아와라! 명령하는 콜백
@@ -217,7 +220,6 @@ void player::update()
 	_indexX = (int)(_tilePos.x / (TILESIZE));			//나의 인덱스 번호 X						//실시간으로 내가 어느타일에 있는지 위치를 찾아주게 넣어놓음
 	_indexY = (int)(_tilePos.y / (TILESIZE));			//나의 인덱스 번호 Y
 
-
 	if (WORLDTIME->_isTimeFlow)																	//UI가 켜지면 움직이지 않는다. 
 	{																							//(게임상 시간의 흐름 - UI가 켜지면 시간이 멈추면서 키와 시간만 멈춘다.)
 		this->stateUpdate(_state);
@@ -232,7 +234,8 @@ void player::update()
 
 	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
-
+	_eatingRc = RectMakeCenter(_pos.x, _pos.y-80, 20,20);
+	
 
 	_shadow->_pos.x = this->_pos.x;
 	_shadow->_pos.y = this->_pos.y -20;
@@ -247,6 +250,8 @@ void player::render()
 
 	_image->aniRender(getMemDC(), this->rectMakeBottom().left - rc.left,										// 이미지 렌더 
 		this->rectMakeBottom().top - rc.top, _player.Motion);
+	//Rectangle(getMemDC(), _eatingRc.left - rc.left, _eatingRc.top - rc.top, _eatingRc.right - rc.left, _eatingRc.bottom-rc.top);
+
 	//Rectangle(getMemDC(), _player.rc.left -rc.left , _player.rc.top-rc.top, 
 	//	_player.rc.right-rc.left, _player.rc.bottom-rc.top);				//실제 플레이어 렉트
 	//Rectangle(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top,			//_pos 좌표 보정렉트 및 플레이어 현 렉트
@@ -260,11 +265,14 @@ void player::render()
 	//Rectangle(getMemDC(), _tilePos.x - rc.left, _tilePos.y - rc.top, 50, 50);
 
 	
-
-	if (_state == STAND_TAKE || _state == STAND_TAKE_LEFT || _state == STAND_TAKE_RIGHT ||						//아이템을 들고있는 상태일때만 그린다.
-		_state == STAND_TAKE_BACK || _state == TAKE_UP || _state == TAKE_LEFT || _state == TAKE_RIGHT || _state == TAKE_DOWN)
+	if (_myItem.img != NULL)
 	{
-		_myItem.img->render(getMemDC(), _myItem.x - rc.left, _myItem.y - rc.top);								//아이템 렌더
+		if (_state == STAND_TAKE || _state == STAND_TAKE_LEFT || _state == STAND_TAKE_RIGHT ||						//아이템을 들고있는 상태일때만 그린다.
+			_state == STAND_TAKE_BACK || _state == TAKE_UP || _state == TAKE_LEFT || _state == TAKE_RIGHT || _state == TAKE_DOWN ||
+			_state == EATING)
+		{
+			_myItem.img->render(getMemDC(), _myItem.x - rc.left, _myItem.y - rc.top);								//아이템 렌더
+		}
 	}
 	
 	if (_tile1 != NULL && _tile2 != NULL)
@@ -284,6 +292,9 @@ void player::render()
 		char str[100];
 		sprintf(str, "%d,%d", _indexX, _indexY);
 		TextOut(getMemDC(), 10, 300, str, strlen(str));
+
+		sprintf_s(str, "%f,%f",_myItem.x,_myItem.y);
+		TextOut(getMemDC(), 10, 400, str, strlen(str));
 	}
 	_shadow->render();
 	//EllipseMakeCenter(getMemDC(), _pos.x-rc.left, _pos.y-rc.top, 10, 10);
