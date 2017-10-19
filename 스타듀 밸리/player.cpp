@@ -267,7 +267,6 @@ void player::render()
 		sprintf(str, "%d,%d", _indexX, _indexY);
 		TextOut(getMemDC(), 10, 300, str, strlen(str));
 	}
-
 	//EllipseMakeCenter(getMemDC(), _pos.x-rc.left, _pos.y-rc.top, 10, 10);
 }
 
@@ -378,8 +377,10 @@ void player::tileCollision()
 							//
 							//}
 
-	if (IntersectRect(&_rc1, &_tile1->getRect(), &_rcCollision))
+	if (_tile1 != NULL)
 	{
+		if (IntersectRect(&_rc1, &_tile1->getRect(), &_rcCollision))
+		{
 			if (_tile1->getTerrain() == TERRAIN::WATER)
 			{
 				switch (_state)
@@ -394,7 +395,7 @@ void player::tileCollision()
 				case playerState::STAND_BACK:
 					break;
 				case playerState::TAKE_UP: case playerState::UP_RUN:
-				
+
 					_pos.y += SPEED;
 					if (KEYMANAGER->isStayKeyDown('A'))
 					{
@@ -406,7 +407,7 @@ void player::tileCollision()
 					}
 					break;
 				case playerState::TAKE_RIGHT: case playerState::RIGHT_RUN:
-				
+
 					_pos.x -= SPEED;
 					if (KEYMANAGER->isStayKeyDown('S'))
 					{
@@ -430,78 +431,6 @@ void player::tileCollision()
 					break;
 				case playerState::TAKE_DOWN: case playerState::DOWN_RUN:
 					_pos.y -= SPEED;
-					if (KEYMANAGER->isStayKeyDown('A'))
-					{
-						_pos.x += SPEED;
-					}
-					else if (KEYMANAGER->isStayKeyDown('D'))
-					{
-						_pos.x -= SPEED;
-					}
-					break;
-				}
-		}
-	}
-
-	if (IntersectRect(&_rc2, &_tile2->getRect(), &_rcCollision))
-	{
-		if(_tile1->getTerrain() != TERRAIN::WATER)
-		{ 
-			if (_tile2->getTerrain() == TERRAIN::WATER)
-			{
-				switch (_state)
-				{
-				case playerState::STAND:
-					break;
-				case playerState::STAND_RIGHT:
-					break;
-				case playerState::STAND_LEFT:
-					break;
-				case playerState::STAND_BACK:
-					break;
-				case playerState::TAKE_UP: case playerState::UP_RUN:
-
-					_pos.y += SPEED;
-
-					if (KEYMANAGER->isStayKeyDown('A'))
-					{
-						_pos.x += SPEED;
-					}
-					else if (KEYMANAGER->isStayKeyDown('D'))
-					{
-						_pos.x -= SPEED;
-					}
-					break;
-				case playerState::TAKE_RIGHT: case playerState::RIGHT_RUN:
-
-					_pos.x -= SPEED;
-
-					if (KEYMANAGER->isStayKeyDown('S'))
-					{
-						_pos.y -= SPEED;
-					}
-					else if (KEYMANAGER->isStayKeyDown('W'))
-					{
-						_pos.y += SPEED;
-					}
-					break;
-				case playerState::TAKE_LEFT: case playerState::LEFT_RUN:
-
-					_pos.x += SPEED;
-
-					if (KEYMANAGER->isStayKeyDown('S'))
-					{
-						_pos.y -= SPEED;
-					}
-					else if (KEYMANAGER->isStayKeyDown('W'))
-					{
-						_pos.y += SPEED;
-					}
-					break;
-				case playerState::TAKE_DOWN: case playerState::DOWN_RUN:
-
-					_pos.y -= SPEED;
-
 					if (KEYMANAGER->isStayKeyDown('A'))
 					{
 						_pos.x += SPEED;
@@ -514,7 +443,86 @@ void player::tileCollision()
 				}
 			}
 		}
+		return;
 	}
+
+	if (_tile2 != NULL)
+	{
+		if (IntersectRect(&_rc2, &_tile2->getRect(), &_rcCollision))
+		{
+			if (_tile1->getTerrain() != TERRAIN::WATER)
+			{
+				if (_tile2->getTerrain() == TERRAIN::WATER)
+				{
+					switch (_state)
+					{
+					case playerState::STAND:
+						break;
+					case playerState::STAND_RIGHT:
+						break;
+					case playerState::STAND_LEFT:
+						break;
+					case playerState::STAND_BACK:
+						break;
+					case playerState::TAKE_UP: case playerState::UP_RUN:
+
+						_pos.y += SPEED;
+
+						if (KEYMANAGER->isStayKeyDown('A'))
+						{
+							_pos.x += SPEED;
+						}
+						else if (KEYMANAGER->isStayKeyDown('D'))
+						{
+							_pos.x -= SPEED;
+						}
+						break;
+					case playerState::TAKE_RIGHT: case playerState::RIGHT_RUN:
+
+						_pos.x -= SPEED;
+
+						if (KEYMANAGER->isStayKeyDown('S'))
+						{
+							_pos.y -= SPEED;
+						}
+						else if (KEYMANAGER->isStayKeyDown('W'))
+						{
+							_pos.y += SPEED;
+						}
+						break;
+					case playerState::TAKE_LEFT: case playerState::LEFT_RUN:
+
+						_pos.x += SPEED;
+
+						if (KEYMANAGER->isStayKeyDown('S'))
+						{
+							_pos.y -= SPEED;
+						}
+						else if (KEYMANAGER->isStayKeyDown('W'))
+						{
+							_pos.y += SPEED;
+						}
+						break;
+					case playerState::TAKE_DOWN: case playerState::DOWN_RUN:
+
+						_pos.y -= SPEED;
+
+						if (KEYMANAGER->isStayKeyDown('A'))
+						{
+							_pos.x += SPEED;
+						}
+						else if (KEYMANAGER->isStayKeyDown('D'))
+						{
+							_pos.x -= SPEED;
+						}
+						break;
+					}
+				}
+			}
+		}
+		return;
+	}
+
 
 }
 
