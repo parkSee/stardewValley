@@ -5,6 +5,7 @@
 #include "inventory.h"
 #include "item.h"
 #include "player.h"
+#include "selectUI.h"
 
 HRESULT mouse::init(string name)
 {
@@ -120,10 +121,10 @@ void mouse::mouseControll()
 
 	if (inven->getTargetItem()->type == itemType::FOOD)
 	{
-
-		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+		if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
 		{
-			//if(PtInRect(&))
+			gameObject* select = (gameObject*)TOWNWORLD->findObject(objectType::INTERFACE,"selectUI");
+			select->sendMessage(tagMessage("setSelectUI"));
 		}
 	}
 	

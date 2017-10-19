@@ -19,7 +19,7 @@ HRESULT inventory::init(string name)
 		char str[100] = "";
 		sprintf(str, "%d", i);
 
-		tagItem	item = tagItem((string)str,"", tagFloat(_subInventory.rc.left + 49 + 64*i , _subInventory.pos.y),i);
+		tagItem	item = tagItem((string)str,"", tagFloat(_subInventory.rc.left + 49 + 64*i , _subInventory.pos.y),0);
 		_vInventory.push_back(item);
 	}
 	//아이템 채워넣어 준다
@@ -76,6 +76,16 @@ void inventory::release()
 void inventory::update()
 {
 	gameObject::update();
+
+	for (int i = 0; i < _vInventory.size(); ++i)
+	{
+		if (_vInventory[i].count == 0)
+		{
+			char str[100] = "";
+			sprintf(str, "%d", i);
+			_vInventory[i] =tagItem((string)str, "", tagFloat(_vInventory[i].pos.x, _vInventory[i].pos.y), 0);
+		}
+	}
 
 	this->keyContoroll();
 

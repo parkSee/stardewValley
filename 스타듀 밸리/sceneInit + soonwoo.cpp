@@ -38,6 +38,10 @@ void townScene::soonwooInit()
 	item2->init("수액", "나무에서 나온 끈적앤 액채",tagFloat(700, 700));
 	TOWNWORLD->addObject(objectType::ITEM, item2);
 
+	dropItem* item3 = new dropItem;
+	item3->init("나무", "집가고 싶다, 쉬고 싶어 . . ,", tagFloat(1000, 500));
+	TOWNWORLD->addObject(objectType::ITEM, item3);
+
 	eProgressBar* energy = new eProgressBar;
 	energy->init("energyBar");
 	TOWNWORLD->addObject(objectType::INTERFACE, energy);
@@ -51,7 +55,7 @@ void townScene::soonwooInit()
 	TOWNWORLD->addObject(objectType::WEATHER, day);
 
 	caroline* carolineNpc = new caroline;
-	carolineNpc->init("caroline", "caroline", tagFloat(900, 900));
+	carolineNpc->init("caroline", "caroline", tagFloat(900, 300));
 	TOWNWORLD->addObject(objectType::HUMAN, carolineNpc);
 
 	selectUI*select = new selectUI;
