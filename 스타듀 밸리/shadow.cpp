@@ -52,7 +52,7 @@ void shadow::render()
 void shadow::startAni()
 {
 
-	exit(0);
+
 	_shadow.ani->start();
 	_shadow.ani->frameUpdate(TIMEMANAGER->getElapsedTime() * 5);
 	
