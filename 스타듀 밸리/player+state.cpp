@@ -210,9 +210,10 @@ void player::stateUpdate(playerState::Enum state)
 	case playerState::SWORD_DOWN:
 		break;
 		//====================================================================================물건 들고 달릴떄
+	
 	case playerState::TAKE_RIGHT:				//들고 오른쪽으로 달리기 
-		_myItem.x = _pos.x - 50;				//아이템의 좌표
-		_myItem.y = _pos.y - CARRY;
+		_myItem.x = _pos.x - CARRYX;				//아이템의 좌표
+		_myItem.y = _pos.y - CARRYY;
 
 		if (KEYMANAGER->isStayKeyDown('D'))
 		{
@@ -232,8 +233,8 @@ void player::stateUpdate(playerState::Enum state)
 		}
 		break;
 	case playerState::TAKE_LEFT:				//들고 왼쪽으로 달리기 
-		_myItem.x = _pos.x;
-		_myItem.y = _pos.y - CARRY;
+		_myItem.x = _pos.x- CARRYX;
+		_myItem.y = _pos.y - CARRYY;
 	
 		if (KEYMANAGER->isStayKeyDown('A'))
 		{
@@ -253,8 +254,8 @@ void player::stateUpdate(playerState::Enum state)
 		}
 		break;
 	case playerState::TAKE_UP:					//들고 위로 달리기 
-		_myItem.x = _pos.x;
-		_myItem.y = _pos.y - CARRY;
+		_myItem.x = _pos.x- CARRYX;
+		_myItem.y = _pos.y - CARRYY;
 
 		if (KEYMANAGER->isStayKeyDown('W'))
 		{
@@ -274,8 +275,8 @@ void player::stateUpdate(playerState::Enum state)
 		}
 		break;
 	case playerState::TAKE_DOWN:				//들고 아래로 달리기 
-		_myItem.x = _pos.x;
-		_myItem.y = _pos.y - CARRY;
+		_myItem.x = _pos.x- CARRYX;
+		_myItem.y = _pos.y - CARRYY;
 
 		if (KEYMANAGER->isStayKeyDown('S'))
 		{
@@ -296,8 +297,8 @@ void player::stateUpdate(playerState::Enum state)
 		}
 		break;
 	case playerState::STAND_TAKE:				//들고 서있기
-		_myItem.x = _pos.x - 30;
-		_myItem.y = _pos.y - CARRY;
+		_myItem.x = _pos.x- CARRYX;
+		_myItem.y = _pos.y - CARRYY;
 
 		if (KEYMANAGER->isOnceKeyDown('A'))
 		{
@@ -319,8 +320,8 @@ void player::stateUpdate(playerState::Enum state)
 
 		break;
 	case playerState::STAND_TAKE_RIGHT:			//들고 오른쪽으로 서있기		
-		_myItem.x = _pos.x;
-		_myItem.y = _pos.y - CARRY;
+		_myItem.x = _pos.x - CARRYX;
+		_myItem.y = _pos.y - CARRYY;
 
 		if (KEYMANAGER->isOnceKeyDown('D'))
 		{
@@ -340,8 +341,8 @@ void player::stateUpdate(playerState::Enum state)
 		}
 		break;
 	case playerState::STAND_TAKE_LEFT:			//들고 왼쪽으로 서있기
-		_myItem.x = _pos.x;
-		_myItem.y = _pos.y - CARRY;
+		_myItem.x = _pos.x- CARRYX;
+		_myItem.y = _pos.y - CARRYY;
 		
 		if (KEYMANAGER->isOnceKeyDown('A'))					//LEFT_STAND
 		{
@@ -362,8 +363,8 @@ void player::stateUpdate(playerState::Enum state)
 
 		break;
 	case playerState::STAND_TAKE_BACK:			//들고 뒤로 서있기
-		_myItem.x = _pos.x;
-		_myItem.y = _pos.y - CARRY;
+		_myItem.x = _pos.x- CARRYX;
+		_myItem.y = _pos.y - CARRYY;
 
 		if (KEYMANAGER->isOnceKeyDown('W'))
 		{
@@ -386,7 +387,7 @@ void player::stateUpdate(playerState::Enum state)
 		break;
 	}
 
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 5, 50, 20);
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
 
 	tileCollision();
 }

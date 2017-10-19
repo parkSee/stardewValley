@@ -85,3 +85,6 @@ extern HINSTANCE _hInstance;
 extern HWND _hWnd;
 extern POINT _ptMouse;
 extern BOOL _leftButtonDown;
+
+#define ABSMOUSEX (CAMERAMANAGER->getRenderRc().left + _ptMouse.x)
+#define ABSMOUSEY (CAMERAMANAGER->getRenderRc().top + _ptMouse.y)

@@ -141,15 +141,15 @@ HRESULT player::init(string objName, tagFloat pos)
 	gameObject::init(objName, "player", tagFloat(WINSIZEX / 2, WINSIZEY / 2), pivot::BOTTOM);
 	
 	_state = STAND;
-	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth() /2, _image->getFrameHeight()/2);	
 	_player.Motion = KEYANIMANAGER->findAnimation("playerStand");
 
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 5, 50, 20);
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);										//플레이어 발밑 충돌렉트
 
-	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;
+	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;					//타일pos를 따로 만든 이유는 ?
 	_tilePos.y = _rcCollision.bottom;
 
-	_indexX = (int)(_tilePos.x / (TILESIZE));
+	_indexX = (int)(_tilePos.x / (TILESIZE));														//나의 인덱스 번호를 구할때 좀더 간결하게 쓰기위해서도 있다.
 	_indexY = (int)(_tilePos.y / (TILESIZE));
 
 
@@ -163,26 +163,26 @@ HRESULT player::init(string objName, tagFloat pos)
 	_myItem.y = 0;
 
 	//콜백
-	this->addCallback("changeState", [this](tagMessage msg)
+	this->addCallback("changeState", [this](tagMessage msg)											//특정프레임이 다 돌면 원래 프레임으로 돌아와라! 명령하는 콜백
 	{
 		this->changeState((playerState::Enum)msg.data);
 	});
 
 	//아이템 먹기 
-	this->addCallback("eating", [this](tagMessage msg)
+	this->addCallback("eating", [this](tagMessage msg)												//왜만들어놨지?
 	{
 		this->eating();
 	});
 
 	//대상 클릭
-	this->addCallback("lbuttonClick", [this](tagMessage msg)
-	{
+	this->addCallback("lbuttonClick", [this](tagMessage msg)										//마우스에게 메세지를 받으면 특정 타일을 선택시 또는 특정 상태로 변환하게
+	{																								//만드는 즉, 마우스와 통신하기위한 콜백1
 		this->lbuttonClick(msg);
 	});
 
 
-	this->addCallback("changeTargetItem", [this](tagMessage msg)
-	{
+	this->addCallback("changeTargetItem", [this](tagMessage msg)									//마우스가 일정 아이템 또는 도구를 선택하면 그에 맞는 상태로 변환시키는 
+	{																								//마우스와 통신하기 위한 콜백2
 		this->changeTargetItem(msg);
 	});
 
@@ -198,46 +198,50 @@ void player::update()
 {
 	gameObject::update();
 
-	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;
+	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;					
 	_tilePos.y = _rcCollision.bottom;
 
-	_indexX = (int)(_tilePos.x / (TILESIZE));			//나의 인덱스 번호 X
-	_indexY = (int)(_tilePos.y / (TILESIZE));		//나의 인덱스 번호 Y
+	_indexX = (int)(_tilePos.x / (TILESIZE));			//나의 인덱스 번호 X						//실시간으로 내가 어느타일에 있는지 위치를 찾아주게 넣어놓음
+	_indexY = (int)(_tilePos.y / (TILESIZE));			//나의 인덱스 번호 Y
 
 
-	if (WORLDTIME->_isTimeFlow)				//UI가 켜지면 움직이지 않는다. (게임상 시간의 흐름 - UI가 켜지면 시간이 멈추면서 키와 시간만 멈춘다.)
-	{
+	if (WORLDTIME->_isTimeFlow)																	//UI가 켜지면 움직이지 않는다. 
+	{																							//(게임상 시간의 흐름 - UI가 켜지면 시간이 멈추면서 키와 시간만 멈춘다.)
 		this->stateUpdate(_state);
 	}
 	
-	if (KEYMANAGER->isOnceKeyDown('Y'))
+	if (KEYMANAGER->isOnceKeyDown('Y'))															//마우스클릭을 아직 받지못해 만들어 놓은 키
 	{
 		this->sendMessage(tagMessage("lbuttonClick"));
 	}
 
 	KEYANIMANAGER->update();
 
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 5, 50, 20);
-	_player.rc = RectMake(_tilePos.x, _tilePos.y, _image->getFrameWidth(), _image->getFrameHeight());
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
+	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 
 }
 void player::render()
 {
 	//gameObject::render();
-	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);				//실제 플레이어 렉트
+	
 	RECT rc = CAMERAMANAGER->getRenderRc();
+
+	_image->aniRender(getMemDC(), this->rectMakeBottom().left - rc.left,										// 이미지 렌더 
+		this->rectMakeBottom().top - rc.top, _player.Motion);
+	//Rectangle(getMemDC(), _player.rc.left -rc.left , _player.rc.top-rc.top, 
+	//	_player.rc.right-rc.left, _player.rc.bottom-rc.top);				//실제 플레이어 렉트
 	//Rectangle(getMemDC(), this->rectMakeBottom().left - rc.left, this->rectMakeBottom().top - rc.top,			//_pos 좌표 보정렉트 및 플레이어 현 렉트
 	//	this->rectMakeBottom().right - rc.left, this->rectMakeBottom().bottom - rc.top);
 
-	RectangleMakeCenter(getMemDC(), _pos.x - rc.left, _pos.y - rc.top, 30, 30);									//_pos 좌표
+	//RectangleMakeCenter(getMemDC(), _pos.x - rc.left, _pos.y - rc.top, 30, 30);									//_pos 좌표
 
 	Rectangle(getMemDC(), _rcCollision.left - rc.left, _rcCollision.top - rc.top,								//타일 충돌렉트
 		_rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
 
 	//Rectangle(getMemDC(), _tilePos.x - rc.left, _tilePos.y - rc.top, 50, 50);
 
-	_image->aniRender(getMemDC(), this->rectMakeBottom().left - rc.left,										// 이미지 렌더 
-		this->rectMakeBottom().top - rc.top, _player.Motion);
+	
 
 	if (_state == STAND_TAKE || _state == STAND_TAKE_LEFT || _state == STAND_TAKE_RIGHT ||						//아이템을 들고있는 상태일때만 그린다.
 		_state == STAND_TAKE_BACK || _state == TAKE_UP || _state == TAKE_LEFT || _state == TAKE_RIGHT || _state == TAKE_DOWN)
@@ -264,7 +268,7 @@ void player::render()
 		TextOut(getMemDC(), 10, 300, str, strlen(str));
 	}
 
-	
+	//EllipseMakeCenter(getMemDC(), _pos.x-rc.left, _pos.y-rc.top, 10, 10);
 }
 
 void player::tileCollision()
@@ -376,16 +380,6 @@ void player::tileCollision()
 
 	if (IntersectRect(&_rc1, &_tile1->getRect(), &_rcCollision))
 	{
-		if (_tile1->getPObj() != NULL)
-		{
-			if (_state == playerState::AXE_LEFT)
-			{
-				exit(0);
-				tree1_bottom* _target = (tree1_bottom*)TOWNWORLD->findObject(objectType::OBJ, "tree1_bottom");
-				_target->sendMessage(tagMessage("treeTarget"));
-			}
-		}
-
 			if (_tile1->getTerrain() == TERRAIN::WATER)
 			{
 				switch (_state)

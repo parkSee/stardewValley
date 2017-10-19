@@ -30,6 +30,7 @@ HRESULT mapToolScene::init()
 	_mapCam.y = _spriteCam.y = WINSIZEY / 2;
 	_spriteImage = NULL;
 
+	//스프라이트 개수만큼 렉트 생성 (스프라이트 변경할 버튼)
 	for (int i = 0; i < SPRITE::END; ++i)
 	{
 		RECT rc = RectMake(WINSIZEX - 210, 10 + i * 50, 200, 40);
@@ -55,6 +56,7 @@ void mapToolScene::update()
 	{
 		_map->load();
 
+		//로드 하고 지형 종류에 따라서 프레임 맞춰준다
 		for (int j = 0; j < TILEY; ++j)
 		{
 			for (int i = 0; i < TILEX; ++i)
