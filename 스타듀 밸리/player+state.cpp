@@ -11,7 +11,6 @@ void player::stateUpdate(playerState::Enum state)
 	{
 	case playerState::STAND:									//플레이어가 아래로(앞을보고) 서있을때
 
-		
 		if (KEYMANAGER->isOnceKeyDown('A'))
 		{
 			this->changeState(LEFT_RUN);						//왼쪽으로 이동상태로	바껴라
@@ -390,6 +389,11 @@ void player::stateUpdate(playerState::Enum state)
 		{
 			this->changeState(TAKE_RIGHT);						//오른쪽으로 가는 상태로 바껴라
 		}
+	case playerState::QUSEAT:
+		
+		break;
+	case playerState::EATING:
+		break;
 
 		break;
 	}

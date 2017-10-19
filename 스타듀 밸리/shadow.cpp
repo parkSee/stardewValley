@@ -36,7 +36,7 @@ void shadow::update()
 	//if (!_isChange)_scale -= 0.03f;
 	//if (_scale >= 1.3)_isChange = false;
 	//if (_scale <= 0.7)_isChange = true;
-	this->startAni();
+	//this->startAni();
 	//this->stopAni();
 }
 void shadow::render() 

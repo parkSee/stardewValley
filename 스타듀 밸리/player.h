@@ -56,7 +56,9 @@ namespace playerState
 		TAKE_RIGHT,				//들고 오른쪽으로 달리기
 		TAKE_LEFT,				//들고 왼쪽으로 달리기
 		TAKE_UP,				//들고 위으로 달리기
-		TAKE_DOWN				//들고 아래으로 달리기
+		TAKE_DOWN,				//들고 아래으로 달리기
+		QUSEAT,					//먹을까요?
+		EATING					//먹어
 	};
 }
 
@@ -72,6 +74,7 @@ struct tagMyItem			//아이템은 구조체로 되어있기 때문에 이미지와 좌표를 가져와서 
 {
 	image* img;
 	float x, y;
+	float gravity;
 
 };
 
@@ -108,7 +111,7 @@ public:
 
 	void stateUpdate(playerState::Enum state);
 	void changeState(playerState::Enum state);
-	void eating();
+	void eating(tagMessage msg);
 	void lbuttonClick(tagMessage msg);
 	void changeTargetItem(tagMessage msg);
 	void tileCollision();

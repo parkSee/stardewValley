@@ -4,9 +4,17 @@
 #include "eProgressBar.h"
 
 
-void player::eating()
+void player::eating(tagMessage msg)
 {
+	_state == EATING;
 	
+	_myItem.img = _item->img;						//아이템 이미지를 띄우는 
+	_myItem.x = _pos.x;
+	_myItem.y -= 3;
+	_myItem.gravity = 0.5f;
+	_myItem.y += _myItem.gravity;
+
+
 }
 
 void player::lbuttonClick(tagMessage msg)
