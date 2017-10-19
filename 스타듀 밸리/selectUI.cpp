@@ -18,7 +18,7 @@ HRESULT selectUI::init(string name)
 
 	_yes.rc = RectMake(_windowRc.left + 30, _windowRc.top + 100, _window->getWidth() - 80, 50);
 	
-	_no.rc = RectMake(_yes.rc.left, _yes.rc.bottom + 30, _yes.rc.right - _yes.rc.left, _yes.rc.bottom - _yes.rc.top);
+	_no.rc = RectMake(_yes.rc.left, _yes.rc.bottom + 15, _yes.rc.right - _yes.rc.left, _yes.rc.bottom - _yes.rc.top);
 
 	_direction = NONE_ACTIVE;
 
@@ -52,6 +52,7 @@ void selectUI::update()
 			{
 				ply->sendMessage(tagMessage("eating"));
 				inven->setDirection(invenDirection::SUB_BOTTOM);
+				inven->getTargetItem()->count -= 1;
 				_direction = NONE_ACTIVE;
 			}
 			else if (PtInRect(&_no.rc, _ptMouse))
@@ -79,11 +80,13 @@ void selectUI::render()
 		{
 			HPEN oldPen = (HPEN)SelectObject(getMemDC(), redPen);
 			Rectangle(getMemDC(), _yes.rc.left, _yes.rc.top, _yes.rc.right, _yes.rc.bottom);
+			SelectObject(getMemDC(), oldPen);
 		}
 		else if (PtInRect(&_no.rc, _ptMouse))
 		{
 			HPEN oldPen = (HPEN)SelectObject(getMemDC(), redPen);
 			Rectangle(getMemDC(), _no.rc.left, _no.rc.top, _no.rc.right, _no.rc.bottom);
+			SelectObject(getMemDC(), oldPen);
 		}
 		char str[100];
 		sprintf(str, "%s", _txt.c_str());
@@ -116,6 +119,9 @@ void selectUI::render()
 		//텍스트 그려주고
 		DrawText(getMemDC(), str3, strlen(str3), &_no.rc, DT_LEFT | DT_VCENTER | DT_WORDBREAK | DT_EXTERNALLEADING);
 
+		DeleteObject(redPen);
+		DeleteObject(nullPen);
+
 		SelectObject(getMemDC(), oldBrush);
 		DeleteObject(brush);
 
@@ -130,6 +136,7 @@ void selectUI::render()
 
 void selectUI::setSelectUI(tagMessage msg)
 {
+
 	_direction = ACTIVE;
 	
 	inventory*	inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");

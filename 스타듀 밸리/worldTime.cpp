@@ -30,7 +30,7 @@ HRESULT worldTime::init()
 	_isTimeFlow = true;
 	_saveHour = 6;
 
-	_dayDirection = DEEP_NIGHT;
+	_dayDirection = EARLY_NIGHT;
 
 	_timeFast = 1.0f;
 
