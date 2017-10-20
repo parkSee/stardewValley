@@ -25,10 +25,10 @@ private:
 	struct tagObjectSave
 	{
 		int idX, idY;
-		int frameX, frameY;
-		objectType::Enum objectType;
 		OBJECT::Enum object;
-		tagFloat pos;
+		objectType::Enum objectType;
+		int frameX, frameY;
+		//tagFloat pos;
 		pivot::Enum pivot;
 
 		string name;
