@@ -89,38 +89,15 @@ void player::stateUpdate(playerState::Enum state)
 		//================================================================================================달리는 모션
 	case playerState::RIGHT_RUN:								//오른쪽으로 이동중
 	
-		if (KEYMANAGER->isStayKeyDown('D'))
-		{
-			_pos.x += SPEED;
-			if (KEYMANAGER->isStayKeyDown('S'))				//오른쪽 대각선 아래로 이동
-			{
-				_pos.y += SPEED;
-			}
-			else if (KEYMANAGER->isStayKeyDown('W'))
-			{
-				_pos.y -= SPEED;									//오른쪽 대각선 위로 이동
-			}
-			//tileCollision();
-		}
-		else if (KEYMANAGER->isOnceKeyUp('D'))
+	
+		 if (KEYMANAGER->isOnceKeyUp('D'))
 		{
 			this->changeState(STAND_RIGHT);
 		}
 		break;
 	case playerState::LEFT_RUN:									//왼쪽으로 이동중
-		if (KEYMANAGER->isStayKeyDown('A'))
-		{
-			_pos.x -= SPEED;
-			if (KEYMANAGER->isStayKeyDown('S'))				//왼쪽 대각선 아래로 이동
-			{
-				_pos.y += SPEED;
-			}
-			else if (KEYMANAGER->isStayKeyDown('W'))			//왼쪽 대각선 위로 이동
-			{
-				_pos.y -= SPEED;
-			}
-		}
-		else if (KEYMANAGER->isOnceKeyUp('A'))
+		
+		 if (KEYMANAGER->isOnceKeyUp('A'))
 		{
 			this->changeState(STAND_LEFT);
 		}
@@ -128,38 +105,13 @@ void player::stateUpdate(playerState::Enum state)
 		
 		break;
 	case playerState::UP_RUN:									//위로 이동중
-		if (KEYMANAGER->isStayKeyDown('W'))
-		{
-			_pos.y -= SPEED;
-			if (KEYMANAGER->isStayKeyDown('A'))				//위 대각선 왼쪽으로 이동
-			{
-				_pos.x -= SPEED;
-			}
-			else if (KEYMANAGER->isStayKeyDown('D'))		//위 대각선 오른쪽으로 이동
-			{
-				_pos.x += SPEED;
-			}
-		}
-		else if (KEYMANAGER->isOnceKeyUp('W'))
+		 if (KEYMANAGER->isOnceKeyUp('W'))
 		{
 			this->changeState(STAND_BACK);
 		}
 		break;
 	case playerState::DOWN_RUN:
-		if (KEYMANAGER->isStayKeyDown('S'))
-		{
-			_pos.y += SPEED;
-
-			if (KEYMANAGER->isStayKeyDown('A'))
-			{
-				_pos.x -= SPEED;
-			}
-			else if (KEYMANAGER->isStayKeyDown('D'))
-			{
-				_pos.x += SPEED;
-			}
-		}
-		else if (KEYMANAGER->isOnceKeyUp('S'))
+		 if (KEYMANAGER->isOnceKeyUp('S'))
 		{
 			this->changeState(STAND);
 		}
@@ -220,19 +172,7 @@ void player::stateUpdate(playerState::Enum state)
 		_myItem.x = _pos.x - CARRYX;				//아이템의 좌표
 		_myItem.y = _pos.y - CARRYY;
 
-		if (KEYMANAGER->isStayKeyDown('D'))
-		{
-			_pos.x += SPEED;
-			if (KEYMANAGER->isStayKeyDown('S'))				//오른쪽 대각선 아래로 이동
-			{
-				_pos.y += SPEED;
-			}
-			else if (KEYMANAGER->isStayKeyDown('W'))
-			{
-				_pos.y -= SPEED;									//오른쪽 대각선 위로 이동
-			}
-		}
-		else if (KEYMANAGER->isOnceKeyUp('D'))
+		if (KEYMANAGER->isOnceKeyUp('D'))
 		{
 			this->changeState(STAND_TAKE_RIGHT);
 		}
@@ -241,19 +181,7 @@ void player::stateUpdate(playerState::Enum state)
 		_myItem.x = _pos.x- CARRYX;
 		_myItem.y = _pos.y - CARRYY;
 	
-		if (KEYMANAGER->isStayKeyDown('A'))
-		{
-			_pos.x -= SPEED;
-			if (KEYMANAGER->isStayKeyDown('S'))				//왼쪽 대각선 아래로 이동
-			{
-				_pos.y += SPEED;
-			}
-			else if (KEYMANAGER->isStayKeyDown('W'))			//왼쪽 대각선 위로 이동
-			{
-				_pos.y -= SPEED;
-			}
-		}
-		else if (KEYMANAGER->isOnceKeyUp('A'))
+		 if (KEYMANAGER->isOnceKeyUp('A'))
 		{
 			this->changeState(STAND_TAKE_LEFT);
 		}
@@ -261,20 +189,8 @@ void player::stateUpdate(playerState::Enum state)
 	case playerState::TAKE_UP:					//들고 위로 달리기 
 		_myItem.x = _pos.x- CARRYX;
 		_myItem.y = _pos.y - CARRYY;
-
-		if (KEYMANAGER->isStayKeyDown('W'))
-		{
-			_pos.y -= SPEED;
-			if (KEYMANAGER->isStayKeyDown('A'))				//위 대각선 왼쪽으로 이동
-			{
-				_pos.x -= SPEED;
-			}
-			else if (KEYMANAGER->isStayKeyDown('D'))		//위 대각선 오른쪽으로 이동
-			{
-				_pos.x += SPEED;
-			}
-		}
-		else if (KEYMANAGER->isOnceKeyUp('W'))
+		
+		if (KEYMANAGER->isOnceKeyUp('W'))
 		{
 			this->changeState(STAND_TAKE_BACK);
 		}
@@ -283,20 +199,7 @@ void player::stateUpdate(playerState::Enum state)
 		_myItem.x = _pos.x- CARRYX;
 		_myItem.y = _pos.y - CARRYY;
 
-		if (KEYMANAGER->isStayKeyDown('S'))
-		{
-			_pos.y += SPEED;
-
-			if (KEYMANAGER->isStayKeyDown('A'))
-			{
-				_pos.x -= SPEED;
-			}
-			else if (KEYMANAGER->isStayKeyDown('D'))
-			{
-				_pos.x += SPEED;
-			}
-		}
-		else if (KEYMANAGER->isOnceKeyUp('S'))
+		if (KEYMANAGER->isOnceKeyUp('S'))
 		{
 			this->changeState(STAND_TAKE);
 		}
@@ -411,9 +314,8 @@ void player::stateUpdate(playerState::Enum state)
 
 		break;
 	}
-
+	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
-
 	tileCollision();
 }
 
@@ -615,6 +517,6 @@ void player::changeState(playerState::Enum state)
 	
 	_state = state;
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
-
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
 }
 

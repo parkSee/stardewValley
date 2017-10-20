@@ -123,6 +123,7 @@ public:
 	void lbuttonClick(tagMessage msg);
 	void changeTargetItem(tagMessage msg);
 	void tileCollision();
+	void playerRun();
 	RECT rectMakeBottom();
 
 

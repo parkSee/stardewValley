@@ -213,7 +213,7 @@ void player::release()
 void player::update() 
 {
 	gameObject::update();
-
+	this->playerRun();
 	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;					
 	_tilePos.y = _rcCollision.bottom;
 
@@ -259,8 +259,8 @@ void player::render()
 
 	//RectangleMakeCenter(getMemDC(), _pos.x - rc.left, _pos.y - rc.top, 30, 30);									//_pos 좌표
 
-	//Rectangle(getMemDC(), _rcCollision.left - rc.left, _rcCollision.top - rc.top,								//타일 충돌렉트
-	//	_rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
+	Rectangle(getMemDC(), _rcCollision.left - rc.left, _rcCollision.top - rc.top,								//타일 충돌렉트
+		_rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
 
 	//Rectangle(getMemDC(), _tilePos.x - rc.left, _tilePos.y - rc.top, 50, 50);
 
@@ -293,13 +293,121 @@ void player::render()
 		sprintf(str, "%d,%d", _indexX, _indexY);
 		TextOut(getMemDC(), 10, 300, str, strlen(str));
 
-		sprintf_s(str, "%f,%f",_myItem.x,_myItem.y);
+		sprintf_s(str, "%f,%f",_pos.x,_pos.y);
 		TextOut(getMemDC(), 10, 400, str, strlen(str));
 	}
 	_shadow->render();
 	//EllipseMakeCenter(getMemDC(), _pos.x-rc.left, _pos.y-rc.top, 10, 10);
 }
 
+void player::playerRun()
+{
+	switch (_state)
+	{
 
+	case playerState::RIGHT_RUN:	case playerState::TAKE_RIGHT:
+	case playerState::LEFT_RUN:		case playerState::TAKE_LEFT:
+	case playerState::UP_RUN:		case playerState::TAKE_UP:
+	case playerState::DOWN_RUN:		case playerState::TAKE_DOWN:
+	{
+		mapToolTile *tile1, *tile2;
+		tile1 = tile2 = NULL;
+		int centerX, centerY;
+
+		RECT temp;
+		if (KEYMANAGER->isStayKeyDown('W'))
+		{
+			
+			centerX = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
+			
+			tile1 = TOWNWORLD->getTile(_indexX, _indexY - 1);
+			
+			if (centerX < _tilePos.x)
+			{
+				tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY - 1);
+			}
+			else if (centerX > _tilePos.x)
+			{
+				tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
+			}
+			
+			if (IntersectRect(&temp, &tile1->getRect(), &_rcCollision))
+			{
+				//_pos.y += SPEED;
+			}
+			_pos.y -= SPEED;
+		}
+
+		if (KEYMANAGER->isStayKeyDown('A'))
+		{
+			centerY = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
+			
+			tile1 = TOWNWORLD->getTile(_indexX - 1, _indexY);
+			
+			if (centerY < _tilePos.y)
+			{
+				tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
+			}
+			else if (centerY > _tilePos.y)
+			{
+				tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
+			}
+			
+			if (IntersectRect(&temp, &tile1->getRect(), &_rcCollision))
+			{
+				//_pos.x += SPEED;
+			}
+
+			_pos.x -= SPEED;
+		}
+
+		if (KEYMANAGER->isStayKeyDown('S'))
+		{
+			centerX = TOWNWORLD->getTile(_indexX, _indexY)->getRect().left + TILESIZE / 2;
+			
+			tile1 = TOWNWORLD->getTile(_indexX, _indexY + 1);
+			
+			if (centerX < _tilePos.x)
+			{
+				tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
+			}
+			else if (centerX > _tilePos.x)
+			{
+				tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY + 1);
+			}
+			if (IntersectRect(&temp, &tile1->getRect(), &_rcCollision))
+			{
+				//_pos.y -= SPEED;
+			}
+			_pos.y += SPEED;
+		}
+
+		if (KEYMANAGER->isStayKeyDown('D'))
+		{
+			centerY = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
+			
+			tile1 = TOWNWORLD->getTile(_indexX + 1, _indexY);
+			if (centerY < _tilePos.y)
+			{
+				tile2 = TOWNWORLD->getTile(_indexX + 1, +_indexY + 1);
+			}
+			else if (centerY > _tilePos.y)
+			{
+				tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY - 1);
+			}
+			if (IntersectRect(&temp, &tile1->getRect(), &_rcCollision))
+			{
+				//_pos.x -= SPEED;
+			}
+
+
+			_pos.x += SPEED;
+		}
+
+	}
+	}
+	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
+}
 
 
