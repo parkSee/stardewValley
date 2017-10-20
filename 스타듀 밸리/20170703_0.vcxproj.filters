@@ -671,5 +671,8 @@
     <ClCompile Include="house.cpp">
       <Filter>playGround\UI\house</Filter>
     </ClCompile>
+    <ClCompile Include="player+tileCollision.cpp">
+      <Filter>playGround\player</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
