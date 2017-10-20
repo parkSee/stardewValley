@@ -49,10 +49,10 @@ public:
 	void update();
 	void render();
 
-	void mapSave();
-	void mapLoad();
-	void objectSave();
-	void objectLoad();
+	void mapSave(string fileName);
+	void mapLoad(string fileName);
+	void objectSave(string fileName);
+	void objectLoad(string fileName);
 
 	void setTileFrameByAround(int indexX, int indexY);
 

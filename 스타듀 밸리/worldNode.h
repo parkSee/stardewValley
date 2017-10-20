@@ -54,8 +54,8 @@ namespace TERRAIN
 //================== ≈∏¿œ =====================
 #define SCALE 4
 #define TILESIZE (16 * SCALE)
-#define TILEX 43
-#define TILEY 27
+#define TILEX 100
+#define TILEY 100
 
 
 //=================== UI ======================

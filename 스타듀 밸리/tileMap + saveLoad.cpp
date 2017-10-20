@@ -3,12 +3,12 @@
 #include "motherObject.h"
 
 
-void tileMap::mapSave()
+void tileMap::mapSave(string fileName)
 {
 	HANDLE file;
 	DWORD write;
 
-	file = CreateFile("mapSave.map", GENERIC_WRITE, 0, NULL,
+	file = CreateFile(fileName.c_str(), GENERIC_WRITE, 0, NULL,
 		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	tagTileSave tileSave;
@@ -34,12 +34,12 @@ void tileMap::mapSave()
 	CloseHandle(file);
 }
 
-void tileMap::mapLoad()
+void tileMap::mapLoad(string fileName)
 {
 	HANDLE file;
 	DWORD read;
 
-	file = CreateFile("mapSave.map", GENERIC_READ, 0, NULL,
+	file = CreateFile(fileName.c_str(), GENERIC_READ, 0, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	tagTileSave tileSave;
@@ -63,14 +63,14 @@ void tileMap::mapLoad()
 	CloseHandle(file);
 }
 
+//-------------------------------------------------------------
 
-
-void tileMap::objectSave()
+void tileMap::objectSave(string fileName)
 {
 	HANDLE file;
 	DWORD write;
 
-	file = CreateFile("objectSave.map", GENERIC_WRITE, 0, NULL,
+	file = CreateFile(fileName.c_str(), GENERIC_WRITE, 0, NULL,
 		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	tagObjectSave objSave;
@@ -104,12 +104,13 @@ void tileMap::objectSave()
 
 	CloseHandle(file);
 }
-void tileMap::objectLoad()
+
+void tileMap::objectLoad(string fileName)
 {
 	//HANDLE file;
 	//DWORD read;
 	//
-	//file = CreateFile("objectSave.map", GENERIC_READ, 0, NULL,
+	//file = CreateFile(fileName.c_str(), GENERIC_READ, 0, NULL,
 	//	OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	//
 	////있던 오브젝트 다 날려버리고
