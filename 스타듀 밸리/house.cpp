@@ -47,11 +47,11 @@ void house::render()
 	_image->alphaRender(getMemDC(), _rc.left - rc.left, _rc.top - rc.top, _alpha); 
 	//_image->getWidth()*SCALE, _image->getHeight()*SCALE);
 
-	int indexX = (_ptMouse.x + rc.left) / TILESIZE;
-	int indexY = (_ptMouse.y +rc.top) / TILESIZE;
-
-	char str[100];
-	sprintf(str, "%d,%d", indexX, indexY);
-	TextOut(getMemDC(), 10, 500, str, strlen(str));
+	//int indexX = (_ptMouse.x + rc.left) / TILESIZE;
+	//int indexY = (_ptMouse.y +rc.top) / TILESIZE;
+	//
+	//char str[100];
+	//sprintf(str, "%d,%d", indexX, indexY);
+	//TextOut(getMemDC(), 10, 500, str, strlen(str));
 
 }

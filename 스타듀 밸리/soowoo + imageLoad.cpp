@@ -52,7 +52,9 @@ void loadingScene::soonwoo()
 	_loading->loadImage("돌맹이", "resource/item/stone.bmp", 56, 56, true);
 	_loading->loadImage("석탄", "resource/item/coal.bmp", 56, 56, true);
 	_loading->loadImage("수액", "resource/item/수액.bmp", 56, 56, true);
-	
+	_loading->loadImage("상자", "resource/item/chest.bmp", 56, 56, true);
+	_loading->loadImage("울타리", "resource/item/fence.bmp", 56, 56, true);
+	_loading->loadImage("사람", "resource/item/humanItem.bmp", 56, 56, true);
 	
 	//인벤토리 설명 창 이미지
 	_loading->loadImage("explainUI", "resource/UI/explainUI.bmp", 258, 214, true, RGB(255, 0, 255));
@@ -68,5 +70,10 @@ void loadingScene::soonwoo()
 	_loading->loadImage("selectUI", "resource/UI/selectUI.bmp", 859, 276, true, RGB(255, 0, 255));
 	//집 이미지
 	_loading->loadImage("house", "resource/UI/house.bmp", 144*SCALE, 144*SCALE, true, RGB(255, 0, 255));
+	//아이템 크리에이트 UI이미지
+	_loading->loadImage("createItem", "resource/UI/createItem.bmp", 852, 354, true, RGB(255, 0, 255));
+	
+	_loading->loadFrameImage("chest_obj", "resource/item/chest_obj.bmp", 64, 92,1,1, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("fence_obj", "resource/item/fence_obj.bmp", 48, 64, 1, 1, true, RGB(255, 0, 255));
 	
 }

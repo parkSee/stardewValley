@@ -9,7 +9,7 @@ public:
 	seed() {}
 	~seed() {}
 
-	virtual HRESULT init(tagFloat pos);
+	virtual HRESULT init(string name,string imageKey,tagFloat pos);
 	virtual void release();
 	virtual void update();
 	virtual void render();

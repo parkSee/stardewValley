@@ -10,7 +10,7 @@ namespace itemType
 {
 	enum Enum
 	{
-		FOOD, SEED, TOOL, STONE, WOOD, NONE
+		FOOD, SEED, TOOL,SETTING, STONE, WOOD, NONE
 	};
 }
 

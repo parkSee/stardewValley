@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "land.h"
+#include "mapToolTile.h"
 
 
 HRESULT land::init(tagFloat pos)
@@ -10,23 +11,32 @@ HRESULT land::init(tagFloat pos)
 	
 	//land* _land = new land;
 	//_land->init(pos);
+	_object = OBJECT::FARMLAND;
 	TOWNWORLD->addObject(objectType::OBJ, this);
+	//자신을 타일에게 알린다
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
 
 
-	this->addCallback("axeAttack", [this](tagMessage msg)
+
+	this->addCallback("pixHoeAttack", [this](tagMessage msg)
 	{
+		
 		this->hoeAttack();
+		//exit(0);
 	});
 
 	return S_OK;
 }
 void land::release()
 {
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(NULL);
+
 	motherObject::release();
 }
 void land::update()
 {
 	motherObject::update();
+	
 }
 void land::render()
 {
@@ -45,5 +55,6 @@ void land::render()
 
 void land::hoeAttack()
 {
+
 	this->setDestroy();
 }

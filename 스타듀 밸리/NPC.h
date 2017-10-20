@@ -63,6 +63,8 @@ public:
 	virtual void render();
 	RECT getRect();
 
+	RECT getCollisionRect() { return _collisionRc; }
+
 	int getIndexX() { return _indexX; }
 	int getIndexY() { return _indexY; }
 
