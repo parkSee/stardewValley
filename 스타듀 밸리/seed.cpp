@@ -20,13 +20,12 @@ HRESULT seed::init(string name, string imageKey, tagFloat pos)
 
 	_growNum = 0;
 
-	if (_image->getMaxFrameX() != _growNum)
+
+	this->addCallback("grow", [this](tagMessage msg)
 	{
-		this->addCallback("grow", [this](tagMessage msg)
-		{
-			this->grow();
-		});
-	}
+		this->grow();
+	});
+	
 
 	TOWNWORLD->addObject(objectType::OBJ,this);
 	
@@ -42,6 +41,7 @@ HRESULT seed::init(string name, string imageKey, tagFloat pos)
 }
  void seed::grow()
  {
+	 if (_growNum >= _image->getMaxFrameX())return;
 	//if (((land*)TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->getPObj())->getWet() == true)
 	//{
 	 _growNum++;
