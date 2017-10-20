@@ -66,5 +66,7 @@ void loadingScene::soonwoo()
 
 	//선택지 UI 창 이미지
 	_loading->loadImage("selectUI", "resource/UI/selectUI.bmp", 859, 276, true, RGB(255, 0, 255));
+	//집 이미지
+	_loading->loadImage("house", "resource/UI/house.bmp", 144, 144, true, RGB(255, 0, 255));
 	
 }
