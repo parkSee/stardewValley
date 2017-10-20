@@ -59,8 +59,8 @@ HRESULT tree1_bottom::init(tagFloat pos)
 	_object = OBJECT::TREE1_BOTTOM;
 	TOWNWORLD->addObject(objectType::OBJ, this);
 	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
-	EFFECTMANAGER->addEffect("die", "나무.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
-	EFFECTMANAGER->addEffect("attack", "나무.bmp", 20700, 370, 450, 370, 1.0f, 1.0f, 1.0f);
+	//EFFECTMANAGER->addEffect("die", "나무.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
+	//EFFECTMANAGER->addEffect("attack", "나무.bmp", 20700, 370, 450, 370, 1.0f, 1.0f, 1.0f);
 
 	this->addCallback("axeAttack", [this](tagMessage msg)
 	{
@@ -82,7 +82,7 @@ void tree1_bottom::update()
 	if (_hp > 0)
 	{
 		
-			EFFECTMANAGER->play("attack", _pos.x / TILESIZE, _pos.y / TILESIZE);
+			//EFFECTMANAGER->play("attack", _pos.x / TILESIZE, _pos.y / TILESIZE);
 		
 	}
 	if (_hp <= 0)
@@ -95,10 +95,7 @@ void tree1_bottom::update()
 
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('L'))
-	{
-		this->sendMessage(tagMessage("axeAttack", 0.0f));
-	}
+
 
 }
 void tree1_bottom::bottomAttack()
@@ -117,7 +114,15 @@ void tree1_bottom::bottomAttack()
 }
 void tree1_bottom::render()
 {
+	
 	_image->alphaScaleFrameRender(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x, -CAMERAMANAGER->getRenderRc().top + _pos.y, 0, 0, 70, 70, 0.0f);
+}
+
+void tree1_bottom::setDestroy(float time)
+{
+	gameObject::setDestroy(time);
+
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(NULL);
 }
 
 //---------------------------------------------------
@@ -130,8 +135,8 @@ HRESULT tree1_top::init(tagFloat pos)
 
 	_object = OBJECT::TREE1_TOP;
 	TOWNWORLD->addObject(objectType::OBJ, this);
-	EFFECTMANAGER->addEffect("die", "나무쓰러짐.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
-	EFFECTMANAGER->addEffect("attack", "나무맞을때.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
+	//EFFECTMANAGER->addEffect("die", "나무쓰러짐.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
+	//EFFECTMANAGER->addEffect("attack", "나무맞을때.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
 
 
 	this->addCallback("axeAttack", [this](tagMessage msg)
@@ -150,30 +155,35 @@ void tree1_top::update()
 {
 	motherObject::update();
 
-	if (_hp > 0)
-	{
-		EFFECTMANAGER->play("attack", _pos.x, _pos.y);
-	}
+	
 
-	if (_hp <= 0)
-	{
-		EFFECTMANAGER->play("die", _pos.x, _pos.y);
-		this->setDestroy();
-		
+	
 
 		//dropItem* drop = new dropItem;
 		//drop->init("tree_top","tree", tagFloat(_pos.x, _pos.y));
-	}
+	
 
 	
 }
 void tree1_top::topAttack()
 {
 	_hp -= 5;
+
+	if (_hp > 0)
+	{
+		EFFECTMANAGER->play("attack", _pos.x - 65, _pos.y - 230);
+	}
+	if (_hp <= 0)
+	{
+		EFFECTMANAGER->play("die", _pos.x + 160, _pos.y - 140);
+		this->setDestroy();
+	}
+
 }
 void tree1_top::render()
 {
-	_image->alphaScaleFrameRender(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x - 65 , -CAMERAMANAGER->getRenderRc().top + _pos.y - 230, 0, 0, 200, 250, 0.0f);
+	
+	_image->alphaScaleFrameRender(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x - 65 , -CAMERAMANAGER->getRenderRc().top + _pos.y - 330, 0, 0, 200, 350, 0.0f);
 }
 
 void tree1_top::setDestroy(float time)

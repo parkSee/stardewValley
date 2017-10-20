@@ -31,6 +31,8 @@ void townWorld::update()
 	auto mIter = _totalObject.begin();
 	auto mIterEnd = _totalObject.end();
 	//먼저 맵을 순환
+	EFFECTMANAGER->update();
+
 	for (; mIter != mIterEnd; ++mIter)
 	{
 		//그다음 벡터를 순환한다
@@ -62,7 +64,7 @@ void townWorld::render()
 	{
 		tile[i]->render();
 	}
-
+	EFFECTMANAGER->render();
 	//======================이외의 모든 오브젝트(HUMAN , OBJ)들을 z오더한다=========================
 
 	vector<gameObject*> zOrderObject;			//z오더 할 오브젝트들을 담아줄 역할
@@ -113,6 +115,7 @@ void townWorld::render()
 		_totalObject[MOUSE][i]->render();
 	}
 
+		
 }
 
 

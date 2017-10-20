@@ -34,6 +34,7 @@ void townScene::update()
 {
 	TOWNWORLD->update();
 	WORLDTIME->update();
+
 	
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
@@ -55,6 +56,7 @@ void townScene::render()
 {
 	_map->render();
 	TOWNWORLD->render();
+
 
 	//에이스타 실험용
 	for (int i = 0; i < _vRoute.size(); ++i)
