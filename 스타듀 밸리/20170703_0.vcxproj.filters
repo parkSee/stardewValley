@@ -193,6 +193,9 @@
     <Filter Include="playGround\UI\house">
       <UniqueIdentifier>{46704a86-92e2-4b69-b72b-c9c65d3f064c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\UI\createUI">
+      <UniqueIdentifier>{4397787f-4709-4fde-9ac0-43eeecb3f897}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -407,6 +410,9 @@
     </ClInclude>
     <ClInclude Include="house.h">
       <Filter>playGround\UI\house</Filter>
+    </ClInclude>
+    <ClInclude Include="createUI.h">
+      <Filter>playGround\UI\createUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -673,6 +679,9 @@
     </ClCompile>
     <ClCompile Include="player+tileCollision.cpp">
       <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="createUI.cpp">
+      <Filter>playGround\UI\createUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

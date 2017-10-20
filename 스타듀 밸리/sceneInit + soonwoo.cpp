@@ -12,6 +12,7 @@
 #include "caroline.h"
 #include "selectUI.h"
 #include "house.h"
+#include "createUI.h"
 
 void townScene::soonwooInit()
 {
@@ -39,8 +40,15 @@ void townScene::soonwooInit()
 	item2->init("수액", "나무에서 나온 끈적앤 액채",tagFloat(700, 700));
 	TOWNWORLD->addObject(objectType::ITEM, item2);
 
+	for (int i = 0; i < 30; i++)
+	{
+		dropItem* item3 = new dropItem;
+		item3->init("나무", "집가고 싶다, 쉬고 싶어 . . ,", tagFloat(1000 +10*RND->getInt(30), 500+10* RND->getInt(30)));
+		TOWNWORLD->addObject(objectType::ITEM, item3);
+	}
+
 	dropItem* item3 = new dropItem;
-	item3->init("나무", "집가고 싶다, 쉬고 싶어 . . ,", tagFloat(1000, 500));
+	item3->init("사람", "맛있겠닭.......", tagFloat(600,200));
 	TOWNWORLD->addObject(objectType::ITEM, item3);
 
 	eProgressBar* energy = new eProgressBar;
@@ -66,5 +74,9 @@ void townScene::soonwooInit()
 	house* home = new house;
 	home->init("house", "house", tagFloat((TILESIZE * 9) +(89*SCALE), (TILESIZE * 9) +(67*SCALE)));
 	TOWNWORLD->addObject(objectType::OBJ, home);
+
+	createUI* createui = new createUI;
+	createui->init("createUI");
+	TOWNWORLD->addObject(objectType::INTERFACE, createui);
 	
 }

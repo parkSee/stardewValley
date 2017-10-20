@@ -156,20 +156,24 @@ void inventory::addItem(tagMessage msg)
 
 itemType::Enum inventory::getItemType(string itemName)
 {
-	if (itemName == "¼ö¾×" || itemName == "¹Îµé·¹")
+	if (itemName == "¼ö¾×" || itemName == "¹Îµé·¹" || itemName == "»ç¶÷")
 	{
 		return itemType::FOOD;
 	}
-	else if ( itemName == "µ¹¸ÍÀÌ" || itemName == "¼®Åº")
+	else if ( itemName == "µ¹¸ÍÀÌ" || itemName == "¼®Åº" )
 	{
 		return itemType::STONE;
 	}
-	else if (itemName == "³ª¹«")
+	else if (itemName == "³ª¹«" )
 	{
 		return itemType::WOOD;
 	}
-	else if (itemName == "¹°»Ñ¸®°³" || itemName == "µµ³¢" || itemName == "player")
+	else if (itemName == "¹°»Ñ¸®°³" || itemName == "µµ³¢" || itemName == "player" )
 	{
 		return itemType::TOOL;
+	}
+	else if (itemName == "»óÀÚ" ||itemName == "¿ïÅ¸¸®")
+	{
+		return itemType::SETTING;
 	}
 }

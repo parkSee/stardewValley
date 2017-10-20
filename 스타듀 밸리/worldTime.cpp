@@ -12,6 +12,7 @@
 #include "weather.h"
 #include "player.h"
 #include "caroline.h"
+#include "motherObject.h"
 
 using namespace month;
 using namespace dayDirection;
@@ -30,7 +31,7 @@ HRESULT worldTime::init()
 	_isTimeFlow = true;
 	_saveHour = 6;
 
-	_dayDirection = EARLY_NIGHT;
+	_dayDirection = MID_NIGHT;
 
 	_timeFast = 1.0f;
 
@@ -68,6 +69,13 @@ void worldTime::update()
 					_time.day += 1;
 					_time.ap = "am";
 					_dayDirection = BRIGHT;
+
+					vector<motherObject*>* vObj;
+					vObj = (vector<motherObject*>*)TOWNWORLD->getObjectList(objectType::OBJ);
+					for (int i = 0; i < vObj->size(); ++i)
+					{
+						vObj->at(i)->sendMessage(tagMessage("grow"));
+					}
 
 					if (_time.day >= 31)
 					{

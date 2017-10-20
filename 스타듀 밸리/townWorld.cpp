@@ -107,7 +107,10 @@ void townWorld::render()
 
 	for (int i = 0; i < _totalObject[INTERFACE].size(); ++i)
 	{
-		_totalObject[INTERFACE][i]->render();
+		if (_totalObject[INTERFACE][i]->isActiveObject())
+		{
+			_totalObject[INTERFACE][i]->render();
+		}
 	}
 
 	for (int i = 0; i < _totalObject[MOUSE].size(); ++i)

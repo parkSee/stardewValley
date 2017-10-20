@@ -6,6 +6,8 @@
 #include "item.h"
 #include "player.h"
 #include "selectUI.h"
+#include "caroline.h"
+#include "createUI.h"
 
 HRESULT mouse::init(string name)
 {
@@ -146,14 +148,35 @@ void mouse::mouseControll()
 		}
 	}
 
-	//집들어가는거
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
-		if (ply->getIndexX() == 14 && ply->getIndexY() ==16)
+		if (inven->getDirection() != invenDirection::MAIN)
 		{
-			if ((indexX == 14 && indexY == 15) || (indexX == 14 && indexY == 14))
+			//집들어가는거
+			caroline* carol = (caroline*)TOWNWORLD->findObject(objectType::HUMAN, "caroline");
+			RECT rc = CAMERAMANAGER->getRenderRc();
+			if (ply->getIndexX() == 14 && ply->getIndexY() == 16)
 			{
-				ply->_pos.y = 10;
+				if ((indexX == 14 && indexY == 15) || (indexX == 14 && indexY == 14))
+				{
+					//59,17
+					ply->_pos.x = (TILESIZE * 59) + TILESIZE / 2;
+					ply->_pos.y = (TILESIZE * 17) + TILESIZE / 2;
+					_image = IMAGEMANAGER->findImage("mouse");
+					_animation = _normalAnimation;
+				}
+			}
+
+			else if (abs(ply->getIndexX() - carol->getIndexX()) < 2 && abs(ply->getIndexY() - carol->getIndexY()) < 2)
+			{
+				if (PtInRect(&carol->getCollisionRect(), PointMake(_ptMouse.x + rc.left, _ptMouse.y + rc.top)))
+				{
+					createUI* createui = (createUI*)TOWNWORLD->findObject(objectType::INTERFACE, "createUI");
+					if (createui->_isActiveUI == false)
+					{
+						createui->_isActiveUI = true;
+					}
+				}
 			}
 		}
 	}

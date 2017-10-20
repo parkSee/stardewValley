@@ -390,6 +390,11 @@ string inventory::getStringItemType(tagItem* item)
 		return "STONE";
 	}
 	break;
+	case SETTING:
+	{
+		return "¼³Ä¡";
+	}
+	break;
 	default:
 		break;
 	}
