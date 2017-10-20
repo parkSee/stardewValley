@@ -56,7 +56,7 @@ void townScene::soonwooInit()
 	TOWNWORLD->addObject(objectType::WEATHER, day);
 
 	caroline* carolineNpc = new caroline;
-	carolineNpc->init("caroline", "caroline", tagFloat(900, 300));
+	carolineNpc->init("caroline", "caroline", tagFloat(800, 300));
 	TOWNWORLD->addObject(objectType::HUMAN, carolineNpc);
 
 	selectUI*select = new selectUI;
@@ -64,7 +64,7 @@ void townScene::soonwooInit()
 	TOWNWORLD->addObject(objectType::INTERFACE, select);
 
 	house* home = new house;
-	home->init("house", "house", tagFloat(0, 0));//(TILESIZE * 10)*-(TILESIZE / 2), (TILESIZE * 10)*-(TILESIZE / 2)));
+	home->init("house", "house", tagFloat((TILESIZE * 9) +(89*SCALE), (TILESIZE * 9) +(67*SCALE)));
 	TOWNWORLD->addObject(objectType::OBJ, home);
 	
 }

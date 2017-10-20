@@ -113,13 +113,13 @@ vector<mapToolTile*> tileMap::getShortestAStar(int startIdX, int startIdY, int e
 				}
 				else   //8방향 이동에서 직선방향 장애물이면 그 옆에 대각선 막아주기
 				{
-					if (!curX - 1 >= 0 && _pTile[curX - 1][curY]->getIsMovable())
+					if (curX - 1 >= 0 && !_pTile[curX - 1][curY]->getIsMovable())
 						if (i == curX - 1 && j != curY) continue;
-					if (!curX + 1 < TILEX && _pTile[curX + 1][curY]->getIsMovable())
+					if (curX + 1 < TILEX && !_pTile[curX + 1][curY]->getIsMovable())
 						if (i == curX + 1 && j != curY) continue;
-					if (!curY - 1 >= 0 && _pTile[curX][curY - 1]->getIsMovable())
+					if (curY - 1 >= 0 && !_pTile[curX][curY - 1]->getIsMovable())
 						if (j == curY - 1 && i != curX) continue;
-					if (!curY + 1 < TILEY && _pTile[curX][curY + 1]->getIsMovable())
+					if (curY + 1 < TILEY && !_pTile[curX][curY + 1]->getIsMovable())
 						if (j == curY + 1 && i != curX) continue;
 				}
 

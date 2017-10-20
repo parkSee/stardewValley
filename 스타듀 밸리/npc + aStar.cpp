@@ -11,6 +11,7 @@ void npc::setMoveRoute(tagMessage msg)
 	{
 		_vMoveTile.push_back((mapToolTile*)msg.targetList[i]);
 	}
+
 	_vMoveTile.erase(_vMoveTile.begin());
 	changeState(this->getAngleDirection(_angle));
 	_isMove = true;
@@ -26,7 +27,7 @@ void npc::move()
 		_vMoveTile.erase(_vMoveTile.begin());
 
 		//요건 도착 했다는 뜻
-		if (_vMoveTile.size() == 0)
+		if (_vMoveTile.size() == 1)
 		{
 			if (_direction == MOVE_DOWN)changeState(STAND_DOWN);
 			else if (_direction == MOVE_RIGHT)changeState(STAND_RIGHT);
