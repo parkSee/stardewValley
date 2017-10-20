@@ -6,7 +6,7 @@ HRESULT gameObject::init(string objName, string imageKey , tagFloat pos ,
 	 pivot::Enum pivot)
 {
 	_name = objName;			
-	//_objEnum = OBJECT::NONE;
+	_objEnum = OBJECT::NONE;
 	
 	_animation = new animation;
 
@@ -31,7 +31,7 @@ HRESULT gameObject::init(string objName, string imageKey , tagFloat pos ,
 	_isLive = true;
 	_isActive = true;
 	_destroyDelayTime = 0.0f;
-	//_isMovable = false;
+	_isMovable = false;
 	
 	this->addCallback("daysGone", [this](tagMessage msg)
 	{

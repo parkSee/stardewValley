@@ -80,23 +80,24 @@ void tileMap::objectSave(string fileName)
 		auto vObj = *TOWNWORLD->getObjectList((objectType::Enum)j);
 		for (int i = 0; i < vObj.size(); ++i)
 		{
-			auto obj = vObj[i];
+			memset(&objSave, 0, sizeof(objSave));
 
-			ZeroMemory(&objSave, sizeof(objSave));
+			auto obj = vObj[i];
 
 			objSave.idX = obj->_pos.x / TILESIZE;
 			objSave.idY = obj->_pos.y / TILESIZE;
-			objSave.object = ((motherObject*)obj)->_object;
-			//---------------
-			int idX, idY;
-			OBJECT::Enum object;
-			objectType::Enum objectType;
-			int frameX, frameY;
-			//tagFloat pos;
-			pivot::Enum pivot;
+			objSave.object = obj->_objEnum;
 
-			string name;
-			string imageKey;
+			////---------------
+			//int idX, idY;
+			//OBJECT::Enum object;
+			//objectType::Enum objectType;
+			//int frameX, frameY;
+			////tagFloat pos;
+			//pivot::Enum pivot;
+			//
+			//string name;
+			//string imageKey;
 
 			WriteFile(file, &objSave, sizeof(objSave), &write, NULL);
 		}
@@ -107,55 +108,56 @@ void tileMap::objectSave(string fileName)
 
 void tileMap::objectLoad(string fileName)
 {
-	//HANDLE file;
-	//DWORD read;
-	//
-	//file = CreateFile(fileName.c_str(), GENERIC_READ, 0, NULL,
-	//	OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	//
-	////있던 오브젝트 다 날려버리고
-	//for (int j = 0; j < objectType::END; ++j)
-	//{
-	//	auto vObj = *TOWNWORLD->getObjectList((objectType::Enum)j);
-	//	for (int i = 0; i < vObj.size(); ++i)
-	//	{
-	//		vObj[i]->setDestroy();
-	//	}
-	//}
-	////타일이 들고있던 포인터도 다 날려버리고
-	//for (int j = 0; j < TILEY; ++j)
-	//{
-	//	for (int i = 0; i < TILEX; ++i)
-	//	{
-	//		_pTile[i][j]->setPObj(NULL);
-	//	}
-	//}
-	//
-	////읽어와서 오브젝트 생성해서 타운월드에 넣기
-	//testObject* tempobj = NULL;
-	//tagObjectSave tag1;
-	//ZeroMemory(&tag1, sizeof(tag1));
-	//while (true)
-	//{
-	//	ReadFile(file, &tag1, sizeof(tag1), &read, NULL);
-	//	if (read != sizeof(tag1)) break;
-	//
-	//	tempobj = new testObject;
-	//	tempobj->init(tag1.name, tag1.imageKey, tag1.pos, tag1.pivot);
-	//	tempobj->_object = tag1.object;
-	//	tempobj->setFrameX(tag1.frameX);
-	//	tempobj->setFrameY(tag1.frameY);
-	//	tempobj->setIdX(tag1.idX);
-	//	tempobj->setIdY(tag1.idY);
-	//
-	//	TOWNWORLD->addObject(tag1.objectType, tempobj);
-	//
-	//	//타일에도 오브젝트 연결해주기
-	//	_pTile[tag1.idX][tag1.idY]->setPObj(tempobj);
-	//
-	//	tempobj = NULL;
-	//	ZeroMemory(&tag1, sizeof(tag1));
-	//}
-	//
-	//CloseHandle(file);
+	HANDLE file;
+	DWORD read;
+
+	//있던 오브젝트 다 날려버리고
+	for (int j = 0; j < objectType::END; ++j)
+	{
+		auto vObj = *TOWNWORLD->getObjectList((objectType::Enum)j);
+		for (int i = 0; i < vObj.size(); ++i)
+		{
+			vObj[i]->setDestroy();
+		}
+	}
+	//타일이 들고있던 포인터도 다 날려버리고
+	for (int j = 0; j < TILEY; ++j)
+	{
+		for (int i = 0; i < TILEX; ++i)
+		{
+			_pTile[i][j]->setPObj(NULL);
+		}
+	}
+
+	//읽어와서 오브젝트 생성해서 타운월드에 넣기
+	file = CreateFile(fileName.c_str(), GENERIC_READ, 0, NULL,
+		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	tagObjectSave objSave;
+
+	while (true)
+	{
+		memset(&objSave, 0, sizeof(objSave));
+		ReadFile(file, &objSave, sizeof(objSave), &read, NULL);
+		if (read != sizeof(objSave)) break;
+
+
+
+		////--------------------------------------------------------
+		//gameObject* tempobj = new gameObject;
+		//tempobj->init(objSave.name, objSave.imageKey,
+		//	tagFloat(objSave.idX * TILESIZE, objSave.idY * TILESIZE), objSave.pivot);
+		//tempobj->_object = objSave.object;
+		//tempobj->setFrameX(objSave.frameX);
+		//tempobj->setFrameY(objSave.frameY);
+		//tempobj->setIdX(objSave.idX);
+		//tempobj->setIdY(objSave.idY);
+		//
+		//TOWNWORLD->addObject(objSave.objectType, tempobj);
+		//
+		////타일에도 오브젝트 연결해주기
+		//_pTile[objSave.idX][objSave.idY]->setPObj(tempobj);
+	}
+
+	CloseHandle(file);
 }
