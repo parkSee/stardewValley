@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "tileMap.h"
+#include "motherObject.h"
 
 
 void tileMap::mapSave()
@@ -66,38 +67,42 @@ void tileMap::mapLoad()
 
 void tileMap::objectSave()
 {
-	//HANDLE file;
-	//DWORD write;
-	//
-	//file = CreateFile("objectSave.map", GENERIC_WRITE, 0, NULL,
-	//	CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-	//
-	//for (int j = 0; j < objectType::END; ++j)
-	//{
-	//	auto vObj = *TOWNWORLD->getObjectList((objectType::Enum)j);
-	//	for (int i = 0; i < vObj.size(); ++i)
-	//	{
-	//		auto obj = (testObject*)vObj[i];
-	//
-	//		tagObjectSave tag1;
-	//		ZeroMemory(&tag1, sizeof(tag1));
-	//
-	//		tag1.objectType = (objectType::Enum)j;
-	//		tag1.object = obj->_object;
-	//		tag1.frameX = obj->getFrameX();
-	//		tag1.frameY = obj->getFrameY();
-	//		tag1.idX = obj->getIdX();
-	//		tag1.idY = obj->getIdY();
-	//		tag1.imageKey = "tileSprite";
-	//		tag1.name = obj->getName();
-	//		tag1.pivot = obj->getPivot();
-	//		tag1.pos = obj->_pos;
-	//
-	//		WriteFile(file, &tag1, sizeof(tag1), &write, NULL);
-	//	}
-	//}
-	//
-	//CloseHandle(file);
+	HANDLE file;
+	DWORD write;
+
+	file = CreateFile("objectSave.map", GENERIC_WRITE, 0, NULL,
+		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	tagObjectSave objSave;
+
+	for (int j = 0; j < objectType::END; ++j)
+	{
+		auto vObj = *TOWNWORLD->getObjectList((objectType::Enum)j);
+		for (int i = 0; i < vObj.size(); ++i)
+		{
+			auto obj = vObj[i];
+
+			ZeroMemory(&objSave, sizeof(objSave));
+
+			objSave.idX = obj->_pos.x / TILESIZE;
+			objSave.idY = obj->_pos.y / TILESIZE;
+			objSave.object = ((motherObject*)obj)->_object;
+			//---------------
+			int idX, idY;
+			OBJECT::Enum object;
+			objectType::Enum objectType;
+			int frameX, frameY;
+			//tagFloat pos;
+			pivot::Enum pivot;
+
+			string name;
+			string imageKey;
+
+			WriteFile(file, &objSave, sizeof(objSave), &write, NULL);
+		}
+	}
+
+	CloseHandle(file);
 }
 void tileMap::objectLoad()
 {
