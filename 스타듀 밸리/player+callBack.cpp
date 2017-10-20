@@ -11,6 +11,10 @@ void player::eating(tagMessage msg)
 
 	if (_item->type == itemType::FOOD)
 	{
+		eProgressBar*energe = (eProgressBar*)TOWNWORLD->findObject(objectType::INTERFACE, "energyBar");
+		energe->sendMessage(tagMessage("consume", 0.0f, -3));
+
+
 		this->changeState(EATING);
 		//this->moveToEat();
 		_myItem.img = _item->img;						//아이템 이미지를 띄우는 
@@ -77,7 +81,10 @@ void player::lbuttonClick(tagMessage msg)
 				}
 				else if (!_tile1->getPObj())
 				{
-					_tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
+					if (_tile2->getPObj())
+					{
+						_tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
+					}
 				}
 				break;
 			case playerState::STAND_BACK: case playerState::UP_RUN:
@@ -95,6 +102,7 @@ void player::lbuttonClick(tagMessage msg)
 				}
 				break;
 			}
+			return;
 		}
 
 		if (_item->name == "괭이")

@@ -144,7 +144,9 @@ void player::tileCollision()
 					}
 					break;
 				case playerState::TAKE_LEFT: case playerState::LEFT_RUN:
+					
 					_pos.x += SPEED;
+					
 					if (KEYMANAGER->isStayKeyDown('S'))
 					{
 						_pos.y -= SPEED;
