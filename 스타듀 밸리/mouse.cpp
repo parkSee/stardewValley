@@ -127,7 +127,36 @@ void mouse::mouseControll()
 			select->sendMessage(tagMessage("setSelectUI"));
 		}
 	}
-	
+	RECT rc = CAMERAMANAGER->getRenderRc();
+	player* ply = (player*)TOWNWORLD->findObject(objectType::HUMAN, "player");
+	int indexX = (_ptMouse.x + rc.left) / TILESIZE;
+	int indexY = (_ptMouse.y + rc.top) / TILESIZE;
+
+	if (ply->getIndexX() ==14 && ply->getIndexY() == 16)
+	{
+		if ((indexX == 14 && indexY == 15) || (indexX == 14 && indexY == 14))
+		{
+			_image = IMAGEMANAGER->findImage("selectMouse");
+			_animation = _selectAnimation;
+		}
+		else
+		{
+			_image = IMAGEMANAGER->findImage("mouse");
+			_animation = _normalAnimation;
+		}
+	}
+
+	//집들어가는거
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+		if (ply->getIndexX() == 14 && ply->getIndexY() ==16)
+		{
+			if ((indexX == 14 && indexY == 15) || (indexX == 14 && indexY == 14))
+			{
+				ply->_pos.y = 10;
+			}
+		}
+	}
 
 	//애니메이션이 셀렉트 에니메이션 상태라면 
 	if (_animation == _selectAnimation)

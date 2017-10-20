@@ -96,6 +96,7 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="grass.h" />
     <ClInclude Include="heightProgressBar.h" />
+    <ClInclude Include="house.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniDataManager.h" />
@@ -168,6 +169,7 @@
     <ClCompile Include="geunHwa.+ imageLoad.cpp" />
     <ClCompile Include="grass.cpp" />
     <ClCompile Include="heightProgressBar.cpp" />
+    <ClCompile Include="house.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
@@ -189,8 +191,9 @@
     <ClCompile Include="npc.cpp" />
     <ClCompile Include="obj.cpp" />
     <ClCompile Include="pierre.cpp" />
-    <ClCompile Include="player+callBackcpp.cpp" />
+    <ClCompile Include="player+callBack.cpp" />
     <ClCompile Include="player+state.cpp" />
+    <ClCompile Include="player+tileCollision.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="progressBar.cpp" />

@@ -190,6 +190,9 @@
     <Filter Include="playGround\UI\selectUI">
       <UniqueIdentifier>{c86de075-08f9-41e4-b3e5-2f1c8c74fb5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\UI\house">
+      <UniqueIdentifier>{46704a86-92e2-4b69-b72b-c9c65d3f064c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -402,6 +405,9 @@
     <ClInclude Include="selectUI.h">
       <Filter>playGround\UI\selectUI</Filter>
     </ClInclude>
+    <ClInclude Include="house.h">
+      <Filter>playGround\UI\house</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -608,9 +614,6 @@
     <ClCompile Include="player+state.cpp">
       <Filter>playGround\player</Filter>
     </ClCompile>
-    <ClCompile Include="player+callBackcpp.cpp">
-      <Filter>playGround\player</Filter>
-    </ClCompile>
     <ClCompile Include="store.cpp">
       <Filter>playGround\store</Filter>
     </ClCompile>
@@ -661,6 +664,15 @@
     </ClCompile>
     <ClCompile Include="selectUI.cpp">
       <Filter>playGround\UI\selectUI</Filter>
+    </ClCompile>
+    <ClCompile Include="player+callBack.cpp">
+      <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="house.cpp">
+      <Filter>playGround\UI\house</Filter>
+    </ClCompile>
+    <ClCompile Include="player+tileCollision.cpp">
+      <Filter>playGround\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

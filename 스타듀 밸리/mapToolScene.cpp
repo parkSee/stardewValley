@@ -16,9 +16,9 @@ HRESULT mapToolScene::init()
 
 	_map = new tileMap;
 	_map->init();
-	_map->mapLoad();
+	_map->mapLoad("mapSave.map");
 
-	CAMERAMANAGER->setMapSize(3000, 3000);
+	CAMERAMANAGER->setMapSize(TILESIZE * TILEX + WINSIZEX, TILESIZE * TILEY + WINSIZEY);
 
 	CAMERAMANAGER->_pos.x = WINSIZEX / 2;
 	CAMERAMANAGER->_pos.y = WINSIZEY / 2;
@@ -54,11 +54,11 @@ void mapToolScene::update()
 	//F1, F2 세이브 로드
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
 	{
-		_map->mapSave();
+		_map->mapSave("tempMapSave.map");
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_F2))
 	{
-		_map->mapLoad();
+		_map->mapLoad("tempMapSave.map");
 
 		////로드하고나서 지형 종류에 따라서 프레임 맞춰준다
 		//for (int j = 0; j < TILEY; ++j)
@@ -68,6 +68,14 @@ void mapToolScene::update()
 		//		_map->setTileFrameByAround(i, j);
 		//	}
 		//}
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_F3))
+	{
+		_map->objectSave("tempObjectSave.map");
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_F4))
+	{
+		_map->objectLoad("tempObjectSave.map");
 	}
 
 	//탭 누르면 맵 - 스프라이트 전환

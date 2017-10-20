@@ -11,6 +11,7 @@
 #include "weather.h"
 #include "caroline.h"
 #include "selectUI.h"
+#include "house.h"
 
 void townScene::soonwooInit()
 {
@@ -55,11 +56,15 @@ void townScene::soonwooInit()
 	TOWNWORLD->addObject(objectType::WEATHER, day);
 
 	caroline* carolineNpc = new caroline;
-	carolineNpc->init("caroline", "caroline", tagFloat(900, 300));
+	carolineNpc->init("caroline", "caroline", tagFloat(800, 300));
 	TOWNWORLD->addObject(objectType::HUMAN, carolineNpc);
 
 	selectUI*select = new selectUI;
 	select->init("selectUI");
 	TOWNWORLD->addObject(objectType::INTERFACE, select);
+
+	house* home = new house;
+	home->init("house", "house", tagFloat((TILESIZE * 9) +(89*SCALE), (TILESIZE * 9) +(67*SCALE)));
+	TOWNWORLD->addObject(objectType::OBJ, home);
 	
 }

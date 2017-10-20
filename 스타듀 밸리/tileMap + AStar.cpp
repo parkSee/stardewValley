@@ -113,20 +113,20 @@ vector<mapToolTile*> tileMap::getShortestAStar(int startIdX, int startIdY, int e
 				}
 				else   //8방향 이동에서 직선방향 장애물이면 그 옆에 대각선 막아주기
 				{
-					if (curX - 1 >= 0 && _pTile[curX - 1][curY]->getIsUnmovable())
+					if (curX - 1 >= 0 && !_pTile[curX - 1][curY]->getIsMovable())
 						if (i == curX - 1 && j != curY) continue;
-					if (curX + 1 < TILEX && _pTile[curX + 1][curY]->getIsUnmovable())
+					if (curX + 1 < TILEX && !_pTile[curX + 1][curY]->getIsMovable())
 						if (i == curX + 1 && j != curY) continue;
-					if (curY - 1 >= 0 && _pTile[curX][curY - 1]->getIsUnmovable())
+					if (curY - 1 >= 0 && !_pTile[curX][curY - 1]->getIsMovable())
 						if (j == curY - 1 && i != curX) continue;
-					if (curY + 1 < TILEY && _pTile[curX][curY + 1]->getIsUnmovable())
+					if (curY + 1 < TILEY && !_pTile[curX][curY + 1]->getIsMovable())
 						if (j == curY + 1 && i != curX) continue;
 				}
 
 				//닫혀있으면 continue
 				if (node[i][j].isClosed) continue;
 				//장애물이면 continue
-				if (_pTile[i][j]->getIsUnmovable())
+				if (!_pTile[i][j]->getIsMovable())
 				{
 					node[i][j].isOpen = true;
 					node[i][j].isClosed = true;

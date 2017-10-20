@@ -88,7 +88,6 @@ void player::stateUpdate(playerState::Enum state)
 
 		//================================================================================================달리는 모션
 	case playerState::RIGHT_RUN:								//오른쪽으로 이동중
-		
 	
 		if (KEYMANAGER->isStayKeyDown('D'))
 		{
@@ -393,7 +392,22 @@ void player::stateUpdate(playerState::Enum state)
 		
 		break;
 	case playerState::EATING:
-		break;
+
+		_myItem.y -= _myItem.jumpPower;
+		_myItem.jumpPower -= _myItem.gravity;
+
+		_eatingRc = RectMakeCenter(_pos.x, _pos.y - 80, 20, 20);
+
+		RECT temp;
+		_eatCenter.x = _eatingRc.left + (_eatingRc.right - _eatingRc.left) / 2;
+		_eatCenter.y = _eatingRc.bottom;
+
+		if (getDistance(_myItem.x, _myItem.y, _eatCenter.x, _eatCenter.y)<60)
+		{
+		
+			_myItem.img = NULL;
+
+		}
 
 		break;
 	}
@@ -413,6 +427,7 @@ void player::changeState(playerState::Enum state)
 		break;
 	case playerState::STAND_RIGHT:
 		_player.Motion = KEYANIMANAGER->findAnimation("rightStand");
+
 		break;
 	case playerState::STAND_LEFT:
 		_player.Motion = KEYANIMANAGER->findAnimation("leftStand");
@@ -588,10 +603,18 @@ void player::changeState(playerState::Enum state)
 		_player.Motion = KEYANIMANAGER->findAnimation("playerTakeStandUp");
 		_player.Motion->start();
 		break;
+	case playerState::QUSEAT:
+		break;
+	case playerState::EATING:
+		_player.Motion = KEYANIMANAGER->findAnimation("playerEating");
+		_player.Motion->start();
+		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
+		break;
 
 	}
 	
 	_state = state;
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+
 }
 

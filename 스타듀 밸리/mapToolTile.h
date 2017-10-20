@@ -55,7 +55,9 @@ public:
 	}
 
 	//에이스타
-	inline bool getIsUnmovable() { return false; }
+	inline bool getIsMovable() { return _isMovable; }
+	//혹시 모르니
+	inline void setIsMovable(bool isMovable) { _isMovable = isMovable; }
 
 
 	mapToolTile() {}
