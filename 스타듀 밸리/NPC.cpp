@@ -64,8 +64,8 @@ void npc::render()
 	RECT npcRc = this->getRect();
 	RECT cameraRc = CAMERAMANAGER->getRenderRc();
 
-	//Rectangle(getMemDC(), npcRc.left - cameraRc.left, npcRc.top - cameraRc.top,
-	//	npcRc.right- cameraRc.left, npcRc.bottom - cameraRc.top);
+	//Rectangle(getMemDC(), _collisionRc.left - cameraRc.left, _collisionRc.top - cameraRc.top,
+	//	_collisionRc.right- cameraRc.left, _collisionRc.bottom - cameraRc.top);
 
 	_image->scaleAniRender(getMemDC(), npcRc.left - cameraRc.left, npcRc.top - cameraRc.top, _animation, 
 		_image->getFrameWidth() * _scale, _image->getFrameHeight() * _scale);
