@@ -11,6 +11,7 @@
 #include "weather.h"
 #include "caroline.h"
 #include "selectUI.h"
+#include "house.h"
 
 void townScene::soonwooInit()
 {
@@ -61,5 +62,9 @@ void townScene::soonwooInit()
 	selectUI*select = new selectUI;
 	select->init("selectUI");
 	TOWNWORLD->addObject(objectType::INTERFACE, select);
+
+	house* home = new house;
+	home->init("house", "house", tagFloat(0, 0));//(TILESIZE * 10)*-(TILESIZE / 2), (TILESIZE * 10)*-(TILESIZE / 2)));
+	TOWNWORLD->addObject(objectType::OBJ, home);
 	
 }
