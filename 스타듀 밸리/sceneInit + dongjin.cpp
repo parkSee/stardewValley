@@ -16,7 +16,7 @@ void townScene::dongjinInit()
 	stom->init(tagFloat(TOWNWORLD->getTile(4, 2)->getRect().left, TOWNWORLD->getTile(4, 2)->getRect().top));
 
 	seed* sour = new seed;
-	sour->init("seed", "seed", (tagFloat(TOWNWORLD->getTile(8, 2)->getRect().left, TOWNWORLD->getTile(8, 2)->getRect().top)));
+	sour->init("¾çÆÄ", "seed", (tagFloat(TOWNWORLD->getTile(8, 2)->getRect().left, TOWNWORLD->getTile(8, 2)->getRect().top)));
 
 	grass* tlqkf = new grass;
 	tlqkf->init(tagFloat(TOWNWORLD->getTile(10, 2)->getRect().left, TOWNWORLD->getTile(10, 2)->getRect().top));

@@ -164,9 +164,9 @@ void tree1_top::update()
 	{
 		_count += TIMEMANAGER->getElapsedTime();
 
-		if (_count >= 2.0f)
+		if (_count >= 2.3f)
 		{
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < RND->getFromIntTo(2, 10); i++)
 			{
 				dropItem* a = new dropItem;
 				a->init("ผ๖พื", "asdadadad", tagFloat(_pos.x + 270, _pos.y));
