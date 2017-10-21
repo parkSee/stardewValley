@@ -5,7 +5,7 @@
 
 
 
-HRESULT seed::init(string name, string imageKey, tagFloat pos)
+HRESULT seed::init(string name, string imageKey, tagFloat pos, string explain)
 {
 	motherObject::init(name,imageKey,pos, pivot::LEFT_TOP);
 
@@ -21,6 +21,7 @@ HRESULT seed::init(string name, string imageKey, tagFloat pos)
 	_growNum = 0;
 	_isRight = false;
 	_isMovable = true;
+	_explain = explain;
 
 	this->addCallback("grow", [this](tagMessage msg)
 	{
