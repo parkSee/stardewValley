@@ -13,7 +13,7 @@ HRESULT land::init(tagFloat pos)
 	//land* _land = new land;
 	//_land->init(pos);
 	_objEnum = OBJECT::FARMLAND;
-	TOWNWORLD->addObject(objectType::OBJ, this);
+	TOWNWORLD->addObject(objectType::TILE, this);
 	//자신을 타일에게 알린다
 	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
 
@@ -44,7 +44,7 @@ void land::render()
 
 	if (_isWet == false)
 	{
-		_image->frameScaleRender(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x, -CAMERAMANAGER->getRenderRc().top + _pos.y, 0, 0, 70, 70);
+		_image->frameScaleRender(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x, -CAMERAMANAGER->getRenderRc().top + _pos.y, 0, 0, 65, 65);
 	}
 
 	if (_isWet == true)

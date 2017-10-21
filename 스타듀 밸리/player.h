@@ -5,6 +5,7 @@
 #include "mapToolTile.h"
 #include "eProgressBar.h"
 #include "tree1.h"
+#include "land.h"
 
 
 #define SPEED 4
@@ -122,7 +123,6 @@ public:
 	void eating(tagMessage msg);
 	void lbuttonClick(tagMessage msg);
 	void changeTargetItem(tagMessage msg);
-	void tileCollision();
 	void playerRun();
 	RECT rectMakeBottom();
 
@@ -140,7 +140,7 @@ public:
 
 	int getIndexX(void) { return _indexX; }
 	int getIndexY(void) { return _indexY; }
-
+	
 
 
 	player() {};
