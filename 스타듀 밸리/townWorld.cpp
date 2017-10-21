@@ -69,6 +69,7 @@ void townWorld::render()
 	{
 		tile[i]->render();
 	}
+
 	EFFECTMANAGER->render();
 	//======================이외의 모든 오브젝트(HUMAN , OBJ)들을 z오더한다=========================
 

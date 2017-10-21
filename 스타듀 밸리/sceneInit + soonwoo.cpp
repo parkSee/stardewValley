@@ -40,12 +40,16 @@ void townScene::soonwooInit()
 	item2->init("수액", "나무에서 나온 끈적앤 액채",tagFloat(700, 700));
 	TOWNWORLD->addObject(objectType::ITEM, item2);
 
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		dropItem* item3 = new dropItem;
 		item3->init("나무", "집가고 싶다, 쉬고 싶어 . . ,", tagFloat(1000 +10*RND->getInt(30), 500+10* RND->getInt(30)));
 		TOWNWORLD->addObject(objectType::ITEM, item3);
 	}
+
+	dropItem* item4 = new dropItem;
+	item4->init("당근씨앗", "땅에 씨앗을 뿌리면 수확할 수 있다.", tagFloat(600, 200));
+	TOWNWORLD->addObject(objectType::ITEM, item4);
 
 	dropItem* item3 = new dropItem;
 	item3->init("사람", "맛있겠닭.......", tagFloat(600,200));

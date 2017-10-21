@@ -124,7 +124,6 @@ void inventory::changeItem()
 
 }
 
-
 void inventory::addItem(tagMessage msg)
 {
 	for (int i = 0; i < _vInventory.size(); ++i)
@@ -174,5 +173,9 @@ itemType::Enum inventory::getItemType(string itemName)
 	else if (itemName == "»óÀÚ" ||itemName == "¿ïÅ¸¸®")
 	{
 		return itemType::SETTING;
+	}
+	else if (itemName == "´ç±Ù¾¾¾Ñ")
+	{
+		return itemType::SEED;
 	}
 }

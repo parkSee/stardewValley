@@ -17,6 +17,8 @@ HRESULT land::init(tagFloat pos)
 	//자신을 타일에게 알린다
 	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
 
+	
+
 
 
 	this->addCallback("pixHoeAttack", [this](tagMessage msg)
@@ -41,10 +43,11 @@ void land::update()
 }
 void land::render()
 {
+	RECT rc = CAMERAMANAGER->getRenderRc();
 
 	if (_isWet == false)
 	{
-		_image->frameScaleRender(getMemDC(), -CAMERAMANAGER->getRenderRc().left + _pos.x, -CAMERAMANAGER->getRenderRc().top + _pos.y, 0, 0, 65, 65);
+		_image->frameScaleRender(getMemDC(), -rc.left + _pos.x , - rc.top + _pos.y , 0, 0, 65, 65);
 	}
 
 	if (_isWet == true)
