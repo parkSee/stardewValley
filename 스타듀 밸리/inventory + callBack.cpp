@@ -156,7 +156,8 @@ void inventory::addItem(tagMessage msg)
 
 itemType::Enum inventory::getItemType(string itemName)
 {
-	if (itemName == "수액" || itemName == "민들레" || itemName == "사람")
+	if (itemName == "수액" || itemName == "민들레" || itemName == "사람" || itemName == "멜론" || itemName == "사탕 수수" ||
+		itemName == "양파" || itemName == "당근"|| itemName=="멜론")
 	{
 		return itemType::FOOD;
 	}
