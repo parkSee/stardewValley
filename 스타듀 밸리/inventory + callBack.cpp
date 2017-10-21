@@ -174,4 +174,8 @@ itemType::Enum inventory::getItemType(string itemName)
 	{
 		return itemType::SETTING;
 	}
+	else if (itemName == "´ç±Ù¾¾¾Ñ")
+	{
+		return itemType::SEED;
+	}
 }

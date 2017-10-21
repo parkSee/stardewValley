@@ -55,6 +55,7 @@ void loadingScene::soonwoo()
 	_loading->loadImage("상자", "resource/item/chest.bmp", 56, 56, true);
 	_loading->loadImage("울타리", "resource/item/fence.bmp", 56, 56, true);
 	_loading->loadImage("사람", "resource/item/humanItem.bmp", 56, 56, true);
+	_loading->loadImage("당근씨앗", "resource/item/당근씨앗.bmp", 56, 56, true);
 	
 	//인벤토리 설명 창 이미지
 	_loading->loadImage("explainUI", "resource/UI/explainUI.bmp", 258, 214, true, RGB(255, 0, 255));
