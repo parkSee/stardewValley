@@ -196,6 +196,9 @@
     <Filter Include="playGround\UI\createUI">
       <UniqueIdentifier>{4397787f-4709-4fde-9ac0-43eeecb3f897}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\UI\fade">
+      <UniqueIdentifier>{44e4896b-a61e-4f9a-b649-782cbaa9cced}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -413,6 +416,9 @@
     </ClInclude>
     <ClInclude Include="createUI.h">
       <Filter>playGround\UI\createUI</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>playGround\UI\fade</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -682,6 +688,9 @@
     </ClCompile>
     <ClCompile Include="createUI.cpp">
       <Filter>playGround\UI\createUI</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>playGround\UI\fade</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
