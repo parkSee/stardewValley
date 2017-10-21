@@ -6,7 +6,7 @@ HRESULT stone::init(tagFloat pos)
 	motherObject::init("stone", "tileSprite", pos, pivot::LEFT_TOP);
 
 
-	_object = OBJECT::STONE;
+	_objEnum = OBJECT::STONE;
 	TOWNWORLD->addObject(objectType::OBJ, this);
 
 	EFFECTMANAGER->addEffect("stoneDie", "µ¹.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);

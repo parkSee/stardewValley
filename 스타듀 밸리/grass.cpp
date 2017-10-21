@@ -1,20 +1,19 @@
 #include "stdafx.h"
 #include "grass.h"
-
+#include "mapToolTile.h"
 
 HRESULT grass::init(tagFloat pos)
 {
-	motherObject::init("grass", "tileSprite", pos, pivot::LEFT_TOP);
+	motherObject::init("grass", "grass", pos, pivot::LEFT_TOP);
 
-	_hp = 10;
-
-	_object = OBJECT::GRASS;
+	
+	_isMovable = true;
+	_objEnum = OBJECT::GRASS;
 	TOWNWORLD->addObject(objectType::OBJ, this);
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
+	
 
-	EFFECTMANAGER->addEffect("grassAttack", "Ç®.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
-	EFFECTMANAGER->addEffect("grassDie", "Ç®ÅÍÁü.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
-
-	this->addCallback("sickleAttack", [this](tagMessage msg)
+	this->addCallback("axeAttack", [this](tagMessage msg)
 	{
 		this->grassAttack();
 	});
@@ -23,6 +22,8 @@ HRESULT grass::init(tagFloat pos)
 }
 void grass::release()
 {
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(NULL);
+
 	motherObject::release();
 }
 void grass::update()
@@ -31,23 +32,20 @@ void grass::update()
 }
 void grass::grassAttack()
 {
-	if (_hp >= 0)
-	{
-		EFFECTMANAGER->play("grassAttack", _pos.x, _pos.y);
-	}
-
-	if (_hp <= 0)
-	{
-		EFFECTMANAGER->play("grassDie", _pos.x, _pos.y);
+	
+	
+		EFFECTMANAGER->play("grassDie", _pos.x + 35, _pos.y);
 
 		this->setDestroy();
 
 		//dropItem* drop = new dropItem;
 		//drop->init("grass", "grass");
-	}
+	
 }
 
 void grass::render()
 {
-	motherObject::render();
+	RECT rc = CAMERAMANAGER->getRenderRc();
+
+	_image->frameScaleRender(getMemDC(), -rc.left + _pos.x, -rc.top + _pos.y, 0, 0, 70, 70);
 }

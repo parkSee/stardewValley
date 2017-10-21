@@ -168,8 +168,8 @@ HRESULT player::init(string objName, tagFloat pos)
 	tem = tagItem("도끼", "나무를 밸 수 있다", tagFloat(1000000,10000000), 1, itemType::TOOL);		//아이템 초기값
 	_item = &tem;
 
-	_tile1 = NULL;
-	_tile2 = NULL;
+	tile1 = NULL;
+	tile2 = NULL;
 
 	_myItem.img = _item->img;
 	_myItem.x = 0;
@@ -213,12 +213,17 @@ void player::release()
 void player::update() 
 {
 	gameObject::update();
-	this->playerRun();
+
+
 	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;					
 	_tilePos.y = _rcCollision.bottom;
 
 	_indexX = (int)(_tilePos.x / (TILESIZE));			//나의 인덱스 번호 X						//실시간으로 내가 어느타일에 있는지 위치를 찾아주게 넣어놓음
 	_indexY = (int)(_tilePos.y / (TILESIZE));			//나의 인덱스 번호 Y
+
+	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
+
+	this->playerRun();
 
 	if (WORLDTIME->_isTimeFlow)																	//UI가 켜지면 움직이지 않는다. 
 	{																							//(게임상 시간의 흐름 - UI가 켜지면 시간이 멈추면서 키와 시간만 멈춘다.)
@@ -232,7 +237,6 @@ void player::update()
 
 	KEYANIMANAGER->update();
 
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_eatingRc = RectMakeCenter(_pos.x, _pos.y-80, 20,20);
 	
@@ -259,8 +263,8 @@ void player::render()
 
 	//RectangleMakeCenter(getMemDC(), _pos.x - rc.left, _pos.y - rc.top, 30, 30);									//_pos 좌표
 
-	Rectangle(getMemDC(), _rcCollision.left - rc.left, _rcCollision.top - rc.top,								//타일 충돌렉트
-		_rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
+	//Rectangle(getMemDC(), _rcCollision.left - rc.left, _rcCollision.top - rc.top,								//타일 충돌렉트
+	//	_rcCollision.right - rc.left, _rcCollision.bottom - rc.top);
 
 	//Rectangle(getMemDC(), _tilePos.x - rc.left, _tilePos.y - rc.top, 50, 50);
 
@@ -275,10 +279,10 @@ void player::render()
 		}
 	}
 	
-	if (_tile1 != NULL && _tile2 != NULL)
+	if (tile1 != NULL && tile2 != NULL)
 	{
-		RECT rc1 = _tile1->getRect();
-		RECT rc2 = _tile2->getRect();
+		RECT rc1 = tile1->getRect();
+		RECT rc2 = tile2->getRect();
 
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), brush);
@@ -309,15 +313,12 @@ void player::playerRun()
 	case playerState::LEFT_RUN:		case playerState::TAKE_LEFT:
 	case playerState::UP_RUN:		case playerState::TAKE_UP:
 	case playerState::DOWN_RUN:		case playerState::TAKE_DOWN:
-	{
-		mapToolTile *tile1, *tile2;
-		tile1 = tile2 = NULL;
+	
 		int centerX, centerY;
 
 		RECT temp;
 		if (KEYMANAGER->isStayKeyDown('W'))
 		{
-			
 			centerX = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
 			
 			tile1 = TOWNWORLD->getTile(_indexX, _indexY - 1);
@@ -333,17 +334,56 @@ void player::playerRun()
 			
 			if (IntersectRect(&temp, &tile1->getRect(), &_rcCollision))
 			{
-				//_pos.y += SPEED;
+				if (!tile1->getIsMovable())							//타일이 갈수 없는 타일이면
+				{
+					//안간다
+				}
+				else if (tile1->getIsMovable())						//타일이 갈수 있는 타일이면	
+				{
+					if (!tile1->getPObj())								//타일위에 오브젝트가 없으면
+					{
+						//간다
+						_pos.y -= SPEED;
+					}
+			
+					else if (tile1->getPObj())								//타일 위에 오브젝트가 있으면
+					{
+						//갈수있는 오브젝트인지 아닌지 확인
+					}
+				}
 			}
-			_pos.y -= SPEED;
+			else if (IntersectRect(&temp, &tile2->getRect(), &_rcCollision))
+			{
+				if (!tile2->getIsMovable())							//타일이 갈수 없는 타일이면
+				{
+					//안간다
+				}
+				else if (tile2->getIsMovable())						//타일이 갈수 있는 타일이면	
+				{
+					if (!tile2->getPObj())								//타일위에 오브젝트가 없으면
+					{
+						//간다
+						_pos.y -= SPEED;
+					}
+			
+					else if (tile2->getPObj())								//타일 위에 오브젝트가 있으면
+					{
+						//확인한다
+					}
+				}
+			}
+			else
+			{
+				_pos.y -= SPEED;
+			}
 		}
 
 		if (KEYMANAGER->isStayKeyDown('A'))
 		{
 			centerY = TOWNWORLD->getTile(_indexX, _indexY)->getRect().top + TILESIZE / 2;
-			
+
 			tile1 = TOWNWORLD->getTile(_indexX - 1, _indexY);
-			
+
 			if (centerY < _tilePos.y)
 			{
 				tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
@@ -352,34 +392,113 @@ void player::playerRun()
 			{
 				tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY - 1);
 			}
-			
+
 			if (IntersectRect(&temp, &tile1->getRect(), &_rcCollision))
 			{
-				//_pos.x += SPEED;
-			}
+				if (!tile1->getIsMovable())						//갈수없는 타일이면
+				{
 
-			_pos.x -= SPEED;
+				}
+				else if (tile1->getIsMovable())					//갈수있는 타일이면
+				{
+
+					if (!tile1->getPObj())						//오브젝트가 없으면
+					{
+						_pos.x -= SPEED;
+					}
+					else if (tile1->getPObj())					//오브젝트다 있으면
+					{
+
+
+					}
+				}
+			}
+			else if (IntersectRect(&temp, &tile2->getRect(), &_rcCollision))
+			{
+				if (!tile2->getIsMovable())						//갈수없는 타일이면
+				{
+
+				}
+				else if (tile2->getIsMovable())					//갈수있는 타일이면
+				{
+
+					if (!tile2->getPObj())						//오브젝트가 없으면
+					{
+						_pos.x -= SPEED;
+					}
+					else if (tile2->getPObj())					//오브젝트다 있으면
+					{
+
+
+					}
+				}
+			}
+			else
+			{
+				_pos.x -= SPEED;
+			}
 		}
 
 		if (KEYMANAGER->isStayKeyDown('S'))
 		{
 			centerX = TOWNWORLD->getTile(_indexX, _indexY)->getRect().left + TILESIZE / 2;
-			
-			tile1 = TOWNWORLD->getTile(_indexX, _indexY + 1);
-			
+
+			tile1 = TOWNWORLD->getTile(_indexX, _indexY);
+
 			if (centerX < _tilePos.x)
 			{
-				tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY + 1);
+				tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY );
 			}
 			else if (centerX > _tilePos.x)
 			{
-				tile2 = TOWNWORLD->getTile(_indexX + 1, _indexY + 1);
+				tile2 = TOWNWORLD->getTile(_indexX - 1, _indexY );
 			}
+
 			if (IntersectRect(&temp, &tile1->getRect(), &_rcCollision))
 			{
-				//_pos.y -= SPEED;
+				if (!tile1->getIsMovable())							//타일이 갈수 없는 타일이면
+				{
+					//안간다
+					//exit(0);
+				}
+				else if (tile1->getIsMovable())						//타일이 갈수 있는 타일이면	
+				{
+					if (!tile1->getPObj())								//타일위에 오브젝트가 없으면
+					{
+						//간다
+						_pos.y += SPEED;
+					}
+
+					else if (tile1->getPObj())								//타일 위에 오브젝트가 있으면
+					{
+						//갈수있는 오브젝트인지 아닌지 확인
+					}
+				}
 			}
-			_pos.y += SPEED;
+		    else if (IntersectRect(&temp, &tile2->getRect(), &_rcCollision))
+			{
+				if (!tile2->getIsMovable())							//타일이 갈수 없는 타일이면
+				{
+					//안간다
+				}
+				else if (tile2->getIsMovable())						//타일이 갈수 있는 타일이면	
+				{
+					if (!tile2->getPObj())								//타일위에 오브젝트가 없으면
+					{
+						//간다
+						_pos.y += SPEED;
+					}
+
+					else if (tile2->getPObj())								//타일 위에 오브젝트가 있으면
+					{
+						//확인한다
+					}
+				}
+			}
+			else
+			{
+				_pos.y += SPEED;
+			}
 		}
 
 		if (KEYMANAGER->isStayKeyDown('D'))
@@ -397,17 +516,36 @@ void player::playerRun()
 			}
 			if (IntersectRect(&temp, &tile1->getRect(), &_rcCollision))
 			{
-				//_pos.x -= SPEED;
+				if (!tile1->getIsMovable())
+				{
+
+				}
+				else if (tile1->getIsMovable())
+				{
+					if (!tile1->getPObj())
+					{
+						_pos.x += SPEED;
+					}
+					else if (tile1->getPObj())
+					{
+
+					}
+				}
+
 			}
-
-
-			_pos.x += SPEED;
+			else
+			{
+				_pos.x += SPEED;
+			}
+			
 		}
 
+		}
+
+		//tileCollision();
+		_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
+		_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
 	}
-	}
-	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
-	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
-}
+	
 
 

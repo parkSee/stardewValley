@@ -44,60 +44,60 @@ void player::lbuttonClick(tagMessage msg)
 			{
 			case playerState::STAND: case playerState::DOWN_RUN:
 				this->changeState(AXE_DOWN);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
 				}
 				
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					 if (_tile2->getPObj())
+					 if (tile2->getPObj())
 					{
-						 _tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
+						 tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
 				this->changeState(AXE_RIGHT);
 
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_LEFT: case playerState::LEFT_RUN:
 				this->changeState(AXE_LEFT);
 
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_BACK: case playerState::UP_RUN:
 				this->changeState(AXE_UP);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
 					}
 				}
 				break;
@@ -112,57 +112,58 @@ void player::lbuttonClick(tagMessage msg)
 			case playerState::STAND: case playerState::DOWN_RUN:
 				this->changeState(HOE_DOWN);
 
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
 				this->changeState(HOE_RIGHT);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_LEFT: case playerState::LEFT_RUN:
 				this->changeState(HOE_LEFT);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_BACK: case playerState::UP_RUN:
 				this->changeState(HOE_UP);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
+
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
 					}
 				}
 				break;
@@ -174,58 +175,58 @@ void player::lbuttonClick(tagMessage msg)
 			{
 			case playerState::STAND: case playerState::DOWN_RUN:
 				this->changeState(SICKLE_DOWN);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
 					}
 				}
 
 				break;
 			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
 				this->changeState(SICKLE_RIGHT);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_LEFT: case playerState::LEFT_RUN:
 				this->changeState(SICKLE_LEFT);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_BACK: case playerState::UP_RUN:
 				this->changeState(SICKLE_UP);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
 					}
 				}
 				break;
@@ -239,57 +240,57 @@ void player::lbuttonClick(tagMessage msg)
 			{
 			case playerState::STAND: case playerState::DOWN_RUN:
 				this->changeState(PIXHOE_DOWN);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
 				this->changeState(PIXHOE_RIGHT);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_LEFT: case playerState::LEFT_RUN:
 				this->changeState(PIXHOE_LEFT);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
 					}
 				}
 				break;
 			case playerState::STAND_BACK: case playerState::UP_RUN:
 				this->changeState(PIXHOE_UP);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+					tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+						tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
 					}
 				}
 				break;
@@ -302,57 +303,57 @@ void player::lbuttonClick(tagMessage msg)
 			{
 			case playerState::STAND: case playerState::DOWN_RUN:
 				this->changeState(WATER_DOWN);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("watering"));
+					tile1->getPObj()->sendMessage(tagMessage("watering"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("watering"));
+						tile2->getPObj()->sendMessage(tagMessage("watering"));
 					}
 				}
 				break;
 			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
 				this->changeState(WATER_RIGHT);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("watering"));
+					tile1->getPObj()->sendMessage(tagMessage("watering"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("watering"));
+						tile2->getPObj()->sendMessage(tagMessage("watering"));
 					}
 				}
 				break;
 			case playerState::STAND_LEFT: case playerState::LEFT_RUN:
 				this->changeState(WATER_LEFT);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("watering"));
+					tile1->getPObj()->sendMessage(tagMessage("watering"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("watering"));
+						tile2->getPObj()->sendMessage(tagMessage("watering"));
 					}
 				}
 				break;
 			case playerState::STAND_BACK: case playerState::UP_RUN:
 				this->changeState(WATER_UP);
-				if (_tile1->getPObj())
+				if (tile1->getPObj())
 				{
-					_tile1->getPObj()->sendMessage(tagMessage("watering"));
+					tile1->getPObj()->sendMessage(tagMessage("watering"));
 				}
-				else if (!_tile1->getPObj())
+				else if (!tile1->getPObj())
 				{
-					if (_tile2->getPObj())
+					if (tile2->getPObj())
 					{
-						_tile2->getPObj()->sendMessage(tagMessage("watering"));
+						tile2->getPObj()->sendMessage(tagMessage("watering"));
 					}
 				}
 				break;
