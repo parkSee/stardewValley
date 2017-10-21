@@ -10,7 +10,7 @@ HRESULT tileMap::init()
 		for (int i = 0; i < TILEX; ++i)
 		{
 			_pTile[i][j] = new mapToolTile;
-			_pTile[i][j]->init(i, j);
+			_pTile[i][j]->init(i, j, TERRAIN::GRASS);
 		}
 	}
 
