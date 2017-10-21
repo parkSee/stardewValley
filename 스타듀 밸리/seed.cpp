@@ -53,7 +53,7 @@ HRESULT seed::init(string name, string imageKey, tagFloat pos, string explain)
 	 _growNum++;
 	 if (_growNum == _image->getMaxFrameX())
 	 {
-		 _isRight == true;
+		 _isRight = true;
 	 }
 	//}
 
