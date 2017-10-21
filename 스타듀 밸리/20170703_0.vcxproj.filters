@@ -689,9 +689,6 @@
     <ClCompile Include="house.cpp">
       <Filter>playGround\UI\house</Filter>
     </ClCompile>
-    <ClCompile Include="player+tileCollision.cpp">
-      <Filter>playGround\player</Filter>
-    </ClCompile>
     <ClCompile Include="createUI.cpp">
       <Filter>playGround\UI\createUI</Filter>
     </ClCompile>
