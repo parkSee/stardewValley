@@ -31,6 +31,8 @@ HRESULT gameObject::init(string objName, string imageKey , tagFloat pos ,
 	_isLive = true;
 	_isActive = true;
 	_destroyDelayTime = 0.0f;
+
+	_pObj = NULL;
 	_isMovable = false;
 	
 	this->addCallback("daysGone", [this](tagMessage msg)

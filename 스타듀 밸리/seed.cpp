@@ -9,7 +9,7 @@ HRESULT seed::init(string name, string imageKey, tagFloat pos)
 {
 	motherObject::init(name,imageKey,pos, pivot::LEFT_TOP);
 
-	_object = OBJECT::SEED;
+	_objEnum = OBJECT::SEED;
 	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
 
 	//EFFECTMANAGER->addEffect("seed", "¾¾¸ÂÀ»¶§.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
@@ -19,11 +19,14 @@ HRESULT seed::init(string name, string imageKey, tagFloat pos)
 	});
 
 	_growNum = 0;
+	_isRight = false;
+	_isMovable = true;
 
-	this->addCallback("up", [this](tagMessage msg)
+	this->addCallback("grow", [this](tagMessage msg)
 	{
 		this->grow();
 	});
+	
 
 	TOWNWORLD->addObject(objectType::OBJ,this);
 	
@@ -31,18 +34,24 @@ HRESULT seed::init(string name, string imageKey, tagFloat pos)
 }
  void seed::release()
 {
+	 TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(NULL);
+
 	 motherObject::release();
 }
  void seed::update()
 {
 	 motherObject::update();
+
+	
 }
  void seed::grow()
  {
-	if (((land*)TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->getPObj())->getWet() == true)
-	{
+	 if (_growNum >= _image->getMaxFrameX())return;
+	//if (((land*)TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->getPObj())->getWet() == true)
+	//{
 	 _growNum++;
-	}
+	 _isRight == true;
+	//}
 
  }
  void seed::growAttack()

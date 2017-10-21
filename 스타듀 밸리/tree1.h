@@ -40,6 +40,9 @@ public:
 	tree1_top() {}
 	~tree1_top() {}
 
+	float _count;
+	bool _isDie;
+
 	virtual HRESULT init(tagFloat pos);
 	virtual void release();
 	virtual void update();

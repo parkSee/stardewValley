@@ -13,14 +13,8 @@ protected:
 	int _frameX, _frameY;
 	int _idX, _idY;
 	int _hp;
-	gameObject* _pObj;
 	animation* Motion;
 public:
-	motherObject() {}
-	~motherObject() {}
-
-	OBJECT::Enum _object;
-
 	virtual HRESULT init(string objName, string imageKey = "", tagFloat pos = tagFloat(), pivot::Enum pivot = pivot::CENTER);
 	virtual void release();
 	virtual void update();
@@ -30,12 +24,13 @@ public:
 	inline int getFrameY() { return _frameY; }
 	inline int getIdX() { return _idX; }
 	inline int getIdY() { return _idY; }
-	inline gameObject* getPObj() { return _pObj; }
 	
 
 	inline void setFrameX(int x) { _frameX = x; }
 	inline void setFrameY(int y) { _frameY = y; }
 	inline void setIdX(int x) { _idX = x; }
 	inline void setIdY(int y) { _idY = y; }
-	inline void setPobj(gameObject* pobj) { _pObj = pobj; }
+
+	motherObject() {}
+	virtual ~motherObject() {}
 };

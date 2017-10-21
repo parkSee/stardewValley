@@ -9,11 +9,9 @@ HRESULT motherObject::init(string objName, string imageKey, tagFloat pos, pivot:
 
 	_frameX = _frameY = 0;
 	_idX = _idY = 0;
-	_hp = 0;
-	_pObj = NULL;
+	_hp = 1;
 
-	_object = OBJECT::NONE;
-	Motion == NULL;
+	Motion = NULL;
 
 	return S_OK;
 }
@@ -25,10 +23,10 @@ void motherObject::update()
 {
 	gameObject::update();
 
-	EFFECTMANAGER->update();
+	
 
 }
 void motherObject::render()
 {
-	EFFECTMANAGER->render();
+	
 }
