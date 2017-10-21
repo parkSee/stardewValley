@@ -2,7 +2,7 @@
 #include "player.h"
 #include "inventory.h"
 #include "eProgressBar.h"
-
+#include "seed.h"
 
 void player::eating(tagMessage msg)
 {
@@ -33,8 +33,22 @@ void player::lbuttonClick(tagMessage msg)
 		_state == PIXHOE_LEFT || _state == PIXHOE_UP || _state == PIXHOE_RIGHT || _state == WATER_DOWN || _state == WATER_LEFT || _state == WATER_UP || 
 		_state == WATER_RIGHT)return;
 
+
+	if (tile1->getPObj())
+	{
+		seed* sed = (seed*)tile1->getPObj();
+		if (sed->_isRight)
+		{
+			inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+			sed->setDestroy();
+			inven->addItem(tagMessage(ADDITEM, 0.0f, 0, 0, vector<gameObject*>(), sed->_name, "¸ÀÀÖ´Ù"));
+		}
+	}
+
+
 	eProgressBar* energe = (eProgressBar*)TOWNWORLD->findObject(objectType::INTERFACE, "energyBar");
 	energe->sendMessage(tagMessage("consume", 0.0f, 1));
+
 
 	if (_item->type == itemType::TOOL)
 	{
@@ -360,6 +374,9 @@ void player::lbuttonClick(tagMessage msg)
 			}
 		}
 	}
+
+
+
 }
 
 	void player::changeTargetItem(tagMessage msg)

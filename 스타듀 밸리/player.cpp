@@ -201,6 +201,7 @@ HRESULT player::init(string objName, tagFloat pos)
 		this->changeTargetItem(msg);
 	});
 
+
 	
 
 	return S_OK;
@@ -234,6 +235,7 @@ void player::update()
 	{
 		this->sendMessage(tagMessage("lbuttonClick"));
 	}
+	
 
 	KEYANIMANAGER->update();
 
