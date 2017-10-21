@@ -420,6 +420,12 @@
     <ClInclude Include="fade.h">
       <Filter>playGround\UI\fade</Filter>
     </ClInclude>
+    <ClInclude Include="seed3.h">
+      <Filter>playGround\map\seed</Filter>
+    </ClInclude>
+    <ClInclude Include="seed2.h">
+      <Filter>playGround\map\seed</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -691,6 +697,12 @@
     </ClCompile>
     <ClCompile Include="fade.cpp">
       <Filter>playGround\UI\fade</Filter>
+    </ClCompile>
+    <ClCompile Include="seed3.cpp">
+      <Filter>playGround\map\seed</Filter>
+    </ClCompile>
+    <ClCompile Include="seed2.cpp">
+      <Filter>playGround\map\seed</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

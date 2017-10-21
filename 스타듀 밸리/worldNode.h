@@ -26,6 +26,8 @@ namespace OBJECT
 		STONE,
 		FARMLAND,
 		SEED,
+		SEED2,
+		SEED3,
 		TREE1_BOTTOM,
 		TREE1_TOP,
 		TREE1,
