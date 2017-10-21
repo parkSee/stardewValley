@@ -31,7 +31,7 @@ HRESULT worldTime::init()
 	_isTimeFlow = true;
 	_saveHour = 6;
 
-	_dayDirection = MID_NIGHT;
+	_dayDirection = BRIGHT;
 
 	_timeFast = 1.0f;
 
