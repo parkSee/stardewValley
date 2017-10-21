@@ -3,6 +3,7 @@
 #include "inventory.h"
 #include "shadow.h"
 
+
 HRESULT player::init(string objName, tagFloat pos)
 {
 
@@ -164,12 +165,11 @@ HRESULT player::init(string objName, tagFloat pos)
 	_shadow = new shadow;
 	_shadow->init(objName, "shadow",tagFloat( this->_pos.x - 30, this->_pos.y));
 
-
-	tem = tagItem("도끼", "나무를 밸 수 있다", tagFloat(1000000,10000000), 1, itemType::TOOL);		//아이템 초기값
+	tem = tagItem("도끼", "나무를 밸 수 있다", tagFloat(1000000, 10000000), 1, itemType::TOOL);
 	_item = &tem;
 
-	tile1 = NULL;
-	tile2 = NULL;
+	tile1 =TOWNWORLD->getTile(_indexX,_indexY);
+	tile2 = TOWNWORLD->getTile(_indexX-1,_indexY);
 
 	_myItem.img = _item->img;
 	_myItem.x = 0;
@@ -215,7 +215,6 @@ void player::update()
 {
 	gameObject::update();
 
-
 	_tilePos.x = _rcCollision.left + (_rcCollision.right - _rcCollision.left) / 2;					
 	_tilePos.y = _rcCollision.bottom;
 
@@ -241,7 +240,6 @@ void player::update()
 
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_eatingRc = RectMakeCenter(_pos.x, _pos.y-80, 20,20);
-	
 	_shadow->_pos.x = this->_pos.x;
 	_shadow->_pos.y = this->_pos.y -20;
 
@@ -302,7 +300,6 @@ void player::render()
 		TextOut(getMemDC(), 10, 400, str, strlen(str));
 	}
 	_shadow->render();
-	//EllipseMakeCenter(getMemDC(), _pos.x-rc.left, _pos.y-rc.top, 10, 10);
 }
 
 void player::playerRun()
@@ -314,7 +311,6 @@ void player::playerRun()
 	case playerState::LEFT_RUN:		case playerState::TAKE_LEFT:
 	case playerState::UP_RUN:		case playerState::TAKE_UP:
 	case playerState::DOWN_RUN:		case playerState::TAKE_DOWN:
-	
 		int centerX, centerY;
 
 		RECT temp;
@@ -349,7 +345,14 @@ void player::playerRun()
 			
 					else if (tile1->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						//갈수있는 오브젝트인지 아닌지 확인
+						if (!tile1->getIsMovable())
+						{
+
+						}
+						else if (tile1->getIsMovable())
+						{
+							_pos.y -= SPEED;
+						}
 					}
 				}
 			}
@@ -369,7 +372,14 @@ void player::playerRun()
 			
 					else if (tile2->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						//확인한다
+						if (!tile2->getIsMovable())
+						{
+
+						}
+						else if (tile2->getIsMovable())
+						{
+							_pos.y -= SPEED;
+						}
 					}
 				}
 			}
@@ -410,7 +420,14 @@ void player::playerRun()
 					else if (tile1->getPObj())					//오브젝트다 있으면
 					{
 
+						if (!tile1->getIsMovable())
+						{
 
+						}
+						else if (tile1->getIsMovable())
+						{
+							_pos.x -= SPEED;
+						}
 					}
 				}
 			}
@@ -429,7 +446,14 @@ void player::playerRun()
 					}
 					else if (tile2->getPObj())					//오브젝트다 있으면
 					{
+						if (!tile1->getIsMovable())
+						{
 
+						}
+						else if (tile1->getIsMovable())
+						{
+							_pos.x -= SPEED;
+						}
 
 					}
 				}
@@ -472,7 +496,14 @@ void player::playerRun()
 
 					else if (tile1->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						//갈수있는 오브젝트인지 아닌지 확인
+						if (!tile1->getIsMovable())							//그게 갈수없는 타일인지
+						{
+
+						}
+						else if (tile1->getIsMovable())						//갈수있는 타일인지
+						{
+							_pos.y += SPEED;
+						}
 					}
 				}
 			}
@@ -492,7 +523,14 @@ void player::playerRun()
 
 					else if (tile2->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						//확인한다
+						if (!tile2->getIsMovable())
+						{
+
+						}
+						else if (tile2->getIsMovable())
+						{
+							_pos.y += SPEED;
+						}
 					}
 				}
 			}
@@ -529,7 +567,14 @@ void player::playerRun()
 					}
 					else if (tile1->getPObj())
 					{
+						if (!tile1->getIsMovable())							//그게 갈수없는 타일인지
+						{
 
+						}
+						else if (tile1->getIsMovable())						//갈수있는 타일인지
+						{
+							_pos.x += SPEED;
+						}
 					}
 				}
 

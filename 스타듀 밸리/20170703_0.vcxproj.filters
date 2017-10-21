@@ -169,9 +169,6 @@
     <Filter Include="playGround\map\herb">
       <UniqueIdentifier>{f1a10cdc-221b-46f6-b9b9-f4fbada51e34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\mapToolScene">
-      <UniqueIdentifier>{879fd6f7-956a-401c-89fa-ff12a1452e23}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\store">
       <UniqueIdentifier>{8d27d5aa-c77e-4793-b8de-f17a9bddfcec}</UniqueIdentifier>
     </Filter>
@@ -198,6 +195,9 @@
     </Filter>
     <Filter Include="playGround\UI\fade">
       <UniqueIdentifier>{44e4896b-a61e-4f9a-b649-782cbaa9cced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\map\mapToolScene">
+      <UniqueIdentifier>{879fd6f7-956a-401c-89fa-ff12a1452e23}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -367,19 +367,19 @@
       <Filter>playGround\map\herb</Filter>
     </ClInclude>
     <ClInclude Include="mapToolNode.h">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClInclude>
     <ClInclude Include="mapToolScene.h">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClInclude>
     <ClInclude Include="mapToolTile.h">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClInclude>
     <ClInclude Include="testObject.h">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClInclude>
     <ClInclude Include="tileMap.h">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClInclude>
     <ClInclude Include="store.h">
       <Filter>playGround\store</Filter>
@@ -425,6 +425,9 @@
     </ClInclude>
     <ClInclude Include="seed2.h">
       <Filter>playGround\map\seed</Filter>
+    </ClInclude>
+    <ClInclude Include="mainScene.h">
+      <Filter>playGround\mainScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -615,16 +618,16 @@
       <Filter>playGround\map\herb</Filter>
     </ClCompile>
     <ClCompile Include="mapToolScene.cpp">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClCompile>
     <ClCompile Include="mapToolTile.cpp">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClCompile>
     <ClCompile Include="testObject.cpp">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClCompile>
     <ClCompile Include="tileMap.cpp">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClCompile>
     <ClCompile Include="inventory + callBack.cpp">
       <Filter>playGround\UI\inventory</Filter>
@@ -651,7 +654,7 @@
       <Filter>playGround\UI\energyProgress</Filter>
     </ClCompile>
     <ClCompile Include="tileMap + AStar.cpp">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClCompile>
     <ClCompile Include="pierre.cpp">
       <Filter>playGround\NPC\pierre</Filter>
@@ -678,7 +681,7 @@
       <Filter>playGround\NPC\caroline</Filter>
     </ClCompile>
     <ClCompile Include="tileMap + saveLoad.cpp">
-      <Filter>playGround\mapToolScene</Filter>
+      <Filter>playGround\map\mapToolScene</Filter>
     </ClCompile>
     <ClCompile Include="selectUI.cpp">
       <Filter>playGround\UI\selectUI</Filter>
@@ -688,9 +691,6 @@
     </ClCompile>
     <ClCompile Include="house.cpp">
       <Filter>playGround\UI\house</Filter>
-    </ClCompile>
-    <ClCompile Include="player+tileCollision.cpp">
-      <Filter>playGround\player</Filter>
     </ClCompile>
     <ClCompile Include="createUI.cpp">
       <Filter>playGround\UI\createUI</Filter>
@@ -703,6 +703,9 @@
     </ClCompile>
     <ClCompile Include="seed2.cpp">
       <Filter>playGround\map\seed</Filter>
+    </ClCompile>
+    <ClCompile Include="mainScene.cpp">
+      <Filter>playGround\mainScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
