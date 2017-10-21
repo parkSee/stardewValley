@@ -24,7 +24,6 @@ HRESULT playGround::init(void)
 	SCENEMANAGER->changeScene("·Îµù¾À");
 	
     ShowCursor(false);
-	//SCENEMANAGER->changeScene("¸ÊÅø¾À");
 
 	return S_OK;
 }
