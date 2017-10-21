@@ -97,8 +97,8 @@ private:
 	tagItem							 tem;
 	tileMap*						_map;
 	eProgressBar*					_power;
-	mapToolTile*					_tile1;
-	mapToolTile*					_tile2;
+	mapToolTile*					tile1;
+	mapToolTile*					tile2;
 	tree1_bottom*					_tree;
 	shadow*							_shadow;
 	tagFloat						_tilePos;
