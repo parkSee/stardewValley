@@ -20,17 +20,18 @@ private:
 		KIND_TERRAIN,
 		KIND_OBJECT
 	};
-	struct tagTileSampleRect
+	struct tagMyButton
 	{
 		RECT rc;
 		KIND kind;
 		TERRAIN::Enum terrain;
 		OBJECT::Enum object;
 		string str;
+		bool bTrue;
 
-		tagTileSampleRect() :
+		tagMyButton() :
 			rc({ 0,0,0,0 }), kind(KIND_NONE),
-			terrain(TERRAIN::NONE), object(OBJECT::NONE), str("") {}
+			terrain(TERRAIN::NONE), object(OBJECT::NONE), str(""), bTrue(false) {}
 
 		void init()
 		{
@@ -39,6 +40,7 @@ private:
 			terrain = TERRAIN::NONE;
 			object = OBJECT::NONE;
 			str = "";
+			bTrue = false;
 		}
 	};
 	//------------------------
@@ -46,12 +48,15 @@ private:
 	tileMap* _map;
 
 	vector<RECT> _vSpriteRect;		//스프라이트 선택할 버튼 만들 렉트
-	vector<tagTileSampleRect> _vtileSampleSelect;		//타일샘플 전용 선택버튼 구조체
+	vector<tagMyButton> _vtileSampleSelect;		//타일샘플 전용 선택버튼 구조체
 	SPRITE::Enum _sprite;			//현재 선택한 스프라이트 이넘
 	image* _spriteImage;			//현재 선택한 스프라이트의 이미지
 	string _spriteImageKey;			//현재 선택한 스프라이트의 이미지 키 저장용
 	MODE _mode;						//맵인지 스프라이트인지 모드
 	tagInt _mapCam, _spriteCam;		//맵이랑 스프라이트랑 왔다갔다 할 때 카메라 좌표 저장
+
+	//버튼들
+	tagMyButton _moveTrue, _moveFalse;
 
 
 	int _selectIdX, _selectIdY;		//스프라이트에서 선택한 인덱스 저장
