@@ -26,7 +26,6 @@ public:
 private:
 	objectContainer _totalObject;
 	tileMap* _tileMap;
-	//fade*	_fade;
 
 public:
 	HRESULT init();

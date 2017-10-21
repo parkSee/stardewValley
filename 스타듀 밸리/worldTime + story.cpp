@@ -15,12 +15,13 @@
 using namespace month;
 using namespace dayDirection;
 
-
 void worldTime::story()
 {
 	if (KEYMANAGER->isOnceKeyDown('M'))
 	{
 		this->_isTimeFlow = false;
+		SOUNDMANAGER->stop("bgm1");
+		SOUNDMANAGER->play("bgm3", 1.0f);
 
 		pierre* pirre = (pierre*)TOWNWORLD->findObject(objectType::HUMAN, "pierre");
 		player* target = (player*)TOWNWORLD->findObject(objectType::HUMAN, "player");
@@ -37,7 +38,7 @@ void worldTime::story()
 		pirre->setCallback([]()
 		{
 			UI* ui = (UI*)TOWNWORLD->findObject(objectType::INTERFACE, "UI");
-			string str = "더 살려두고 싶었지만 안타깝게 됬어 . . . 이만 죽어줘야 겠어 . . 자네들은";
+			string str = "내가 밤에 돌아다니지 말랬지!!! 이번에는 봐주지만 다음엔 가차 없을 줄 알아";
 			ui->sendMessage(tagMessage(CONVERSATIONUI, 0.1f, PIERRE, 0, vector<gameObject*>(), str));
 
 			ui->setCallback([]()
@@ -54,6 +55,8 @@ void worldTime::story()
 				}
 
 				pirre->sendMessage(tagMessage("setMoveRoute", 0.0f, 0, 0, sendList));
+				SOUNDMANAGER->stop("bgm3");
+				SOUNDMANAGER->play("bgm1");
 
 			});
 		});

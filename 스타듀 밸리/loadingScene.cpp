@@ -38,7 +38,7 @@ void loadingScene::update()
 
 	if (_loading->loadingDone())
 	{
-		SCENEMANAGER->changeScene("¸¶À»¾À");
+		SCENEMANAGER->changeScene("¸ŞÀÎ¾À");
 		//ShowCursor(true);
 		//SCENEMANAGER->changeScene("¸ÊÅø¾À");
 	}

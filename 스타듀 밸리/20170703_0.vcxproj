@@ -109,6 +109,7 @@
     <ClInclude Include="land.h" />
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
+    <ClInclude Include="mainScene.h" />
     <ClInclude Include="mapToolNode.h" />
     <ClInclude Include="mapToolScene.h" />
     <ClInclude Include="mapToolTile.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="land.cpp" />
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
+    <ClCompile Include="mainScene.cpp" />
     <ClCompile Include="mapToolScene.cpp" />
     <ClCompile Include="mapToolTile.cpp" />
     <ClCompile Include="motherObject.cpp" />
