@@ -36,11 +36,14 @@ protected:
 
 	tagSize _size;								//가로 세로 길이
 	bool _isMovable;							//통과 가능한 오브젝트인지 여부
+	gameObject* _pObj;							//이 오브젝트가 들고있는 오브젝트의 포인터
 	
 public:
 	tagFloat _pos;								//좌표
 	string _name;								//오브젝트 이름
 	OBJECT::Enum _objEnum;						//오브젝트 이넘 (종류)
+
+	//여기까지 퍼블릭 변수 -----------------------------------------
 
 	gameObject() {}
 	virtual ~gameObject() {}
@@ -71,4 +74,8 @@ public:
 	//_isMovable에 대한 겟셋
 	inline bool getIsMovable() { return _isMovable; }
 	inline void setIsMovable(bool isMovable) { _isMovable = isMovable; }
+
+	//_pObj에 대한 겟셋
+	inline gameObject* getPObj() { return _pObj; }
+	inline void setPObj(gameObject* pObj) { _pObj = pObj; }
 };

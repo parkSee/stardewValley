@@ -11,7 +11,7 @@ HRESULT tree1::init(tagFloat pos)
 	tree1_top* top = new tree1_top;
 	top->init(pos);
 
-	bottom->setPobj(top);
+	bottom->setPObj(top);
 
 	_treeNum = 0;
 
@@ -53,10 +53,11 @@ HRESULT tree1_bottom::init(tagFloat pos)
 	motherObject::init("tree1_bottom", "tree", pos, pivot::LEFT_TOP);
 
 	_hp = 15;
+	_isMovable = false;
 
 	
 
-	_object = OBJECT::TREE1_BOTTOM;
+	_objEnum = OBJECT::TREE1_BOTTOM;
 	TOWNWORLD->addObject(objectType::OBJ, this);
 	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
 	//EFFECTMANAGER->addEffect("die", "나무.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
@@ -136,7 +137,7 @@ HRESULT tree1_top::init(tagFloat pos)
 	_isDie = false;
 	_count = 0;
 
-	_object = OBJECT::TREE1_TOP;
+	_objEnum = OBJECT::TREE1_TOP;
 	TOWNWORLD->addObject(objectType::OBJ, this);
 	//EFFECTMANAGER->addEffect("die", "나무쓰러짐.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
 	//EFFECTMANAGER->addEffect("attack", "나무맞을때.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
@@ -163,9 +164,9 @@ void tree1_top::update()
 	{
 		_count += TIMEMANAGER->getElapsedTime();
 
-		if (_count >= 2.0f)
+		if (_count >= 2.3f)
 		{
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < RND->getFromIntTo(2, 10); i++)
 			{
 				dropItem* a = new dropItem;
 				a->init("수액", "asdadadad", tagFloat(_pos.x + 270, _pos.y));
@@ -213,5 +214,5 @@ void tree1_top::setDestroy(float time)
 {
 	gameObject::setDestroy(time);
 
-	((motherObject*)TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->getPObj())->setPobj(NULL);
+	((motherObject*)TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->getPObj())->setPObj(NULL);
 }

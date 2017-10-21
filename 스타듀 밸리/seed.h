@@ -5,11 +5,15 @@ class seed : public motherObject
 private:
 	int _growNum;
 
+
 public:
 	seed() {}
 	~seed() {}
 
-	virtual HRESULT init(string name,string imageKey,tagFloat pos);
+	bool _isRight;
+	string _explain;
+
+	virtual HRESULT init(string name,string imageKey,tagFloat pos,string explain);
 	virtual void release();
 	virtual void update();
 	virtual void render();

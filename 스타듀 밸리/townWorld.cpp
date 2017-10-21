@@ -16,6 +16,9 @@ HRESULT townWorld::init()
 		_totalObject.insert(make_pair((objectType::Enum)i, v));
 	}
 
+	//_fade = new  fade;
+	//_fade->init("fade");
+
 	return S_OK;
 }
 
@@ -52,6 +55,8 @@ void townWorld::update()
 			}
 		}
 	}
+
+	//_fade->update();
 }
 
 
@@ -112,6 +117,8 @@ void townWorld::render()
 			_totalObject[INTERFACE][i]->render();
 		}
 	}
+
+	//_fade->render();
 
 	for (int i = 0; i < _totalObject[MOUSE].size(); ++i)
 	{

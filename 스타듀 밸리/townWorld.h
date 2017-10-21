@@ -3,6 +3,7 @@
 #include "worldNode.h"
 #include <vector>
 #include <unordered_map>
+//#include "fade.h"
 
 class gameObject;
 class mapToolTile;
@@ -25,6 +26,7 @@ public:
 private:
 	objectContainer _totalObject;
 	tileMap* _tileMap;
+	//fade*	_fade;
 
 public:
 	HRESULT init();
@@ -52,6 +54,9 @@ public:
 
 	//Å¸ÀÏ °Ù
 	mapToolTile* getTile(int indexX, int indexY);
+
+	//ÆäÀÌµå ¾Æ¿ô
+	//void fadeOut() { _fade->startFadeOut(); }
 
 	townWorld() {}
 	~townWorld() {}

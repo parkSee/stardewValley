@@ -178,6 +178,12 @@ void mouse::mouseControll()
 					}
 				}
 			}
+
+			else
+			{
+				ply->sendMessage(tagMessage("lbuttonClick"));
+			}
+
 		}
 	}
 
