@@ -3,6 +3,8 @@
 #include "tree1.h"
 #include "land.h"
 #include "seed.h"
+#include "seed2.h"
+#include "seed3.h"
 #include "grass.h"
 
 void townScene::dongjinInit()
@@ -15,8 +17,8 @@ void townScene::dongjinInit()
 	land* stom = new land;
 	stom->init(tagFloat(TOWNWORLD->getTile(4, 2)->getRect().left, TOWNWORLD->getTile(4, 2)->getRect().top));
 
-	seed* sour = new seed;
-	sour->init("양파", "seed",(tagFloat(TOWNWORLD->getTile(8, 2)->getRect().left, TOWNWORLD->getTile(8, 2)->getRect().top)), "개무서웡");
+	seed2* sour = new seed2;
+	sour->init("양파", "seed2",(tagFloat(TOWNWORLD->getTile(8, 2)->getRect().left, TOWNWORLD->getTile(8, 2)->getRect().top)), "개무서웡");
 
 	grass* tlqkf = new grass;
 	tlqkf->init(tagFloat(TOWNWORLD->getTile(10, 2)->getRect().left, TOWNWORLD->getTile(10, 2)->getRect().top));

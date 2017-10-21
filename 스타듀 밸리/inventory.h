@@ -57,7 +57,6 @@ private:
 	invenDirection::Enum	_direction;				//인벤토리 창 상태 
 
 	tagMainInventory		_mainInventory;			//메인 인벤토리 창 구조체
-	tagSubInventory			_subInventory;			//기본 인벤토리  창 구조체
 	tagExplain				_explain;				//아이템 설명 창 구조체
 
 	//인벤토리 창에서 아이템 옮길 때 사용 하는 템프 변수들
@@ -67,6 +66,9 @@ private:
 
 	//검은색 레이어 
 	tagLayer				_layer;
+
+public:
+	tagSubInventory			_subInventory;			//기본 인벤토리  창 구조체
 
 public:
 	HRESULT init(string name);

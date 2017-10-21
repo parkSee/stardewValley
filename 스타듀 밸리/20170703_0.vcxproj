@@ -125,6 +125,8 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="seed.h" />
+    <ClInclude Include="seed2.h" />
+    <ClInclude Include="seed3.h" />
     <ClInclude Include="selectUI.h" />
     <ClInclude Include="shadow.h" />
     <ClInclude Include="singletonBase.h" />
@@ -210,6 +212,8 @@
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="sceneInit + dongjin.cpp" />
     <ClCompile Include="seed.cpp" />
+    <ClCompile Include="seed2.cpp" />
+    <ClCompile Include="seed3.cpp" />
     <ClCompile Include="seeyound + imageLoad.cpp" />
     <ClCompile Include="selectUI.cpp" />
     <ClCompile Include="shadow.cpp" />
