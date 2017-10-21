@@ -6,6 +6,7 @@
 #include "seed2.h"
 #include "seed3.h"
 #include "grass.h"
+#include "stone.h"
 
 void townScene::dongjinInit()
 {
@@ -17,12 +18,17 @@ void townScene::dongjinInit()
 	land* stom = new land;
 	stom->init(tagFloat(TOWNWORLD->getTile(4, 2)->getRect().left, TOWNWORLD->getTile(4, 2)->getRect().top));
 
-	seed2* sour = new seed2;
-	sour->init("양파", "seed2",(tagFloat(TOWNWORLD->getTile(8, 2)->getRect().left, TOWNWORLD->getTile(8, 2)->getRect().top)), "개무서웡");
+	seed* sour = new seed;
+	sour->init("양파", "seed",(tagFloat(TOWNWORLD->getTile(8, 2)->getRect().left, TOWNWORLD->getTile(8, 2)->getRect().top)), "개무서웡");
 
 	grass* tlqkf = new grass;
 	tlqkf->init(tagFloat(TOWNWORLD->getTile(10, 2)->getRect().left, TOWNWORLD->getTile(10, 2)->getRect().top));
 
 	EFFECTMANAGER->addEffect("grassDie", "resource/effect/풀때기.bmp", 500, 137, 100, 137, 1.0f, 0.3f, 1000);
+
+	stone* _stone = new stone;
+	_stone->init(tagFloat(TOWNWORLD->getTile(3, 2)->getRect().left, TOWNWORLD->getTile(3, 2)->getRect().top));
+
+	EFFECTMANAGER->addEffect("stoneDie", "resource/effect/돌시발.bmp", 4400, 120, 200, 120, 1.0f, 0.7f, 1000);
 	//tree1 탑이랑 바텀 이닛에서 스스로 타운월드에 집어넣는다
 }

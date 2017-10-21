@@ -173,6 +173,13 @@ void tree1_top::update()
 				TOWNWORLD->addObject(objectType::ITEM, a);
 			}
 
+			for (int i = 0; i < RND->getFromIntTo(2, 10); i++)
+			{
+				dropItem* b = new dropItem;
+				b->init("³ª¹«", "asdadadad", tagFloat(_pos.x + 270, _pos.y));
+				TOWNWORLD->addObject(objectType::ITEM, b);
+			}
+
 			this->setDestroy();
 		}
 	}

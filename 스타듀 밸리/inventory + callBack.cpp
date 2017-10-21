@@ -124,7 +124,6 @@ void inventory::changeItem()
 
 }
 
-
 void inventory::addItem(tagMessage msg)
 {
 	for (int i = 0; i < _vInventory.size(); ++i)

@@ -20,6 +20,7 @@ HRESULT playGround::init(void)
 	SCENEMANAGER->addLoadingScene("·Îµù¾À", new loadingScene);
 	SCENEMANAGER->addScene("¸¶À»¾À", new townScene);
 	SCENEMANAGER->addScene("¸ÊÅø¾À", new mapToolScene);
+	SCENEMANAGER->addScene("¸ÞÀÎ¾À", new mainScene);
 
 	SCENEMANAGER->changeScene("·Îµù¾À");
 	

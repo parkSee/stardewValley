@@ -109,6 +109,7 @@
     <ClInclude Include="land.h" />
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
+    <ClInclude Include="mainScene.h" />
     <ClInclude Include="mapToolNode.h" />
     <ClInclude Include="mapToolScene.h" />
     <ClInclude Include="mapToolTile.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="land.cpp" />
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
+    <ClCompile Include="mainScene.cpp" />
     <ClCompile Include="mapToolScene.cpp" />
     <ClCompile Include="mapToolTile.cpp" />
     <ClCompile Include="motherObject.cpp" />
@@ -199,7 +201,6 @@
     <ClCompile Include="pierre.cpp" />
     <ClCompile Include="player+callBack.cpp" />
     <ClCompile Include="player+state.cpp" />
-    <ClCompile Include="player+tileCollision.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="progressBar.cpp" />

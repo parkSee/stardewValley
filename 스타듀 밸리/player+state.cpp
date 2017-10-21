@@ -178,7 +178,7 @@ void player::stateUpdate(playerState::Enum state)
 		}
 		break;
 	case playerState::TAKE_LEFT:				//들고 왼쪽으로 달리기 
-		_myItem.x = _pos.x- CARRYX;
+		_myItem.x = _pos.x - CARRYX;
 		_myItem.y = _pos.y - CARRYY;
 	
 		 if (KEYMANAGER->isOnceKeyUp('A'))
@@ -205,7 +205,7 @@ void player::stateUpdate(playerState::Enum state)
 		}
 		break;
 	case playerState::STAND_TAKE:				//들고 서있기
-		_myItem.x = _pos.x- CARRYX;
+		_myItem.x = _pos.x - CARRYX;
 		_myItem.y = _pos.y - CARRYY;
 
 		if (KEYMANAGER->isOnceKeyDown('A'))
@@ -249,7 +249,7 @@ void player::stateUpdate(playerState::Enum state)
 		}
 		break;
 	case playerState::STAND_TAKE_LEFT:			//들고 왼쪽으로 서있기
-		_myItem.x = _pos.x- CARRYX;
+		_myItem.x = _pos.x - CARRYX;
 		_myItem.y = _pos.y - CARRYY;
 		
 		if (KEYMANAGER->isOnceKeyDown('A'))					//LEFT_STAND
@@ -270,8 +270,8 @@ void player::stateUpdate(playerState::Enum state)
 		}
 
 		break;
-	case playerState::STAND_TAKE_BACK:			//들고 뒤로 서있기
-		_myItem.x = _pos.x- CARRYX;
+	case playerState::STAND_TAKE_BACK:							//들고 뒤로 서있기
+		_myItem.x = _pos.x - CARRYX;
 		_myItem.y = _pos.y - CARRYY;
 
 		if (KEYMANAGER->isOnceKeyDown('W'))
@@ -295,20 +295,6 @@ void player::stateUpdate(playerState::Enum state)
 		
 		break;
 	case playerState::EATING:
-
-		_myItem.y -= _myItem.jumpPower;
-		_myItem.jumpPower -= _myItem.gravity;
-
-		_eatingRc = RectMakeCenter(_pos.x, _pos.y - 80, 20, 20);
-
-		_eatCenter.x = _eatingRc.left + (_eatingRc.right - _eatingRc.left) / 2;
-		_eatCenter.y = _eatingRc.bottom;
-
-		if (getDistance(_myItem.x, _myItem.y, _eatCenter.x, _eatCenter.y)<60)
-		{
-			_myItem.img = NULL;
-			
-		}
 
 		break;
 	}
