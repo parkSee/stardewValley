@@ -431,14 +431,14 @@ void player::lbuttonClick(tagMessage msg)
 		}
 	}
 
-	if (tile1->getPObj())
+	if (tile1->getPObj())											//시바 잡초같은 .....잡초잡초잡초 밟아버려
 	{
 		seed* sed = (seed*)tile1->getPObj();
 		if (sed->_isRight)
 		{
 			sed->setDestroy();
 			inven->addItem(tagMessage(ADDITEM, 0.0f, 0, 0, vector<gameObject*>(), sed->_name, sed->_explain));
-			//return;
+			return;
 		}
 	}
 

@@ -76,7 +76,7 @@ void townScene::soonwooInit()
 	TOWNWORLD->addObject(objectType::INTERFACE, select);
 
 	house* home = new house;
-	home->init("house", "house", tagFloat((TILESIZE * 9) +(89*SCALE), (TILESIZE * 9) +(67*SCALE)));
+	home->init("house", "house", tagFloat((TILESIZE * 19) +(89*SCALE), (TILESIZE * 7) +(67*SCALE)));
 	TOWNWORLD->addObject(objectType::OBJ, home);
 
 	createUI* createui = new createUI;
