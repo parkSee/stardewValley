@@ -27,6 +27,10 @@ void tileMap::mapSave(string fileName)
 			tileSave.frameX = _pTile[i][j]->getFrameX();
 			tileSave.frameY = _pTile[i][j]->getFrameY();
 
+			sprintf(tileSave.imageKey2, _pTile[i][j]->getImageKey2().c_str());
+			tileSave.frameX2 = _pTile[i][j]->getFrameX2();
+			tileSave.frameY2 = _pTile[i][j]->getFrameY2();
+
 			WriteFile(file, &tileSave, sizeof(tileSave), &write, NULL);
 		}
 	}
@@ -57,11 +61,43 @@ void tileMap::mapLoad(string fileName)
 			_pTile[tileSave.idX][tileSave.idY]->changeImage(tileSave.imageKey);
 			_pTile[tileSave.idX][tileSave.idY]->setFrameX(tileSave.frameX);
 			_pTile[tileSave.idX][tileSave.idY]->setFrameY(tileSave.frameY);
+			_pTile[tileSave.idX][tileSave.idY]->changeImage2(tileSave.imageKey2);
+			_pTile[tileSave.idX][tileSave.idY]->setFrameX2(tileSave.frameX2);
+			_pTile[tileSave.idX][tileSave.idY]->setFrameY2(tileSave.frameY2);
 		}
 	}
 
 	CloseHandle(file);
 }
+
+//void tileMap::mapLoadPast(string fileName)
+//{
+//	HANDLE file;
+//	DWORD read;
+//
+//	file = CreateFile(fileName.c_str(), GENERIC_READ, 0, NULL,
+//		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+//
+//	tagTileSavePast tileSavePast;
+//
+//	while (true)
+//	{
+//		memset(&tileSavePast, 0, sizeof(tileSavePast));
+//		ReadFile(file, &tileSavePast, sizeof(tileSavePast), &read, NULL);
+//		if (read != sizeof(tileSavePast)) break;
+//
+//		if (0 <= tileSavePast.idX && tileSavePast.idX < TILEX &&
+//			0 <= tileSavePast.idY && tileSavePast.idY < TILEY)
+//		{
+//			_pTile[tileSavePast.idX][tileSavePast.idY]->init(tileSavePast.idX, tileSavePast.idY, tileSavePast.terrain);
+//			_pTile[tileSavePast.idX][tileSavePast.idY]->changeImage(tileSavePast.imageKey);
+//			_pTile[tileSavePast.idX][tileSavePast.idY]->setFrameX(tileSavePast.frameX);
+//			_pTile[tileSavePast.idX][tileSavePast.idY]->setFrameY(tileSavePast.frameY);
+//		}
+//	}
+//
+//	CloseHandle(file);
+//}
 
 //-------------------------------------------------------------
 

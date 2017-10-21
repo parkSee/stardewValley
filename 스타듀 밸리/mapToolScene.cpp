@@ -472,6 +472,34 @@ void mapToolScene::modeMapUpdate()
 		if (0 <= idx && idx < TILEX &&
 			0 <= idy && idy < TILEY)
 		{
+			//쉬프트 좌클릭 하면 이중 올리기
+			if (KEYMANAGER->isStayKeyDown(VK_LSHIFT))
+			{
+				switch (_sprite)
+				{
+				case SPRITE::TILESAMPLE:
+					switch (_selectKind)
+					{
+					case mapToolScene::KIND_NONE:
+						//일반 스프라이트처럼
+						_map->getTile(idx, idy)->changeImage2(_spriteImageKey);
+						_map->getTile(idx, idy)->setFrameX2(_selectIdX);
+						_map->getTile(idx, idy)->setFrameY2(_selectIdY);
+						break;
+					}
+					break;
+				case SPRITE::END:
+					break;
+				default:
+					_map->getTile(idx, idy)->changeImage2(_spriteImageKey);
+					_map->getTile(idx, idy)->setFrameX2(_selectIdX);
+					_map->getTile(idx, idy)->setFrameY2(_selectIdY);
+					break;
+				}
+
+				return;
+			}
+
 			switch (_sprite)
 			{
 			case SPRITE::TILESAMPLE:
@@ -531,6 +559,8 @@ void mapToolScene::modeMapUpdate()
 				break;
 			}
 		}
+
+		return;
 	}
 
 	//우클릭
@@ -539,11 +569,23 @@ void mapToolScene::modeMapUpdate()
 		if (0 <= idx && idx < TILEX &&
 			0 <= idy && idy < TILEY)
 		{
+			//쉬프트 우클릭 하면 이중 정보 지움
+			if (KEYMANAGER->isStayKeyDown(VK_LSHIFT))
+			{
+				_map->getTile(idx, idy)->changeImage2("");
+				_map->getTile(idx, idy)->setFrameX2(0);
+				_map->getTile(idx, idy)->setFrameY2(0);
+
+				return;
+			}
+
 			if (_map->getTile(idx, idy)->getPObj() != NULL)
 			{
 				_map->getTile(idx, idy)->getPObj()->setDestroy();
 				_map->getTile(idx, idy)->setPObj(NULL);
 			}
 		}
+
+		return;
 	}
 }
