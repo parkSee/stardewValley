@@ -7,13 +7,14 @@
 class tileMap : public gameObject		//게임오브젝트 상속받았당 수누야
 {
 private:
-	//enum KIND
+	//struct tagTileSavePast
 	//{
-	//	KIND_TERRAIN,
-	//	KIND_OBJECT,
-	//	KIND_OBJECT_ERASER
+	//	int idX, idY;
+	//	TERRAIN::Enum terrain;
+	//
+	//	char imageKey[64];
+	//	int frameX, frameY;
 	//};
-
 	struct tagTileSave
 	{
 		int idX, idY;
@@ -21,6 +22,9 @@ private:
 
 		char imageKey[64];
 		int frameX, frameY;
+
+		char imageKey2[64];
+		int frameX2, frameY2;
 	};
 	struct tagObjectSave
 	{
@@ -36,12 +40,8 @@ private:
 	};
 	//------------------------------------------------
 
+	//타일 포인터 이중배열
 	mapToolTile* _pTile[TILEX][TILEY];
-
-	////맵툴용
-	//int _selectIdX, _selectIdY;
-	//KIND _kind;
-	//RECT _rc1, _rc2, _rc3;
 
 public:
 	HRESULT init();
@@ -51,6 +51,7 @@ public:
 
 	void mapSave(string fileName);
 	void mapLoad(string fileName);
+	//void mapLoadPast(string fileName);
 	void objectSave(string fileName);
 	void objectLoad(string fileName);
 
@@ -60,9 +61,6 @@ public:
 	int getHeuristic(int idX1, int idY1, int idX2, int idY2, bool eightDirection);
 	vector<mapToolTile*> getShortestAStar(int startIdX, int startIdY, int endIdX, int endIdY, bool eightDirection);
 
-
-	//inline void setSelectIdX(int x) { _selectIdX = x; }
-	//inline void setSelectIdY(int y) { _selectIdY = y; }
 
 	inline bool isInRange(int indexX, int indexY)
 	{
