@@ -11,4 +11,6 @@ void loadingScene::dongjin()
 	_loading->loadFrameImage("seed", "resource/시험용파일/식물1.bmp", 112, 21, 7, 1, true, RGB(255, 0, 255));
 	_loading->loadFrameImage("grass", "resource/시험용파일/풀임.bmp", 64, 64, 1, 1, true, RGB(255, 0, 255));
 
+	_loading->loadImage("양파", "resource/시험용파일/양파.bmp", 56, 56, true);
+
 }

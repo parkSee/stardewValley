@@ -50,7 +50,10 @@ HRESULT seed::init(string name, string imageKey, tagFloat pos)
 	//if (((land*)TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->getPObj())->getWet() == true)
 	//{
 	 _growNum++;
-	 _isRight == true;
+	 if (_growNum == _image->getMaxFrameX())
+	 {
+		 _isRight == true;
+	 }
 	//}
 
  }
