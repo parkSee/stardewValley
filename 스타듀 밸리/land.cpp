@@ -8,10 +8,11 @@ HRESULT land::init(tagFloat pos)
 	motherObject::init("land", "land", pos, pivot::LEFT_TOP);
 
 	_isWet = false;
+	_isMovable = true;
 	
 	//land* _land = new land;
 	//_land->init(pos);
-	_object = OBJECT::FARMLAND;
+	_objEnum = OBJECT::FARMLAND;
 	TOWNWORLD->addObject(objectType::OBJ, this);
 	//자신을 타일에게 알린다
 	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
