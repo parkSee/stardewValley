@@ -42,6 +42,7 @@ void player::lbuttonClick(tagMessage msg)
 			inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
 			sed->setDestroy();
 			inven->addItem(tagMessage(ADDITEM, 0.0f, 0, 0, vector<gameObject*>(), sed->_name, "∏¿¿÷¥Ÿ"));
+			return;
 		}
 	}
 
