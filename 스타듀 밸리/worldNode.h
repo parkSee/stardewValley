@@ -49,6 +49,7 @@ namespace TERRAIN
 		DIRT,
 		GRASS,
 		WATER,
+		UNMOVABLE_DIRT,
 		END
 	};
 }

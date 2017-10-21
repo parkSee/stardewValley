@@ -242,7 +242,6 @@ void player::update()
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_eatingRc = RectMakeCenter(_pos.x, _pos.y-80, 20,20);
 	
-
 	_shadow->_pos.x = this->_pos.x;
 	_shadow->_pos.y = this->_pos.y -20;
 
@@ -299,7 +298,7 @@ void player::render()
 		sprintf(str, "%d,%d", _indexX, _indexY);
 		TextOut(getMemDC(), 10, 300, str, strlen(str));
 
-		sprintf_s(str, "%f,%f",_pos.x,_pos.y);
+		sprintf_s(str, "%f,%f",_myItem.x, _myItem.y);
 		TextOut(getMemDC(), 10, 400, str, strlen(str));
 	}
 	_shadow->render();

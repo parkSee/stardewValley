@@ -301,15 +301,13 @@ void player::stateUpdate(playerState::Enum state)
 
 		_eatingRc = RectMakeCenter(_pos.x, _pos.y - 80, 20, 20);
 
-		RECT temp;
 		_eatCenter.x = _eatingRc.left + (_eatingRc.right - _eatingRc.left) / 2;
 		_eatCenter.y = _eatingRc.bottom;
 
 		if (getDistance(_myItem.x, _myItem.y, _eatCenter.x, _eatCenter.y)<60)
 		{
-		
 			_myItem.img = NULL;
-
+			
 		}
 
 		break;

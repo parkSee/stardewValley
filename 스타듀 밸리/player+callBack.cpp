@@ -28,23 +28,16 @@ void player::eating(tagMessage msg)
 
 void player::lbuttonClick(tagMessage msg)
 {
+	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+	
 	if (_state == AXE_DOWN || _state == AXE_LEFT || _state == AXE_UP || _state == AXE_RIGHT || _state == HOE_DOWN || _state == HOE_LEFT || _state == HOE_UP ||
 		_state== HOE_RIGHT || _state == SICKLE_DOWN || _state == SICKLE_LEFT || _state == SICKLE_UP || _state == SICKLE_RIGHT || _state == PIXHOE_DOWN || 
 		_state == PIXHOE_LEFT || _state == PIXHOE_UP || _state == PIXHOE_RIGHT || _state == WATER_DOWN || _state == WATER_LEFT || _state == WATER_UP || 
 		_state == WATER_RIGHT)return;
 
+	if (PtInRect(&inven->_subInventory.rc, _ptMouse))return;
 
-	if (tile1->getPObj())
-	{
-		seed* sed = (seed*)tile1->getPObj();
-		if (sed->_isRight)
-		{
-			inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
-			sed->setDestroy();
-			inven->addItem(tagMessage(ADDITEM, 0.0f, 0, 0, vector<gameObject*>(), sed->_name, "¸ÀÀÖ´Ù"));
-			return;
-		}
-	}
+
 
 
 	eProgressBar* energe = (eProgressBar*)TOWNWORLD->findObject(objectType::INTERFACE, "energyBar");
@@ -62,6 +55,7 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
+					return;
 				}
 				
 				else if (!tile1->getPObj())
@@ -69,6 +63,7 @@ void player::lbuttonClick(tagMessage msg)
 					 if (tile2->getPObj())
 					{
 						 tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
+						 return;
 					}
 				}
 				break;
@@ -78,12 +73,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
+						return;
 					}
 				}
 				break;
@@ -93,12 +90,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
+						return;
 					}
 				}
 				break;
@@ -107,12 +106,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("axeAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("axeAttack"));
+						return;
 					}
 				}
 				break;
@@ -130,12 +131,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
+						return;
 					}
 				}
 				break;
@@ -144,12 +147,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
+						return;
 					}
 				}
 				break;
@@ -158,12 +163,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
+						return;
 					}
 				}
 				break;
@@ -172,6 +179,7 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
+					return;
 
 				}
 				else if (!tile1->getPObj())
@@ -179,6 +187,7 @@ void player::lbuttonClick(tagMessage msg)
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
+						return;
 					}
 				}
 				break;
@@ -193,12 +202,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
+						return;
 					}
 				}
 
@@ -208,12 +219,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
+						return;
 					}
 				}
 				break;
@@ -222,12 +235,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
+						return;
 					}
 				}
 				break;
@@ -236,12 +251,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("sickleAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("sickleAttack"));
+						return;
 					}
 				}
 				break;
@@ -258,12 +275,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+						return;
 					}
 				}
 				break;
@@ -272,12 +291,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+						return;
 					}
 				}
 				break;
@@ -286,12 +307,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+						return;
 					}
 				}
 				break;
@@ -300,12 +323,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("pixHoeAttack"));
+						return;
 					}
 				}
 				break;
@@ -321,12 +346,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("watering"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("watering"));
+						return;
 					}
 				}
 				break;
@@ -335,12 +362,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("watering"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("watering"));
+						return;
 					}
 				}
 				break;
@@ -349,12 +378,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("watering"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("watering"));
+						return;
 					}
 				}
 				break;
@@ -363,12 +394,14 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("watering"));
+					return;
 				}
 				else if (!tile1->getPObj())
 				{
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("watering"));
+						return;
 					}
 				}
 				break;
@@ -376,7 +409,16 @@ void player::lbuttonClick(tagMessage msg)
 		}
 	}
 
-
+	if (tile1->getPObj())
+	{
+		seed* sed = (seed*)tile1->getPObj();
+		if (sed->_isRight)
+		{
+			sed->setDestroy();
+			inven->addItem(tagMessage(ADDITEM, 0.0f, 0, 0, vector<gameObject*>(), sed->_name, sed->_explain));
+			//return;
+		}
+	}
 
 }
 
