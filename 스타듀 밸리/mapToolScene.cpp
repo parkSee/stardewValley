@@ -33,6 +33,17 @@ HRESULT mapToolScene::init()
 	//타일샘플 전용 선택버튼 구조체 세팅
 	setTileSampleSelect();
 
+	//버튼들
+	_moveFalse.init();
+	_moveFalse.str = "moveFalse";
+	_moveFalse.rc = RectMake(WINSIZEX - 110, 400, 100, 20);
+	_moveFalse.bTrue = false;
+
+	_moveTrue.init();
+	_moveTrue.str = "moveTrue";
+	_moveTrue.rc = RectMake(_moveFalse.rc.left - 110, _moveFalse.rc.top, 100, 20);
+	_moveTrue.bTrue = true;
+
 	return S_OK;
 }
 void mapToolScene::release()
@@ -230,6 +241,12 @@ void mapToolScene::render()
 				break;
 			}
 		}
+
+		////기타 버튼들 표시
+		//Rectangle(getMemDC(), _moveTrue.rc.left, _moveTrue.rc.top, _moveTrue.rc.right, _moveTrue.rc.bottom);
+		//TextOut(getMemDC(), _moveTrue.rc.left + 2, _moveTrue.rc.top + 2, _moveTrue.str.c_str(), strlen(_moveTrue.str.c_str()));
+		//Rectangle(getMemDC(), _moveFalse.rc.left, _moveFalse.rc.top, _moveFalse.rc.right, _moveFalse.rc.bottom);
+		//TextOut(getMemDC(), _moveFalse.rc.left + 2, _moveFalse.rc.top + 2, _moveFalse.str.c_str(), strlen(_moveFalse.str.c_str()));
 	}
 	break;
 	}		//맵-스프라이트 모드 이넘 스위치문 끝
@@ -415,7 +432,7 @@ void mapToolScene::leftClickInSprite()
 
 void mapToolScene::setTileSampleSelect()
 {
-	tagTileSampleRect tag;
+	tagMyButton tag;
 
 	tag.init();
 	tag.rc = RectMake(TILESIZE * 0, TILESIZE * 0, TILESIZE * 3, TILESIZE * 6);
@@ -457,6 +474,13 @@ void mapToolScene::setTileSampleSelect()
 	tag.kind = KIND_OBJECT;
 	tag.object = OBJECT::FARMLAND;
 	tag.str = "farmland";
+	_vtileSampleSelect.push_back(tag);
+
+	tag.init();
+	tag.rc = RectMake(TILESIZE * 24, TILESIZE * 0, TILESIZE * 1, TILESIZE * 1);
+	tag.kind = KIND_TERRAIN;
+	tag.terrain = TERRAIN::UNMOVABLE_DIRT;
+	tag.str = "unmovableDirt";
 	_vtileSampleSelect.push_back(tag);
 }
 

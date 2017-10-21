@@ -1,18 +1,22 @@
 #include "stdafx.h"
 #include "stone.h"
+#include "mapToolTile.h"
 
 HRESULT stone::init(tagFloat pos)
 {
-	motherObject::init("stone", "tileSprite", pos, pivot::LEFT_TOP);
+	motherObject::init("stone", "stone", pos, pivot::LEFT_TOP);
 
 
 	_objEnum = OBJECT::STONE;
 	TOWNWORLD->addObject(objectType::OBJ, this);
-
-	EFFECTMANAGER->addEffect("stoneDie", "µ¹.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
 	
+	
+	
+	_isMovable = false;
 
-	this->addCallback("pickAttack", [this](tagMessage msg)
+
+	this->addCallback("axeAttack", [this](tagMessage msg)
 	{
 		this->stoneAttack();
 	});
@@ -21,15 +25,22 @@ HRESULT stone::init(tagFloat pos)
 }
 void stone::release()
 {
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(NULL);
+
 	motherObject::release();
 }
 void stone::update()
 {
 	motherObject::update();
+
+	if (KEYMANAGER->isOnceKeyDown('B'))
+	{
+		EFFECTMANAGER->play("stoneDie", _pos.x + 30, _pos.y + 100);
+	}
 }
 void stone::stoneAttack()
 {
-	EFFECTMANAGER->play("stoneDie", _pos.x, _pos.y);
+	EFFECTMANAGER->play("stoneDie", _pos.x + 30, _pos.y);
 
 	this->setDestroy();
 
@@ -39,5 +50,8 @@ void stone::stoneAttack()
 }
 void stone::render()
 {
-	motherObject::render();
+
+	RECT rc = CAMERAMANAGER->getRenderRc();
+
+	_image->frameScaleRender(getMemDC(), -rc.left + _pos.x, -rc.top + _pos.y, 0, 0, 65, 65);
 }

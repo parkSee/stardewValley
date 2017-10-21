@@ -56,6 +56,11 @@ HRESULT mapToolTile::init(int idX, int idY, TERRAIN::Enum terrain)
 		_frameX = 8; _frameY = 13;
 		_isMovable = false;
 		break;
+	case TERRAIN::UNMOVABLE_DIRT:
+		changeImage("outdoorsSpring");
+		_frameX = 3; _frameY = 6;
+		_isMovable = false;
+		break;
 	case TERRAIN::END:
 		break;
 	}
