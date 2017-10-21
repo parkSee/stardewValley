@@ -122,9 +122,7 @@ void inventory::changeItem()
 	}
 
 
-
 }
-
 
 
 void inventory::addItem(tagMessage msg)
