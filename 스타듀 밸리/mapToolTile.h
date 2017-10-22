@@ -26,11 +26,18 @@ private:
 	int				_frameX2, _frameY2;
 	bool			_isMovable2;
 
+	//삼중으로 올릴 이미지 - 지형 렌더, 월드 렌더 다음에 렌더할거
+	image*			_image3;
+	string			_imageKey3;
+	int				_frameX3, _frameY3;
+
 public:
 	HRESULT init(int idX, int idY, TERRAIN::Enum terrain = TERRAIN::NONE);
 	void release();
 	void update();		//타일은 업데이트 돌리지 말자
 	void render();
+
+	void renderTile3();
 
 
 	inline int getIndexX() { return _indexX; }
@@ -42,10 +49,14 @@ public:
 	inline string getImageKey() { return _imageKey; }
 	inline image* getImage2() { return _image2; }
 	inline string getImageKey2() { return _imageKey2; }
+	inline image* getImage3() { return _image3; }
+	inline string getImageKey3() { return _imageKey3; }
 	inline int getFrameX() { return _frameX; }
 	inline int getFrameY() { return _frameY; }
 	inline int getFrameX2() { return _frameX2; }
 	inline int getFrameY2() { return _frameY2; }
+	inline int getFrameX3() { return _frameX3; }
+	inline int getFrameY3() { return _frameY3; }
 
 	inline void setIndexX(int x) { _indexX = x; }
 	inline void setIndexY(int y) { _indexY = y; }
@@ -56,10 +67,14 @@ public:
 	inline void setImageKey(string str) { _imageKey = str; }		//밑의 changeImage 써라
 	inline void setImage2(image* image) { _image2 = image; }		//이거 두개 쓰지 말고
 	inline void setImageKey2(string str) { _imageKey2 = str; }		//밑의 changeImage2 써라
+	inline void setImage3(image* image) { _image3 = image; }			//이거 두개 쓰지 말고
+	inline void setImageKey3(string str) { _imageKey3 = str; }		//밑의 changeImage 써라
 	inline void setFrameX(int x) { _frameX = x; }
 	inline void setFrameY(int y) { _frameY = y; }
 	inline void setFrameX2(int x) { _frameX2 = x; }
 	inline void setFrameY2(int y) { _frameY2 = y; }
+	inline void setFrameX3(int x) { _frameX3 = x; }
+	inline void setFrameY3(int y) { _frameY3 = y; }
 
 	inline void changeImage(string imageKey)
 	{
@@ -70,6 +85,11 @@ public:
 	{
 		_imageKey2 = imageKey;
 		_image2 = IMAGEMANAGER->findImage(imageKey);
+	}
+	inline void changeImage3(string imageKey)
+	{
+		_imageKey3 = imageKey;
+		_image3 = IMAGEMANAGER->findImage(imageKey);
 	}
 
 	//에이스타

@@ -105,6 +105,9 @@ void townWorld::render()
 		}
 	}
 
+	//UI 보다만 먼저, 오브젝트들보다 나중에 렌더할 타일
+	_tileMap->renderTile3();
+
 	//z오더를 다해 준후에 UI를 그리자
 	for (int i = 0; i < _totalObject[WEATHER].size(); ++i)
 	{

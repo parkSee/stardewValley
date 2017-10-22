@@ -4,7 +4,10 @@
 
 HRESULT mapToolScene::init()
 {
+	ShowCursor(true);
+
 	_map = new tileMap;
+	TOWNWORLD->setMapAddress(_map);
 	_map->init();
 	_map->mapLoad("mapSave.map");
 
@@ -56,10 +59,13 @@ void mapToolScene::update()
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
 	{
 		_map->mapSave("tempMapSave.map");
-		_map->mapSaveNew("tempMapSaveNew.map");
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_F2))
 	{
+		if (KEYMANAGER->isStayKeyDown(VK_LSHIFT))
+		{
+			return;
+		}
 		_map->mapLoad("tempMapSave.map");
 
 		////로드하고나서 지형 종류에 따라서 프레임 맞춰준다
@@ -156,6 +162,7 @@ void mapToolScene::render()
 		}
 
 		TOWNWORLD->render();
+		_map->renderTile3();
 		break;
 	case mapToolScene::MODE_SPRITE:
 	{
@@ -513,6 +520,34 @@ void mapToolScene::modeMapUpdate()
 			//쉬프트 좌클릭 하면 이중 올리기
 			if (KEYMANAGER->isStayKeyDown(VK_LSHIFT))
 			{
+				//컨트롤 쉬프트 좌클릭 하면 삼중 올리기
+				if (KEYMANAGER->isStayKeyDown(VK_LCONTROL))
+				{
+					switch (_sprite)
+					{
+					case SPRITE::TILESAMPLE:
+						switch (_selectKind)
+						{
+						case mapToolScene::KIND_NONE:
+							//일반 스프라이트처럼
+							_map->getTile(idx, idy)->changeImage3(_spriteImageKey);
+							_map->getTile(idx, idy)->setFrameX3(_selectIdX);
+							_map->getTile(idx, idy)->setFrameY3(_selectIdY);
+							break;
+						}
+						break;
+					case SPRITE::END:
+						break;
+					default:
+						_map->getTile(idx, idy)->changeImage3(_spriteImageKey);
+						_map->getTile(idx, idy)->setFrameX3(_selectIdX);
+						_map->getTile(idx, idy)->setFrameY3(_selectIdY);
+						break;
+					}
+
+					return;
+				}
+
 				switch (_sprite)
 				{
 				case SPRITE::TILESAMPLE:
@@ -623,6 +658,16 @@ void mapToolScene::modeMapUpdate()
 			//쉬프트 우클릭 하면 이중 정보 지움
 			if (KEYMANAGER->isStayKeyDown(VK_LSHIFT))
 			{
+				//컨트롤 쉬프트 우클릭 하면 삼중 정보 지움
+				if (KEYMANAGER->isStayKeyDown(VK_LCONTROL))
+				{
+					_map->getTile(idx, idy)->changeImage3("");
+					_map->getTile(idx, idy)->setFrameX3(0);
+					_map->getTile(idx, idy)->setFrameY3(0);
+
+					return;
+				}
+
 				_map->getTile(idx, idy)->changeImage2("");
 				_map->getTile(idx, idy)->setFrameX2(0);
 				_map->getTile(idx, idy)->setFrameY2(0);
