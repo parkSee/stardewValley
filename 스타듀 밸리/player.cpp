@@ -350,7 +350,7 @@ void player::playerRun()
 			
 					else if (tile1->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						if (!tile1->getIsMovable())
+						if (!tile1->getPObj()->getIsMovable())
 						{
 
 						}
@@ -377,7 +377,7 @@ void player::playerRun()
 			
 					else if (tile2->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						if (!tile2->getIsMovable())
+						if (!tile2->getPObj()->getIsMovable())
 						{
 
 						}
@@ -425,7 +425,7 @@ void player::playerRun()
 					else if (tile1->getPObj())					//오브젝트다 있으면
 					{
 
-						if (!tile1->getIsMovable())
+						if (!tile1->getPObj()->getIsMovable())
 						{
 
 						}
@@ -451,7 +451,7 @@ void player::playerRun()
 					}
 					else if (tile2->getPObj())					//오브젝트다 있으면
 					{
-						if (!tile1->getIsMovable())
+						if (!tile2->getPObj()->getIsMovable())
 						{
 
 						}
@@ -501,7 +501,7 @@ void player::playerRun()
 
 					else if (tile1->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						if (!tile1->getIsMovable())							//그게 갈수없는 타일인지
+						if (!tile1->getPObj()->getIsMovable())							//그게 갈수없는 타일인지
 						{
 
 						}
@@ -528,7 +528,7 @@ void player::playerRun()
 
 					else if (tile2->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						if (!tile2->getIsMovable())
+						if (!tile2->getPObj()->getIsMovable())
 						{
 
 						}
@@ -572,7 +572,7 @@ void player::playerRun()
 					}
 					else if (tile1->getPObj())
 					{
-						if (!tile1->getIsMovable())							//그게 갈수없는 타일인지
+						if (!tile1->getPObj()->getIsMovable())							//그게 갈수없는 타일인지
 						{
 
 						}
