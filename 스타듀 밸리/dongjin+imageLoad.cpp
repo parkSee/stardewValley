@@ -16,6 +16,7 @@ void loadingScene::dongjin()
 	_loading->loadFrameImage("stone", "resource/시험용파일/돌.bmp", 60, 60, 1, 1, true, RGB(255, 0, 255));
 
 	_loading->loadImage("풀", "resource/item/풀.bmp", 56, 56, RGB(255, 0, 255));
+	_loading->loadImage("돌", "resource/item/돌.bmp", 56, 56, RGB(255, 0, 255));
 
 	_loading->loadFrameImage("seed_seed", "resource/item/씨.bmp", 56, 56, 1, 1, true, RGB(255, 0, 255));
 
