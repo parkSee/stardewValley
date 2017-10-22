@@ -16,7 +16,7 @@ HRESULT stone::init(tagFloat pos)
 	_isMovable = false;
 
 
-	this->addCallback("axeAttack", [this](tagMessage msg)
+	this->addCallback("pixHoeAttack", [this](tagMessage msg)
 	{
 		this->stoneAttack();
 	});
@@ -33,10 +33,7 @@ void stone::update()
 {
 	motherObject::update();
 
-	if (KEYMANAGER->isOnceKeyDown('B'))
-	{
-		EFFECTMANAGER->play("stoneDie", _pos.x + 30, _pos.y + 100);
-	}
+	
 }
 void stone::stoneAttack()
 {
