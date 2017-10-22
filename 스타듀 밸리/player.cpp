@@ -279,7 +279,7 @@ void player::render()
 			_state == STAND_TAKE_BACK || _state == TAKE_UP || _state == TAKE_LEFT || _state == TAKE_RIGHT || _state == TAKE_DOWN ||
 			_state == EATING)
 		{
-			_myItem.img->render(getMemDC(), _myItem.x - (_myItem.img->getWidth()/2-10) - rc.left, _myItem.y - (_myItem.img->getHeight()/2 -40) - rc.top);								//아이템 렌더
+			_myItem.img->render(getMemDC(), _myItem.x - (_myItem.img->getWidth()/2-10) - rc.left, _myItem.y - (_myItem.img->getHeight()/2 -20) - rc.top);								//아이템 렌더
 		}
 	}
 	
