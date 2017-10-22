@@ -54,7 +54,7 @@ void grass::grassAttack()
 		this->setDestroy();
 
 		dropItem* d = new dropItem;
-		d->init("Ǯ", "asdadadad", tagFloat(_pos.x + 30, _pos.y));
+		d->init("풀", "asdadadad", tagFloat(_pos.x + 30, _pos.y));
 		TOWNWORLD->addObject(objectType::ITEM, d);
 	
 }

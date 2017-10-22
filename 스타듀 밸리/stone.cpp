@@ -41,6 +41,9 @@ void stone::stoneAttack()
 
 	this->setDestroy();
 
+	dropItem* e = new dropItem;
+	e->init("µ¹", "asdadadad", tagFloat(_pos.x + 30, _pos.y));
+	TOWNWORLD->addObject(objectType::ITEM, e);
 
 	//dropItem* drop = new dropItem;
 	//drop->init("stone", "stone");
