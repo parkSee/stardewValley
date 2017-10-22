@@ -5,7 +5,7 @@ class land  : public motherObject
 {
 private:
 	bool _isWet;
-
+	RECT _rc;
 public:
 	land() {}
 	~land() {}

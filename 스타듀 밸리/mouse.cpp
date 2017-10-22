@@ -134,9 +134,9 @@ void mouse::mouseControll()
 	int indexX = (_ptMouse.x + rc.left) / TILESIZE;
 	int indexY = (_ptMouse.y + rc.top) / TILESIZE;
 
-	if (ply->getIndexX() ==14 && ply->getIndexY() == 16)
+	if (ply->getIndexX() ==24 && ply->getIndexY() == 14)
 	{
-		if ((indexX == 14 && indexY == 15) || (indexX == 14 && indexY == 14))
+		if ((indexX == 24 && indexY == 13) || (indexX == 24 && indexY == 12))
 		{
 			_image = IMAGEMANAGER->findImage("selectMouse");
 			_animation = _selectAnimation;
@@ -155,13 +155,14 @@ void mouse::mouseControll()
 			//집들어가는거
 			caroline* carol = (caroline*)TOWNWORLD->findObject(objectType::HUMAN, "caroline");
 			RECT rc = CAMERAMANAGER->getRenderRc();
-			if (ply->getIndexX() == 14 && ply->getIndexY() == 16)
+
+			if (ply->getIndexX() == 24 && ply->getIndexY() == 14)
 			{
-				if ((indexX == 14 && indexY == 15) || (indexX == 14 && indexY == 14))
+				if ((indexX == 24 && indexY == 13) || (indexX == 24 && indexY == 12))
 				{
-					//59,17
-					ply->_pos.x = (TILESIZE * 59) + TILESIZE / 2;
-					ply->_pos.y = (TILESIZE * 17) + TILESIZE / 2;
+					
+					ply->_pos.x = (TILESIZE * 8) + TILESIZE / 2;
+					ply->_pos.y = (TILESIZE * 95) + TILESIZE / 2;
 					_image = IMAGEMANAGER->findImage("mouse");
 					_animation = _normalAnimation;
 				}
@@ -187,6 +188,12 @@ void mouse::mouseControll()
 		}
 	}
 
+	if (ply->getIndexX() == 8 && ply->getIndexY() == 96)
+	{
+		ply->_pos.x = (TILESIZE * 24) + TILESIZE / 2;
+		ply->_pos.y = (TILESIZE * 14) + TILESIZE / 2;
+	}
+	
 	//애니메이션이 셀렉트 에니메이션 상태라면 
 	if (_animation == _selectAnimation)
 	{

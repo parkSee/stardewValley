@@ -61,4 +61,18 @@ void worldTime::story()
 			});
 		});
 	}
+
+
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+		pierre* pirre = (pierre*)TOWNWORLD->findObject(objectType::HUMAN, "pierre");
+		RECT rc = CAMERAMANAGER->getRenderRc();
+		if (PtInRect(&pirre->getRect(), PointMake(_ptMouse.x + rc.left, _ptMouse.y + rc.top)))
+		{
+			UI* ui = (UI*)TOWNWORLD->findObject(objectType::INTERFACE, "UI");
+			string str = "날씨가 참 좋은 것 같아. 그렇게 생각하니 너도?? 그리고 밤에는 절대 밖에 나오지 말게 . . . 그랬다가는 무서운  일이 생길 걸세.";
+			ui->sendMessage(tagMessage(CONVERSATIONUI, 0, PIERRE, 0, vector<gameObject*>(), str));
+		}
+	}
+	
 }

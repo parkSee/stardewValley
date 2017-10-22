@@ -4,7 +4,7 @@ class seed : public motherObject
 {
 private:
 	int _growNum;
-
+	RECT _rc;
 
 public:
 	seed() {}
