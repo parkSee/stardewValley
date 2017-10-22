@@ -14,7 +14,8 @@ void townScene::dongjinInit()
 	temp->init(tagFloat(TOWNWORLD->getTile(4, 10)->getRect().left, TOWNWORLD->getTile(4, 10)->getRect().top));
 
 	EFFECTMANAGER->addEffect("die", "resource/effect/³ª¹«.bmp", 20700, 370, 450, 370, 1.0f, 0.4f, 1000);
-
+	EFFECTMANAGER->addEffect("bottom_die", "resource/effect/³ª¹«¹Ø.bmp", 5301, 231, 279, 231, 1.0f, 1.0f, 1000);
+		
 	land* stom = new land;
 	stom->init(tagFloat(TOWNWORLD->getTile(4, 2)->getRect().left, TOWNWORLD->getTile(4, 2)->getRect().top));
 

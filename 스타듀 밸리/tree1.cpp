@@ -60,8 +60,7 @@ HRESULT tree1_bottom::init(tagFloat pos)
 	_objEnum = OBJECT::TREE1_BOTTOM;
 	TOWNWORLD->addObject(objectType::OBJ, this);
 	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
-	//EFFECTMANAGER->addEffect("die", "나무.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
-	//EFFECTMANAGER->addEffect("attack", "나무.bmp", 20700, 370, 450, 370, 1.0f, 1.0f, 1.0f);
+	
 
 	this->addCallback("axeAttack", [this](tagMessage msg)
 	{
@@ -88,9 +87,18 @@ void tree1_bottom::update()
 	}
 	if (_hp <= 0)
 	{
-		EFFECTMANAGER->play("die", _pos.x, _pos.y);
+		EFFECTMANAGER->play("bottom_die", _pos.x + 30, _pos.y);
+
+		
+
 		this->setDestroy();
 
+		for (int i = 0; i < RND->getFromIntTo(1, 3); i++)
+		{
+			dropItem* c = new dropItem;
+			c->init("나무", "asdadadad", tagFloat(_pos.x + 30, _pos.y));
+			TOWNWORLD->addObject(objectType::ITEM, c);
+		}
 		//dropItem* drop = new dropItem;
 		//drop->init("tree_bottom", "tree");
 
@@ -164,7 +172,7 @@ void tree1_top::update()
 	{
 		_count += TIMEMANAGER->getElapsedTime();
 
-		if (_count >= 2.3f)
+		if (_count >= 2.8f)
 		{
 			for (int i = 0; i < RND->getFromIntTo(2, 10); i++)
 			{
