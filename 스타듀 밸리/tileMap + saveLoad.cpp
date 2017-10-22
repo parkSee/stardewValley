@@ -70,34 +70,76 @@ void tileMap::mapLoad(string fileName)
 	CloseHandle(file);
 }
 
-//void tileMap::mapLoadPast(string fileName)
-//{
-//	HANDLE file;
-//	DWORD read;
-//
-//	file = CreateFile(fileName.c_str(), GENERIC_READ, 0, NULL,
-//		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-//
-//	tagTileSavePast tileSavePast;
-//
-//	while (true)
-//	{
-//		memset(&tileSavePast, 0, sizeof(tileSavePast));
-//		ReadFile(file, &tileSavePast, sizeof(tileSavePast), &read, NULL);
-//		if (read != sizeof(tileSavePast)) break;
-//
-//		if (0 <= tileSavePast.idX && tileSavePast.idX < TILEX &&
-//			0 <= tileSavePast.idY && tileSavePast.idY < TILEY)
-//		{
-//			_pTile[tileSavePast.idX][tileSavePast.idY]->init(tileSavePast.idX, tileSavePast.idY, tileSavePast.terrain);
-//			_pTile[tileSavePast.idX][tileSavePast.idY]->changeImage(tileSavePast.imageKey);
-//			_pTile[tileSavePast.idX][tileSavePast.idY]->setFrameX(tileSavePast.frameX);
-//			_pTile[tileSavePast.idX][tileSavePast.idY]->setFrameY(tileSavePast.frameY);
-//		}
-//	}
-//
-//	CloseHandle(file);
-//}
+void tileMap::mapSaveNew(string fileName)
+{
+	HANDLE file;
+	DWORD write;
+
+	file = CreateFile(fileName.c_str(), GENERIC_WRITE, 0, NULL,
+		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	tagTileSaveNew tileSaveNew;
+
+	for (int j = 0; j < TILEY; ++j)
+	{
+		for (int i = 0; i < TILEX; ++i)
+		{
+			memset(&tileSaveNew, 0, sizeof(tileSaveNew));
+
+			tileSaveNew.idX = i;
+			tileSaveNew.idY = j;
+			tileSaveNew.terrain = _pTile[i][j]->getTerrain();
+
+			sprintf(tileSaveNew.imageKey, _pTile[i][j]->getImageKey().c_str());
+			tileSaveNew.frameX = _pTile[i][j]->getFrameX();
+			tileSaveNew.frameY = _pTile[i][j]->getFrameY();
+			tileSaveNew.isMovable = _pTile[i][j]->getIsMovable1();
+
+			sprintf(tileSaveNew.imageKey2, _pTile[i][j]->getImageKey2().c_str());
+			tileSaveNew.frameX2 = _pTile[i][j]->getFrameX2();
+			tileSaveNew.frameY2 = _pTile[i][j]->getFrameY2();
+			tileSaveNew.isMovable2 = _pTile[i][j]->getIsMovable2();
+
+			WriteFile(file, &tileSaveNew, sizeof(tileSaveNew), &write, NULL);
+		}
+	}
+
+	CloseHandle(file);
+}
+
+void tileMap::mapLoadNew(string fileName)
+{
+	HANDLE file;
+	DWORD read;
+
+	file = CreateFile(fileName.c_str(), GENERIC_READ, 0, NULL,
+		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	tagTileSaveNew tileSaveNew;
+
+	while (true)
+	{
+		memset(&tileSaveNew, 0, sizeof(tileSaveNew));
+		ReadFile(file, &tileSaveNew, sizeof(tileSaveNew), &read, NULL);
+		if (read != sizeof(tileSaveNew)) break;
+
+		if (0 <= tileSaveNew.idX && tileSaveNew.idX < TILEX &&
+			0 <= tileSaveNew.idY && tileSaveNew.idY < TILEY)
+		{
+			_pTile[tileSaveNew.idX][tileSaveNew.idY]->init(tileSaveNew.idX, tileSaveNew.idY, tileSaveNew.terrain);
+			_pTile[tileSaveNew.idX][tileSaveNew.idY]->changeImage(tileSaveNew.imageKey);
+			_pTile[tileSaveNew.idX][tileSaveNew.idY]->setFrameX(tileSaveNew.frameX);
+			_pTile[tileSaveNew.idX][tileSaveNew.idY]->setFrameY(tileSaveNew.frameY);
+			_pTile[tileSaveNew.idX][tileSaveNew.idY]->setIsMovable1(tileSaveNew.isMovable);
+			_pTile[tileSaveNew.idX][tileSaveNew.idY]->changeImage2(tileSaveNew.imageKey2);
+			_pTile[tileSaveNew.idX][tileSaveNew.idY]->setFrameX2(tileSaveNew.frameX2);
+			_pTile[tileSaveNew.idX][tileSaveNew.idY]->setFrameY2(tileSaveNew.frameY2);
+			_pTile[tileSaveNew.idX][tileSaveNew.idY]->setIsMovable2(tileSaveNew.isMovable2);
+		}
+	}
+
+	CloseHandle(file);
+}
 
 //-------------------------------------------------------------
 

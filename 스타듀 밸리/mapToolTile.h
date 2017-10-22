@@ -78,12 +78,14 @@ public:
 		if (_isMovable)
 		{
 			if (_isMovable2) return true;
-			else false;
+			else return false;
 		}
 		else return false;
 	}
 	//혹시 모르니
-	inline void setIsMovable(bool isMovable) { _isMovable = isMovable; }
+	inline bool getIsMovable1() { return _isMovable; }
+	inline bool getIsMovable2() { return _isMovable2; }
+	inline void setIsMovable1(bool isMovable) { _isMovable = isMovable; }
 	inline void setIsMovable2(bool isMovable2) { _isMovable2 = isMovable2; }
 
 
