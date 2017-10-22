@@ -18,21 +18,6 @@ void player::eating(tagMessage msg)
 
 		this->changeState(EATING);
 		
-		_myItem.img = _item->img;
-
-		_myItem.y -= _myItem.jumpPower;
-		_myItem.jumpPower -= _myItem.gravity;
-
-		_eatingRc = RectMakeCenter(_pos.x, _pos.y - 80, 20, 20);
-
-		_eatCenter.x = _eatingRc.left + (_eatingRc.right - _eatingRc.left) / 2;
-		_eatCenter.y = _eatingRc.bottom;
-
-		if (getDistance(_myItem.x, _myItem.y, _eatCenter.x, _eatCenter.y)<60)
-		{
-			_myItem.img = NULL;
-		}
-		
 	}
 
 	
@@ -52,7 +37,6 @@ void player::lbuttonClick(tagMessage msg)
 
 	eProgressBar* energe = (eProgressBar*)TOWNWORLD->findObject(objectType::INTERFACE, "energyBar");
 	energe->sendMessage(tagMessage("consume", 0.0f, 1));
-
 
 	if (_item->type == itemType::TOOL)
 	{
@@ -361,13 +345,17 @@ void player::lbuttonClick(tagMessage msg)
 
 		if (_item->name == "물뿌리개")
 		{
+			land* _land = (land*)TOWNWORLD->findObject(objectType::OBJ, "land");
+
 			switch (_state)
 			{
 			case playerState::STAND: case playerState::DOWN_RUN:
 				this->changeState(WATER_DOWN);
 				if (tile1->getPObj())
 				{
+					exit(0);
 					tile1->getPObj()->sendMessage(tagMessage("watering"));
+					_land->setWet(true);
 					return;
 				}
 				else if (!tile1->getPObj())
@@ -431,7 +419,57 @@ void player::lbuttonClick(tagMessage msg)
 		}
 	}
 
-	if (tile1->getPObj())											//시바 잡초같은 .....잡초잡초잡초 밟아버려
+	if (_item->type == itemType::SEED)
+	{
+		if (_item->name == "당근씨앗")
+		{
+			_myItem.img = _item->img;						//아이템 이미지를 띄우는 
+			if (tile1->getPObj())							//타일위에 오브젝트가 있고
+			{
+				if (tile1->getIsMovable())					//그게 갈수있는 타일이면 ->경작지
+				{
+					switch (_state)
+					{
+					case playerState::STAND_TAKE:						//들고 서있기
+					{
+						seed* _seed = new seed;
+						_seed->init("양파", "seed", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
+						_item->count--;
+					}
+					if (_item->count == 0)
+					{
+						this->changeState(STAND);
+					}
+					break;
+					case playerState::STAND_RIGHT:
+						this->changeState(STAND_TAKE_RIGHT);
+						break;
+					case playerState::STAND_LEFT:
+						this->changeState(STAND_TAKE_LEFT);
+						break;
+					case playerState::STAND_BACK:
+						this->changeState(STAND_TAKE_BACK);
+						break;
+					case playerState::TAKE_RIGHT:						//들고 앞으로 달리기
+						this->changeState(RIGHT_RUN);
+						break;
+					case playerState::TAKE_LEFT:						//들고 왼쪽으로 달리기
+						this->changeState(LEFT_RUN);
+						break;
+					case playerState::TAKE_UP:							//들고 위로 달리기
+						this->changeState(UP_RUN);
+						break;
+					case playerState::TAKE_DOWN:							//들고 아래로 달리기
+						this->changeState(DOWN_RUN);
+						break;
+					}
+				}
+			}
+			
+		}
+	}
+
+	if (tile1->getPObj())											//시바 잡초같은 .....잡초잡초잡초 밟아버려 씨드 뽀아버려시바
 	{
 		seed* sed = (seed*)tile1->getPObj();
 		if (sed->_isRight)
@@ -450,7 +488,37 @@ void player::lbuttonClick(tagMessage msg)
 																										//타운월드 안에 있는 인벤토리에 접근접근
 		_item = inven->getTargetItem();																	//인벤토리 클래스에 있는 getTargetItem의 함수를 데려와 
 																										//아이템 변수에다가 삽입!
-		//_item = inven->findItem(msg.conversation);
+
+		if (_item->type == itemType::TOOL)
+		{
+			switch (_state)
+			{
+			case playerState::STAND_TAKE:						//들고 서있기
+				this->changeState(STAND);
+				break;
+			case playerState::STAND_TAKE_RIGHT:					//들고 오른쪽으로 서있기
+				this->changeState(STAND_RIGHT);
+				break;
+			case playerState::STAND_TAKE_LEFT:					//들고 왼쪽으로 서있기
+				this->changeState(STAND_LEFT);
+				break;
+			case playerState::STAND_TAKE_BACK:					//들고 뒤로 서있기
+				this->changeState(STAND_BACK);
+				break;
+			case playerState::TAKE_RIGHT:						//들고 앞으로 달리기
+				this->changeState(RIGHT_RUN);
+				break;
+			case playerState::TAKE_LEFT:						//들고 왼쪽으로 달리기
+				this->changeState(LEFT_RUN);
+				break;
+			case playerState::TAKE_UP:							//들고 위로 달리기
+				this->changeState(UP_RUN);
+				break;
+			case playerState::TAKE_DOWN:							//들고 아래로 달리기
+				this->changeState(DOWN_RUN);
+				break;
+			}
+		}
 
 		if (_item->type == itemType::SEED || _item->type == itemType::FOOD)
 		{
@@ -481,37 +549,6 @@ void player::lbuttonClick(tagMessage msg)
 				break;
 			case playerState::DOWN_RUN:						//들고 아래로 달리기
 				this->changeState(TAKE_DOWN);
-				break;
-			}
-		}
-
-		if (_item->type == itemType::TOOL)
-		{
-			switch (_state)
-			{
-			case playerState::STAND_TAKE:						//들고 서있기
-				this->changeState(STAND);
-				break;
-			case playerState::STAND_TAKE_RIGHT:					//들고 오른쪽으로 서있기
-				this->changeState(STAND_RIGHT);
-				break;
-			case playerState::STAND_TAKE_LEFT:					//들고 왼쪽으로 서있기
-				this->changeState(STAND_LEFT);
-				break;
-			case playerState::STAND_TAKE_BACK:					//들고 뒤로 서있기
-				this->changeState(STAND_BACK);
-				break;
-			case playerState::TAKE_RIGHT:						//들고 앞으로 달리기
-				this->changeState(RIGHT_RUN);
-				break;
-			case playerState::TAKE_LEFT:						//들고 왼쪽으로 달리기
-				this->changeState(LEFT_RUN);
-				break;
-			case playerState::TAKE_UP:							//들고 위로 달리기
-				this->changeState(UP_RUN);
-				break;
-			case playerState::TAKE_DOWN:							//들고 아래로 달리기
-				this->changeState(DOWN_RUN);
 				break;
 			}
 		}
