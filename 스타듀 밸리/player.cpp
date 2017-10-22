@@ -36,42 +36,42 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	//µµ³¢
 	int axeLeft[] = { 38,39,40,41,42 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerAxeLeft", "player", axeLeft, 5, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerAxeLeft", "player", axeLeft, 5, 10, false);
 
 	int axeUp[] = { 43,44,45,46 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerAxeUp", "player", axeUp, 4, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerAxeUp", "player", axeUp, 4, 10, false);
 
 	int axeRight[] = { 33,34,35,36,37 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerAxeRight", "player", axeRight, 5, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerAxeRight", "player", axeRight, 5, 10, false);
 
 	int axeDown[] = { 27,28,29,30,31,32 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerAxeDown", "player", axeDown, 6, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerAxeDown", "player", axeDown, 6, 10, false);
 
 	//±ªÀÌ
 	int hoeLeft[] = { 60,61,62,63,64 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerHoeLeft", "player", hoeLeft, 5, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerHoeLeft", "player", hoeLeft, 5, 10, false);
 
 	int hoeUp[] = { 51,52,53,54 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerHoeUp", "player", hoeUp, 4, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerHoeUp", "player", hoeUp, 4, 10, false);
 
 	int hoeRight[] = { 55,56,57,58,59 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerHoeRight", "player", hoeRight, 5, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerHoeRight", "player", hoeRight, 5, 10, false);
 
 	int hoeDown[] = { 48,49,50 };
 	KEYANIMANAGER->addArrayFrameAnimation("playerHoeDown", "player", hoeDown, 3, 10, false);
 
 	//³´
 	int sickleLeft[] = { 78,79,80,81,82,83 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleLeft", "player", sickleLeft, 6, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleLeft", "player", sickleLeft, 6, 10, false);
 
 	int sickleUp[] = { 84,85,86,87,88,89 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleUp", "player", sickleUp, 6, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleUp", "player", sickleUp, 6, 10, false);
 
 	int sickleRight[] = { 72,73,74,75,76,77 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleRight", "player", sickleRight, 6, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleRight", "player", sickleRight, 6, 10, false);
 
 	int sickleDown[] = { 65,66,67,68,69,70,71 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleDown", "player", sickleDown, 6, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleDown", "player", sickleDown, 6, 10, false);
 
 	//¹°»Ñ¸®°³
 	int waterLeft[] = { 108,109,110,111,112 };
@@ -88,16 +88,16 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	//°î±ªÀÌ
 	int pixhoeDown[] = { 168,169,170,171,172,173,174 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeDown", "player", pixhoeDown, 7, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeDown", "player", pixhoeDown, 7, 10, false);
 
 	int pixhoeUP[] = { 175,176,177,178 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeUp", "player", pixhoeUP, 4, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeUp", "player", pixhoeUP, 4, 10, false);
 
 	int pixhoeRight[] = { 180,181,182,183,184 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeRight", "player", pixhoeRight, 5, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeRight", "player", pixhoeRight, 5, 10, false);
 
 	int pixhoeLeft[] = { 189,188,187,186,185 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeLeft", "player", pixhoeLeft, 5, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerPixhoeLeft", "player", pixhoeLeft, 5, 10, false);
 
 	//°Ë
 	int swordDown[] = { 143,144,145,146,147,148 };
