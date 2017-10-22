@@ -368,7 +368,7 @@ void player::lbuttonClick(tagMessage msg)
 				if (tile1->getPObj())
 				{
 					tile1->getPObj()->sendMessage(tagMessage("watering"));
-					((land*)tile1->getPObj())->setWet(true);
+					((land*)tile1->getPObj())->watering();
 					return;
 				}
 				else if (!tile1->getPObj())
