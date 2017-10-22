@@ -154,11 +154,11 @@ void inventory::addItem(tagMessage msg)
 itemType::Enum inventory::getItemType(string itemName)
 {
 	if (itemName == "¼ö¾×" || itemName == "¹Îµé·¹" || itemName == "»ç¶÷" || itemName == "¸á·Ð" || itemName == "»çÅÁ ¼ö¼ö" ||
-		itemName == "¾çÆÄ" || itemName == "´ç±Ù"|| itemName=="¸á·Ð" || itemName == "Ç®")
+		itemName == "¾çÆÄ" || itemName == "´ç±Ù"|| itemName=="¸á·Ð" || itemName == "grass")
 	{
 		return itemType::FOOD;
 	}
-	else if ( itemName == "µ¹¸ÍÀÌ" || itemName == "¼®Åº" )
+	else if ( itemName == "_stone" || itemName == "¼®Åº" )
 	{
 		return itemType::STONE;
 	}
