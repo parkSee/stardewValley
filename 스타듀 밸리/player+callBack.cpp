@@ -560,7 +560,7 @@ void player::lbuttonClick(tagMessage msg)
 			}
 		}
 
-		if (_item->type == itemType::SEED || _item->type == itemType::FOOD)
+		if (_item->type == itemType::SEED || _item->type == itemType::FOOD || _item->type == itemType::STONE)
 		{
 			_myItem.img = _item->img;						//아이템 이미지를 띄우는 
 
