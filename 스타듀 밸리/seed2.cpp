@@ -10,7 +10,7 @@ HRESULT seed2::init(string name, string imageKey, tagFloat pos, string explain)
 	motherObject::init(name, imageKey, pos, pivot::LEFT_TOP);
 
 	_objEnum = OBJECT::SEED2;
-	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(this);
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->getPObj()->setPObj(this);
 
 	//EFFECTMANAGER->addEffect("seed", "¾¾¸ÂÀ»¶§.bmp", 832, 62, 32, 62, 1.0f, 1.0f, 1000);
 	this->addCallback("pickAttack", [this](tagMessage msg)
@@ -35,7 +35,7 @@ HRESULT seed2::init(string name, string imageKey, tagFloat pos, string explain)
 }
 void seed2::release()
 {
-	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->setPObj(NULL);
+	TOWNWORLD->getTile(_pos.x / TILESIZE, _pos.y / TILESIZE)->getPObj()->setPObj(this);
 
 	motherObject::release();
 }

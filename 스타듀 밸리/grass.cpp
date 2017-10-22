@@ -18,6 +18,21 @@ HRESULT grass::init(tagFloat pos)
 		this->grassAttack();
 	});
 
+	this->addCallback("pixHoeAttack", [this](tagMessage msg)
+	{
+		this->grassAttack();
+	});
+
+	this->addCallback("sickleAttack", [this](tagMessage msg)
+	{
+		this->grassAttack();
+	});
+
+	this->addCallback("hoeAttack", [this](tagMessage msg)
+	{
+		this->grassAttack();
+	});
+
 	return S_OK;
 }
 void grass::release()
@@ -38,8 +53,9 @@ void grass::grassAttack()
 
 		this->setDestroy();
 
-		//dropItem* drop = new dropItem;
-		//drop->init("grass", "grass");
+		dropItem* d = new dropItem;
+		d->init("grass", "asdasdsad", tagFloat(_pos.x + 35, _pos.y));
+		TOWNWORLD->addObject(objectType::ITEM, d);
 	
 }
 

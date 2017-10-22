@@ -15,6 +15,10 @@ void player::eating(tagMessage msg)
 		eProgressBar*energe = (eProgressBar*)TOWNWORLD->findObject(objectType::INTERFACE, "energyBar");
 		energe->sendMessage(tagMessage("consume", 0.0f, -3));
 
+		_myItem.img = _item->img;
+
+		_myItem.y = _pos.y - CARRYY;
+		_myItem.x = _pos.x - CARRYX;
 
 		this->changeState(EATING);
 		
@@ -127,25 +131,26 @@ void player::lbuttonClick(tagMessage msg)
 			case playerState::STAND: case playerState::DOWN_RUN:
 				this->changeState(HOE_DOWN);
 
-				if (tile1->getPObj())
+				if (tile1->getPObj())								//타일에 오브젝트가 있으면(경작지가 이미 있다)
 				{
 					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
 
 					return;
 				}
-				else if (!tile1->getPObj())							//==========================================================================
+				else if (!tile1->getPObj())							//타일에 오브젝트가 없으면 경작지를 만든다
 				{
 					land* lend = new land;
 					lend->init(tagFloat(this->_pos.x, this->_pos.y));
 					return;
 				}
-				else if (!tile1->getPObj())
+				else if (!tile1->getPObj())							//타일에 오브젝트가 없고 
 				{
-					if (tile2->getPObj())
+					if (tile2->getPObj())							//타일 2에 오브젝트가 ㅇ있으면
 					{
 						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
 						return;
 					}
+					
 				}
 				break;
 			case playerState::STAND_RIGHT: case playerState::RIGHT_RUN:
@@ -157,6 +162,9 @@ void player::lbuttonClick(tagMessage msg)
 				}
 				else if (!tile1->getPObj())
 				{
+					land* lend = new land;
+					lend->init(tagFloat(this->_pos.x, this->_pos.y));
+
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
@@ -173,6 +181,9 @@ void player::lbuttonClick(tagMessage msg)
 				}
 				else if (!tile1->getPObj())
 				{
+					land* lend = new land;
+					lend->init(tagFloat(this->_pos.x, this->_pos.y));
+
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
@@ -190,6 +201,9 @@ void player::lbuttonClick(tagMessage msg)
 				}
 				else if (!tile1->getPObj())
 				{
+
+					land* lend = new land;
+					lend->init(tagFloat(this->_pos.x, this->_pos.y));
 					if (tile2->getPObj())
 					{
 						tile2->getPObj()->sendMessage(tagMessage("hoeAttack"));
@@ -353,9 +367,8 @@ void player::lbuttonClick(tagMessage msg)
 				this->changeState(WATER_DOWN);
 				if (tile1->getPObj())
 				{
-					exit(0);
 					tile1->getPObj()->sendMessage(tagMessage("watering"));
-					_land->setWet(true);
+					((land*)tile1->getPObj())->watering();
 					return;
 				}
 				else if (!tile1->getPObj())
@@ -426,7 +439,7 @@ void player::lbuttonClick(tagMessage msg)
 			_myItem.img = _item->img;						//아이템 이미지를 띄우는 
 			if (tile1->getPObj())							//타일위에 오브젝트가 있고
 			{
-				if (tile1->getIsMovable())					//그게 갈수있는 타일이면 ->경작지
+				if (tile1->getPObj()->_objEnum == OBJECT::FARMLAND && !tile1->getPObj()->getPObj())		//경작지 이고 그위에 오브젝트가 없으면 
 				{
 					switch (_state)
 					{
@@ -435,34 +448,58 @@ void player::lbuttonClick(tagMessage msg)
 						seed* _seed = new seed;
 						_seed->init("양파", "seed", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
 						_item->count--;
+
+						if (_item->count == 0)
+						{
+							this->changeState(STAND);
+						}
 					}
-					if (_item->count == 0)
-					{
-						this->changeState(STAND);
-					}
+					
 					break;
-					case playerState::STAND_RIGHT:
-						this->changeState(STAND_TAKE_RIGHT);
+					case playerState::STAND_TAKE_RIGHT:
+						{
+							seed* _seed = new seed;
+							_seed->init("양파", "seed", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
+							_item->count--;
+
+							if (_item->count == 0)
+							{
+								this->changeState(STAND_RIGHT);
+							}
+
+						}
+
 						break;
-					case playerState::STAND_LEFT:
-						this->changeState(STAND_TAKE_LEFT);
+					case playerState::STAND_TAKE_LEFT:
+					{
+						seed* _seed = new seed;
+						_seed->init("양파", "seed", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
+						_item->count--;
+
+						if (_item->count == 0)
+						{
+							this->changeState(STAND_LEFT);
+						}
+					}
 						break;
-					case playerState::STAND_BACK:
-						this->changeState(STAND_TAKE_BACK);
-						break;
-					case playerState::TAKE_RIGHT:						//들고 앞으로 달리기
-						this->changeState(RIGHT_RUN);
-						break;
-					case playerState::TAKE_LEFT:						//들고 왼쪽으로 달리기
-						this->changeState(LEFT_RUN);
-						break;
-					case playerState::TAKE_UP:							//들고 위로 달리기
-						this->changeState(UP_RUN);
-						break;
-					case playerState::TAKE_DOWN:							//들고 아래로 달리기
-						this->changeState(DOWN_RUN);
+					case playerState::STAND_TAKE_BACK:
+					{
+						seed* _seed = new seed;
+						_seed->init("양파", "seed", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
+						_item->count--;
+
+						if (_item->count == 0)
+						{
+							this->changeState(STAND_BACK);
+						}
+					}
+						
 						break;
 					}
+				}
+				else if (tile2->getIsMovable())
+				{
+					return;
 				}
 			}
 			
@@ -472,11 +509,14 @@ void player::lbuttonClick(tagMessage msg)
 	if (tile1->getPObj())											//시바 잡초같은 .....잡초잡초잡초 밟아버려 씨드 뽀아버려시바
 	{
 		seed* sed = (seed*)tile1->getPObj();
-		if (sed->_isRight)
+		if (sed->_name == "seed")
 		{
-			sed->setDestroy();
-			inven->addItem(tagMessage(ADDITEM, 0.0f, 0, 0, vector<gameObject*>(), sed->_name, sed->_explain));
-			return;
+			if (sed->_isRight)
+			{
+				sed->setDestroy();
+				inven->addItem(tagMessage(ADDITEM, 0.0f, 0, 0, vector<gameObject*>(), sed->_name, sed->_explain));
+				return;
+			}
 		}
 	}
 
@@ -520,7 +560,7 @@ void player::lbuttonClick(tagMessage msg)
 			}
 		}
 
-		if (_item->type == itemType::SEED || _item->type == itemType::FOOD)
+		if (_item->type == itemType::SEED || _item->type == itemType::FOOD || _item->type == itemType::STONE)
 		{
 			_myItem.img = _item->img;						//아이템 이미지를 띄우는 
 

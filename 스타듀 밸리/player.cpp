@@ -62,16 +62,16 @@ HRESULT player::init(string objName, tagFloat pos)
 
 	//낫
 	int sickleLeft[] = { 78,79,80,81,82,83 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleLeft", "player", sickleLeft, 6, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleLeft", "player", sickleLeft, 6, 10, false);
 
 	int sickleUp[] = { 84,85,86,87,88,89 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleUp", "player", sickleUp, 6, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleUp", "player", sickleUp, 6, 10, false);
 
 	int sickleRight[] = { 72,73,74,75,76,77 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleRight", "player", sickleRight, 6, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleRight", "player", sickleRight, 6, 10, false);
 
 	int sickleDown[] = { 65,66,67,68,69,70,71 };
-	KEYANIMANAGER->addArrayFrameAnimation("playerSickleDown", "player", sickleDown, 6, 15, false);
+	KEYANIMANAGER->addArrayFrameAnimation("playerSickleDown", "player", sickleDown, 6, 10, false);
 
 	//물뿌리개
 	int waterLeft[] = { 108,109,110,111,112 };
@@ -175,7 +175,10 @@ HRESULT player::init(string objName, tagFloat pos)
 	_myItem.x = 0;
 	_myItem.y = 0;
 	_myItem.gravity = 0.5f;
-	_myItem.jumpPower = 8.0f;
+	_myItem.jumpPower = 5.0f;
+
+	_eatCenter.x = _pos.x;
+	_eatCenter.y = _pos.y - 60;
 
 	//콜백
 	this->addCallback("changeState", [this](tagMessage msg)											//특정프레임이 다 돌면 원래 프레임으로 돌아와라! 명령하는 콜백
@@ -267,6 +270,8 @@ void player::render()
 
 	//Rectangle(getMemDC(), _tilePos.x - rc.left, _tilePos.y - rc.top, 50, 50);
 
+	//RectangleMake(getMemDC(), (_myItem.x-10) - rc.left, (_myItem.y +40)- rc.top, 20, 20);
+
 	
 	if (_myItem.img != NULL)
 	{
@@ -274,7 +279,7 @@ void player::render()
 			_state == STAND_TAKE_BACK || _state == TAKE_UP || _state == TAKE_LEFT || _state == TAKE_RIGHT || _state == TAKE_DOWN ||
 			_state == EATING)
 		{
-			_myItem.img->render(getMemDC(), _myItem.x - rc.left, _myItem.y - rc.top);								//아이템 렌더
+			_myItem.img->render(getMemDC(), _myItem.x - (_myItem.img->getWidth()/2-10) - rc.left, _myItem.y - (_myItem.img->getHeight()/2 -20) - rc.top);								//아이템 렌더
 		}
 	}
 	
@@ -345,7 +350,7 @@ void player::playerRun()
 			
 					else if (tile1->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						if (!tile1->getIsMovable())
+						if (!tile1->getPObj()->getIsMovable())
 						{
 
 						}
@@ -372,7 +377,7 @@ void player::playerRun()
 			
 					else if (tile2->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						if (!tile2->getIsMovable())
+						if (!tile2->getPObj()->getIsMovable())
 						{
 
 						}
@@ -420,7 +425,7 @@ void player::playerRun()
 					else if (tile1->getPObj())					//오브젝트다 있으면
 					{
 
-						if (!tile1->getIsMovable())
+						if (!tile1->getPObj()->getIsMovable())
 						{
 
 						}
@@ -446,7 +451,7 @@ void player::playerRun()
 					}
 					else if (tile2->getPObj())					//오브젝트다 있으면
 					{
-						if (!tile1->getIsMovable())
+						if (!tile2->getPObj()->getIsMovable())
 						{
 
 						}
@@ -496,7 +501,7 @@ void player::playerRun()
 
 					else if (tile1->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						if (!tile1->getIsMovable())							//그게 갈수없는 타일인지
+						if (!tile1->getPObj()->getIsMovable())							//그게 갈수없는 타일인지
 						{
 
 						}
@@ -523,7 +528,7 @@ void player::playerRun()
 
 					else if (tile2->getPObj())								//타일 위에 오브젝트가 있으면
 					{
-						if (!tile2->getIsMovable())
+						if (!tile2->getPObj()->getIsMovable())
 						{
 
 						}
@@ -567,7 +572,7 @@ void player::playerRun()
 					}
 					else if (tile1->getPObj())
 					{
-						if (!tile1->getIsMovable())							//그게 갈수없는 타일인지
+						if (!tile1->getPObj()->getIsMovable())							//그게 갈수없는 타일인지
 						{
 
 						}
