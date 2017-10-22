@@ -169,6 +169,7 @@ void player::stateUpdate(playerState::Enum state)
 		//====================================================================================물건 들고 달릴떄
 	
 	case playerState::TAKE_RIGHT:				//들고 오른쪽으로 달리기 
+
 		_myItem.x = _pos.x - CARRYX;				//아이템의 좌표
 		_myItem.y = _pos.y - CARRYY;
 
@@ -295,19 +296,23 @@ void player::stateUpdate(playerState::Enum state)
 		
 		break;
 	case playerState::EATING:
-		_myItem.img = _item->img;
 
 		_myItem.y -= _myItem.jumpPower;
 		_myItem.jumpPower -= _myItem.gravity;
 
 		_eatingRc = RectMakeCenter(_pos.x, _pos.y - 80, 20, 20);
 
-		_eatCenter.x = _eatingRc.left + (_eatingRc.right - _eatingRc.left) / 2;
-		_eatCenter.y = _eatingRc.bottom;
+		_eatCenter.x = _pos.x;
+		_eatCenter.y = _pos.y - 60;
 
-		if (getDistance(_myItem.x, _myItem.y, _eatCenter.x, _eatCenter.y)<60)
+		if (getDistance(_myItem.x, _myItem.y, _eatCenter.x, _eatCenter.y)<30)
 		{
 			_myItem.img = NULL;
+
+			_myItem.gravity = 0.5f;
+			_myItem.jumpPower = 5.0f;
+
+			this->changeState(STAND);
 		}
 		break;
 	}
@@ -508,7 +513,7 @@ void player::changeState(playerState::Enum state)
 		_player.Motion = KEYANIMANAGER->findAnimation("playerEating");
 		_player.Motion->start();
 
-		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
+		//this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
 		break;
 
 	}
