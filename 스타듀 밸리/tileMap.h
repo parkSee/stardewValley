@@ -7,14 +7,19 @@
 class tileMap : public gameObject		//게임오브젝트 상속받았당 수누야
 {
 private:
-	//struct tagTileSavePast
-	//{
-	//	int idX, idY;
-	//	TERRAIN::Enum terrain;
-	//
-	//	char imageKey[64];
-	//	int frameX, frameY;
-	//};
+	struct tagTileSaveNew
+	{
+		int idX, idY;
+		TERRAIN::Enum terrain;
+
+		char imageKey[64];
+		int frameX, frameY;
+		bool isMovable;
+
+		char imageKey2[64];
+		int frameX2, frameY2;
+		bool isMovable2;
+	};
 	struct tagTileSave
 	{
 		int idX, idY;
@@ -51,7 +56,8 @@ public:
 
 	void mapSave(string fileName);
 	void mapLoad(string fileName);
-	//void mapLoadPast(string fileName);
+	void mapSaveNew(string fileName);
+	void mapLoadNew(string fileName);
 	void objectSave(string fileName);
 	void objectLoad(string fileName);
 

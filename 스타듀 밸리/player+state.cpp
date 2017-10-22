@@ -295,7 +295,20 @@ void player::stateUpdate(playerState::Enum state)
 		
 		break;
 	case playerState::EATING:
+		_myItem.img = _item->img;
 
+		_myItem.y -= _myItem.jumpPower;
+		_myItem.jumpPower -= _myItem.gravity;
+
+		_eatingRc = RectMakeCenter(_pos.x, _pos.y - 80, 20, 20);
+
+		_eatCenter.x = _eatingRc.left + (_eatingRc.right - _eatingRc.left) / 2;
+		_eatCenter.y = _eatingRc.bottom;
+
+		if (getDistance(_myItem.x, _myItem.y, _eatCenter.x, _eatCenter.y)<60)
+		{
+			_myItem.img = NULL;
+		}
 		break;
 	}
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
@@ -494,6 +507,7 @@ void player::changeState(playerState::Enum state)
 	case playerState::EATING:
 		_player.Motion = KEYANIMANAGER->findAnimation("playerEating");
 		_player.Motion->start();
+
 		this->_player.Motion->setEndMessage(this, tagMessage("changeState", 0.0f, playerState::STAND));
 		break;
 

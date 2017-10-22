@@ -56,6 +56,7 @@ void mapToolScene::update()
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
 	{
 		_map->mapSave("tempMapSave.map");
+		_map->mapSaveNew("tempMapSaveNew.map");
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_F2))
 	{
@@ -496,6 +497,19 @@ void mapToolScene::modeMapUpdate()
 		if (0 <= idx && idx < TILEX &&
 			0 <= idy && idy < TILEY)
 		{
+			//1 누르고 좌클릭하면 _isMovable true로
+			if (KEYMANAGER->isStayKeyDown('1'))
+			{
+				_map->getTile(idx, idy)->setIsMovable1(true);
+				return;
+			}
+			//2 누르고 좌클릭하면 _isMovable2 true로
+			if (KEYMANAGER->isStayKeyDown('2'))
+			{
+				_map->getTile(idx, idy)->setIsMovable2(true);
+				return;
+			}
+
 			//쉬프트 좌클릭 하면 이중 올리기
 			if (KEYMANAGER->isStayKeyDown(VK_LSHIFT))
 			{
@@ -593,6 +607,19 @@ void mapToolScene::modeMapUpdate()
 		if (0 <= idx && idx < TILEX &&
 			0 <= idy && idy < TILEY)
 		{
+			//1 누르고 우클릭하면 _isMovable false로
+			if (KEYMANAGER->isStayKeyDown('1'))
+			{
+				_map->getTile(idx, idy)->setIsMovable1(false);
+				return;
+			}
+			//2 누르고 우클릭하면 _isMovable2 false로
+			if (KEYMANAGER->isStayKeyDown('2'))
+			{
+				_map->getTile(idx, idy)->setIsMovable2(false);
+				return;
+			}
+
 			//쉬프트 우클릭 하면 이중 정보 지움
 			if (KEYMANAGER->isStayKeyDown(VK_LSHIFT))
 			{

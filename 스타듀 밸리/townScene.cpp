@@ -9,7 +9,7 @@ HRESULT townScene::init()
 	_map = new tileMap;
 	TOWNWORLD->setMapAddress(_map);
 	_map->init();
-	_map->mapLoad("mapSave.map");
+	_map->mapLoadNew("mapSave.map");
 
 	CAMERAMANAGER->setMapSize(TILESIZE * TILEX + WINSIZEX, TILESIZE * TILEY + WINSIZEY);
 
