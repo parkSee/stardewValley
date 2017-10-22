@@ -18,10 +18,18 @@ public:
 	virtual void render();
 
 	inline bool getWet() { return  _isWet; }
+	//void setWat(bool isWet){_isWet =}
 
-	inline void setWet(bool isWet) { _isWet = isWet; }
+	void setWet(bool isWet) { _isWet = isWet; }
 
 	void hoeAttack();
+
+	void watering()
+	{
+		if (_isWet)return;		
+		_image = IMAGEMANAGER->findImage("wetland");
+		_isWet = true;
+	}
 
 };
 
