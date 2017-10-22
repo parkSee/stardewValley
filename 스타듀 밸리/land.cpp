@@ -43,6 +43,7 @@ void land::update()
 {
 	motherObject::update();
 	
+	
 }
 void land::render()
 {
@@ -55,7 +56,7 @@ void land::render()
 
 	if (_isWet == true)
 	{
-
+		_image->frameScaleRender(getMemDC(), -rc.left + _rc.left, -rc.top + _rc.top, 0, 0, 65, 65);
 	}
 }
 
