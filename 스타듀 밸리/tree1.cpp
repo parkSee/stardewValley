@@ -172,7 +172,7 @@ void tree1_top::update()
 	{
 		_count += TIMEMANAGER->getElapsedTime();
 
-		if (_count >= 2.8f)
+		if (_count >= 2.0f)
 		{
 			for (int i = 0; i < RND->getFromIntTo(2, 10); i++)
 			{
