@@ -175,7 +175,10 @@ HRESULT player::init(string objName, tagFloat pos)
 	_myItem.x = 0;
 	_myItem.y = 0;
 	_myItem.gravity = 0.5f;
-	_myItem.jumpPower = 8.0f;
+	_myItem.jumpPower = 5.0f;
+
+	_eatCenter.x = _pos.x;
+	_eatCenter.y = _pos.y - 60;
 
 	//콜백
 	this->addCallback("changeState", [this](tagMessage msg)											//특정프레임이 다 돌면 원래 프레임으로 돌아와라! 명령하는 콜백
@@ -267,6 +270,8 @@ void player::render()
 
 	//Rectangle(getMemDC(), _tilePos.x - rc.left, _tilePos.y - rc.top, 50, 50);
 
+	//RectangleMake(getMemDC(), (_myItem.x-10) - rc.left, (_myItem.y +40)- rc.top, 20, 20);
+
 	
 	if (_myItem.img != NULL)
 	{
@@ -274,7 +279,7 @@ void player::render()
 			_state == STAND_TAKE_BACK || _state == TAKE_UP || _state == TAKE_LEFT || _state == TAKE_RIGHT || _state == TAKE_DOWN ||
 			_state == EATING)
 		{
-			_myItem.img->render(getMemDC(), _myItem.x - rc.left, _myItem.y - rc.top);								//아이템 렌더
+			_myItem.img->render(getMemDC(), _myItem.x - (_myItem.img->getWidth()/2-10) - rc.left, _myItem.y - (_myItem.img->getHeight()/2 -40) - rc.top);								//아이템 렌더
 		}
 	}
 	

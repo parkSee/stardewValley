@@ -9,7 +9,7 @@
 
 
 #define SPEED 4
-#define CARRYX 30
+#define CARRYX 10
 #define CARRYY 160
 
 class shadow;
