@@ -125,10 +125,20 @@ void mouse::mouseControll()
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
 		{
-			gameObject* select = (gameObject*)TOWNWORLD->findObject(objectType::INTERFACE,"selectUI");
-			select->sendMessage(tagMessage("setSelectUI"));
+			selectUI* select = (selectUI*)TOWNWORLD->findObject(objectType::INTERFACE,"selectUI");
+			select->sendMessage(tagMessage("selectEat",0,0,0,vector<gameObject*>(),"¸ÔÀ»±î¿ä?"));
+			select->setCb([]() 
+			{
+				player* ply = (player*)TOWNWORLD->findObject(objectType::HUMAN, "player");
+				inventory*	inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
+
+				ply->sendMessage(tagMessage("eating"));
+				inven->setDirection(invenDirection::SUB_BOTTOM);
+				inven->getTargetItem()->count -= 1;
+			});
 		}
 	}
+
 	RECT rc = CAMERAMANAGER->getRenderRc();
 	player* ply = (player*)TOWNWORLD->findObject(objectType::HUMAN, "player");
 	int indexX = (_ptMouse.x + rc.left) / TILESIZE;

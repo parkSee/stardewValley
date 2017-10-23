@@ -354,10 +354,6 @@ void inventory::render()
 	}
 
 
-	char strTarget[100];
-	sprintf(strTarget, "%s", _targetItem->name.c_str());
-	TextOut(getMemDC(), 10, 100, strTarget, strlen(strTarget));
-	
 }
 
 

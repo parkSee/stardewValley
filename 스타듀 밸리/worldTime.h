@@ -1,6 +1,7 @@
 #pragma once
 #include "singletonBase.h"
 
+
 namespace month
 {
 	enum Enum
@@ -33,7 +34,6 @@ private:
 	int						_day;
 	month::Enum				_month;
 	int						_saveHour;
-
 
 	float					_timeFast;
 public:

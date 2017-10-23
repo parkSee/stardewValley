@@ -24,6 +24,8 @@ private:
 	tagChoice					_yes;
 	tagChoice					_no;
 	string						_txt;
+
+	CBFUNCTION					_cb;
 	
 public:
 	HRESULT init(string name);
@@ -32,6 +34,9 @@ public:
 	void render();
 
 	void setSelectUI(tagMessage msg);
+	void sleep(tagMessage msg);
+
+	void setCb(CBFUNCTION cb) { _cb = cb; }
 
 	selectUI() {}
 	~selectUI() {}

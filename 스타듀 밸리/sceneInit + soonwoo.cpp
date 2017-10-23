@@ -13,6 +13,7 @@
 #include "selectUI.h"
 #include "house.h"
 #include "createUI.h"
+#include "fade.h"
 
 void townScene::soonwooInit()
 {
@@ -43,7 +44,7 @@ void townScene::soonwooInit()
 	for (int i = 0; i < 5; i++)
 	{
 		dropItem* item3 = new dropItem;
-		item3->init("나무", "집가고 싶다, 쉬고 싶어 . . ,", tagFloat(1000 +10*RND->getInt(30), 500+10* RND->getInt(30)));
+		item3->init("나무", "집가고 싶다, 쉬고 싶어 . . ,", tagFloat(1000 +10*RND->getInt(30), 1300+10* RND->getInt(30)));
 		TOWNWORLD->addObject(objectType::ITEM, item3);
 	}
 
@@ -68,7 +69,7 @@ void townScene::soonwooInit()
 	TOWNWORLD->addObject(objectType::WEATHER, day);
 
 	caroline* carolineNpc = new caroline;
-	carolineNpc->init("caroline", "caroline", tagFloat(800, 300));
+	carolineNpc->init("caroline", "caroline", tagFloat(900, 600));
 	TOWNWORLD->addObject(objectType::HUMAN, carolineNpc);
 
 	selectUI*select = new selectUI;
@@ -82,5 +83,9 @@ void townScene::soonwooInit()
 	createUI* createui = new createUI;
 	createui->init("createUI");
 	TOWNWORLD->addObject(objectType::INTERFACE, createui);
+
+	fade* fadeOut = new fade;
+	fadeOut->init("fade");
+	TOWNWORLD->addObject(objectType::WEATHER, fadeOut);
 	
 }
