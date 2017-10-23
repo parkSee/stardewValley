@@ -147,7 +147,7 @@ HRESULT player::init(string objName, tagFloat pos)
 
 //========================================================================================================
 	
-	gameObject::init(objName, "player", tagFloat(WINSIZEX / 2, WINSIZEY / 2), pivot::BOTTOM);
+	gameObject::init(objName, "player", pos, pivot::BOTTOM);
 	
 	_state = STAND;
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth() /2, _image->getFrameHeight()/2);	
