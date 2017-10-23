@@ -171,6 +171,7 @@ HRESULT player::init(string objName, tagFloat pos)
 	tile1 =TOWNWORLD->getTile(_indexX,_indexY);
 	tile2 = TOWNWORLD->getTile(_indexX-1,_indexY);
 
+
 	_myItem.img = _item->img;
 	_myItem.x = 0;
 	_myItem.y = 0;
@@ -283,27 +284,27 @@ void player::render()
 		}
 	}
 	
-	if (tile1 != NULL && tile2 != NULL)
-	{
-		RECT rc1 = tile1->getRect();
-		RECT rc2 = tile2->getRect();
-
-		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), brush);
-
-		Rectangle(getMemDC(), rc1.left - rc.left, rc1.top-rc.top, rc1.right-rc.left, rc1.bottom-rc.top);		//플레이어 바로 앞 타일
-		Rectangle(getMemDC(), rc2.left - rc.left, rc2.top - rc.top, rc2.right - rc.left, rc2.bottom - rc.top);	//플레이어 옆 타일
-
-		SelectObject(getMemDC(), oldBrush);
-		DeleteObject(brush);
-
-		char str[100];
-		sprintf(str, "%d,%d", _indexX, _indexY);
-		TextOut(getMemDC(), 10, 300, str, strlen(str));
-
-		sprintf_s(str, "%f,%f",_myItem.x, _myItem.y);
-		TextOut(getMemDC(), 10, 400, str, strlen(str));
-	}
+	//if (tile1 != NULL && tile2 != NULL)
+	//{
+	//	RECT rc1 = tile1->getRect();
+	//	RECT rc2 = tile2->getRect();
+	//
+	//	HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
+	//	HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), brush);
+	//
+	//	Rectangle(getMemDC(), rc1.left - rc.left, rc1.top-rc.top, rc1.right-rc.left, rc1.bottom-rc.top);		//플레이어 바로 앞 타일
+	//	Rectangle(getMemDC(), rc2.left - rc.left, rc2.top - rc.top, rc2.right - rc.left, rc2.bottom - rc.top);	//플레이어 옆 타일
+	//
+	//	SelectObject(getMemDC(), oldBrush);
+	//	DeleteObject(brush);
+	//
+	//	char str[100];
+	//	sprintf(str, "%d,%d", _indexX, _indexY);
+	//	TextOut(getMemDC(), 10, 300, str, strlen(str));
+	//
+	//	sprintf_s(str, "%f,%f",_myItem.x, _myItem.y);
+	//	TextOut(getMemDC(), 10, 400, str, strlen(str));
+	//}
 	_shadow->render();
 }
 

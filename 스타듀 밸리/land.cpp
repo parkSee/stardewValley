@@ -9,7 +9,7 @@ HRESULT land::init(tagFloat pos)
 
 	_isWet = false;
 	_isMovable = true;
-	
+
 	//land* _land = new land;
 	//_land->init(pos);
 	_objEnum = OBJECT::FARMLAND;
@@ -26,10 +26,20 @@ HRESULT land::init(tagFloat pos)
 
 	this->addCallback("pixHoeAttack", [this](tagMessage msg)
 	{
-		
+
 		this->hoeAttack();
 		//exit(0);
 	});
+
+
+	this->addCallback("grow", [this](tagMessage msg)
+	{
+		this->grow();
+	});
+
+
+
+
 
 	return S_OK;
 }
@@ -42,22 +52,17 @@ void land::release()
 void land::update()
 {
 	motherObject::update();
-	
+
 	
 }
 void land::render()
 {
 	RECT rc = CAMERAMANAGER->getRenderRc();
 
-	if (_isWet == false)
-	{
-		_image->frameScaleRender(getMemDC(), -rc.left + _rc.left ,  -rc.top + _rc.top , 0, 0, 65, 65);
-	}
+	
+	_image->frameScaleRender(getMemDC(), -rc.left + _rc.left ,  -rc.top + _rc.top , 0, 0, 65, 65);
+	
 
-	if (_isWet == true)
-	{
-		_image->frameScaleRender(getMemDC(), -rc.left + _rc.left, -rc.top + _rc.top, 0, 0, 65, 65);
-	}
 }
 
 
@@ -65,4 +70,11 @@ void land::hoeAttack()
 {
 
 	this->setDestroy();
+}
+
+void land::grow()
+{
+	
+	_isWet = false;
+	_image = IMAGEMANAGER->findImage("land");
 }

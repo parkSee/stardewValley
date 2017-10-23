@@ -31,7 +31,8 @@ void player::eating(tagMessage msg)
 void player::lbuttonClick(tagMessage msg)
 {
 	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
-	
+
+
 	if (_state == AXE_DOWN || _state == AXE_LEFT || _state == AXE_UP || _state == AXE_RIGHT || _state == HOE_DOWN || _state == HOE_LEFT || _state == HOE_UP ||
 		_state== HOE_RIGHT || _state == SICKLE_DOWN || _state == SICKLE_LEFT || _state == SICKLE_UP || _state == SICKLE_RIGHT || _state == PIXHOE_DOWN || 
 		_state == PIXHOE_LEFT || _state == PIXHOE_UP || _state == PIXHOE_RIGHT || _state == WATER_DOWN || _state == WATER_LEFT || _state == WATER_UP || 
@@ -137,13 +138,14 @@ void player::lbuttonClick(tagMessage msg)
 
 					return;
 				}
-				else if (!tile1->getPObj())							//타일에 오브젝트가 없으면 경작지를 만든다
+				 if (tile1->getTerrain() == TERRAIN::DIRT)							//타일에 오브젝트가 없으면 경작지를 만든다		//터레인에 더트만 경작
 				{
 					land* lend = new land;
 					lend->init(tagFloat(this->_pos.x, this->_pos.y));
 					return;
 				}
-				else if (!tile1->getPObj())							//타일에 오브젝트가 없고 
+				
+				 if (!tile1->getPObj())							//타일에 오브젝트가 없고 
 				{
 					if (tile2->getPObj())							//타일 2에 오브젝트가 ㅇ있으면
 					{
@@ -160,7 +162,7 @@ void player::lbuttonClick(tagMessage msg)
 					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
 					return;
 				}
-				else if (!tile1->getPObj())
+				if (tile1->getTerrain() == TERRAIN::DIRT)
 				{
 					land* lend = new land;
 					lend->init(tagFloat(this->_pos.x, this->_pos.y));
@@ -179,7 +181,7 @@ void player::lbuttonClick(tagMessage msg)
 					tile1->getPObj()->sendMessage(tagMessage("hoeAttack"));
 					return;
 				}
-				else if (!tile1->getPObj())
+				if (tile1->getTerrain() == TERRAIN::DIRT)
 				{
 					land* lend = new land;
 					lend->init(tagFloat(this->_pos.x, this->_pos.y));
@@ -199,7 +201,7 @@ void player::lbuttonClick(tagMessage msg)
 					return;
 
 				}
-				else if (!tile1->getPObj())
+				if (tile1->getTerrain() == TERRAIN::DIRT)
 				{
 
 					land* lend = new land;
@@ -446,7 +448,7 @@ void player::lbuttonClick(tagMessage msg)
 					case playerState::STAND_TAKE:						//들고 서있기
 					{
 						seed* _seed = new seed;
-						_seed->init("양파", "seed", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
+						_seed->init("당근", "seed2", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
 						_item->count--;
 
 						if (_item->count == 0)
@@ -459,7 +461,7 @@ void player::lbuttonClick(tagMessage msg)
 					case playerState::STAND_TAKE_RIGHT:
 						{
 							seed* _seed = new seed;
-							_seed->init("양파", "seed", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
+							_seed->init("당근", "seed2", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
 							_item->count--;
 
 							if (_item->count == 0)
@@ -473,7 +475,7 @@ void player::lbuttonClick(tagMessage msg)
 					case playerState::STAND_TAKE_LEFT:
 					{
 						seed* _seed = new seed;
-						_seed->init("양파", "seed", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
+						_seed->init("당근", "seed2", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
 						_item->count--;
 
 						if (_item->count == 0)
@@ -485,7 +487,7 @@ void player::lbuttonClick(tagMessage msg)
 					case playerState::STAND_TAKE_BACK:
 					{
 						seed* _seed = new seed;
-						_seed->init("양파", "seed", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
+						_seed->init("당근", "seed2", tagFloat(_pos.x, _pos.y), "이런 씨드 씨드씨이..드");
 						_item->count--;
 
 						if (_item->count == 0)
@@ -505,17 +507,33 @@ void player::lbuttonClick(tagMessage msg)
 			
 		}
 	}
-
-	if (tile1->getPObj())											//시바 잡초같은 .....잡초잡초잡초 밟아버려 씨드 뽀아버려시바
+	if (_item->type == itemType::NONE)
 	{
-		seed* sed = (seed*)tile1->getPObj();
-		if (sed->_name == "seed")
+		//seed* _sed = (seed*)TOWNWORLD->findObject(objectType::OBJ, "seed");
+		if (tile1->getPObj())
 		{
-			if (sed->_isRight)
+			if (tile1->getPObj()->_objEnum == OBJECT::FARMLAND)							//타일에 오브젝트의 타입이 경작지 이고
 			{
-				sed->setDestroy();
-				inven->addItem(tagMessage(ADDITEM, 0.0f, 0, 0, vector<gameObject*>(), sed->_name, sed->_explain));
-				return;
+				if (tile1->getPObj()->getPObj())										//오브젝트 위에 오브젝트가 있으면
+				{
+					if (tile1->getPObj()->getPObj()->_objEnum == OBJECT::SEED)			//그 오브젝트 타입이 씨드면 
+					{
+						seed* sed = (seed*)tile1->getPObj()->getPObj();							//타운월드에서 이름으로 찾으면 벡터에서 같은 이름으로 제일 
+												//앞에 있는 아이가 나옵니다. 찾는 인덱스 번호의 타일위에 
+						
+												//경작지 위의 시드를 찾아가라..제발
+						if (sed->_name == "당근")
+						{
+
+							if (sed->_isRight)
+							{
+								sed->setDestroy();
+								inven->addItem(tagMessage(ADDITEM, 0.0f, 0, 0, vector<gameObject*>(), sed->_name, sed->_explain));
+								return;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
