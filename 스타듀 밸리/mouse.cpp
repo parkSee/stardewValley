@@ -175,6 +175,8 @@ void mouse::mouseControll()
 					ply->_pos.y = (TILESIZE * 95) + TILESIZE / 2;
 					_image = IMAGEMANAGER->findImage("mouse");
 					_animation = _normalAnimation;
+
+					WORLDTIME->_playerPos = playerPos::HOUSE;
 				}
 			}
 
@@ -202,6 +204,8 @@ void mouse::mouseControll()
 	{
 		ply->_pos.x = (TILESIZE * 24) + TILESIZE / 2;
 		ply->_pos.y = (TILESIZE * 14) + TILESIZE / 2;
+
+		WORLDTIME->_playerPos = playerPos::OUTSIDE;
 	}
 	
 	//애니메이션이 셀렉트 에니메이션 상태라면 

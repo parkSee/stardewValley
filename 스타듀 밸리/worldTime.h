@@ -1,7 +1,6 @@
 #pragma once
 #include "singletonBase.h"
 
-
 namespace month
 {
 	enum Enum
@@ -16,6 +15,14 @@ namespace dayDirection
 	enum Enum
 	{
 		BRIGHT,EARLY_NIGHT,MID_NIGHT,DEEP_NIGHT
+	};
+}
+
+namespace playerPos
+{
+	enum Enum
+	{
+		HOUSE,OUTSIDE
 	};
 }
 
@@ -36,10 +43,13 @@ private:
 	int						_saveHour;
 
 	float					_timeFast;
+
+	bool					_isUse;
 public:
 	tagTime					_time;
 	bool					_isTimeFlow;
 	dayDirection::Enum		_dayDirection;
+	playerPos::Enum			_playerPos;
 
 	HRESULT init();
 	void release();
