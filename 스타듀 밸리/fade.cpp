@@ -34,6 +34,7 @@ void fade::update()
 {
 	if (_isActiving)
 	{
+		
 		if (!_isMax)
 		{
 			_alpha++;
@@ -42,7 +43,8 @@ void fade::update()
 				_isMax = true;
 
 				player* ply = (player*)TOWNWORLD->findObject(objectType::HUMAN, "player");
-				
+				ply->_pos.x = 14 * (TILESIZE);
+				ply->_pos.y = 93 * (TILESIZE);
 			}
 		}
 		else if (_isMax)
@@ -53,6 +55,8 @@ void fade::update()
 				_alpha = 0;
 				_isMax = false;
 				_isActiving = false;
+				WORLDTIME->_isTimeFlow = true;
+
 			}
 		}
 
