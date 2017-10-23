@@ -162,7 +162,29 @@ void mapToolScene::render()
 		}
 
 		TOWNWORLD->render();
-		_map->renderTile3();
+
+		//이동 불가능한 타일 X 표시
+		for (int j = 0; j < TILEY; ++j)
+		{
+			for (int i = 0; i < TILEX; ++i)
+			{
+				if (!_map->getTile(i, j)->getIsMovable())
+				{
+					HPEN oldPen = (HPEN)SelectObject(getMemDC(), CreatePen(PS_SOLID, 3, BLACKNESS));
+
+					int camx = CAMERAMANAGER->getRenderRc().left;
+					int camy = CAMERAMANAGER->getRenderRc().top;
+					RECT rc = _map->getTile(i, j)->getRect();
+					LineMake(getMemDC(), -camx + rc.left + 4, -camy + rc.top + 4,
+						-camx + rc.right - 4, -camy + rc.bottom - 4);
+					LineMake(getMemDC(), -camx + rc.right - 4, -camy + rc.top + 4,
+						-camx + rc.left + 4, -camy + rc.bottom - 4);
+
+					DeleteObject(SelectObject(getMemDC(), oldPen));
+				}
+			}
+		}
+
 		break;
 	case mapToolScene::MODE_SPRITE:
 	{
@@ -457,6 +479,13 @@ void mapToolScene::setTileSampleSelect()
 	_vtileSampleSelect.push_back(tag);
 
 	tag.init();
+	tag.rc = RectMake(TILESIZE * 10, TILESIZE * 0, TILESIZE * 3, TILESIZE * 6);
+	tag.kind = KIND_OBJECT;
+	tag.object = OBJECT::TREE3;
+	tag.str = "tree3";
+	_vtileSampleSelect.push_back(tag);
+
+	tag.init();
 	tag.rc = RectMake(TILESIZE * 22, TILESIZE * 0, TILESIZE * 1, TILESIZE * 1);
 	tag.kind = KIND_TERRAIN;
 	tag.terrain = TERRAIN::GRASS;
@@ -546,7 +575,7 @@ void mapToolScene::modeMapUpdate()
 					}
 
 					return;
-				}
+				}		//컨트롤 쉬프트 좌클릭 끝
 
 				switch (_sprite)
 				{
@@ -571,7 +600,7 @@ void mapToolScene::modeMapUpdate()
 				}
 
 				return;
-			}
+			}		//쉬프트 좌클릭 끝
 
 			switch (_sprite)
 			{
@@ -601,23 +630,100 @@ void mapToolScene::modeMapUpdate()
 					}
 					break;
 				case mapToolScene::KIND_OBJECT:
-					//타일에 오브젝트 올라가있으면 없애버리기
-					if (_map->getTile(idx, idy)->getPObj() != NULL)
+					//오브젝트는 포.기.
+
+					////타일에 오브젝트 올라가있으면 없애버리기
+					//if (_map->getTile(idx, idy)->getPObj() != NULL)
+					//{
+					//	_map->getTile(idx, idy)->getPObj()->setDestroy();
+					//	_map->getTile(idx, idy)->setPObj(NULL);
+					//}
+					//
+					////타일에 오브젝트 만들어서 올리기
+					//testObject* tempobj = new testObject;
+					//tempobj->init("test", "outdoorsSpring", tagFloat(idx * TILESIZE, idy * TILESIZE), pivot::LEFT_TOP);
+					//tempobj->setIdX(idx);
+					//tempobj->setIdY(idy);
+					//tempobj->setFrameX(1);
+					//tempobj->setFrameY(5);
+					//tempobj->_object = _selectObject;
+					//TOWNWORLD->addObject(objectType::OBJ, tempobj);
+					//_map->getTile(idx, idy)->setPObj(tempobj);
+
+					//오브젝트는 포기하고 배경으로 지형이나 깔아주자
+					switch (_selectObject)
 					{
-						_map->getTile(idx, idy)->getPObj()->setDestroy();
-						_map->getTile(idx, idy)->setPObj(NULL);
+					case OBJECT::TREE1:
+						for (int j = idy - 5; j <= idy - 2; ++j)
+						{
+							if (j < 0 || j >= TILEY) continue;
+							for (int i = idx - 1; i <= idx + 1; ++i)
+							{
+								if (i < 0 || i >= TILEX) continue;
+
+								_map->getTile(i, j)->changeImage2("outdoorsSpring");
+								_map->getTile(i, j)->setFrameX2(1 + (i - idx));
+								_map->getTile(i, j)->setFrameY2(5 + (j - idy));
+							}
+						}
+						if (0 <= idy - 1 && idy - 1 < TILEY)
+						{
+							_map->getTile(idx, idy - 1)->changeImage2("outdoorsSpring");
+							_map->getTile(idx, idy - 1)->setFrameX2(1);
+							_map->getTile(idx, idy - 1)->setFrameY2(5 - 1);
+						}
+						_map->getTile(idx, idy)->changeImage2("outdoorsSpring");
+						_map->getTile(idx, idy)->setFrameX2(1);
+						_map->getTile(idx, idy)->setFrameY2(5);
+						break;
+					case OBJECT::TREE2:
+						for (int j = idy - 5; j <= idy - 2; ++j)
+						{
+							if (j < 0 || j >= TILEY) continue;
+							for (int i = idx - 1; i <= idx + 1; ++i)
+							{
+								if (i < 0 || i >= TILEX) continue;
+
+								_map->getTile(i, j)->changeImage2("outdoorsSpring");
+								_map->getTile(i, j)->setFrameX2(4 + (i - idx));
+								_map->getTile(i, j)->setFrameY2(5 + (j - idy));
+							}
+						}
+						if (0 <= idy - 1 && idy - 1 < TILEY)
+						{
+							_map->getTile(idx, idy - 1)->changeImage2("outdoorsSpring");
+							_map->getTile(idx, idy - 1)->setFrameX2(4);
+							_map->getTile(idx, idy - 1)->setFrameY2(5 - 1);
+						}
+						_map->getTile(idx, idy)->changeImage2("outdoorsSpring");
+						_map->getTile(idx, idy)->setFrameX2(4);
+						_map->getTile(idx, idy)->setFrameY2(5);
+						break;
+					case OBJECT::TREE3:
+						for (int j = idy - 5; j <= idy - 2; ++j)
+						{
+							if (j < 0 || j >= TILEY) continue;
+							for (int i = idx - 1; i <= idx + 1; ++i)
+							{
+								if (i < 0 || i >= TILEX) continue;
+
+								_map->getTile(i, j)->changeImage2("outdoorsSpring");
+								_map->getTile(i, j)->setFrameX2(11 + (i - idx));
+								_map->getTile(i, j)->setFrameY2(5 + (j - idy));
+							}
+						}
+						if (0 <= idy - 1 && idy - 1 < TILEY)
+						{
+							_map->getTile(idx, idy - 1)->changeImage2("outdoorsSpring");
+							_map->getTile(idx, idy - 1)->setFrameX2(11);
+							_map->getTile(idx, idy - 1)->setFrameY2(5 - 1);
+						}
+						_map->getTile(idx, idy)->changeImage2("outdoorsSpring");
+						_map->getTile(idx, idy)->setFrameX2(11);
+						_map->getTile(idx, idy)->setFrameY2(5);
+						break;
 					}
 
-					//타일에 오브젝트 만들어서 올리기
-					testObject* tempobj = new testObject;
-					tempobj->init("test", "outdoorsSpring", tagFloat(idx * TILESIZE, idy * TILESIZE), pivot::LEFT_TOP);
-					tempobj->setIdX(idx);
-					tempobj->setIdY(idy);
-					tempobj->setFrameX(1);
-					tempobj->setFrameY(5);
-					tempobj->_object = _selectObject;
-					TOWNWORLD->addObject(objectType::OBJ, tempobj);
-					_map->getTile(idx, idy)->setPObj(tempobj);
 					break;
 				}
 				break;
@@ -634,7 +740,7 @@ void mapToolScene::modeMapUpdate()
 		}
 
 		return;
-	}
+	}		//좌클릭 끝
 
 	//우클릭
 	if (KEYMANAGER->isStayKeyDown(VK_RBUTTON))
@@ -683,5 +789,5 @@ void mapToolScene::modeMapUpdate()
 		}
 
 		return;
-	}
+	}		//우클릭 끝
 }
