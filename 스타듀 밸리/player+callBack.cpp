@@ -10,19 +10,15 @@ void player::eating(tagMessage msg)
 	inventory* inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
 	_item = inven->getTargetItem();
 
-	if (_item->type == itemType::FOOD)
-	{
-		eProgressBar*energe = (eProgressBar*)TOWNWORLD->findObject(objectType::INTERFACE, "energyBar");
-		energe->sendMessage(tagMessage("consume", 0.0f, -3));
+	eProgressBar*energe = (eProgressBar*)TOWNWORLD->findObject(objectType::INTERFACE, "energyBar");
+	energe->sendMessage(tagMessage("consume", 0.0f, -3));
 
-		_myItem.img = _item->img;
+	_myItem.img = _item->img;
 
-		_myItem.y = _pos.y - CARRYY;
-		_myItem.x = _pos.x - CARRYX;
+	_myItem.y = _pos.y - CARRYY;
+	_myItem.x = _pos.x - CARRYX;
 
-		this->changeState(EATING);
-		
-	}
+	this->changeState(EATING);
 
 	
 }

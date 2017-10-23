@@ -519,6 +519,7 @@ void player::changeState(playerState::Enum state)
 	}
 	
 	_state = state;
+
 	_player.rc = RectMake(_pos.x, _pos.y, _image->getFrameWidth(), _image->getFrameHeight());
 	_rcCollision = RectMakeCenter(_pos.x, _pos.y - 20, 50, 20);
 }
