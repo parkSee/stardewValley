@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "fade.h"
-
+#include "player.h"
 
 fade::fade()
 {
@@ -37,6 +37,13 @@ void fade::update()
 		if (!_isMax)
 		{
 			_alpha++;
+			if (_alpha >= 255)
+			{
+				_isMax = true;
+
+				player* ply = (player*)TOWNWORLD->findObject(objectType::HUMAN, "player");
+				
+			}
 		}
 		else if (_isMax)
 		{
@@ -44,6 +51,7 @@ void fade::update()
 			if (_alpha <= 0)
 			{
 				_alpha = 0;
+				_isMax = false;
 				_isActiving = false;
 			}
 		}

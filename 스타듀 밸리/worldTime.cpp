@@ -13,6 +13,7 @@
 #include "player.h"
 #include "caroline.h"
 #include "motherObject.h"
+#include "fade.h"
 
 using namespace month;
 using namespace dayDirection;
@@ -35,6 +36,7 @@ HRESULT worldTime::init()
 
 	_timeFast = 1.0f;
 
+	
 	return S_OK;
 }
 
@@ -76,6 +78,9 @@ void worldTime::update()
 					{
 						vObj->at(i)->sendMessage(tagMessage("grow"));
 					}
+
+					fade* fd = (fade*)TOWNWORLD->findObject(objectType::WEATHER, "fade");
+					fd->startFadeOut();
 
 					if (_time.day >= 31)
 					{

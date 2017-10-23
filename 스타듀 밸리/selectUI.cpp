@@ -24,7 +24,9 @@ HRESULT selectUI::init(string name)
 
 	_txt = "¸ÔÀ»±î¿ä?";
 
-	this->addCallback("setSelectUI", [this](tagMessage msg)
+	_cb = NULL;
+
+	this->addCallback("selectEat", [this](tagMessage msg)
 	{
 		this->setSelectUI(msg);
 	});
@@ -50,15 +52,20 @@ void selectUI::update()
 			
 			if (PtInRect(&_yes.rc, _ptMouse))
 			{
-				ply->sendMessage(tagMessage("eating"));
-				inven->setDirection(invenDirection::SUB_BOTTOM);
-				inven->getTargetItem()->count -= 1;
 				_direction = NONE_ACTIVE;
+
+				if (_cb != NULL)
+				{
+					_cb();
+					_cb = NULL;
+				}
 			}
 			else if (PtInRect(&_no.rc, _ptMouse))
 			{
 				inven->setDirection(invenDirection::SUB_BOTTOM);
 				_direction = NONE_ACTIVE;
+
+				_cb = NULL;
 			}
 		}
 	}
@@ -138,8 +145,9 @@ void selectUI::setSelectUI(tagMessage msg)
 {
 
 	_direction = ACTIVE;
-	
+
 	inventory*	inven = (inventory*)TOWNWORLD->findObject(objectType::INTERFACE, "inventory");
 	inven->setDirection(invenDirection::HIDE);
 
+	_txt = msg.conversation;
 }
