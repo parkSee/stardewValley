@@ -49,6 +49,8 @@ public:
 
 	string getMonth();
 
+	void dayGone();
+
 
 	worldTime() 
 	{}

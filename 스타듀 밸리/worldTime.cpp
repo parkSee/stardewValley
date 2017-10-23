@@ -67,20 +67,7 @@ void worldTime::update()
 
 				if (_time.ap == "pm" && _time.hour >= 13)
 				{
-					_time.hour = 6;
-					_time.day += 1;
-					_time.ap = "am";
-					_dayDirection = BRIGHT;
-
-					vector<motherObject*>* vObj;
-					vObj = (vector<motherObject*>*)TOWNWORLD->getObjectList(objectType::OBJ);
-					for (int i = 0; i < vObj->size(); ++i)
-					{
-						vObj->at(i)->sendMessage(tagMessage("grow"));
-					}
-
-					fade* fd = (fade*)TOWNWORLD->findObject(objectType::WEATHER, "fade");
-					fd->startFadeOut();
+					this->dayGone();
 
 					if (_time.day >= 31)
 					{
@@ -132,3 +119,22 @@ string worldTime::getMonth()
 }
 
 
+void worldTime::dayGone()
+{
+	_time.hour = 6;
+	_time.day += 1;
+	_time.ap = "am";
+	_dayDirection = BRIGHT;
+
+	vector<motherObject*>* vObj;
+	vObj = (vector<motherObject*>*)TOWNWORLD->getObjectList(objectType::OBJ);
+	for (int i = 0; i < vObj->size(); ++i)
+	{
+		vObj->at(i)->sendMessage(tagMessage("grow"));
+	}
+
+	fade* fd = (fade*)TOWNWORLD->findObject(objectType::WEATHER, "fade");
+	fd->startFadeOut();
+
+	this->_isTimeFlow = false;
+}

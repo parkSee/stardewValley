@@ -253,6 +253,11 @@ void player::update()
 	{
 		selectUI* select = (selectUI*)TOWNWORLD->findObject(objectType::INTERFACE, "selectUI");
 		select->sendMessage(tagMessage("selectEat", 0, 0, 0, vector<gameObject*>(), "잠들까요?"));
+		select->setCb([]() 
+		{
+			WORLDTIME->dayGone();
+
+		});
 	}
 }
 void player::render()
