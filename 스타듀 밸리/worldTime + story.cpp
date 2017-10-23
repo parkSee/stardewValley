@@ -17,8 +17,10 @@ using namespace dayDirection;
 
 void worldTime::story()
 {
-	if (KEYMANAGER->isOnceKeyDown('M'))
+	if (_dayDirection == dayDirection::DEEP_NIGHT && _playerPos == playerPos::OUTSIDE)
 	{
+		if (_isUse == true)return;
+
 		this->_isTimeFlow = false;
 		SOUNDMANAGER->stop("bgm1");
 		SOUNDMANAGER->play("bgm3", 1.0f);
@@ -60,6 +62,8 @@ void worldTime::story()
 
 			});
 		});
+
+		_isUse = true;
 	}
 
 
