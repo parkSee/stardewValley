@@ -2,7 +2,7 @@
 #include "player.h"
 #include "inventory.h"
 #include "shadow.h"
-
+#include "selectUI.h"
 
 HRESULT player::init(string objName, tagFloat pos)
 {
@@ -248,6 +248,12 @@ void player::update()
 	_shadow->_pos.y = this->_pos.y -20;
 
 	_shadow->update();
+
+	if (_indexX == 15 && _indexY == 93)
+	{
+		selectUI* select = (selectUI*)TOWNWORLD->findObject(objectType::INTERFACE, "selectUI");
+		select->sendMessage(tagMessage("selectEat", 0, 0, 0, vector<gameObject*>(), "잠들까요?"));
+	}
 }
 void player::render()
 {
@@ -284,28 +290,29 @@ void player::render()
 		}
 	}
 	
-	//if (tile1 != NULL && tile2 != NULL)
-	//{
-	//	RECT rc1 = tile1->getRect();
-	//	RECT rc2 = tile2->getRect();
-	//
-	//	HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
-	//	HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), brush);
-	//
-	//	Rectangle(getMemDC(), rc1.left - rc.left, rc1.top-rc.top, rc1.right-rc.left, rc1.bottom-rc.top);		//플레이어 바로 앞 타일
-	//	Rectangle(getMemDC(), rc2.left - rc.left, rc2.top - rc.top, rc2.right - rc.left, rc2.bottom - rc.top);	//플레이어 옆 타일
-	//
-	//	SelectObject(getMemDC(), oldBrush);
-	//	DeleteObject(brush);
-	//
-	//	char str[100];
-	//	sprintf(str, "%d,%d", _indexX, _indexY);
-	//	TextOut(getMemDC(), 10, 300, str, strlen(str));
-	//
-	//	sprintf_s(str, "%f,%f",_myItem.x, _myItem.y);
-	//	TextOut(getMemDC(), 10, 400, str, strlen(str));
-	//}
+	if (tile1 != NULL && tile2 != NULL)
+	{
+		RECT rc1 = tile1->getRect();
+		RECT rc2 = tile2->getRect();
+	
+		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
+		HBRUSH oldBrush = (HBRUSH)SelectObject(getMemDC(), brush);
+	
+		Rectangle(getMemDC(), rc1.left - rc.left, rc1.top-rc.top, rc1.right-rc.left, rc1.bottom-rc.top);		//플레이어 바로 앞 타일
+		Rectangle(getMemDC(), rc2.left - rc.left, rc2.top - rc.top, rc2.right - rc.left, rc2.bottom - rc.top);	//플레이어 옆 타일
+	
+		SelectObject(getMemDC(), oldBrush);
+		DeleteObject(brush);
+	
+		char str[100];
+		sprintf(str, "%d,%d", _indexX, _indexY);
+		TextOut(getMemDC(), 10, 300, str, strlen(str));
+	
+		sprintf_s(str, "%f,%f",_myItem.x, _myItem.y);
+		TextOut(getMemDC(), 10, 400, str, strlen(str));
+	}
 	_shadow->render();
+
 }
 
 void player::playerRun()
