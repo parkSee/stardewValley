@@ -48,6 +48,7 @@ void fade::update()
 				player* ply = (player*)TOWNWORLD->findObject(objectType::HUMAN, "player");
 				ply->_pos.x = 14 * (TILESIZE);
 				ply->_pos.y = 94 * (TILESIZE);
+				WORLDTIME->_dayDirection = dayDirection::BRIGHT;
 			}
 		}
 		else if (_isMax)
@@ -59,6 +60,7 @@ void fade::update()
 				_isMax = false;
 				_isActiving = false;
 				WORLDTIME->_isTimeFlow = true;
+				
 
 			}
 		}

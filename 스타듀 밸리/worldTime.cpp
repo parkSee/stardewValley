@@ -14,6 +14,7 @@
 #include "caroline.h"
 #include "motherObject.h"
 #include "fade.h"
+#include "land.h"
 
 using namespace month;
 using namespace dayDirection;
@@ -34,7 +35,10 @@ HRESULT worldTime::init()
 
 	_dayDirection = BRIGHT;
 
-	_timeFast = 1.0f;
+	_playerPos = playerPos::OUTSIDE;
+	_isUse = false;
+
+	_timeFast = 3.0f;
 
 	
 	return S_OK;
@@ -93,7 +97,7 @@ void worldTime::update()
 
 	if (KEYMANAGER->isOnceKeyDown('P'))
 	{
-		_timeFast += 2;
+		_time.second+= TIMEMANAGER->getElapsedTime()*1000;
 	}
 
 }
@@ -124,13 +128,19 @@ void worldTime::dayGone()
 	_time.hour = 6;
 	_time.day += 1;
 	_time.ap = "am";
-	_dayDirection = BRIGHT;
 
 	vector<motherObject*>* vObj;
 	vObj = (vector<motherObject*>*)TOWNWORLD->getObjectList(objectType::OBJ);
 	for (int i = 0; i < vObj->size(); ++i)
 	{
 		vObj->at(i)->sendMessage(tagMessage("grow"));
+	}
+
+	vector<land*>* vLand;
+	vLand = (vector<land*>*)TOWNWORLD->getObjectList(objectType::TILE);
+	for (int i = 0; i < vLand->size(); ++i)
+	{
+		vLand->at(i)->sendMessage(tagMessage("grow"));
 	}
 
 	fade* fd = (fade*)TOWNWORLD->findObject(objectType::WEATHER, "fade");
