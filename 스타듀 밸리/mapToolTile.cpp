@@ -27,6 +27,11 @@ HRESULT mapToolTile::init(int idX, int idY, TERRAIN::Enum terrain)
 	_frameX2 = _frameY2 = 0;
 	_isMovable2 = true;
 
+	//삼중타일도 초기화
+	_image3 = NULL;
+	_imageKey3 = "";
+	_frameX3 = _frameY3 = 0;
+
 
 	//지형 종류에 따라서 이미지, 프레임, 이동가능여부 설정
 	switch (_terrain)
@@ -89,5 +94,17 @@ void mapToolTile::render()
 			-CAMERAMANAGER->getRenderRc().left + _rc.left,
 			-CAMERAMANAGER->getRenderRc().top + _rc.top,
 			_frameX2, _frameY2, TILESIZE, TILESIZE);
+	}
+}
+
+void mapToolTile::renderTile3()
+{
+	//맨 위에 렌더할거
+	if (_image3 != NULL)
+	{
+		_image3->frameScaleRender(getMemDC(),
+			-CAMERAMANAGER->getRenderRc().left + _rc.left,
+			-CAMERAMANAGER->getRenderRc().top + _rc.top,
+			_frameX3, _frameY3, TILESIZE, TILESIZE);
 	}
 }

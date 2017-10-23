@@ -49,6 +49,30 @@ void tileMap::render()
 		}
 	}
 }
+void tileMap::renderTile3()
+{
+	//타일 렌더 - 창에 보이는 만큼만!
+	RECT renderRc = CAMERAMANAGER->getRenderRc();
+	int startIndexX = renderRc.left / TILESIZE;
+	int startIndexY = renderRc.top / TILESIZE;
+	int endIndexX = renderRc.right / TILESIZE;
+	int endIndexY = renderRc.bottom / TILESIZE;
+
+	//타일 범위 벗어나는거 방지
+	if (startIndexX < 0) startIndexX = 0;
+	if (startIndexY < 0) startIndexY = 0;
+	if (endIndexX >= TILEX) endIndexX = TILEX - 1;
+	if (endIndexY >= TILEY) endIndexY = TILEY - 1;
+
+	for (int j = startIndexY; j <= endIndexY; ++j)
+	{
+		for (int i = startIndexX; i <= endIndexX; ++i)
+		{
+			_pTile[i][j]->renderTile3();
+		}
+	}
+}
+
 
 
 void tileMap::setTileFrameByAround(int indexX, int indexY)
