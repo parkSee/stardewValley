@@ -269,7 +269,7 @@ void player::render()
 
 	_image->aniRender(getMemDC(), this->rectMakeBottom().left - rc.left,										// 이미지 렌더 
 		this->rectMakeBottom().top - rc.top, _player.Motion);
-	//Rectangle(getMemDC(), _eatingRc.left - rc.left, _eatingRc.top - rc.top, _eatingRc.right - rc.left, _eatingRc.bottom-rc.top);
+	Rectangle(getMemDC(), _eatingRc.left - rc.left, _eatingRc.top - rc.top, _eatingRc.right - rc.left, _eatingRc.bottom-rc.top);
 
 	//Rectangle(getMemDC(), _player.rc.left -rc.left , _player.rc.top-rc.top, 
 	//	_player.rc.right-rc.left, _player.rc.bottom-rc.top);				//실제 플레이어 렉트
@@ -283,7 +283,7 @@ void player::render()
 
 	//Rectangle(getMemDC(), _tilePos.x - rc.left, _tilePos.y - rc.top, 50, 50);
 
-	//RectangleMake(getMemDC(), (_myItem.x-10) - rc.left, (_myItem.y +40)- rc.top, 20, 20);
+	RectangleMake(getMemDC(), (_myItem.x-10) - rc.left, (_myItem.y +40)- rc.top, 20, 20);
 
 	
 	if (_myItem.img != NULL)

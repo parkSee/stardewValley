@@ -135,6 +135,8 @@ void mouse::mouseControll()
 				ply->sendMessage(tagMessage("eating"));
 				inven->setDirection(invenDirection::SUB_BOTTOM);
 				inven->getTargetItem()->count -= 1;
+
+				WORLDTIME->_isTimeFlow = true;
 			});
 		}
 	}
