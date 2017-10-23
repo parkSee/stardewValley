@@ -249,7 +249,7 @@ void player::update()
 
 	_shadow->update();
 
-	if (_indexX == 15 && _indexY == 93)
+	if (_indexX == 15 && _indexY == 93 && WORLDTIME->_isTimeFlow ==true)
 	{
 		selectUI* select = (selectUI*)TOWNWORLD->findObject(objectType::INTERFACE, "selectUI");
 		select->sendMessage(tagMessage("selectEat", 0, 0, 0, vector<gameObject*>(), "잠들까요?"));
@@ -260,6 +260,7 @@ void player::update()
 		});
 	}
 }
+
 void player::render()
 {
 	//gameObject::render();

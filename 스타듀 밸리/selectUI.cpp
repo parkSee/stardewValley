@@ -59,6 +59,8 @@ void selectUI::update()
 					_cb();
 					_cb = NULL;
 				}
+
+				inven->setDirection(invenDirection::SUB_BOTTOM);
 			}
 			else if (PtInRect(&_no.rc, _ptMouse))
 			{
@@ -66,6 +68,7 @@ void selectUI::update()
 				_direction = NONE_ACTIVE;
 
 				_cb = NULL;
+				WORLDTIME->_isTimeFlow = true;
 			}
 		}
 	}
@@ -150,4 +153,6 @@ void selectUI::setSelectUI(tagMessage msg)
 	inven->setDirection(invenDirection::HIDE);
 
 	_txt = msg.conversation;
+
+	WORLDTIME->_isTimeFlow = false;
 }

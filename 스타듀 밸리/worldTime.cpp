@@ -136,5 +136,4 @@ void worldTime::dayGone()
 	fade* fd = (fade*)TOWNWORLD->findObject(objectType::WEATHER, "fade");
 	fd->startFadeOut();
 
-	this->_isTimeFlow = false;
 }
