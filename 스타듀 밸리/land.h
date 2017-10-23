@@ -24,6 +24,8 @@ public:
 
 	void hoeAttack();
 
+	void grow();
+
 	void watering()
 	{
 		if (_isWet)return;		

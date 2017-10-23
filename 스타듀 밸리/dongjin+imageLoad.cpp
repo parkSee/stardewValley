@@ -20,6 +20,6 @@ void loadingScene::dongjin()
 
 	_loading->loadFrameImage("seed_seed", "resource/item/씨.bmp", 56, 56, 1, 1, true, RGB(255, 0, 255));
 
-	_loading->loadImage("양파", "resource/시험용파일/양파.bmp", 56, 56, true);
+	_loading->loadImage("당근", "resource/시험용파일/설탕당근.bmp", 56, 56, true);
 
 }
